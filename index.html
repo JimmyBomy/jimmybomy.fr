@@ -413,7 +413,7 @@ function content(app){
       ${p.link?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></button>`:`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
   if(app==="apropos")return `<div class="h-eyebrow">À propos</div><div class="h-title">Salut,<br>moi c'est Jimmy.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
-    <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n">1<i>er</i></div><div class="l">major de promo (dev)</div></div><div class="stat"><div class="n"><i>9</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
+    <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n">1<i>er</i></div><div class="l">major de promo (dev)</div></div><div class="stat"><div class="n"><i>14</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
     <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>`;
   if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><div class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</div>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
@@ -485,7 +485,6 @@ function openApp(app){
   el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(app);});
   el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(app);});
   el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t){openApp(t.getAttribute("data-open"));return;}const s=e.target.closest("[data-site]");if(s)openSite(s.getAttribute("data-site"),s.getAttribute("data-title"));});
-  if(app==="contact")wireTerminal(el);
   makeDraggable(el,app);makeResizable(el,app);
 }
 function closeApp(app){const st=wins[app];if(!st)return;st.el.classList.add("closing");markDock(app,false);snd.close();
@@ -523,32 +522,6 @@ function openSite(url,title){
   el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(key);});
   makeDraggable(el,key);makeResizable(el,key);
 }
-
-/* TERMINAL */
-function wireTerminal(root){const out=root.querySelector("#termOut,.term-out"),inp=root.querySelector(".term-in"),term=root.querySelector(".term");
-  if(!inp)return;setTimeout(()=>inp.focus(),60);term.addEventListener("click",e=>{if(!e.target.closest("a"))inp.focus();});
-  inp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const cmd=inp.value.trim();
-    add(out,`<span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ ${esc(cmd)}`);runCmd(cmd,out);inp.value="";
-    (out.parentElement||out).scrollTop=9e9;out.scrollIntoView&&inp.scrollIntoView({block:"nearest"});});}
-function add(out,html){const d=document.createElement("div");d.innerHTML=html;out.appendChild(d);}
-function runCmd(raw,out){const cmd=raw.toLowerCase();
-  if(cmd===""){return;}
-  if(cmd==="clear"){out.innerHTML="";return;}
-  if(cmd==="projets"||cmd==="ls projets"){add(out,'<span class="muted">Ouverture du dossier Projets…</span>');openApp("projets");return;}
-  if(cmd==="labs"||cmd==="ls labs"){add(out,'<span class="muted">Ouverture du dossier Labs…</span>');openApp("labs");return;}
-  if(cmd==="cv"){add(out,'<span class="muted">Ouverture de CV.pdf…</span>');openApp("cv");return;}
-  if(cmd==="parcours"){add(out,'<span class="muted">Ouverture de Parcours…</span>');openApp("parcours");return;}
-  if(cmd==="sudo"||cmd.startsWith("sudo ")){add(out,'<span class="c">Nice try 😏 — pas de root sur BomyOS.</span>');return;}
-  const map={
-    help:()=>'commandes : <span class="acc">whoami</span> · <span class="acc">projets</span> · <span class="acc">labs</span> · <span class="acc">parcours</span> · <span class="acc">contact</span> · <span class="acc">cv</span> · <span class="acc">ls</span> · <span class="acc">date</span> · <span class="acc">clear</span>',
-    whoami:()=>"Jimmy Bomy — développeur web créatif · étudiant BUT MMI (Troyes) · basé à Sedan.",
-    ls:()=>"projets/&nbsp;&nbsp;labs/&nbsp;&nbsp;a-propos.txt&nbsp;&nbsp;parcours.doc&nbsp;&nbsp;cv.pdf&nbsp;&nbsp;contact",
-    contact:()=>`email → <a href="mailto:${EMAIL}">${EMAIL}</a><br>tél&nbsp;&nbsp;&nbsp;→ <a href="tel:${TEL}">${PHONE}</a><br>lieu&nbsp;&nbsp;→ Sedan / Troyes`,
-    date:()=>new Date().toLocaleString("fr-FR"),
-    about:()=>"Étudiant BUT MMI, autodidacte, j'aime le web from scratch et l'administration serveur.",
-  };
-  if(map[cmd]){add(out,'<span class="c">'+map[cmd]()+"</span>");return;}
-  add(out,`<span class="c">commande introuvable : ${esc(raw)} — tape <span class="acc">help</span></span>`);}
 
 /* ICONS + DOCK */
 const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"]];
@@ -607,7 +580,7 @@ function mopen(app,origin){
   msheet.classList.add("on");mobileEl.classList.add("behind");snd.open();
   msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"),o)));
   msBody.querySelectorAll("[data-site]").forEach(o=>o.addEventListener("click",()=>msite(o.getAttribute("data-site"),o.getAttribute("data-title"))));
-  if(app==="contact")wireTerminal(msheet);}
+}
 function msite(url,title){msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
 function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}
 document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app,t)));

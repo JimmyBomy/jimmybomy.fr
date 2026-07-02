@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Jimmy Bomy — Développeur web créatif · Sedan / Troyes</title>
+<meta name="description" content="Jimmy Bomy, développeur web créatif et étudiant BUT MMI à Troyes, basé à Sedan. Portfolio interactif façon OS : sites PHP/MySQL, jeux en Canvas, projets web." />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="Jimmy Bomy" />
+<meta name="theme-color" content="#05060a" />
+<link rel="canonical" href="https://jimmybomy.fr/" />
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jimmybomy.fr/" />
+<meta property="og:title" content="Jimmy Bomy — Développeur web créatif · Sedan / Troyes" />
+<meta property="og:description" content="Portfolio interactif façon système d'exploitation. Sites PHP/MySQL, jeux en Canvas, projets web." />
+<meta property="og:image" content="https://jimmybomy.fr/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Jimmy Bomy — Développeur web créatif" />
+<meta name="twitter:description" content="Portfolio interactif façon OS · Sedan / Troyes." />
+<meta name="twitter:image" content="https://jimmybomy.fr/og.png" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23c6ff4e'/%3E%3Cstop offset='1' stop-color='%237cc4ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<!-- Analytics (Umami self-hosted sur ton VPS) — décommente et mets ton instance + id :
+<script defer src="https://umami.jimmybomy.fr/script.js" data-website-id="TON-WEBSITE-ID"></script>
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#c6ff4e;--acc2:#7cc4ff;--ink:#eef0ea;--muted:#a7abb4;--dim:#71757e;--glass:rgba(20,21,26,.72);--glass-brd:rgba(255,255,255,.10);--bar:rgba(14,15,19,.6);--radius:16px;--menh:36px}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);background:#05060a;overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--acc);color:#0a0b0e}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.dicon:focus-visible,.dock button:focus-visible,.mtile:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:12px}
+.skip{position:fixed;left:12px;top:-60px;z-index:10001;background:var(--acc);color:#0a0b0e;padding:9px 16px;border-radius:10px;font-weight:600;font-size:14px;transition:top .2s}
+.skip:focus{top:10px}
+
+#desktop{position:fixed;inset:0;overflow:hidden;background:radial-gradient(1200px 800px at 18% 12%,rgba(124,196,255,.20),transparent 55%),radial-gradient(1000px 900px at 85% 20%,rgba(198,255,78,.14),transparent 55%),radial-gradient(1100px 900px at 70% 95%,rgba(150,110,255,.22),transparent 55%),radial-gradient(900px 700px at 8% 90%,rgba(255,120,170,.14),transparent 55%),linear-gradient(160deg,#0a0d15,#070810 70%)}
+#desktop::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wm-watermark{position:absolute;right:3vw;bottom:calc(4vh + 60px);font-family:"Archivo";font-weight:900;font-size:clamp(60px,12vw,190px);letter-spacing:-.05em;color:rgba(255,255,255,.03);pointer-events:none;line-height:.8;text-align:right}
+.dicons{position:fixed;top:calc(var(--menh) + 18px);left:16px;z-index:5;display:flex;flex-direction:column;gap:6px}
+
+.menubar{position:fixed;top:0;left:0;right:0;height:var(--menh);z-index:9000;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:var(--bar);backdrop-filter:blur(22px) saturate(1.3);border-bottom:1px solid var(--glass-brd);font-size:13.5px}
+.menubar .left{display:flex;align-items:center;gap:18px}
+.menubar .logo{display:flex;align-items:center;gap:9px;font-weight:600}
+.menubar .logo .m{width:17px;height:17px;border-radius:5px;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 0 12px rgba(198,255,78,.4)}
+.menubar .menu{color:var(--muted);cursor:default}.menubar .menu:hover{color:var(--ink)}
+.menubar .right{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12.5px}
+.menubar .right .live{display:flex;align-items:center;gap:7px}
+.menubar .right .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px var(--acc)}
+.menubar .right button.icb{color:var(--muted);display:grid;place-items:center;padding:4px;border-radius:7px}
+.menubar .right button.icb:hover{color:var(--ink);background:rgba(255,255,255,.08)}
+.menubar .right button.icb[aria-pressed="true"]{color:var(--acc)}
+.mb-cta{background:var(--acc);color:#0a0b0e;font-weight:600;padding:5px 13px;border-radius:8px;font-size:13px}
+.mb-cta:hover{filter:brightness(1.06)}
+@media(max-width:720px){.menubar .menu,.menubar .right .hidem{display:none}}
+
+.dicon{width:96px;padding:12px 8px 9px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transition:background .15s;border:1px solid transparent}
+.dicon:hover{background:rgba(255,255,255,.06)}
+.dicon.sel{background:rgba(124,196,255,.16);border-color:rgba(124,196,255,.3)}
+.dicon .ic{width:46px;height:46px;display:grid;place-items:center;pointer-events:none}
+.dicon .lbl{font-size:12px;color:#e7e9e4;text-shadow:0 1px 3px rgba(0,0,0,.7);line-height:1.15;pointer-events:none}
+
+.win{position:absolute;min-width:280px;background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--radius);backdrop-filter:blur(26px) saturate(1.4);box-shadow:0 30px 80px -20px rgba(0,0,0,.7),0 2px 0 rgba(255,255,255,.05) inset;display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:scale(.96);transition:opacity .22s ease,transform .28s cubic-bezier(.2,.9,.3,1),width .28s cubic-bezier(.2,.9,.3,1),height .28s cubic-bezier(.2,.9,.3,1),left .28s cubic-bezier(.2,.9,.3,1),top .28s cubic-bezier(.2,.9,.3,1)}
+.win.open{opacity:1;transform:none}
+.win.closing{opacity:0;transform:scale(.96);pointer-events:none}
+.win.min{opacity:0;transform:scale(.15) translateY(60vh);pointer-events:none}
+.win-bar{height:44px;flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:0 12px;cursor:grab;background:rgba(255,255,255,.03);border-bottom:1px solid var(--glass-brd)}
+.win-bar:active{cursor:grabbing}
+.win .lights{display:flex;gap:8px}
+.win .lights button{width:13px;height:13px;border-radius:50%;position:relative;display:grid;place-items:center}
+.win .lights .c{background:#ff5f57}.win .lights .mi{background:#febc2e}.win .lights .fu{background:#28c840}
+.win .lights button svg{opacity:0;width:8px;height:8px}
+.win-bar:hover .lights button svg,.win .lights button:focus-visible svg{opacity:.6}
+.win .wtitle{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;font-weight:500;pointer-events:none}
+.win-body{flex:1 1 auto;overflow:auto;padding:26px 28px}
+.win.active{border-color:rgba(255,255,255,.2)}.win.active .win-bar{background:rgba(255,255,255,.05)}
+.win-body::-webkit-scrollbar{width:10px}.win-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:3px solid transparent;background-clip:content-box}
+.rz{position:absolute;right:1px;bottom:1px;width:18px;height:18px;cursor:nwse-resize;z-index:6;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 60%,transparent 60%,transparent 72%,rgba(255,255,255,.25) 72%,rgba(255,255,255,.25) 82%,transparent 82%)}
+.win.max .rz{display:none}
+
+.h-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.h-title{font-family:"Archivo";font-weight:800;letter-spacing:-.03em;font-size:clamp(30px,4vw,52px);line-height:.98;margin:10px 0 14px}
+.lede{color:var(--muted);line-height:1.65;max-width:60ch}.lede b{color:var(--ink);font-weight:600}.acc{color:var(--acc)}
+.divider{height:1px;background:var(--glass-brd);margin:26px 0}
+.finder{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.fitem{padding:16px 10px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;border:1px solid transparent;transition:background .15s,border-color .15s;width:100%}
+.fitem:hover,.fitem:focus-visible{background:rgba(255,255,255,.06);border-color:var(--glass-brd);outline:none}
+.fitem .fthumb{width:100%;aspect-ratio:4/3;border-radius:9px;position:relative;overflow:hidden;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)}
+.fitem .fthumb::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.12);border-radius:9px}
+.fitem .fname{font-size:12.5px;font-weight:500}.fitem .fmeta{font-size:11px;color:var(--dim);margin-top:-6px}
+.proj-hero{aspect-ratio:16/8;border-radius:12px;position:relative;overflow:hidden;margin-bottom:22px}
+.proj-hero .mock{position:absolute;inset:16% 12% auto 12%;height:70%;border-radius:10px 10px 0 0;background:rgba(6,7,10,.5);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(4px)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border:1px solid var(--glass-brd);padding:5px 11px;border-radius:100px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 22px;margin-top:22px;font-size:14px}.kv .k{color:var(--dim)}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:100px;background:var(--acc);color:#0a0b0e;font-weight:600;font-size:14px;transition:transform .15s,box-shadow .2s;margin-top:24px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(198,255,78,.5)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--glass-brd)}
+.btn.ghost:hover{box-shadow:none;background:rgba(255,255,255,.06)}
+.todo{color:#febc2e;font-style:italic}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}
+.stat .n{font-family:"Archivo";font-weight:800;font-size:34px;line-height:1}.stat .n i{font-style:normal;color:var(--acc)}
+.stat .l{font-size:12px;color:var(--muted);margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{font-size:12.5px;padding:7px 13px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
+.tl .row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--glass-brd)}
+.tl .row:first-child{border-top:none}
+.tl .yr{font-family:"JetBrains Mono";font-size:12.5px;color:var(--acc);padding-top:3px}
+.tl .role{font-weight:600;font-size:16px}.tl .co{color:var(--dim);font-size:13px;margin:3px 0 8px}.tl .desc{color:var(--muted);font-size:13.5px;line-height:1.55}
+.term{font-family:"JetBrains Mono";font-size:13.5px;line-height:1.9;color:#d5f7c0}
+.term-out{min-height:150px}
+.term .p{color:var(--acc)}.term .u{color:var(--acc2)}.term .c{color:#e9ecef}.term .muted{color:var(--dim)}
+.term a{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+.term-line{display:flex;align-items:center;gap:2px}
+.term-in{flex:1;background:none;border:none;outline:none;color:#e9ecef;font-family:inherit;font-size:inherit;caret-color:var(--acc);padding:0 4px}
+.pdf{background:#f4f3ee;color:#14151a;border-radius:8px;padding:40px 42px;font-family:"Space Grotesk";box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
+.pdf h1{font-family:"Archivo";font-weight:800;font-size:32px;letter-spacing:-.02em}
+.pdf .role{color:#6a6f7a;margin:4px 0 20px}
+.pdf .sec{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9aa0ab;margin:22px 0 8px;border-bottom:1px solid #e2e2dc;padding-bottom:6px}
+.pdf .li{display:flex;justify-content:space-between;gap:16px;font-size:14px;padding:5px 0}.pdf .li .muted{color:#8b909a}
+
+.dock{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:9000;display:flex;align-items:flex-end;gap:8px;padding:9px 12px;background:var(--bar);backdrop-filter:blur(24px) saturate(1.4);border:1px solid var(--glass-brd);border-radius:20px;box-shadow:0 20px 50px -18px rgba(0,0,0,.7)}
+.dock button{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;position:relative;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd);transition:transform .18s cubic-bezier(.2,.9,.3,1),background .2s}
+.dock button:hover{transform:translateY(-10px) scale(1.08);background:rgba(255,255,255,.12)}
+.dock button .run{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--acc);opacity:0}
+.dock button.running .run{opacity:1}
+.dock .sep{width:1px;height:38px;background:var(--glass-brd);margin:0 3px;align-self:center}
+.dock .tip{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:#0c0d11;border:1px solid var(--glass-brd);padding:4px 10px;border-radius:7px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.dock button:hover .tip,.dock button:focus-visible .tip{opacity:1}
+@media(max-width:720px){.dock{display:none}}
+
+.ctx{position:fixed;z-index:9500;min-width:216px;background:var(--glass);border:1px solid var(--glass-brd);border-radius:12px;backdrop-filter:blur(24px) saturate(1.4);padding:6px;box-shadow:0 20px 50px -18px rgba(0,0,0,.7);display:none;font-size:13.5px}
+.ctx.on{display:block;animation:ctxin .12s ease}
+@keyframes ctxin{from{opacity:0;transform:scale(.96)}}
+.ctx button{display:flex;width:100%;align-items:center;gap:11px;padding:8px 12px;border-radius:8px;text-align:left;color:var(--ink)}
+.ctx button:hover{background:rgba(255,255,255,.08)}.ctx .sep{height:1px;background:var(--glass-brd);margin:5px 6px}
+
+.crtfx{position:fixed;inset:0;z-index:8500;pointer-events:none;display:none}
+body.crt .crtfx{display:block;background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,rgba(0,0,0,.16) 2px 3px);animation:flick .12s infinite}
+body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 50%,transparent 60%,rgba(0,0,0,.5));pointer-events:none}
+@keyframes flick{50%{opacity:.93}}
+
+.boot{position:fixed;inset:0;z-index:10000;background:#05060a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.boot .bmark{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 0 60px rgba(198,255,78,.4);animation:pop .7s cubic-bezier(.2,.9,.3,1)}
+.boot .bname{font-family:"Archivo";font-weight:800;font-size:26px;letter-spacing:-.02em}
+.boot .bbar{width:200px;height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
+.boot .bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px}
+.boot .btip{font-size:12.5px;color:var(--dim);font-family:"JetBrains Mono"}
+.boot.done{opacity:0;transition:opacity .6s ease;pointer-events:none}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
+
+.hint{position:fixed;left:50%;top:calc(var(--menh) + 14px);transform:translateX(-50%);z-index:20;font-size:12.5px;color:var(--muted);background:var(--bar);border:1px solid var(--glass-brd);padding:8px 15px;border-radius:100px;backdrop-filter:blur(14px);display:flex;align-items:center;gap:9px;animation:floaty 3s ease-in-out infinite}
+.hint b{color:var(--ink);font-weight:600}
+@keyframes floaty{50%{transform:translateX(-50%) translateY(4px)}}
+
+.mobile{display:none}
+@media(max-width:720px){
+  .dicons,.wm-watermark{display:none}
+  .mobile{display:block;position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(var(--menh) + 20px) 16px 40px}
+  .mlaunch{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-bottom:20px}
+  .mtile{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .mtile .ic{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid var(--glass-brd);display:grid;place-items:center}
+  .mtile .lbl{font-size:11.5px;color:#e7e9e4;text-align:center}
+  .msheet{position:fixed;inset:0;z-index:40;background:#0a0c12;overflow-y:auto;padding:calc(var(--menh) + 8px) 20px 60px;transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.9,.3,1)}
+  .msheet.on{transform:none}
+  .mback{position:sticky;top:0;display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--acc);padding:8px 0 16px;margin-bottom:6px}
+  .win,.dock,.hint{display:none!important}
+  .mhero .m{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--acc),var(--acc2));margin-bottom:14px}
+  .mhero h2{font-family:"Archivo";font-weight:800;font-size:40px;letter-spacing:-.03em;line-height:.95}
+  .mhero p{color:var(--muted);margin:12px 0 4px}
+}
+
+/* print → CV propre */
+#printCV{display:none}
+@media print{
+  body{overflow:visible;background:#fff;-webkit-print-color-adjust:exact}
+  body>*{display:none!important}
+  #printCV{display:block!important}
+  .cvp{max-width:720px;margin:0 auto;color:#14151a;font-family:"Space Grotesk",sans-serif}
+  .cvp h1{font-family:"Archivo";font-size:30px;margin-bottom:2px}
+  .cvp .role{color:#555;margin-bottom:6px}.cvp .contact{color:#555;font-size:13px;margin-bottom:18px}
+  .cvp h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#888;border-bottom:1px solid #ddd;padding-bottom:4px;margin:18px 0 8px}
+  .cvp li{margin-bottom:6px;font-size:13.5px}.cvp p{font-size:13.5px;line-height:1.5}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#" id="skip">Aller au menu</a>
+
+<!-- SEO / lecteurs d'écran : contenu réel, en dur dans le HTML (pas injecté en JS) -->
+<main class="sr-only">
+  <h1>Jimmy Bomy — Développeur web créatif</h1>
+  <p>Étudiant en BUT MMI (Métiers du Multimédia et de l'Internet) à l'IUT de Troyes, basé à Sedan. Développement web créatif : sites PHP/MySQL, jeux en HTML5 Canvas, administration serveur.</p>
+  <h2>Projets</h2>
+  <ul>
+    <li>Rois de France — encyclopédie web sur les monarques de France, de Clovis à Napoléon III : 64 fiches dynamiques, quiz, recherche, sécurisation des formulaires (XSS, injections SQL), audit Lighthouse. PHP/MySQL, déployé sur VPS. Noté 1er de promo.</li>
+    <li>RIFT — identité de marque complète pour un fabricant fictif de claviers mécaniques custom : stratégie de communication, charte graphique et site web.</li>
+    <li>Site d'agence — site vitrine complet réalisé en SAÉ (BUT MMI).</li>
+    <li>BomyOS — ce portfolio : un système d'exploitation complet en JavaScript vanilla, fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés.</li>
+  </ul>
+  <h2>Labs</h2>
+  <ul>
+    <li>Pendule échecs/dames — horloge de jeu jouable dans le navigateur, HTML/JS.</li>
+    <li>Le Nœud de Sillenbach — fiction interactive sous Twine, récit non-linéaire inspiré de Dark.</li>
+    <li>Convertisseur de fichiers — outil en ligne de commande Node.js.</li>
+    <li>RTS en Canvas — jeu de stratégie temps réel from scratch en JavaScript vanilla et HTML5 Canvas.</li>
+    <li>SAÉ 105 — site web réalisé au premier semestre du BUT MMI.</li>
+  </ul>
+  <h2>Parcours</h2>
+  <ul>
+    <li>BUT MMI, IUT de Troyes (2025–2026) : 1re année validée, major de promo en développement web (18,1/20).</li>
+    <li>Auto-hébergement : tous mes projets tournent sur mon propre VPS Linux (Apache, monitoring GoAccess). Serveur Minecraft (Paper) administré via Pterodactyl.</li>
+    <li>Développeur autodidacte avant le BUT : développement web et Node.js en autonomie.</li>
+  </ul>
+  <h2>Contact</h2>
+  <p>Email : contact@jimmybomy.fr · Téléphone : 07 88 02 16 76 · Sedan / Troyes, France.</p>
+</main>
+
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="bmark"></div><div class="bname">BomyOS</div>
+  <div class="bbar"><i id="bbar"></i></div><div class="btip" id="btip">démarrage…</div>
+</div>
+
+<div id="desktop"><div class="wm-watermark" aria-hidden="true">BOMY<br>OS</div><div class="dicons" id="dicons"></div></div>
+<div class="crtfx" aria-hidden="true"></div>
+
+<div class="menubar" role="banner">
+  <div class="left">
+    <div class="logo"><span class="m"></span>BomyOS</div>
+    <span class="menu" style="font-weight:600;color:var(--ink)">Jimmy Bomy</span>
+    <span class="menu">Fichier</span><span class="menu">Projets</span><span class="menu">Aide</span>
+  </div>
+  <div class="right">
+    <span class="live hidem"><span class="dot"></span>Disponible · <span id="year"></span></span>
+    <button id="crtBtn" class="icb hidem" aria-pressed="false" aria-label="Activer l'effet CRT" title="Effet CRT"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></button>
+    <button id="sndBtn" class="icb hidem" aria-pressed="true" aria-label="Couper le son" title="Son"><svg id="sndIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a3 3 0 0 1 0 6"/></svg></button>
+    <button id="contactBtn" class="mb-cta">Me contacter</button>
+    <span id="clock" class="hidem">—</span>
+  </div>
+</div>
+
+<div class="hint" id="hint">👆 <b>Double-clique</b> un fichier · <b>Tab</b>+<b>Entrée</b> · <b>clic droit</b> = menu</div>
+<div class="dock" id="dock" role="toolbar" aria-label="Dock des applications"></div>
+<div class="ctx" id="ctx" role="menu" aria-label="Menu contextuel"></div>
+
+<div class="mobile" id="mobile">
+  <div class="mhero"><div class="m"></div><h2>Jimmy<br>Bomy</h2>
+    <p>Développeur web créatif · BUT MMI Troyes · Sedan.</p>
+    <button class="btn" id="mContact" style="margin-top:14px">Me contacter</button></div>
+  <div class="mlaunch" id="mlaunch"></div>
+</div>
+<div class="msheet" id="msheet" role="dialog" aria-label="Contenu"><a class="mback" id="mback" href="#">‹ Retour au bureau</a><div id="msheetBody"></div></div>
+
+<div id="printCV" aria-hidden="true"></div>
+
+<script>
+const EMAIL="contact@jimmybomy.fr",PHONE="07 88 02 16 76",TEL="0788021676";
+const ICON={
+  folder:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#7cc4ff"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#a9d8ff"/></svg>',
+  labs:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#a78bfa"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#c4b5fd"/><path d="M21.5 25v4.2l-3.6 5.9a2 2 0 0 0 1.7 3h8.8a2 2 0 0 0 1.7-3l-3.6-5.9V25" stroke="#3b2a6e" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M19.8 25h8.4" stroke="#3b2a6e" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="34.5" r="1.6" fill="#c6ff4e"/></svg>',
+  user:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="7" y="6" width="34" height="36" rx="5" fill="#eef0ea"/><circle cx="24" cy="20" r="6" fill="#c6ff4e"/><path d="M14 36c1.5-6 6-8 10-8s8.5 2 10 8" stroke="#0a0b0e" stroke-width="2.4" fill="none"/></svg>',
+  doc:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="16" y="22" width="16" height="2.4" rx="1.2" fill="#71757e"/><rect x="16" y="28" width="16" height="2.4" rx="1.2" fill="#71757e"/><rect x="16" y="34" width="10" height="2.4" rx="1.2" fill="#71757e"/></svg>',
+  pdf:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="8" y="28" width="32" height="12" rx="2" fill="#ff5f57"/><text x="24" y="37" font-family="Archivo" font-size="8" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
+  terminal:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="5" y="8" width="38" height="32" rx="5" fill="#0c1016"/><rect x="5" y="8" width="38" height="32" rx="5" stroke="#2b3340" stroke-width="1.5"/><path d="M13 20l6 4-6 4" stroke="#c6ff4e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="24" y="27" width="10" height="2.4" rx="1.2" fill="#7cc4ff"/></svg>',
+  gh:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.52.1.71-.23.71-.5v-1.75c-2.9.63-3.52-1.4-3.52-1.4-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.07-2.8-.1-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.56 1.43.2 2.49.1 2.75.67.73 1.07 1.66 1.07 2.8 0 4-2.45 4.9-4.78 5.16.38.32.72.96.72 1.94v2.88c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>',
+  li:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.9V21H19v-5.5c0-1.3-.02-3-1.87-3-1.87 0-2.16 1.44-2.16 2.92V21H11V9z"/></svg>',
+};
+/* ==== VITRINE — les 4 flagships (édite ici) ==== */
+const PROJECTS={
+  rois:{name:"Rois de France",cat:"Encyclopédie web · PHP/MySQL",grad:"linear-gradient(135deg,#3a2410,#c8892e 55%,#f2d06b)",role:"Conception, back & front",year:"2025",client:"SAÉ 203 · BUT MMI — noté 1er de promo",tags:["PHP","MySQL","Sécurité XSS/SQL","Lighthouse","VPS"],link:"https://sae203.mmi25c02.mmi-troyes.fr/listing.php",desc:"Encyclopédie web sur les monarques de France, de Clovis à Napoléon III : 64 fiches dynamiques, quiz, recherche, sécurisation des formulaires (XSS / injections SQL) et audit Lighthouse. PHP/MySQL, déployé sur mon VPS."},
+  rift:{name:"RIFT",cat:"Identité de marque & site",grad:"linear-gradient(135deg,#1a0f2e,#e2456d 55%,#f6c453)",role:"Branding, com & développement",year:"2025",client:"BUT MMI",tags:["Branding","Charte graphique","Stratégie de com","HTML/CSS"],link:"",desc:"Identité de marque complète pour un fabricant fictif de claviers mécaniques custom : stratégie de communication, charte graphique, schémas, et le site (accueil + fiche produit). Le combo design + com + web du profil MMI. <span class='todo'>[Lien ou screenshots à ajouter si déployé.]</span>"},
+  agence:{name:"Site d'agence",cat:"Site vitrine",grad:"linear-gradient(135deg,#0e1a3a,#2563eb 55%,#7cc4ff)",role:"Intégration & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Responsive"],link:"https://sae202-agence.mmi25c02.mmi-troyes.fr",desc:"Site vitrine complet pour une agence. <span class='todo'>[À COMPLÉTER : une phrase sur le concept — et préciser la différence avec sae202.mmi25c02.mmi-troyes.fr.]</span>"},
+  bomyos:{name:"BomyOS",cat:"Ce site · OS en JS vanilla",grad:"linear-gradient(135deg,#0d1f12,#c6ff4e 60%,#7cc4ff)",role:"Design & développement from scratch",year:"2026",client:"Portfolio personnel",tags:["JS vanilla","WebAudio","Accessibilité","UI/UX"],link:"https://github.com/TwitchJimmyxe/jimmybomy.fr",desc:"Le site sur lequel tu te trouves : un système d'exploitation complet en JavaScript vanilla, sans framework — fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés, terminal interactif. La démo tourne sous tes yeux."},
+};
+/* ==== LABS — les expériences ==== */
+const LABS={
+  pendule:{name:"Pendule échecs/dames",cat:"Outil · HTML/JS",grad:"linear-gradient(135deg,#1a1a1a,#c6ff4e 65%,#eef0ea)",role:"Développement",year:"2025",client:"Projet personnel",tags:["HTML","JavaScript"],link:"",desc:"Horloge de jeu (pendule) pour parties d'échecs et de dames, jouable directement dans le navigateur — construite à l'origine pour départager la rivalité aux dames avec mon père."},
+  sillenbach:{name:"Le Nœud de Sillenbach",cat:"Fiction interactive · Twine",grad:"linear-gradient(135deg,#0f172a,#334155 55%,#94a3b8)",role:"Écriture & conception",year:"2025",client:"Projet personnel",tags:["Twine","Narration non-linéaire","Écriture"],link:"",desc:"Fiction interactive sous Twine : un récit non-linéaire à embranchements, inspiré de la série Dark. Écriture multimédia et narration interactive."},
+  cli:{name:"Convertisseur de fichiers",cat:"Outil CLI · Node.js",grad:"linear-gradient(135deg,#0c1016,#22c55e 60%,#a7f3d0)",role:"Développement",year:"2025",client:"Projet personnel",tags:["Node.js","CLI"],link:"",desc:"Outil en ligne de commande Node.js pour convertir des fichiers d'un format à l'autre."},
+  rts:{name:"RTS en Canvas",cat:"Jeu · en cours",grad:"linear-gradient(135deg,#0b3d2e,#22c55e 55%,#c6ff4e)",role:"Développement from scratch",year:"2026",client:"Projet personnel",tags:["JS vanilla","HTML5 Canvas","Game loop"],link:"",desc:"Jeu de stratégie temps réel développé entièrement à la main en JavaScript vanilla et Canvas HTML5 : rendu, boucle de jeu, unités. <span class='todo'>[À COMPLÉTER : état d'avancement réel.]</span>"},
+  sae105:{name:"SAÉ 105",cat:"Site web · S1",grad:"linear-gradient(135deg,#3b1e6e,#7c5cff 60%,#7cc4ff)",role:"Développement",year:"2025",client:"SAÉ 105 · BUT MMI",tags:["Web"],link:"https://sae105.mmi25c02.mmi-troyes.fr",desc:"Site web réalisé au premier semestre du BUT MMI. <span class='todo'>[À COMPLÉTER : décris cette SAÉ en une phrase.]</span>"},
+};
+const ALL={...PROJECTS,...LABS};
+const XP=[
+  {yr:"2025 — 26",role:"BUT MMI — Métiers du Multimédia et de l'Internet",co:"IUT de Troyes",desc:"1re année validée — <b style='color:var(--acc)'>major de promo en développement web (18,1/20)</b>."},
+  {yr:"En continu",role:"Auto-hébergement & administration système",co:"VPS personnel",desc:"J'héberge et administre tous mes projets sur mon propre VPS Linux : Apache, monitoring GoAccess, déploiements. Également : serveur de jeu Minecraft (Paper) administré via Pterodactyl."},
+  {yr:"Avant",role:"Développeur autodidacte",co:"En autonomie",desc:"Développement web et Node.js en autonomie complète, avant l'entrée en BUT MMI."},
+];
+const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Terminal — contact",icon:"terminal",w:580,h:430},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600}};
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><div class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</div>
+  ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
+  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="background:${p.grad}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span></button>`).join("")}</div>`;}
+function content(app){
+  if(app==="projets")return finderHTML("Projets","La vitrine — mes projets principaux.",PROJECTS);
+  if(app==="labs")return finderHTML("Labs","Les expériences — petits projets, outils et bidouilles.",LABS);
+  if(app.startsWith("project:")){const p=ALL[app.split(":")[1]];
+    return `<div class="proj-hero" style="background:${p.grad}"><div class="mock"></div></div><div class="h-eyebrow">${p.cat}</div><div class="h-title">${p.name}</div>
+      <p class="lede">${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+      <div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div>
+      ${p.link?`<a class="btn" href="${p.link}" target="_blank" rel="noopener">Visiter le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`:`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
+  if(app==="apropos")return `<div class="h-eyebrow">À propos</div><div class="h-title">Salut,<br>moi c'est Jimmy.</div>
+    <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
+    <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n">1<i>er</i></div><div class="l">major de promo (dev)</div></div><div class="stat"><div class="n"><i>9</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
+    <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>`;
+  if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><div class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</div>
+    <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
+  if(app==="contact")return `<div class="term"><div class="term-out" id="termOut">
+      <div class="muted">BomyOS terminal — tape <span class="acc">help</span> pour la liste des commandes.</div>
+      <div><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ whoami</div>
+      <div class="c">Jimmy Bomy — développeur web créatif, étudiant BUT MMI (Troyes), basé à Sedan.</div></div>
+    <div class="term-line"><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$&nbsp;<input class="term-in" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal — tape une commande" /></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap">
+      <a class="btn" href="mailto:${EMAIL}" style="margin-top:0">Écrire un mail</a>
+      <a class="btn ghost" href="tel:${TEL}" style="margin-top:0">${PHONE}</a></div>`;
+  if(app==="cv")return `<div class="pdf"><h1>Jimmy Bomy</h1><div class="role">Développeur web créatif — BUT MMI (Troyes) · Sedan</div>
+    <div class="sec">Formation</div><div class="li"><span><b>BUT MMI</b> — IUT de Troyes · <span class="muted">major de promo dev web (18,1/20)</span></span><span class="muted">2025–26</span></div>
+    <div class="sec">Projets</div>${Object.values(PROJECTS).map(p=>`<div class="li"><span><b>${p.name}</b> — ${p.cat}</span><span class="muted">${p.year}</span></div>`).join("")}
+    <div class="sec">Compétences</div><div class="li"><span>Back</span><span class="muted">PHP · MySQL · Node.js · Linux/Apache (VPS)</span></div><div class="li"><span>Front</span><span class="muted">JavaScript · HTML/CSS · HTML5 Canvas</span></div>
+    <div class="sec">Contact</div><div class="li"><span>${EMAIL} · ${PHONE}</span><span class="muted">Sedan / Troyes</span></div></div>
+    <button class="btn" onclick="window.print()">Télécharger en PDF ↓</button>
+    <p class="lede" style="font-size:12.5px;margin-top:14px">Astuce : « Enregistrer en PDF » dans la boîte d'impression. <span class="todo">Tu peux aussi déposer ton vrai CV sous <b>cv-jimmy-bomy.pdf</b> et lier le bouton dessus.</span></p>`;
+  return "";
+}
+const titleFor=a=>a.startsWith("project:")?ALL[a.split(":")[1]].name:(APPS[a]?.title||a);
+const iconFor=a=>a.startsWith("project:")?"folder":(APPS[a]?.icon||"doc");
+
+/* print CV */
+document.getElementById("printCV").innerHTML=`<div class="cvp"><h1>Jimmy Bomy</h1>
+  <div class="role">Développeur web créatif — Étudiant BUT MMI (Troyes) · Sedan</div>
+  <div class="contact">${EMAIL} · ${PHONE} · jimmybomy.fr</div>
+  <h2>Formation</h2><p><b>BUT MMI</b> — IUT de Troyes (2025–2026). 1re année validée, major de promo en développement web (18,1/20).</p>
+  <h2>Projets</h2><ul>${Object.values(PROJECTS).map(p=>`<li><b>${p.name}</b> — ${p.desc.replace(/<[^>]+>/g,'')}</li>`).join("")}</ul>
+  <h2>Compétences</h2><p>PHP · MySQL · JavaScript · HTML/CSS · HTML5 Canvas · Node.js · Administration Linux/Apache (VPS) · Git</p></div>`;
+
+/* SOUND */
+let AC,muted=false;
+function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}return AC}
+function beep(f1,f2,dur,vol){if(muted)return;const a=ac();if(!a)return;if(a.state==="suspended")a.resume();
+  try{const o=a.createOscillator(),g=a.createGain();o.type="sine";o.frequency.setValueAtTime(f1,a.currentTime);
+  if(f2)o.frequency.exponentialRampToValueAtTime(f2,a.currentTime+dur);
+  g.gain.setValueAtTime(0,a.currentTime);g.gain.linearRampToValueAtTime(vol||.05,a.currentTime+.012);
+  g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+dur);o.connect(g).connect(a.destination);o.start();o.stop(a.currentTime+dur);}catch(e){}}
+const snd={open:()=>beep(420,780,.14,.05),close:()=>beep(520,230,.13,.045),tap:()=>beep(660,null,.045,.03),min:()=>beep(600,200,.16,.04)};
+
+/* WINDOW MANAGER */
+const desktop=document.getElementById("desktop");
+let zTop=100,activeWin=null;const wins={};
+function bringFront(el){zTop++;el.style.zIndex=zTop;document.querySelectorAll(".win").forEach(w=>w.classList.remove("active"));el.classList.add("active");activeWin=el.dataset.app;}
+function openApp(app){
+  const hint=document.getElementById("hint");if(hint)hint.style.display="none";
+  const st=wins[app];
+  if(st){if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);st.el.focus();snd.tap();return;}
+  const meta=APPS[app]||{w:560,h:460};
+  const el=document.createElement("div");el.className="win";el.dataset.app=app;el.setAttribute("role","dialog");el.setAttribute("aria-label",titleFor(app));el.tabIndex=-1;
+  const w=Math.min(meta.w||560,innerWidth-40),h=Math.min(meta.h||460,innerHeight-120);
+  const n=Object.keys(wins).length;
+  const left=Math.max(20,Math.min(innerWidth-w-20,innerWidth/2-w/2+(n*30-60)));
+  const top=Math.max(56,innerHeight/2-h/2+(n*26-40));
+  el.style.width=w+"px";el.style.height=h+"px";el.style.left=left+"px";el.style.top=top+"px";
+  el.innerHTML=`<div class="win-bar"><div class="lights">
+      <button class="c" data-act="close" aria-label="Fermer ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#4a0002" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>
+      <button class="mi" data-act="min" aria-label="Réduire ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#7a4a00" stroke-width="1.5"><path d="M2 5h6"/></svg></button>
+      <button class="fu" data-act="max" aria-label="Agrandir ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#0a4a00" stroke-width="1.5"><path d="M2.5 2.5h5v5h-5z"/></svg></button></div>
+      <div class="wtitle">${ICON[iconFor(app)].replace('width="42" height="42"','width="15" height="15"')}${titleFor(app)}</div></div>
+    <div class="win-body">${content(app)}</div><div class="rz" aria-hidden="true"></div>`;
+  desktop.appendChild(el);wins[app]={el,min:false,max:false,prev:null};
+  requestAnimationFrame(()=>{el.classList.add("open");bringFront(el);el.focus();});
+  markDock(app,true);snd.open();
+  el.addEventListener("mousedown",()=>bringFront(el));
+  el.querySelector('[data-act="close"]').addEventListener("click",e=>{e.stopPropagation();closeApp(app);});
+  el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(app);});
+  el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(app);});
+  el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t)openApp(t.getAttribute("data-open"));});
+  if(app==="contact")wireTerminal(el);
+  makeDraggable(el,app);makeResizable(el,app);
+}
+function closeApp(app){const st=wins[app];if(!st)return;st.el.classList.add("closing");markDock(app,false);snd.close();
+  setTimeout(()=>{st.el.remove();delete wins[app];},220);const db=dock.querySelector(`[data-app="${app}"]`);if(db)db.focus();}
+function minApp(app){const st=wins[app];if(!st)return;st.min=true;st.el.classList.add("min");snd.min();const db=dock.querySelector(`[data-app="${app}"]`);if(db)db.focus();}
+function maxApp(app){const st=wins[app];if(!st)return;const el=st.el;snd.tap();
+  if(st.max){el.style.left=st.prev.l;el.style.top=st.prev.t;el.style.width=st.prev.w;el.style.height=st.prev.h;st.max=false;el.classList.remove("max");}
+  else{st.prev={l:el.style.left,t:el.style.top,w:el.style.width,h:el.style.height};el.style.left="12px";el.style.top=(parseInt(getComputedStyle(document.documentElement).getPropertyValue('--menh'))+8)+"px";el.style.width=(innerWidth-24)+"px";el.style.height=(innerHeight-52-90)+"px";st.max=true;el.classList.add("max");bringFront(el);}}
+function makeDraggable(el,app){const bar=el.querySelector(".win-bar");let sx,sy,ox,oy,drag=false;
+  bar.addEventListener("dblclick",e=>{if(!e.target.closest("button"))maxApp(app);});
+  bar.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(wins[app]&&wins[app].max)return;drag=true;bar.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;ox=el.offsetLeft;oy=el.offsetTop;bringFront(el);el.style.transition="none";});
+  bar.addEventListener("pointermove",e=>{if(!drag)return;let nl=ox+(e.clientX-sx),nt=oy+(e.clientY-sy);nl=Math.max(-el.offsetWidth+120,Math.min(innerWidth-60,nl));nt=Math.max(38,Math.min(innerHeight-52,nt));el.style.left=nl+"px";el.style.top=nt+"px";});
+  const end=()=>{drag=false;el.style.transition="";};bar.addEventListener("pointerup",end);bar.addEventListener("pointercancel",end);}
+function makeResizable(el,app){const h=el.querySelector(".rz");let sx,sy,sw,sh,rz=false;
+  h.addEventListener("pointerdown",e=>{e.stopPropagation();if(wins[app]&&wins[app].max)return;rz=true;h.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;sw=el.offsetWidth;sh=el.offsetHeight;bringFront(el);el.style.transition="none";});
+  h.addEventListener("pointermove",e=>{if(!rz)return;el.style.width=Math.max(300,Math.min(innerWidth-30,sw+e.clientX-sx))+"px";el.style.height=Math.max(220,Math.min(innerHeight-60,sh+e.clientY-sy))+"px";});
+  const end=()=>{rz=false;el.style.transition="";};h.addEventListener("pointerup",end);h.addEventListener("pointercancel",end);}
+
+/* TERMINAL */
+function wireTerminal(root){const out=root.querySelector("#termOut,.term-out"),inp=root.querySelector(".term-in"),term=root.querySelector(".term");
+  if(!inp)return;setTimeout(()=>inp.focus(),60);term.addEventListener("click",e=>{if(!e.target.closest("a"))inp.focus();});
+  inp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const cmd=inp.value.trim();
+    add(out,`<span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ ${esc(cmd)}`);runCmd(cmd,out);inp.value="";
+    (out.parentElement||out).scrollTop=9e9;out.scrollIntoView&&inp.scrollIntoView({block:"nearest"});});}
+function add(out,html){const d=document.createElement("div");d.innerHTML=html;out.appendChild(d);}
+function runCmd(raw,out){const cmd=raw.toLowerCase();
+  if(cmd===""){return;}
+  if(cmd==="clear"){out.innerHTML="";return;}
+  if(cmd==="projets"||cmd==="ls projets"){add(out,'<span class="muted">Ouverture du dossier Projets…</span>');openApp("projets");return;}
+  if(cmd==="labs"||cmd==="ls labs"){add(out,'<span class="muted">Ouverture du dossier Labs…</span>');openApp("labs");return;}
+  if(cmd==="cv"){add(out,'<span class="muted">Ouverture de CV.pdf…</span>');openApp("cv");return;}
+  if(cmd==="parcours"){add(out,'<span class="muted">Ouverture de Parcours…</span>');openApp("parcours");return;}
+  if(cmd==="sudo"||cmd.startsWith("sudo ")){add(out,'<span class="c">Nice try 😏 — pas de root sur BomyOS.</span>');return;}
+  const map={
+    help:()=>'commandes : <span class="acc">whoami</span> · <span class="acc">projets</span> · <span class="acc">labs</span> · <span class="acc">parcours</span> · <span class="acc">contact</span> · <span class="acc">cv</span> · <span class="acc">ls</span> · <span class="acc">date</span> · <span class="acc">clear</span>',
+    whoami:()=>"Jimmy Bomy — développeur web créatif · étudiant BUT MMI (Troyes) · basé à Sedan.",
+    ls:()=>"projets/&nbsp;&nbsp;labs/&nbsp;&nbsp;a-propos.txt&nbsp;&nbsp;parcours.doc&nbsp;&nbsp;cv.pdf&nbsp;&nbsp;contact",
+    contact:()=>`email → <a href="mailto:${EMAIL}">${EMAIL}</a><br>tél&nbsp;&nbsp;&nbsp;→ <a href="tel:${TEL}">${PHONE}</a><br>lieu&nbsp;&nbsp;→ Sedan / Troyes`,
+    date:()=>new Date().toLocaleString("fr-FR"),
+    about:()=>"Étudiant BUT MMI, autodidacte, j'aime le web from scratch et l'administration serveur.",
+  };
+  if(map[cmd]){add(out,'<span class="c">'+map[cmd]()+"</span>");return;}
+  add(out,`<span class="c">commande introuvable : ${esc(raw)} — tape <span class="acc">help</span></span>`);}
+
+/* ICONS + DOCK */
+const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"]];
+document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)]}</span><span class="lbl">${l}</span></button>`).join("");
+document.querySelectorAll(".dicon").forEach(ic=>{ic.addEventListener("dblclick",()=>openApp(ic.dataset.app));
+  ic.addEventListener("click",()=>{document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");});
+  ic.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openApp(ic.dataset.app);}});});
+const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["apropos","À propos","user"],["parcours","Parcours","doc"],["contact","Terminal","terminal"],["cv","CV","pdf"],["--","",""],["gh","GitHub","gh","https://github.com/TwitchJimmyxe"],["li","LinkedIn","li","https://www.linkedin.com/"]];
+const dock=document.getElementById("dock");
+dock.innerHTML=DOCK.map(d=>{if(d[0]==="--")return '<div class="sep"></div>';const link=d[3]&&d[3].startsWith("http");
+  return `<button data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}"><span class="tip">${d[1]}</span>${ICON[d[2]]}<span class="run" data-run="${d[0]}"></span></button>`;}).join("");
+dock.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.link){window.open(b.dataset.link,"_blank","noopener");return;}if(b.dataset.app)openApp(b.dataset.app);}));
+function markDock(app,on){const r=dock.querySelector(`[data-run="${app}"]`);if(r)r.parentElement.classList.toggle("running",on);}
+
+/* CONTEXT MENU */
+const ctx=document.getElementById("ctx");
+const CTX=[["projets","Ouvrir Projets"],["labs","Ouvrir Labs"],["apropos","À propos"],["parcours","Parcours"],["contact","Terminal — contact"],["cv","CV.pdf"],["--",""],["_close","Tout fermer"]];
+ctx.innerHTML=CTX.map(c=>c[0]==="--"?'<div class="sep"></div>':`<button role="menuitem" data-ctx="${c[0]}">${c[1]}</button>`).join("");
+function showCtx(x,y){ctx.style.left=Math.min(x,innerWidth-230)+"px";ctx.style.top=Math.min(y,innerHeight-260)+"px";ctx.classList.add("on");}
+function hideCtx(){ctx.classList.remove("on");}
+desktop.addEventListener("contextmenu",e=>{e.preventDefault();showCtx(e.clientX,e.clientY);});
+ctx.addEventListener("click",e=>{const b=e.target.closest("[data-ctx]");if(!b)return;const v=b.dataset.ctx;if(v==="_close")Object.keys(wins).forEach(closeApp);else openApp(v);hideCtx();});
+addEventListener("click",e=>{if(!ctx.contains(e.target))hideCtx();});
+addEventListener("keydown",e=>{if(e.key==="Escape"){if(ctx.classList.contains("on")){hideCtx();return;}if(activeWin&&wins[activeWin]&&!wins[activeWin].min)closeApp(activeWin);}});
+
+/* MENUBAR buttons */
+document.getElementById("year").textContent=new Date().getFullYear();
+const sndBtn=document.getElementById("sndBtn"),sndIcon=document.getElementById("sndIcon");
+sndBtn.addEventListener("click",()=>{muted=!muted;sndBtn.setAttribute("aria-pressed",String(!muted));sndBtn.setAttribute("aria-label",muted?"Activer le son":"Couper le son");
+  sndIcon.innerHTML=muted?'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/>':'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a3 3 0 0 1 0 6"/>';if(!muted)snd.tap();});
+const crtBtn=document.getElementById("crtBtn");crtBtn.addEventListener("click",()=>{const on=document.body.classList.toggle("crt");crtBtn.setAttribute("aria-pressed",String(on));snd.tap();});
+document.getElementById("contactBtn").addEventListener("click",()=>{if(innerWidth<=720)mopen("contact");else openApp("contact");});
+document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();document.querySelector(".dicon")?.focus();});
+
+/* MOBILE */
+const MTILES=[["projets","Projets"],["labs","Labs"],["apropos","À propos"],["parcours","Parcours"],["contact","Contact"],["cv","CV"]];
+document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)].replace('width="42" height="42"','width="34" height="34"')}</span><span class="lbl">${l}</span></button>`).join("");
+const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
+function mopen(app){msBody.innerHTML=content(app);msheet.classList.add("on");msheet.scrollTop=0;
+  msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"))));
+  if(app==="contact")wireTerminal(msheet);}
+document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app)));
+document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();msheet.classList.remove("on");});
+document.getElementById("mContact").addEventListener("click",()=>mopen("contact"));
+
+/* CLOCK */
+function tick(){const d=new Date();document.getElementById("clock").textContent=d.toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short"})+"  "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});}
+tick();setInterval(tick,10000);
+
+/* BOOT */
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+(function boot(){const b=document.getElementById("boot"),bar=document.getElementById("bbar"),tip=document.getElementById("btip");
+  const steps=["initialisation du noyau…","montage de /projets…","chargement des polices…","démarrage du bureau…"];
+  if(reduce){b.style.display="none";afterBoot();return;}
+  let v=0,si=0;const iv=setInterval(()=>{v+=Math.random()*18+7;if(v>100)v=100;bar.style.width=v+"%";
+    const ns=Math.min(steps.length-1,Math.floor(v/26));if(ns!==si){si=ns;tip.textContent=steps[si];}
+    if(v>=100){clearInterval(iv);setTimeout(()=>{b.classList.add("done");setTimeout(()=>{b.style.display="none";afterBoot();},600);},250);}},160);})();
+function afterBoot(){if(innerWidth>720){openApp("apropos");setTimeout(()=>openApp("projets"),260);}}
+</script>
+</body>
+</html>

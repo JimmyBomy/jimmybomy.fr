@@ -8,3 +8,6 @@ www/
 
 # CV / documents perso — jamais dans le repo public
 *.pdf
+
+# Projets école dupliqués (hébergés sur le VPS, hors git)
+travaux/

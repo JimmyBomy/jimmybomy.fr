@@ -24,6 +24,8 @@
 <meta name="twitter:image" content="https://jimmybomy.fr/og.png" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23c6ff4e'/%3E%3Cstop offset='1' stop-color='%237cc4ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <!-- Analytics (Umami self-hosted sur ton VPS) — décommente et mets ton instance + id :
 <script defer src="https://umami.jimmybomy.fr/script.js" data-website-id="TON-WEBSITE-ID"></script>
 -->
@@ -163,21 +165,67 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 .hint b{color:var(--ink);font-weight:600}
 @keyframes floaty{50%{transform:translateX(-50%) translateY(4px)}}
 
-.mobile{display:none}
+/* ============ MOBILE — interface façon iOS ============ */
+.ios-status,.mobile,.msheet,.homebar,.mdock{display:none}
+@media(max-width:1100px){.wm-watermark{font-size:clamp(44px,9vw,110px)}}
 @media(max-width:720px){
-  .dicons,.wm-watermark{display:none}
-  .mobile{display:block;position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(var(--menh) + 20px) 16px 40px}
-  .mlaunch{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-bottom:20px}
-  .mtile{display:flex;flex-direction:column;align-items:center;gap:8px}
-  .mtile .ic{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid var(--glass-brd);display:grid;place-items:center}
-  .mtile .lbl{font-size:11.5px;color:#e7e9e4;text-align:center}
-  .msheet{position:fixed;inset:0;z-index:40;background:#0a0c12;overflow-y:auto;padding:calc(var(--menh) + 8px) 20px 60px;transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.9,.3,1)}
+  .menubar,.dicons,.wm-watermark,.win,.dock,.hint{display:none!important}
+  /* barre de statut */
+  .ios-status{display:flex;position:fixed;top:0;left:0;right:0;z-index:70;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,10px) + 6px) 28px 4px;color:#fff;pointer-events:none}
+  .ios-status .time{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .ios-status .icons{display:flex;gap:7px;align-items:center;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))}
+  /* écran d'accueil */
+  .mobile{display:flex;flex-direction:column;position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(env(safe-area-inset-top,10px) + 52px) 20px 130px}
+  .widget{background:rgba(30,32,40,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(30px) saturate(1.5);border-radius:26px;padding:18px 18px 16px;margin-bottom:30px;box-shadow:0 18px 40px -18px rgba(0,0,0,.6)}
+  .widget .wtop{display:flex;align-items:center;gap:13px}
+  .widget .wava{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-family:"Archivo";font-weight:900;color:#0a0b0e;font-size:19px;flex:0 0 auto}
+  .widget .wname{font-family:"Archivo";font-weight:800;font-size:19px;letter-spacing:-.02em}
+  .widget .wrole{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.35}
+  .widget .wdispo{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);margin:13px 0 12px}
+  .widget .wdispo .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px var(--acc)}
+  .widget .wcta{display:block;width:100%;text-align:center;background:var(--acc);color:#0a0b0e;font-weight:600;font-size:14.5px;padding:12px;border-radius:13px}
+  .widget .wcta:active{filter:brightness(.9)}
+  /* grille d'apps */
+  .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 10px;padding:0 2px}
+  .mtile{display:flex;flex-direction:column;align-items:center;gap:7px}
+  .mtile .ic{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;box-shadow:0 8px 18px -8px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .12s,filter .12s}
+  .mtile:active .ic{transform:scale(.9);filter:brightness(.8)}
+  .mtile .lbl{font-size:11px;font-weight:500;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+  .g-blue{background:linear-gradient(160deg,#4aa8ff,#0a5ce8)}
+  .g-purple{background:linear-gradient(160deg,#b06bff,#6f3df0)}
+  .g-green{background:linear-gradient(160deg,#4cd964,#1f9a48)}
+  .g-orange{background:linear-gradient(160deg,#ffb340,#f2711a)}
+  .g-dark{background:linear-gradient(160deg,#2a2f38,#0c1016);border:1px solid rgba(255,255,255,.14)}
+  .g-red{background:linear-gradient(160deg,#ff6b5e,#dd2e44)}
+  /* dock iOS */
+  .mdock{display:flex;position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,8px) + 18px);z-index:40;justify-content:space-around;align-items:center;padding:12px 6px;background:rgba(70,72,84,.38);backdrop-filter:blur(30px) saturate(1.6);border:1px solid rgba(255,255,255,.12);border-radius:30px;box-shadow:0 20px 44px -18px rgba(0,0,0,.7)}
+  .mdock .mtile{gap:0}
+  /* barre home */
+  .homebar{display:block;position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 6px);transform:translateX(-50%);width:132px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:80;pointer-events:none}
+  /* feuille modale iOS */
+  .msheet{display:block;position:fixed;left:0;right:0;bottom:0;top:14px;z-index:60;background:#0d0f16;border-radius:24px 24px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.65);transform:translateY(103%);transition:transform .34s cubic-bezier(.2,.9,.3,1);overflow-y:auto;-webkit-overflow-scrolling:touch}
   .msheet.on{transform:none}
-  .mback{position:sticky;top:0;display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--acc);padding:8px 0 16px;margin-bottom:6px}
-  .win,.dock,.hint{display:none!important}
-  .mhero .m{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--acc),var(--acc2));margin-bottom:14px}
-  .mhero h2{font-family:"Archivo";font-weight:800;font-size:40px;letter-spacing:-.03em;line-height:.95}
-  .mhero p{color:var(--muted);margin:12px 0 4px}
+  .msheet .mnav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:10px 14px 8px;background:rgba(13,15,22,.85);backdrop-filter:blur(18px)}
+  .msheet .grab{width:40px;height:5px;border-radius:3px;background:rgba(255,255,255,.25)}
+  .msheet .mclose{position:absolute;right:14px;top:8px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center}
+  .msheet .mclose:active{background:rgba(255,255,255,.22)}
+  .msbody{padding:14px 20px calc(env(safe-area-inset-bottom,10px) + 44px)}
+  .term-in{font-size:16px}
+  .h-title{font-size:clamp(26px,7.5vw,36px)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .pdf{padding:26px 22px}
+  .tl .row{grid-template-columns:1fr;gap:4px}
+}
+/* écrans courts (iPhone SE…) : layout compact pour que rien ne passe sous le dock */
+@media(max-width:720px) and (max-height:720px){
+  .mobile{padding-top:calc(env(safe-area-inset-top,8px) + 44px)}
+  .widget{padding:13px 14px 12px;margin-bottom:18px;border-radius:22px}
+  .widget .wava{width:44px;height:44px;font-size:16px}
+  .widget .wname{font-size:17px}
+  .widget .wdispo{margin:9px 0 9px}
+  .widget .wcta{padding:10px}
+  .mtile .ic{width:52px;height:52px;border-radius:12px}
+  .mgrid{gap:16px 8px}
 }
 
 /* print → CV propre */
@@ -254,13 +302,35 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 <div class="dock" id="dock" role="toolbar" aria-label="Dock des applications"></div>
 <div class="ctx" id="ctx" role="menu" aria-label="Menu contextuel"></div>
 
-<div class="mobile" id="mobile">
-  <div class="mhero"><div class="m"></div><h2>Jimmy<br>Bomy</h2>
-    <p>Développeur web créatif · BUT MMI Troyes · Sedan.</p>
-    <button class="btn" id="mContact" style="margin-top:14px">Me contacter</button></div>
-  <div class="mlaunch" id="mlaunch"></div>
+<!-- Barre de statut iOS (mobile) -->
+<div class="ios-status" aria-hidden="true">
+  <span class="time" id="mclock">9:41</span>
+  <span class="icons">
+    <svg width="18" height="12" viewBox="0 0 18 12" fill="#fff"><rect y="7" width="3" height="5" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" width="3" height="12" rx="1"/></svg>
+    <svg width="17" height="12" viewBox="0 0 17 12" fill="#fff"><path d="M8.5 12L16 4.7A11.5 11.5 0 0 0 1 4.7L8.5 12z" opacity=".3"/><path d="M8.5 12l5-4.9a7.4 7.4 0 0 0-10 0l5 4.9z" opacity=".6"/><path d="M8.5 12l2.5-2.4a3.6 3.6 0 0 0-5 0L8.5 12z"/></svg>
+    <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#fff" opacity=".45"/><rect x="2" y="2" width="15" height="8" rx="2" fill="#c6ff4e"/><path d="M23.5 4v4a2.2 2.2 0 0 0 0-4z" fill="#fff" opacity=".45"/></svg>
+  </span>
 </div>
-<div class="msheet" id="msheet" role="dialog" aria-label="Contenu"><a class="mback" id="mback" href="#">‹ Retour au bureau</a><div id="msheetBody"></div></div>
+
+<!-- Écran d'accueil iOS (mobile) -->
+<div class="mobile" id="mobile">
+  <div class="widget">
+    <div class="wtop"><span class="wava" aria-hidden="true">JB</span>
+      <div><div class="wname">Jimmy Bomy</div><div class="wrole">Développeur web créatif · BUT MMI Troyes · Sedan</div></div></div>
+    <div class="wdispo"><span class="dot"></span>Disponible · <span id="myear"></span> — réponse rapide</div>
+    <button class="wcta" id="mContact">Me contacter</button>
+  </div>
+  <div class="mgrid" id="mlaunch"></div>
+</div>
+<div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div>
+<div class="homebar" aria-hidden="true"></div>
+<div class="msheet" id="msheet" role="dialog" aria-label="Contenu">
+  <div class="mnav"><span class="grab" aria-hidden="true"></span>
+    <button class="mclose" id="mback" aria-label="Fermer">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+    </button></div>
+  <div id="msheetBody" class="msbody"></div>
+</div>
 
 <div id="printCV" aria-hidden="true"></div>
 
@@ -366,7 +436,7 @@ function openApp(app){
   if(st){if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);st.el.focus();snd.tap();return;}
   const meta=APPS[app]||{w:560,h:460};
   const el=document.createElement("div");el.className="win";el.dataset.app=app;el.setAttribute("role","dialog");el.setAttribute("aria-label",titleFor(app));el.tabIndex=-1;
-  const w=Math.min(meta.w||560,innerWidth-40),h=Math.min(meta.h||460,innerHeight-120);
+  const w=Math.min(meta.w||560,innerWidth-40),h=Math.min(meta.h||460,innerHeight-160);
   const n=Object.keys(wins).length;
   const left=Math.max(20,Math.min(innerWidth-w-20,innerWidth/2-w/2+(n*30-60)));
   const top=Math.max(56,innerHeight/2-h/2+(n*26-40));
@@ -463,19 +533,32 @@ const crtBtn=document.getElementById("crtBtn");crtBtn.addEventListener("click",(
 document.getElementById("contactBtn").addEventListener("click",()=>{if(innerWidth<=720)mopen("contact");else openApp("contact");});
 document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();document.querySelector(".dicon")?.focus();});
 
-/* MOBILE */
-const MTILES=[["projets","Projets"],["labs","Labs"],["apropos","À propos"],["parcours","Parcours"],["contact","Contact"],["cv","CV"]];
-document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)].replace('width="42" height="42"','width="34" height="34"')}</span><span class="lbl">${l}</span></button>`).join("");
+/* MOBILE — écran d'accueil iOS */
+const IOSGLYPH={
+  projets:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M3 7c0-1.1.9-2 2-2h4.6l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>',
+  labs:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v5.2L5.8 16a3 3 0 0 0 2.6 4.5h7.2A3 3 0 0 0 18.2 16l-4.7-7.8V3"/><circle cx="12" cy="16.5" r="1.4" fill="#fff" stroke="none"/></svg>',
+  apropos:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.2" r="4"/><path d="M4 20c1.2-4.2 4.4-6 8-6s6.8 1.8 8 6H4z"/></svg>',
+  parcours:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4M10 13h5M10 16.5h5"/></svg>',
+  contact:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 4-5 4" stroke="#c6ff4e"/><path d="M13 17h6" stroke="#7cc4ff"/></svg>',
+  cv:'<svg width="30" height="30" viewBox="0 0 24 24"><path d="M6 2.5h8l5 5V21.5H6z" fill="#fff"/><rect x="4" y="12" width="16" height="7" rx="1.6" fill="#a41f2e"/><text x="12" y="17.3" font-family="Archivo,Arial" font-size="5.4" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
+};
+const IOSBG={projets:"g-blue",labs:"g-purple",apropos:"g-green",parcours:"g-orange",contact:"g-dark",cv:"g-red"};
+const MTILES=[["projets","Projets"],["labs","Labs"],["apropos","À propos"],["parcours","Parcours"],["contact","Terminal"],["cv","CV"]];
+document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
+document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
 const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
-function mopen(app){msBody.innerHTML=content(app);msheet.classList.add("on");msheet.scrollTop=0;
+function mopen(app){msBody.innerHTML=content(app);msheet.classList.add("on");msheet.scrollTop=0;snd.open();
   msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"))));
   if(app==="contact")wireTerminal(msheet);}
 document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app)));
-document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();msheet.classList.remove("on");});
+document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();msheet.classList.remove("on");snd.close();});
 document.getElementById("mContact").addEventListener("click",()=>mopen("contact"));
+const myearEl=document.getElementById("myear");if(myearEl)myearEl.textContent=new Date().getFullYear();
 
 /* CLOCK */
-function tick(){const d=new Date();document.getElementById("clock").textContent=d.toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short"})+"  "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});}
+function tick(){const d=new Date();
+  document.getElementById("clock").textContent=d.toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short"})+"  "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  const mc=document.getElementById("mclock");if(mc)mc.textContent=d.toLocaleTimeString("fr-FR",{hour:"numeric",minute:"2-digit"});}
 tick();setInterval(tick,10000);
 
 /* BOOT */

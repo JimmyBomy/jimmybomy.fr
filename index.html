@@ -33,7 +33,7 @@
   "name": "Jimmy Bomy",
   "jobTitle": "Développeur web créatif",
   "url": "https://jimmybomy.fr/",
-  "email": "mailto:contact@jimmybomy.fr",
+  "email": "mailto:jimmybomy@icloud.com",
   "telephone": "+33788021676",
   "address": {"@type": "PostalAddress", "addressLocality": "Sedan", "addressRegion": "Grand Est", "addressCountry": "FR"},
   "alumniOf": {"@type": "CollegeOrUniversity", "name": "IUT de Troyes — BUT MMI"},
@@ -217,14 +217,19 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   .mdock .mtile{gap:0}
   /* barre home */
   .homebar{display:block;position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 6px);transform:translateX(-50%);width:132px;height:5px;border-radius:3px;background:rgba(255,255,255,.9);z-index:80;pointer-events:none}
-  /* feuille modale iOS */
-  .msheet{display:block;position:fixed;left:0;right:0;bottom:0;top:14px;z-index:60;background:#0d0f16;border-radius:24px 24px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.65);transform:translateY(103%);transition:transform .34s cubic-bezier(.2,.9,.3,1);overflow-y:auto;-webkit-overflow-scrolling:touch}
-  .msheet.on{transform:none}
-  .msheet .mnav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:10px 14px 8px;background:rgba(13,15,22,.85);backdrop-filter:blur(18px)}
-  .msheet .grab{width:40px;height:5px;border-radius:3px;background:rgba(255,255,255,.25)}
-  .msheet .mclose{position:absolute;right:14px;top:8px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center}
-  .msheet .mclose:active{background:rgba(255,255,255,.22)}
-  .msbody{padding:14px 20px calc(env(safe-area-inset-bottom,10px) + 44px)}
+  /* ouverture d'app façon iOS : zoom depuis l'icône */
+  .mobile{transition:transform .44s cubic-bezier(.32,.72,0,1),filter .44s,opacity .44s;will-change:transform}
+  .mobile.behind{transform:scale(.9);filter:blur(3px) brightness(.72);opacity:.6;pointer-events:none}
+  .msheet{display:block;position:fixed;inset:0;z-index:60;background:#0a0c12;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    transform:scale(.42);opacity:0;transform-origin:50% 42%;pointer-events:none;
+    transition:transform .44s cubic-bezier(.32,.72,0,1),opacity .3s ease;will-change:transform,opacity}
+  .msheet.on{transform:none;opacity:1;pointer-events:auto}
+  .msheet .mnav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:center;
+    padding:calc(env(safe-area-inset-top,10px) + 20px) 14px 11px;background:rgba(10,12,18,.72);backdrop-filter:blur(22px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.06)}
+  .msheet .mtitle{font-size:16px;font-weight:600}
+  .msheet .mback2{position:absolute;left:6px;bottom:8px;display:flex;align-items:center;gap:1px;color:var(--acc);font-size:16px;font-weight:500;padding:8px 12px}
+  .msheet .mback2:active{opacity:.6}
+  .msbody{padding:18px 20px calc(env(safe-area-inset-bottom,10px) + 50px)}
   .term-in{font-size:16px}
   .h-title{font-size:clamp(26px,7.5vw,36px)}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -268,7 +273,6 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   <h2>Projets</h2>
   <ul>
     <li>Rois de France — encyclopédie web sur les monarques de France, de Clovis à Napoléon III : 64 fiches dynamiques, quiz, recherche, sécurisation des formulaires (XSS, injections SQL), audit Lighthouse. PHP/MySQL, déployé sur VPS. Noté 1er de promo.</li>
-    <li>RIFT — identité de marque complète pour un fabricant fictif de claviers mécaniques custom : stratégie de communication, charte graphique et site web.</li>
     <li>Site d'agence — site vitrine complet réalisé en SAÉ (BUT MMI).</li>
     <li>BomyOS — ce portfolio : un système d'exploitation complet en JavaScript vanilla, fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés.</li>
   </ul>
@@ -277,17 +281,17 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
     <li>Pendule échecs/dames — horloge de jeu jouable dans le navigateur, HTML/JS.</li>
     <li>Le Nœud de Sillenbach — fiction interactive sous Twine, récit non-linéaire inspiré de Dark.</li>
     <li>Convertisseur de fichiers — outil en ligne de commande Node.js.</li>
-    <li>RTS en Canvas — jeu de stratégie temps réel from scratch en JavaScript vanilla et HTML5 Canvas.</li>
     <li>SAÉ 105 — site web réalisé au premier semestre du BUT MMI.</li>
   </ul>
   <h2>Parcours</h2>
   <ul>
-    <li>BUT MMI, IUT de Troyes (2025–2026) : 1re année validée, major de promo en développement web (18,1/20).</li>
+    <li>BUT MMI, IUT de Troyes (depuis 2025) : 1re année validée, major de promo en développement web (18,1/20).</li>
+    <li>Baccalauréat général, Lycée Mabillon (2022–2025).</li>
     <li>Auto-hébergement : tous mes projets tournent sur mon propre VPS Linux (Apache, monitoring GoAccess). Serveur Minecraft (Paper) administré via Pterodactyl.</li>
     <li>Développeur autodidacte avant le BUT : développement web et Node.js en autonomie.</li>
   </ul>
   <h2>Contact</h2>
-  <p>Email : contact@jimmybomy.fr · Téléphone : 07 88 02 16 76 · Sedan / Troyes, France.</p>
+  <p>Email : jimmybomy@icloud.com · Téléphone : 07 88 02 16 76 · Sedan / Troyes, France.</p>
 </main>
 
 <div class="boot" id="boot" aria-hidden="true">
@@ -339,18 +343,19 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 </div>
 <div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div>
 <div class="homebar" aria-hidden="true"></div>
-<div class="msheet" id="msheet" role="dialog" aria-label="Contenu">
-  <div class="mnav"><span class="grab" aria-hidden="true"></span>
-    <button class="mclose" id="mback" aria-label="Fermer">
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
-    </button></div>
+<div class="msheet" id="msheet" role="dialog" aria-modal="true" aria-label="Application">
+  <div class="mnav">
+    <button class="mback2" id="mback" aria-label="Retour à l'accueil">
+      <svg width="11" height="18" viewBox="0 0 11 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L2 9l7 7"/></svg>Accueil</button>
+    <div class="mtitle" id="msheetTitle"></div>
+  </div>
   <div id="msheetBody" class="msbody"></div>
 </div>
 
 <div id="printCV" aria-hidden="true"></div>
 
 <script>
-const EMAIL="contact@jimmybomy.fr",PHONE="07 88 02 16 76",TEL="0788021676";
+const EMAIL="jimmybomy@icloud.com",PHONE="07 88 02 16 76",TEL="0788021676";
 const ICON={
   folder:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#7cc4ff"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#a9d8ff"/></svg>',
   labs:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#a78bfa"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#c4b5fd"/><path d="M21.5 25v4.2l-3.6 5.9a2 2 0 0 0 1.7 3h8.8a2 2 0 0 0 1.7-3l-3.6-5.9V25" stroke="#3b2a6e" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M19.8 25h8.4" stroke="#3b2a6e" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="34.5" r="1.6" fill="#c6ff4e"/></svg>',
@@ -364,7 +369,6 @@ const ICON={
 /* ==== VITRINE — les 4 flagships (édite ici) ==== */
 const PROJECTS={
   rois:{name:"Rois de France",cat:"Encyclopédie web · PHP/MySQL",grad:"linear-gradient(135deg,#3a2410,#c8892e 55%,#f2d06b)",role:"Conception, back & front",year:"2025",client:"SAÉ 203 · BUT MMI — noté 1er de promo",tags:["PHP","MySQL","Sécurité XSS/SQL","Lighthouse","VPS"],link:"https://sae203.mmi25c02.mmi-troyes.fr/listing.php",desc:"Encyclopédie web sur les monarques de France, de Clovis à Napoléon III : 64 fiches dynamiques, quiz, recherche, sécurisation des formulaires (XSS / injections SQL) et audit Lighthouse. PHP/MySQL, déployé sur mon VPS."},
-  rift:{name:"RIFT",cat:"Identité de marque & site",grad:"linear-gradient(135deg,#1a0f2e,#e2456d 55%,#f6c453)",role:"Branding, com & développement",year:"2025",client:"BUT MMI",tags:["Branding","Charte graphique","Stratégie de com","HTML/CSS"],link:"",desc:"Identité de marque complète pour un fabricant fictif de claviers mécaniques custom : stratégie de communication, charte graphique, schémas, et le site (accueil + fiche produit). Le combo design + com + web du profil MMI. <span class='todo'>[Lien ou screenshots à ajouter si déployé.]</span>"},
   agence:{name:"Site d'agence",cat:"Site vitrine",grad:"linear-gradient(135deg,#0e1a3a,#2563eb 55%,#7cc4ff)",role:"Intégration & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Responsive"],link:"https://sae202-agence.mmi25c02.mmi-troyes.fr",desc:"Site vitrine complet pour une agence. <span class='todo'>[À COMPLÉTER : une phrase sur le concept — et préciser la différence avec sae202.mmi25c02.mmi-troyes.fr.]</span>"},
   bomyos:{name:"BomyOS",cat:"Ce site · OS en JS vanilla",grad:"linear-gradient(135deg,#0d1f12,#c6ff4e 60%,#7cc4ff)",role:"Design & développement from scratch",year:"2026",client:"Portfolio personnel",tags:["JS vanilla","WebAudio","Accessibilité","UI/UX"],link:"https://github.com/JimmyBomy/jimmybomy.fr",desc:"Le site sur lequel tu te trouves : un système d'exploitation complet en JavaScript vanilla, sans framework — fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés, terminal interactif. La démo tourne sous tes yeux."},
 };
@@ -373,14 +377,13 @@ const LABS={
   pendule:{name:"Pendule échecs/dames",cat:"Outil · HTML/JS",grad:"linear-gradient(135deg,#1a1a1a,#c6ff4e 65%,#eef0ea)",role:"Développement",year:"2025",client:"Projet personnel",tags:["HTML","JavaScript"],link:"",desc:"Horloge de jeu (pendule) pour parties d'échecs et de dames, jouable directement dans le navigateur — construite à l'origine pour départager la rivalité aux dames avec mon père."},
   sillenbach:{name:"Le Nœud de Sillenbach",cat:"Fiction interactive · Twine",grad:"linear-gradient(135deg,#0f172a,#334155 55%,#94a3b8)",role:"Écriture & conception",year:"2025",client:"Projet personnel",tags:["Twine","Narration non-linéaire","Écriture"],link:"",desc:"Fiction interactive sous Twine : un récit non-linéaire à embranchements, inspiré de la série Dark. Écriture multimédia et narration interactive."},
   cli:{name:"Convertisseur de fichiers",cat:"Outil CLI · Node.js",grad:"linear-gradient(135deg,#0c1016,#22c55e 60%,#a7f3d0)",role:"Développement",year:"2025",client:"Projet personnel",tags:["Node.js","CLI"],link:"",desc:"Outil en ligne de commande Node.js pour convertir des fichiers d'un format à l'autre."},
-  rts:{name:"RTS en Canvas",cat:"Jeu · en cours",grad:"linear-gradient(135deg,#0b3d2e,#22c55e 55%,#c6ff4e)",role:"Développement from scratch",year:"2026",client:"Projet personnel",tags:["JS vanilla","HTML5 Canvas","Game loop"],link:"",desc:"Jeu de stratégie temps réel développé entièrement à la main en JavaScript vanilla et Canvas HTML5 : rendu, boucle de jeu, unités. <span class='todo'>[À COMPLÉTER : état d'avancement réel.]</span>"},
   sae105:{name:"SAÉ 105",cat:"Site web · S1",grad:"linear-gradient(135deg,#3b1e6e,#7c5cff 60%,#7cc4ff)",role:"Développement",year:"2025",client:"SAÉ 105 · BUT MMI",tags:["Web"],link:"https://sae105.mmi25c02.mmi-troyes.fr",desc:"Site web réalisé au premier semestre du BUT MMI. <span class='todo'>[À COMPLÉTER : décris cette SAÉ en une phrase.]</span>"},
 };
 const ALL={...PROJECTS,...LABS};
 const XP=[
-  {yr:"2025 — 26",role:"BUT MMI — Métiers du Multimédia et de l'Internet",co:"IUT de Troyes",desc:"1re année validée — <b style='color:var(--acc)'>major de promo en développement web (18,1/20)</b>."},
+  {yr:"2025 — auj.",role:"BUT MMI — Métiers du Multimédia et de l'Internet",co:"IUT de Troyes",desc:"1re année validée — <b style='color:var(--acc)'>major de promo en développement web (18,1/20)</b>."},
   {yr:"En continu",role:"Auto-hébergement & administration système",co:"VPS personnel",desc:"J'héberge et administre tous mes projets sur mon propre VPS Linux : Apache, monitoring GoAccess, déploiements. Également : serveur de jeu Minecraft (Paper) administré via Pterodactyl."},
-  {yr:"Avant",role:"Développeur autodidacte",co:"En autonomie",desc:"Développement web et Node.js en autonomie complète, avant l'entrée en BUT MMI."},
+  {yr:"2022 — 25",role:"Baccalauréat général",co:"Lycée Mabillon",desc:"Développeur autodidacte en parallèle du lycée : développement web et Node.js en autonomie, avant l'entrée en BUT MMI."},
 ];
 const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Terminal — contact",icon:"terminal",w:580,h:430},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600}};
 
@@ -412,7 +415,7 @@ function content(app){
       <a class="btn" href="mailto:${EMAIL}" style="margin-top:0">Écrire un mail</a>
       <a class="btn ghost" href="tel:${TEL}" style="margin-top:0">${PHONE}</a></div>`;
   if(app==="cv")return `<div class="pdf"><h1>Jimmy Bomy</h1><div class="role">Développeur web créatif — BUT MMI (Troyes) · Sedan</div>
-    <div class="sec">Formation</div><div class="li"><span><b>BUT MMI</b> — IUT de Troyes · <span class="muted">major de promo dev web (18,1/20)</span></span><span class="muted">2025–26</span></div>
+    <div class="sec">Formation</div><div class="li"><span><b>BUT MMI</b> — IUT de Troyes · <span class="muted">major de promo dev web (18,1/20)</span></span><span class="muted">depuis 2025</span></div><div class="li"><span><b>Baccalauréat général</b> — Lycée Mabillon</span><span class="muted">2022–25</span></div>
     <div class="sec">Projets</div>${Object.values(PROJECTS).map(p=>`<div class="li"><span><b>${p.name}</b> — ${p.cat}</span><span class="muted">${p.year}</span></div>`).join("")}
     <div class="sec">Compétences</div><div class="li"><span>Back</span><span class="muted">PHP · MySQL · Node.js · Linux/Apache (VPS)</span></div><div class="li"><span>Front</span><span class="muted">JavaScript · HTML/CSS · HTML5 Canvas</span></div>
     <div class="sec">Contact</div><div class="li"><span>${EMAIL} · ${PHONE}</span><span class="muted">Sedan / Troyes</span></div></div>
@@ -427,7 +430,7 @@ const iconFor=a=>a.startsWith("project:")?"folder":(APPS[a]?.icon||"doc");
 document.getElementById("printCV").innerHTML=`<div class="cvp"><h1>Jimmy Bomy</h1>
   <div class="role">Développeur web créatif — Étudiant BUT MMI (Troyes) · Sedan</div>
   <div class="contact">${EMAIL} · ${PHONE} · jimmybomy.fr</div>
-  <h2>Formation</h2><p><b>BUT MMI</b> — IUT de Troyes (2025–2026). 1re année validée, major de promo en développement web (18,1/20).</p>
+  <h2>Formation</h2><p><b>BUT MMI</b> — IUT de Troyes (depuis 2025). 1re année validée, major de promo en développement web (18,1/20). Baccalauréat général, Lycée Mabillon (2022–2025).</p>
   <h2>Projets</h2><ul>${Object.values(PROJECTS).map(p=>`<li><b>${p.name}</b> — ${p.desc.replace(/<[^>]+>/g,'')}</li>`).join("")}</ul>
   <h2>Compétences</h2><p>PHP · MySQL · JavaScript · HTML/CSS · HTML5 Canvas · Node.js · Administration Linux/Apache (VPS) · Git</p></div>`;
 
@@ -562,12 +565,20 @@ const MTILES=[["projets","Projets"],["labs","Labs"],["apropos","À propos"],["pa
 document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
 document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
 const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
-function mopen(app){msBody.innerHTML=content(app);msheet.classList.add("on");msheet.scrollTop=0;snd.open();
-  msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"))));
+const mobileEl=document.getElementById("mobile"),msTitle=document.getElementById("msheetTitle");
+function mopen(app,origin){
+  msBody.innerHTML=content(app);msBody.scrollTop=0;msheet.scrollTop=0;
+  msTitle.textContent=titleFor(app);
+  // zoom depuis l'icône touchée
+  if(origin&&origin.getBoundingClientRect){const r=origin.getBoundingClientRect();msheet.style.transformOrigin=`${r.left+r.width/2}px ${r.top+r.height/2}px`;}
+  else msheet.style.transformOrigin="50% 42%";
+  msheet.classList.add("on");mobileEl.classList.add("behind");snd.open();
+  msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"),o)));
   if(app==="contact")wireTerminal(msheet);}
-document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app)));
-document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();msheet.classList.remove("on");snd.close();});
-document.getElementById("mContact").addEventListener("click",()=>mopen("contact"));
+function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}
+document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app,t)));
+document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();mclose();});
+document.getElementById("mContact").addEventListener("click",e=>mopen("contact",e.currentTarget));
 const myearEl=document.getElementById("myear");if(myearEl)myearEl.textContent=new Date().getFullYear();
 
 /* CLOCK */

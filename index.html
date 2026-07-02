@@ -227,10 +227,10 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
     transform:scale(.42);opacity:0;transform-origin:50% 42%;pointer-events:none;
     transition:transform .44s cubic-bezier(.32,.72,0,1),opacity .3s ease;will-change:transform,opacity}
   .msheet.on{transform:none;opacity:1;pointer-events:auto}
-  .msheet .mnav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:center;
-    padding:calc(env(safe-area-inset-top,10px) + 20px) 14px 11px;background:rgba(10,12,18,.72);backdrop-filter:blur(22px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.06)}
-  .msheet .mtitle{font-size:16px;font-weight:600}
-  .msheet .mback2{position:absolute;left:6px;bottom:8px;display:flex;align-items:center;gap:1px;color:var(--acc);font-size:16px;font-weight:500;padding:8px 12px}
+  .msheet .mnav{position:sticky;top:0;z-index:5;padding-top:calc(env(safe-area-inset-top,10px) + 30px);background:rgba(10,12,18,.9);backdrop-filter:blur(22px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.06)}
+  .msheet .mnav-row{position:relative;display:flex;align-items:center;justify-content:center;height:46px}
+  .msheet .mtitle{font-size:16px;font-weight:600;max-width:58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .msheet .mback2{position:absolute;left:4px;top:0;height:46px;display:flex;align-items:center;gap:2px;color:var(--acc);font-size:16px;font-weight:500;padding:0 12px}
   .msheet .mback2:active{opacity:.6}
   .msbody{padding:18px 20px calc(env(safe-area-inset-bottom,10px) + 50px)}
   .term-in{font-size:16px}
@@ -348,11 +348,11 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 <div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div>
 <div class="homebar" aria-hidden="true"></div>
 <div class="msheet" id="msheet" role="dialog" aria-modal="true" aria-label="Application">
-  <div class="mnav">
+  <div class="mnav"><div class="mnav-row">
     <button class="mback2" id="mback" aria-label="Retour à l'accueil">
       <svg width="11" height="18" viewBox="0 0 11 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L2 9l7 7"/></svg>Accueil</button>
     <div class="mtitle" id="msheetTitle"></div>
-  </div>
+  </div></div>
   <div id="msheetBody" class="msbody"></div>
 </div>
 

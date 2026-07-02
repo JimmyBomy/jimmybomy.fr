@@ -5,3 +5,6 @@ portfoliommi_top10/
 tasks/
 www/
 *.log
+
+# CV / documents perso — jamais dans le repo public
+*.pdf

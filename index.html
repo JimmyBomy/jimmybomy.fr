@@ -104,6 +104,9 @@ a{color:inherit;text-decoration:none}
 .win-body::-webkit-scrollbar{width:10px}.win-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:3px solid transparent;background-clip:content-box}
 .rz{position:absolute;right:1px;bottom:1px;width:18px;height:18px;cursor:nwse-resize;z-index:6;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 60%,transparent 60%,transparent 72%,rgba(255,255,255,.25) 72%,rgba(255,255,255,.25) 82%,transparent 82%)}
 .win.max .rz{display:none}
+.win-iframe{flex:1;width:100%;border:0;background:#fff}
+.backportf{margin-left:auto;background:var(--acc);color:#0a0b0e;font-weight:600;font-size:12px;padding:5px 12px;border-radius:8px}
+.backportf:hover{filter:brightness(1.06)}
 
 .h-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .h-title{font-family:"Archivo";font-weight:800;letter-spacing:-.03em;font-size:clamp(30px,4vw,52px);line-height:.98;margin:10px 0 14px}
@@ -407,7 +410,7 @@ function content(app){
     return `<div class="proj-hero" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}">${p.img?"":'<div class="mock"></div>'}</div><div class="h-eyebrow">${p.cat}</div><div class="h-title">${p.name}</div>
       <p class="lede">${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
       <div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div>
-      ${p.link?`<a class="btn" href="${p.link}" target="_blank" rel="noopener">Visiter le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`:`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
+      ${p.link?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></button>`:`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
   if(app==="apropos")return `<div class="h-eyebrow">À propos</div><div class="h-title">Salut,<br>moi c'est Jimmy.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
     <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n">1<i>er</i></div><div class="l">major de promo (dev)</div></div><div class="stat"><div class="n"><i>9</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
@@ -481,7 +484,7 @@ function openApp(app){
   el.querySelector('[data-act="close"]').addEventListener("click",e=>{e.stopPropagation();closeApp(app);});
   el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(app);});
   el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(app);});
-  el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t)openApp(t.getAttribute("data-open"));});
+  el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t){openApp(t.getAttribute("data-open"));return;}const s=e.target.closest("[data-site]");if(s)openSite(s.getAttribute("data-site"),s.getAttribute("data-title"));});
   if(app==="contact")wireTerminal(el);
   makeDraggable(el,app);makeResizable(el,app);
 }
@@ -500,6 +503,26 @@ function makeResizable(el,app){const h=el.querySelector(".rz");let sx,sy,sw,sh,r
   h.addEventListener("pointerdown",e=>{e.stopPropagation();if(wins[app]&&wins[app].max)return;rz=true;h.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;sw=el.offsetWidth;sh=el.offsetHeight;bringFront(el);el.style.transition="none";});
   h.addEventListener("pointermove",e=>{if(!rz)return;el.style.width=Math.max(300,Math.min(innerWidth-30,sw+e.clientX-sx))+"px";el.style.height=Math.max(220,Math.min(innerHeight-60,sh+e.clientY-sy))+"px";});
   const end=()=>{rz=false;el.style.transition="";};h.addEventListener("pointerup",end);h.addEventListener("pointercancel",end);}
+function openSite(url,title){
+  const key="site:"+url;
+  if(wins[key]){const st=wins[key];if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);return;}
+  const el=document.createElement("div");el.className="win";el.dataset.app=key;el.setAttribute("role","dialog");el.setAttribute("aria-label",title);el.tabIndex=-1;
+  const w=Math.min(1200,innerWidth-30),h=Math.min(820,innerHeight-100);
+  el.style.width=w+"px";el.style.height=h+"px";el.style.left=((innerWidth-w)/2)+"px";el.style.top="46px";
+  el.innerHTML='<div class="win-bar"><div class="lights">'
+    +'<button class="c" data-act="close" aria-label="Fermer"><svg viewBox="0 0 10 10" stroke="#4a0002" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>'
+    +'<button class="mi" data-act="min" aria-label="Réduire"><svg viewBox="0 0 10 10" stroke="#7a4a00" stroke-width="1.5"><path d="M2 5h6"/></svg></button>'
+    +'<button class="fu" data-act="max" aria-label="Agrandir"><svg viewBox="0 0 10 10" stroke="#0a4a00" stroke-width="1.5"><path d="M2.5 2.5h5v5h-5z"/></svg></button></div>'
+    +'<div class="wtitle">'+title+'</div><button class="backportf" data-act="close">‹ Retour au portfolio</button></div>'
+    +'<iframe class="win-iframe" src="'+url+'" title="'+title+'" loading="lazy"></iframe><div class="rz" aria-hidden="true"></div>';
+  desktop.appendChild(el);wins[key]={el,min:false,max:false,prev:null};
+  requestAnimationFrame(()=>{el.classList.add("open");bringFront(el);el.focus();});snd.open();
+  el.addEventListener("mousedown",()=>bringFront(el));
+  el.querySelectorAll('[data-act="close"]').forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();closeApp(key);}));
+  el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(key);});
+  el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(key);});
+  makeDraggable(el,key);makeResizable(el,key);
+}
 
 /* TERMINAL */
 function wireTerminal(root){const out=root.querySelector("#termOut,.term-out"),inp=root.querySelector(".term-in"),term=root.querySelector(".term");
@@ -583,7 +606,9 @@ function mopen(app,origin){
   else msheet.style.transformOrigin="50% 42%";
   msheet.classList.add("on");mobileEl.classList.add("behind");snd.open();
   msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"),o)));
+  msBody.querySelectorAll("[data-site]").forEach(o=>o.addEventListener("click",()=>msite(o.getAttribute("data-site"),o.getAttribute("data-title"))));
   if(app==="contact")wireTerminal(msheet);}
+function msite(url,title){msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
 function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}
 document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app,t)));
 document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();mclose();});

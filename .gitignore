@@ -11,3 +11,6 @@ www/
 
 # Projets école dupliqués (hébergés sur le VPS, hors git)
 travaux/
+
+# Sites SAÉ mirrorés (hébergés sur le VPS, hors git)
+projets/

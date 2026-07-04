@@ -512,7 +512,7 @@ function devisAct(v,container){
   else{DEVIS.a[DEVIS.step]=+v;DEVIS.step++;}
   snd.tap();container.innerHTML=devisHTML();}
 
-/* ==== TERMINAL (easter egg, restauré via la Corbeille) ==== */
+/* ==== TERMINAL (easter egg — accessible via Ctrl+K ou #terminal) ==== */
 function wireTerminal(root){const out=root.querySelector(".term-out"),inp=root.querySelector(".term-in");if(!inp)return;
   setTimeout(()=>inp.focus(),80);
   inp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const raw=inp.value.trim();inp.value="";

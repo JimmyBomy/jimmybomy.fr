@@ -19,7 +19,8 @@ a{color:inherit;text-decoration:none}
 .menubar{position:fixed;top:0;left:0;right:0;height:var(--menh);z-index:9000;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:var(--bar);backdrop-filter:blur(22px) saturate(1.3);border-bottom:1px solid var(--glass-brd);font-size:13.5px}
 .menubar .left{display:flex;align-items:center;gap:18px}
 .menubar .logo{display:flex;align-items:center;gap:9px;font-weight:600}
-.menubar .logo .m{width:17px;height:17px;border-radius:5px;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 0 12px rgba(198,255,78,.4)}
+:root{--mark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23c6ff4e'/%3E%3Cstop offset='1' stop-color='%237cc4ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Crect x='7' y='9.5' width='18' height='13' rx='2.6' fill='%230d0f14'/%3E%3Ccircle cx='10.5' cy='13' r='1.15' fill='%23ff5f57'/%3E%3Ccircle cx='14' cy='13' r='1.15' fill='%23febc2e'/%3E%3Ccircle cx='17.5' cy='13' r='1.15' fill='%2328c840'/%3E%3C/svg%3E")}
+.menubar .logo .m{width:19px;height:19px;background:var(--mark) center/contain no-repeat;filter:drop-shadow(0 0 10px rgba(198,255,78,.35))}
 .menubar .menu{color:var(--muted);cursor:default;padding:4px 9px;border-radius:7px}
 button.menu{cursor:pointer}
 button.menu:hover,button.menu.open{color:var(--ink);background:rgba(255,255,255,.09)}
@@ -261,7 +262,7 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 @keyframes flick{50%{opacity:.93}}
 
 .boot{position:fixed;inset:0;z-index:10000;background:#05060a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
-.boot .bmark{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 0 60px rgba(198,255,78,.4);animation:pop .7s cubic-bezier(.2,.9,.3,1)}
+.boot .bmark{width:76px;height:76px;background:var(--mark) center/contain no-repeat;filter:drop-shadow(0 0 40px rgba(198,255,78,.4));animation:pop .7s cubic-bezier(.2,.9,.3,1)}
 .boot .bname{font-family:"Archivo";font-weight:800;font-size:26px;letter-spacing:-.02em}
 .boot .bbar{width:200px;height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
 .boot .bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px}
@@ -286,7 +287,7 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   .mobile{display:flex;flex-direction:column;position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(env(safe-area-inset-top,10px) + 52px) 20px 130px}
   .widget{background:rgba(30,32,40,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(30px) saturate(1.5);border-radius:26px;padding:18px 18px 16px;margin-bottom:30px;box-shadow:0 18px 40px -18px rgba(0,0,0,.6)}
   .widget .wtop{display:flex;align-items:center;gap:13px}
-  .widget .wava{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-family:"Archivo";font-weight:900;color:#0a0b0e;font-size:19px;flex:0 0 auto}
+  .widget .wava{width:52px;height:52px;border-radius:14px;object-fit:cover;object-position:top center;flex:0 0 auto;border:1px solid rgba(255,255,255,.14)}
   .widget .wname{font-family:"Archivo";font-weight:800;font-size:19px;letter-spacing:-.02em}
   .widget .wrole{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.35}
   .widget .wdispo{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);margin:13px 0 12px}

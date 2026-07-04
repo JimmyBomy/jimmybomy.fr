@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;font-family:"Space Grotesk",sans-serif;color:#eef0ea;
+  background:radial-gradient(900px 600px at 12% 8%,rgba(124,196,255,.22),transparent 55%),radial-gradient(800px 700px at 88% 90%,rgba(150,110,255,.28),transparent 55%),radial-gradient(700px 500px at 70% 12%,rgba(198,255,78,.16),transparent 55%),linear-gradient(160deg,#0b0e16,#07080f 70%)}
+.card{display:flex;height:100%;align-items:center;gap:56px;padding:64px 70px}
+.left{flex:1}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:30px}
+.logo .m{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#c6ff4e,#7cc4ff);position:relative}
+.logo .m::after{content:"";position:absolute;left:7px;right:7px;top:9px;height:15px;border-radius:3px;background:#0d0f14;
+  box-shadow:inset 4px -3px 0 -2px #ff5f57, inset 8px -3px 0 -2px #febc2e, inset 12px -3px 0 -2px #28c840}
+.logo b{font-family:"Archivo";font-weight:800;font-size:20px;letter-spacing:-.01em}
+.eye{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:#c6ff4e;font-weight:600;margin-bottom:14px}
+h1{font-family:"Archivo";font-weight:900;font-size:76px;line-height:.98;letter-spacing:-.03em}
+.role{font-size:26px;color:#cfd2cb;margin-top:14px;font-weight:500}
+.role b{color:#fff}
+p.t{font-size:19px;color:#9b9aa3;margin-top:22px;max-width:30ch;line-height:1.5}
+.url{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-weight:600;font-size:19px;color:#0a0b0e;background:#c6ff4e;padding:11px 20px;border-radius:100px}
+.right{flex:0 0 auto}
+.photo{width:340px;height:430px;border-radius:24px;object-fit:cover;object-position:top center;border:1px solid rgba(255,255,255,.15);box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
+</style></head>
+<body><div class="card">
+  <div class="left">
+    <div class="logo"><span class="m"></span><b>BomyOS</b></div>
+    <div class="eye">Développeur web · Sedan / Troyes</div>
+    <h1>Jimmy<br>Bomy</h1>
+    <div class="role">Je crée des <b>sites modernes</b> pour<br>commerces &amp; indépendants.</div>
+    <span class="url">jimmybomy.fr</span>
+  </div>
+  <div class="right"><img class="photo" src="assets/jimmy.jpg" alt="Jimmy Bomy"></div>
+</div></body></html>

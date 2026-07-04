@@ -269,17 +269,19 @@ body.ac-rose{--acc:#ff6b9d;--acc2:#ffb46b}
 .mapwrap{border-radius:14px;overflow:hidden;border:1px solid var(--glass-brd);margin:14px 0}
 .pin-pulse{animation:ppulse 2s infinite}
 @keyframes ppulse{50%{opacity:.35}}
-/* Écran verrouillé (mobile) */
-.lock{display:none}
+/* Écran verrouillé (desktop + mobile) */
+.lock{display:flex;position:fixed;inset:0;z-index:9750;flex-direction:column;align-items:center;cursor:pointer;
+  background:linear-gradient(180deg,rgba(5,6,10,.25),rgba(5,6,10,.65)),radial-gradient(1000px 700px at 70% 20%,rgba(124,196,255,.25),transparent 60%),radial-gradient(900px 800px at 25% 80%,rgba(150,110,255,.3),transparent 60%),#070810;
+  padding-top:15vh;transform:translateY(0);transition:transform .55s cubic-bezier(.32,.72,0,1),opacity .55s;touch-action:none}
+.lock.off{transform:translateY(-104%);opacity:.3;pointer-events:none;visibility:hidden;transition:transform .55s cubic-bezier(.32,.72,0,1),opacity .55s,visibility 0s .6s}
+.lock .l-time{font-family:"Archivo";font-weight:800;font-size:clamp(72px,10vw,118px);letter-spacing:-.02em;line-height:1}
+.lock .l-date{color:rgba(255,255,255,.85);font-size:16px;margin-top:8px;text-transform:capitalize}
+.lock .l-notif{display:flex;gap:12px;align-items:center;margin-top:38px;width:min(390px,calc(100% - 32px));padding:13px 15px;background:rgba(40,42,52,.55);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:13px;color:var(--muted);line-height:1.4;text-align:left}
+.lock .l-notif b{color:#fff;font-size:14px}
+.lock .l-hint{margin-top:auto;margin-bottom:44px;font-size:13px;color:rgba(255,255,255,.75);animation:floaty 2.6s ease-in-out infinite}
 @media(max-width:720px){
-  .lock{display:flex;position:fixed;inset:0;z-index:65;flex-direction:column;align-items:center;background:linear-gradient(180deg,rgba(5,6,10,.25),rgba(5,6,10,.65)),radial-gradient(1000px 700px at 70% 20%,rgba(124,196,255,.25),transparent 60%),radial-gradient(900px 800px at 25% 80%,rgba(150,110,255,.3),transparent 60%),#070810;
-    padding-top:calc(env(safe-area-inset-top,10px) + 70px);transform:translateY(0);transition:transform .5s cubic-bezier(.32,.72,0,1),opacity .5s;touch-action:none}
-  .lock.off{transform:translateY(-104%);opacity:.4;pointer-events:none}
-  .lock .l-time{font-family:"Archivo";font-weight:800;font-size:82px;letter-spacing:-.02em;line-height:1}
-  .lock .l-date{color:rgba(255,255,255,.85);font-size:15.5px;margin-top:6px}
-  .lock .l-notif{display:flex;gap:12px;align-items:center;margin-top:34px;width:calc(100% - 32px);padding:13px 15px;background:rgba(40,42,52,.55);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:13px;color:var(--muted);line-height:1.4}
-  .lock .l-notif b{color:#fff;font-size:14px}
-  .lock .l-hint{margin-top:auto;margin-bottom:46px;font-size:13px;color:rgba(255,255,255,.75);animation:floaty 2.6s ease-in-out infinite}
+  .lock{z-index:65;padding-top:calc(env(safe-area-inset-top,10px) + 70px)}
+  .lock .l-time{font-size:82px}
 }
 /* Centre de contrôle (mobile) */
 .cc{display:none}
@@ -499,7 +501,7 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   <div class="l-date" id="ldate">—</div>
   <div class="l-notif"><span class="wava" style="width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-family:Archivo;font-weight:900;color:#0a0b0e;font-size:15px;flex:0 0 auto">JB</span>
     <div><b>Jimmy Bomy</b> · maintenant<br>Développeur web créatif — un projet de site ? 👋</div></div>
-  <div class="l-hint">Glisser vers le haut pour déverrouiller</div>
+  <div class="l-hint" id="lhint">Glisser vers le haut pour déverrouiller</div>
 </div>
 
 <!-- Centre de contrôle (mobile) -->
@@ -1057,8 +1059,7 @@ function handleHash(){
 addEventListener("hashchange",handleHash);
 function afterBoot(){
   const deep=handleHash();
-  if(innerWidth>720&&!deep)openApp("apropos");
-  if(innerWidth<=720&&!deep)showLock();
+  if(!deep)showLock();
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
     if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");
@@ -1110,13 +1111,17 @@ if(matchMedia("(hover:hover)").matches&&!reduce){const wm=document.querySelector
   arm();})();
 /* ==== ÉCRAN VERROUILLÉ + CENTRE DE CONTRÔLE (mobile) ==== */
 const lock=document.getElementById("lock"),cc=document.getElementById("cc"),dim=document.getElementById("dim");
-function showLock(){if(innerWidth>720||location.hash||sessionStorage.getItem("unlocked")){return;}
-  tick();lock.classList.remove("off");
-  let sy=null;
-  lock.addEventListener("touchstart",e=>{sy=e.touches[0].clientY;},{passive:true});
-  lock.addEventListener("touchmove",e=>{if(sy!==null&&sy-e.touches[0].clientY>60)unlock();},{passive:true});
-  lock.addEventListener("click",unlock);}
-function unlock(){if(lock.classList.contains("off"))return;lock.classList.add("off");sessionStorage.setItem("unlocked","1");snd.open();}
+function showLock(){if(location.hash)return;
+  tick();
+  document.getElementById("lhint").textContent=innerWidth>720?"Cliquez ou appuyez sur une touche pour déverrouiller":"Glisser vers le haut pour déverrouiller";
+  lock.classList.remove("off");
+  if(!lock._wired){lock._wired=true;let sy=null;
+    lock.addEventListener("touchstart",e=>{sy=e.touches[0].clientY;},{passive:true});
+    lock.addEventListener("touchmove",e=>{if(sy!==null&&sy-e.touches[0].clientY>60)unlock();},{passive:true});
+    lock.addEventListener("click",unlock);
+    addEventListener("keydown",e=>{if(!lock.classList.contains("off"))unlock();});}}
+function unlock(){if(lock.classList.contains("off"))return;lock.classList.add("off");snd.open();
+  if(innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),420);}
 /* centre de contrôle : balayage vers le bas depuis le haut-droit de l'accueil */
 (function initCC(){if(!cc)return;
   const mob=document.getElementById("mobile");let sy=null,sx=null;

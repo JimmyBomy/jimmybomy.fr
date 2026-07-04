@@ -289,6 +289,10 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   .widget .wcta{display:block;width:100%;text-align:center;background:var(--acc);color:#0a0b0e;font-weight:600;font-size:14.5px;padding:12px;border-radius:13px}
   .widget .wcta:active{filter:brightness(.9)}
   /* grille d'apps */
+  .msearch{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:10px 14px;margin-bottom:20px;color:var(--muted);backdrop-filter:blur(20px)}
+  .msearch input{flex:1;background:none;border:none;outline:none;color:var(--ink);font-family:inherit;font-size:16px}
+  .msearch input::placeholder{color:var(--dim)}
+  .mtile.hide{display:none}
   .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 10px;padding:0 2px}
   .mtile{display:flex;flex-direction:column;align-items:center;gap:7px}
   .mtile .ic{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;box-shadow:0 8px 18px -8px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .12s,filter .12s}

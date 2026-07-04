@@ -333,7 +333,7 @@ function openSite(url,title){
 }
 
 /* ICONS + DOCK */
-const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis express"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
+const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis express"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
 document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)]}</span><span class="lbl">${l}</span></button>`).join("");
 document.querySelectorAll(".dicon").forEach(ic=>{
   let sx,sy,ox,oy,drag=false,moved=false;
@@ -452,6 +452,10 @@ function mopen(app,origin){
 function msite(url,title){msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
 function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}
 document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app,t)));
+/* recherche Spotlight (accueil mobile) */
+const msi=document.getElementById("msearchi");
+if(msi)msi.addEventListener("input",()=>{const q=msi.value.trim().toLowerCase();
+  document.querySelectorAll("#mlaunch .mtile").forEach(t=>{const l=(t.querySelector(".lbl")?.textContent||"").toLowerCase();t.classList.toggle("hide",q&&!l.includes(q));});});
 document.getElementById("mback").addEventListener("click",e=>{e.preventDefault();mclose();});
 document.getElementById("mContact").addEventListener("click",e=>mopen("contact",e.currentTarget));
 const myearEl=document.getElementById("myear");if(myearEl)myearEl.textContent=new Date().getFullYear();

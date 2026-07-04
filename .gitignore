@@ -13,5 +13,7 @@ www/
 travaux/
 
 # Sites SAÉ mirrorés (hébergés sur le VPS, hors git)
-projets/
+projets/*
+# … sauf la démo commerce, elle, versionnée
+!projets/demo-boulangerie/
 !cv-jimmy-bomy.pdf

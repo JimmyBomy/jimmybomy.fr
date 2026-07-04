@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Click & Collect — La Fournée, Sedan</title>
+<meta name="description" content="Commandez vos pains et viennoiseries en ligne à La Fournée (Sedan) et récupérez-les en boutique, sans attente." />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="top"><div class="wrap"><span>Boulangerie artisanale · Sedan (08)</span><span>Aujourd'hui&nbsp;: <b style="color:#fff">6h30 – 19h30</b> · <a href="tel:0324000000">03 24 00 00 00</a></span></div></div>
+<header><div class="wrap"><nav>
+  <a class="brand" href="index.html">La Fournée <small>Sedan · 1987</small></a>
+  <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  <ul id="nav"><li><a href="index.html">Accueil</a></li><li><a href="carte.html">La carte</a></li><li><a href="maison.html">Notre maison</a></li><li><a href="commander.html" class="on">Commander</a></li><li><a href="contact.html">Contact</a></li></ul>
+</nav></div></header>
+
+<section><div class="wrap">
+  <div class="sec-h" style="text-align:center"><div class="eye">Click &amp; Collect</div><h2 style="margin-top:8px">Réservez, on prépare.</h2><p class="lead" style="margin:14px auto 0;text-align:center">Composez votre commande, choisissez un créneau, et récupérez-la au comptoir sans faire la queue. C'est gratuit.</p></div>
+  <div class="oc" id="oc"></div>
+  <div style="max-width:560px;margin:22px auto 0;display:flex;gap:26px;justify-content:center;color:var(--soft);font-size:13.5px;flex-wrap:wrap">
+    <span>① Composez</span><span>② Choisissez l'heure</span><span>③ Récupérez en boutique</span>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fcols">
+    <div><div class="brand">La Fournée <small>Sedan · 1987</small></div><p style="margin-top:12px;max-width:34ch">Boulangerie artisanale au cœur de Sedan. Pétri à la main, cuit sur place, chaque matin.</p></div>
+    <div><h4>Horaires</h4><p>Lun – Ven : 6h30 – 19h30</p><p>Samedi : 6h30 – 20h00</p><p>Dimanche : 7h00 – 13h00</p></div>
+    <div><h4>Contact</h4><p>12 place du Marché, Sedan</p><p><a href="tel:0324000000">03 24 00 00 00</a></p><p><a href="mailto:bonjour@lafournee-sedan.fr">bonjour@lafournee-sedan.fr</a></p></div>
+  </div>
+  <div class="fbar"><span>© 2026 La Fournée — Sedan · Boulangerie artisanale</span><a class="cr" href="https://jimmybomy.fr" target="_blank" rel="noopener">Site conçu par Jimmy Bomy →</a></div>
+</div></footer>
+
+<script>
+const CART=[
+  {n:"Baguette de tradition",p:1.30,q:0},
+  {n:"Pain de campagne",p:3.80,q:0},
+  {n:"Croissant pur beurre",p:1.20,q:0},
+  {n:"Pain au chocolat",p:1.40,q:0},
+  {n:"Tarte aux pommes (part)",p:3.50,q:0},
+];
+const oc=document.getElementById("oc");
+function render(){
+  oc.innerHTML=CART.map((it,i)=>`<div class="oc-row"><div class="n">${it.n}<span>${it.p.toFixed(2).replace(".",",")} € l'unité</span></div>
+    <div class="step"><button data-m="-1" data-i="${i}" aria-label="Retirer">–</button><span class="q">${it.q}</span><button data-m="1" data-i="${i}" aria-label="Ajouter">+</button></div></div>`).join("")
+    +`<div style="margin-top:18px"><label style="font-size:13px;color:var(--soft);display:block;margin-bottom:7px">Créneau de retrait</label>
+       <select id="slot" style="width:100%;padding:12px 14px;border:1px solid var(--line);font-family:inherit;font-size:15px;background:#fff">
+       <option>Demain — 6h30 à 9h00</option><option>Demain — 9h00 à 12h00</option><option>Demain — 16h00 à 19h00</option><option>Samedi matin</option></select></div>
+    <div class="oc-tot"><span>Total</span><span class="s" id="s">0,00 €</span></div>
+    <button class="btn" id="go">Réserver ma commande</button>
+    <div class="oc-msg" id="msg">Commande réservée. Un email de confirmation vous a été envoyé — à récupérer au créneau choisi.</div>`;
+  document.getElementById("s").textContent=CART.reduce((s,it)=>s+it.p*it.q,0).toFixed(2).replace(".",",")+" €";
+}
+oc.addEventListener("click",e=>{
+  const b=e.target.closest("[data-i]");
+  if(b){const i=+b.dataset.i;CART[i].q=Math.max(0,CART[i].q+ +b.dataset.m);render();return;}
+  if(e.target.closest("#go")){if(!CART.some(it=>it.q)){alert("Ajoutez au moins un article.");return;}
+    document.getElementById("msg").style.display="block";document.getElementById("go").textContent="Commande réservée ✓";document.getElementById("go").disabled=true;}
+});
+render();
+</script>
+</body>
+</html>

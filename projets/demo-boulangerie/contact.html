@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nous trouver — La Fournée, boulangerie à Sedan</title>
+<meta name="description" content="La Fournée — 12 place du Marché, 08200 Sedan. Horaires, téléphone et plan d'accès de votre boulangerie artisanale." />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="top"><div class="wrap"><span>Boulangerie artisanale · Sedan (08)</span><span>Aujourd'hui&nbsp;: <b style="color:#fff">6h30 – 19h30</b> · <a href="tel:0324000000">03 24 00 00 00</a></span></div></div>
+<header><div class="wrap"><nav>
+  <a class="brand" href="index.html">La Fournée <small>Sedan · 1987</small></a>
+  <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  <ul id="nav"><li><a href="index.html">Accueil</a></li><li><a href="carte.html">La carte</a></li><li><a href="maison.html">Notre maison</a></li><li><a href="commander.html">Commander</a></li><li><a href="contact.html" class="on">Contact</a></li></ul>
+</nav></div></header>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="eye">Nous trouver</div><h2 style="margin-top:8px">Venez, ça sent bon.</h2></div>
+  <div class="two">
+    <div>
+      <div style="font-family:'Fraunces';font-size:22px;margin-bottom:14px">12 place du Marché<br>08200 Sedan</div>
+      <p style="color:var(--soft);margin:8px 0"><b style="color:var(--ink)">Téléphone</b> — <a href="tel:0324000000">03 24 00 00 00</a></p>
+      <p style="color:var(--soft);margin:8px 0"><b style="color:var(--ink)">Email</b> — <a href="mailto:bonjour@lafournee-sedan.fr">bonjour@lafournee-sedan.fr</a></p>
+      <p style="color:var(--soft);margin:8px 0 20px">Parking gratuit devant la boutique · Accès PMR</p>
+      <div class="hours" style="max-width:360px">
+        <div class="l"><span>Lundi — Vendredi</span><b>6h30 – 19h30</b></div>
+        <div class="l"><span>Samedi</span><b>6h30 – 20h00</b></div>
+        <div class="l"><span>Dimanche</span><b>7h00 – 13h00</b></div>
+      </div>
+    </div>
+    <div>
+      <div class="map" style="margin-bottom:22px"><svg viewBox="0 0 520 300" width="100%" style="display:block;background:#e7ded0">
+        <rect width="520" height="300" fill="#e4dac9"/>
+        <path d="M0 120 H520 M0 210 H520 M150 0 V300 M370 0 V300" stroke="#d3c6ac" stroke-width="12"/>
+        <path d="M0 66 H520 M270 0 V300" stroke="#dccfb6" stroke-width="6"/>
+        <rect x="158" y="128" width="72" height="66" fill="#cabfa4"/>
+        <path d="M262 138 c-12 0-21 9-21 21 0 16 21 35 21 35 s21-19 21-35c0-12-9-21-21-21z" fill="#a6512f"/><circle cx="262" cy="159" r="7.5" fill="#fff"/>
+        <text x="262" y="212" text-anchor="middle" fill="#7a6553" font-family="Fraunces,Georgia" font-size="14" font-style="italic">Place du Marché</text>
+      </svg></div>
+      <form class="form" onsubmit="this.querySelector('.fmsg').style.display='block';return false">
+        <input type="text" placeholder="Votre nom" required>
+        <input type="email" placeholder="Votre email" required>
+        <textarea placeholder="Votre message (une commande spéciale, un gâteau sur mesure…)"></textarea>
+        <button class="btn" type="submit" style="justify-content:center">Envoyer</button>
+        <p class="fmsg" style="display:none;color:#3d6b2f;font-size:14px;text-align:center">Merci ! Nous vous répondons sous 24h.</p>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fcols">
+    <div><div class="brand">La Fournée <small>Sedan · 1987</small></div><p style="margin-top:12px;max-width:34ch">Boulangerie artisanale au cœur de Sedan. Pétri à la main, cuit sur place, chaque matin.</p></div>
+    <div><h4>Horaires</h4><p>Lun – Ven : 6h30 – 19h30</p><p>Samedi : 6h30 – 20h00</p><p>Dimanche : 7h00 – 13h00</p></div>
+    <div><h4>Contact</h4><p>12 place du Marché, Sedan</p><p><a href="tel:0324000000">03 24 00 00 00</a></p><p><a href="mailto:bonjour@lafournee-sedan.fr">bonjour@lafournee-sedan.fr</a></p></div>
+  </div>
+  <div class="fbar"><span>© 2026 La Fournée — Sedan · Boulangerie artisanale</span><a class="cr" href="https://jimmybomy.fr" target="_blank" rel="noopener">Site conçu par Jimmy Bomy →</a></div>
+</div></footer>
+</body>
+</html>

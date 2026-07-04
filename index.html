@@ -818,7 +818,7 @@ function handleHash(){
 addEventListener("hashchange",handleHash);
 function afterBoot(){
   const deep=handleHash();
-  if(innerWidth>720&&!deep){openApp("apropos");setTimeout(()=>openApp("projets"),260);}
+  if(innerWidth>720&&!deep)openApp("apropos");
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
     if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");

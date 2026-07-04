@@ -14,3 +14,4 @@ travaux/
 
 # Sites SAÉ mirrorés (hébergés sur le VPS, hors git)
 projets/
+!cv-jimmy-bomy.pdf

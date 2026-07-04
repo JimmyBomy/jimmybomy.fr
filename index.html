@@ -85,7 +85,7 @@ a{color:inherit;text-decoration:none}
 #desktop{position:fixed;inset:0;overflow:hidden;background:radial-gradient(1200px 800px at 18% 12%,rgba(124,196,255,.20),transparent 55%),radial-gradient(1000px 900px at 85% 20%,rgba(198,255,78,.14),transparent 55%),radial-gradient(1100px 900px at 70% 95%,rgba(150,110,255,.22),transparent 55%),radial-gradient(900px 700px at 8% 90%,rgba(255,120,170,.14),transparent 55%),linear-gradient(160deg,#0a0d15,#070810 70%)}
 #desktop::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .wm-watermark{position:absolute;right:3vw;bottom:calc(4vh + 60px);font-family:"Archivo";font-weight:900;font-size:clamp(60px,12vw,190px);letter-spacing:-.05em;color:rgba(255,255,255,.03);pointer-events:none;line-height:.8;text-align:right}
-.dicons{position:fixed;top:calc(var(--menh) + 18px);left:16px;z-index:5;display:flex;flex-direction:column;gap:6px}
+.dicons{position:fixed;top:calc(var(--menh) + 18px);left:16px;z-index:5;display:flex;flex-flow:column wrap;gap:6px;max-height:calc(100svh - var(--menh) - 140px);align-content:flex-start}
 
 .menubar{position:fixed;top:0;left:0;right:0;height:var(--menh);z-index:9000;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:var(--bar);backdrop-filter:blur(22px) saturate(1.3);border-bottom:1px solid var(--glass-brd);font-size:13.5px}
 .menubar .left{display:flex;align-items:center;gap:18px}
@@ -366,7 +366,7 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   </div>
 </div>
 
-<div class="hint" id="hint">👆 <b>Double-clique</b> un fichier · <b>Tab</b>+<b>Entrée</b> · <b>clic droit</b> = menu</div>
+<div class="hint" id="hint">👆 <b>Clique une icône</b> pour explorer · <b>Ctrl+K</b> pour chercher</div>
 <div class="dock" id="dock" role="toolbar" aria-label="Dock des applications"></div>
 <div class="ctx" id="ctx" role="menu" aria-label="Menu contextuel"></div>
 
@@ -584,7 +584,9 @@ function openApp(app){
   makeDraggable(el,app);makeResizable(el,app);
 }
 function closeApp(app){const st=wins[app];if(!st)return;st.el.classList.add("closing");markDock(app,false);snd.close();
-  setTimeout(()=>{st.el.remove();delete wins[app];},220);const db=dock.querySelector(`[data-app="${app}"]`);if(db)db.focus();}
+  setTimeout(()=>{st.el.remove();delete wins[app];
+    if(!Object.keys(wins).length){const h=document.getElementById("hint");if(h)h.style.display="";}
+  },220);const db=dock.querySelector(`[data-app="${app}"]`);if(db)db.focus();}
 function minApp(app){const st=wins[app];if(!st)return;st.min=true;st.el.classList.add("min");snd.min();const db=dock.querySelector(`[data-app="${app}"]`);if(db)db.focus();}
 function maxApp(app){const st=wins[app];if(!st)return;const el=st.el;snd.tap();
   if(st.max){el.style.left=st.prev.l;el.style.top=st.prev.t;el.style.width=st.prev.w;el.style.height=st.prev.h;st.max=false;el.classList.remove("max");}
@@ -622,8 +624,8 @@ function openSite(url,title){
 /* ICONS + DOCK */
 const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["services","Services"],["devis","Devis express"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"]];
 document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)]}</span><span class="lbl">${l}</span></button>`).join("");
-document.querySelectorAll(".dicon").forEach(ic=>{ic.addEventListener("dblclick",()=>openApp(ic.dataset.app));
-  ic.addEventListener("click",()=>{document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");});
+document.querySelectorAll(".dicon").forEach(ic=>{
+  ic.addEventListener("click",()=>{document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");openApp(ic.dataset.app);});
   ic.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openApp(ic.dataset.app);}});});
 const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["gh","GitHub","gh","https://github.com/JimmyBomy"]];
 const dock=document.getElementById("dock");

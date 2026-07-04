@@ -186,6 +186,11 @@ a{color:inherit;text-decoration:none}
 .ctx button{display:flex;width:100%;align-items:center;gap:11px;padding:8px 12px;border-radius:8px;text-align:left;color:var(--ink)}
 .ctx button:hover{background:rgba(255,255,255,.08)}.ctx .sep{height:1px;background:var(--glass-brd);margin:5px 6px}
 
+/* écran de veille */
+.saver{position:fixed;inset:0;z-index:9900;background:#000;display:none;cursor:none}
+.saver.on{display:block}
+.saver .dvd{position:absolute;top:0;left:0;display:flex;align-items:center;gap:12px;font-family:"Archivo";font-weight:800;font-size:28px;letter-spacing:-.02em;will-change:transform}
+.saver .dvd .m{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 0 24px rgba(198,255,78,.5)}
 /* notification OS */
 .osnotif{position:fixed;top:calc(var(--menh) + 12px);right:14px;z-index:9600;display:flex;align-items:center;gap:12px;max-width:330px;
   padding:13px 15px;background:var(--glass);border:1px solid var(--glass-brd);border-radius:16px;backdrop-filter:blur(24px) saturate(1.4);
@@ -415,6 +420,7 @@ const ICON={
   mail:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="6" y="11" width="36" height="26" rx="6" fill="#eef0ea"/><path d="M8 15l16 12 16-12" stroke="#7cc4ff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   services:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 16l3-8h26l3 8v3a5 5 0 0 1-10 0 5 5 0 0 1-11 0 5 5 0 0 1-11 0v-3z" fill="#c6ff4e"/><path d="M10 24v14a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V24" stroke="#eef0ea" stroke-width="2.6"/><rect x="20" y="29" width="8" height="11" rx="1" fill="#eef0ea"/></svg>',
   devis:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 8h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H20l-9 8v-8H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#eef0ea"/><text x="24" y="28" font-family="Archivo" font-size="16" font-weight="800" fill="#0a5ce8" text-anchor="middle">€</text></svg>',
+  trash:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 14h24l-2.4 26a3 3 0 0 1-3 2.7H17.4a3 3 0 0 1-3-2.7L12 14z" fill="#b9bcc4"/><path d="M12 14h24l-1 11H13l-1-11z" fill="#d4d7dd"/><rect x="9" y="10" width="30" height="4" rx="2" fill="#eef0ea"/><path d="M19 10a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3" stroke="#eef0ea" stroke-width="2.4"/><path d="M19 20v14M24 20v14M29 20v14" stroke="#71757e" stroke-width="2"/></svg>',
   gh:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.52.1.71-.23.71-.5v-1.75c-2.9.63-3.52-1.4-3.52-1.4-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.07-2.8-.1-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.56 1.43.2 2.49.1 2.75.67.73 1.07 1.66 1.07 2.8 0 4-2.45 4.9-4.78 5.16.38.32.72.96.72 1.94v2.88c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>',
   li:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.9V21H19v-5.5c0-1.3-.02-3-1.87-3-1.87 0-2.16 1.44-2.16 2.92V21H11V9z"/></svg>',
 };
@@ -444,7 +450,7 @@ const XP=[
   {yr:"En continu",role:"Auto-hébergement & administration système",co:"VPS personnel",desc:"J'héberge et administre tous mes projets sur mon propre VPS Linux : Apache, monitoring GoAccess, déploiements. Également : serveur de jeu Minecraft (Paper) administré via Pterodactyl."},
   {yr:"2022 — 25",role:"Baccalauréat général",co:"Lycée Mabillon",desc:"Développeur autodidacte en parallèle du lycée : développement web et Node.js en autonomie, avant l'entrée en BUT MMI."},
 ];
-const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600}};
+const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},corbeille:{title:"Corbeille",icon:"trash",w:470,h:400},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},oldv1:{title:"portfolio-v1.html",icon:"doc",w:440,h:280},todo:{title:"todo-2026.txt",icon:"doc",w:440,h:320},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600}};
 
 /* ==== DEVIS EXPRESS (configurateur) ==== */
 let DEVIS={step:0,a:[]};
@@ -475,6 +481,27 @@ function devisAct(v,container){
   else{DEVIS.a[DEVIS.step]=+v;DEVIS.step++;}
   snd.tap();container.innerHTML=devisHTML();}
 
+/* ==== TERMINAL (easter egg, restauré via la Corbeille) ==== */
+function wireTerminal(root){const out=root.querySelector(".term-out"),inp=root.querySelector(".term-in");if(!inp)return;
+  setTimeout(()=>inp.focus(),80);
+  inp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const raw=inp.value.trim();inp.value="";
+    const w=document.createElement("div");w.innerHTML=`<span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ ${esc(raw)}`;out.appendChild(w);
+    runCmd(raw,out);inp.scrollIntoView({block:"nearest"});});}
+function tOut(out,html){const d=document.createElement("div");d.className="c";d.innerHTML=html;out.appendChild(d);}
+function runCmd(raw,out){const cmd=raw.toLowerCase();if(!cmd)return;
+  if(cmd==="clear"){out.innerHTML="";return;}
+  const open={projets:"projets",labs:"labs",devis:"devis",services:"services",cv:"cv",parcours:"parcours",contact:"contact"};
+  if(open[cmd]){tOut(out,'<span class="muted">Ouverture…</span>');openApp(open[cmd]);return;}
+  if(cmd==="sudo embauche-moi"){tOut(out,'Permission accordée ✅ — <a href="mailto:'+EMAIL+'?subject=On%20t%27embauche">envoie le mail d\'embauche</a>');return;}
+  if(cmd.startsWith("sudo")){tOut(out,'Nice try 😏 — essaie <span class="acc">sudo embauche-moi</span>');return;}
+  const map={help:'commandes : <span class="acc">whoami · projets · labs · services · devis · contact · cv · ls · date · clear</span> — et un sudo bien senti.',
+    whoami:"Jimmy Bomy — développeur web créatif · BUT MMI (Troyes) · Sedan.",
+    ls:"projets/&nbsp;&nbsp;labs/&nbsp;&nbsp;services&nbsp;&nbsp;devis&nbsp;&nbsp;a-propos.txt&nbsp;&nbsp;cv.pdf&nbsp;&nbsp;corbeille/",
+    contact:`email → <a href="mailto:${EMAIL}">${EMAIL}</a><br>tél&nbsp;&nbsp;&nbsp;→ <a href="tel:${TEL}">${PHONE}</a><br>whatsapp → <a href="https://wa.me/33788021676" target="_blank" rel="noopener">wa.me</a>`,
+    date:new Date().toLocaleString("fr-FR")};
+  if(map[cmd]){tOut(out,map[cmd]);return;}
+  tOut(out,`commande introuvable : ${esc(raw)} — tape <span class="acc">help</span>`);}
+
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><div class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</div>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
@@ -494,6 +521,24 @@ function content(app){
   if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><div class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</div>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
   if(app==="devis")return devisHTML();
+  if(app==="corbeille")return `<div class="h-eyebrow">Corbeille · 3 éléments</div><div class="h-title" style="font-size:24px;margin-bottom:18px">Rien ne se perd…</div>
+    <div class="finder">
+      <button class="fitem" data-open="terminal"><span class="fthumb" style="background:linear-gradient(160deg,#2a2f38,#0c1016);display:grid;place-items:center">${ICON.terminal.replace('width="42" height="42"','width="34" height="34"')}</span><span class="fname">Terminal.app</span><span class="fmeta">supprimé récemment</span></button>
+      <button class="fitem" data-open="oldv1"><span class="fthumb" style="background:linear-gradient(135deg,#8b5cf6,#22d3ee,#c6ff4e)"></span><span class="fname">portfolio-v1.html</span><span class="fmeta">on ne juge pas</span></button>
+      <button class="fitem" data-open="todo"><span class="fthumb" style="background:linear-gradient(160deg,#1a1a20,#2a2a32);display:grid;place-items:center;font-family:JetBrains Mono,monospace;color:var(--acc);font-size:20px">✓</span><span class="fname">todo-2026.txt</span><span class="fmeta">confidentiel</span></button>
+    </div>`;
+  if(app==="terminal")return `<div class="term"><div class="term-out" id="termOut">
+      <div class="muted">Terminal restauré depuis la corbeille 🗑️ — tape <span class="acc">help</span>.</div>
+      <div><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ whoami</div>
+      <div class="c">Jimmy Bomy — développeur web créatif (Sedan / Troyes)</div></div>
+    <div class="term-line"><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$&nbsp;<input class="term-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal"/></div></div>`;
+  if(app==="oldv1")return `<div class="h-eyebrow">Archive</div><div class="h-title" style="font-size:22px">La toute première version.</div>
+    <p class="lede">Un fond noir, un blob en dégradé, une grosse typo. Rejetée en 20 minutes avec la mention « c'est pas du tout le meilleur site là ». Elle avait raison.</p>`;
+  if(app==="todo")return `<div class="term" style="min-height:0"><div class="c">1. Valider la 1re année MMI <span class="acc">✓</span></div>
+    <div class="c">2. Major de promo en dev web <span class="acc">✓ (18,1)</span></div>
+    <div class="c">3. Construire le meilleur portfolio MMI <span class="acc">✓ (vous êtes dedans)</span></div>
+    <div class="c">4. Premier client commerçant <span class="muted">— en cours…</span></div>
+    <div class="c">5. sudo embauche-moi <span class="muted">— voir Terminal</span></div></div>`;
   if(app==="services")return `<div class="h-eyebrow">Pour les commerces & indépendants</div><div class="h-title">Un site pro,<br>sans prise de tête.</div>
     <p class="lede">Votre établissement mérite mieux qu'une page Facebook. Je crée des sites <b>simples, rapides et beaux</b> — et je m'occupe de tout.</p>
     <div class="divider"></div><div class="h-eyebrow">Ce que je propose</div>
@@ -581,6 +626,7 @@ function openApp(app){
   el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(app);});
   el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(app);});
   el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t){openApp(t.getAttribute("data-open"));return;}const s=e.target.closest("[data-site]");if(s){openSite(s.getAttribute("data-site"),s.getAttribute("data-title"));return;}const dv=e.target.closest("[data-devis]");if(dv)devisAct(dv.getAttribute("data-devis"),el.querySelector(".win-body"));});
+  if(app==="terminal")wireTerminal(el);
   makeDraggable(el,app);makeResizable(el,app);
 }
 function closeApp(app){const st=wins[app];if(!st)return;st.el.classList.add("closing");markDock(app,false);snd.close();
@@ -622,10 +668,18 @@ function openSite(url,title){
 }
 
 /* ICONS + DOCK */
-const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["services","Services"],["devis","Devis express"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"]];
+const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["services","Services"],["devis","Devis express"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["corbeille","Corbeille"]];
 document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)]}</span><span class="lbl">${l}</span></button>`).join("");
 document.querySelectorAll(".dicon").forEach(ic=>{
-  ic.addEventListener("click",()=>{document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");openApp(ic.dataset.app);});
+  let sx,sy,ox,oy,drag=false,moved=false;
+  ic.addEventListener("pointerdown",e=>{drag=true;moved=false;sx=e.clientX;sy=e.clientY;const r=ic.getBoundingClientRect();ox=r.left;oy=r.top;});
+  ic.addEventListener("pointermove",e=>{if(!drag)return;
+    if(!moved&&Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>7){moved=true;ic.setPointerCapture(e.pointerId);ic.style.position="fixed";ic.style.zIndex=60;ic.style.margin=0;}
+    if(moved){ic.style.left=Math.max(0,Math.min(innerWidth-96,ox+e.clientX-sx))+"px";ic.style.top=Math.max(38,Math.min(innerHeight-90,oy+e.clientY-sy))+"px";}});
+  const up=()=>{drag=false;};
+  ic.addEventListener("pointerup",up);ic.addEventListener("pointercancel",up);
+  ic.addEventListener("click",()=>{if(moved){moved=false;return;}
+    document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");openApp(ic.dataset.app);});
   ic.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openApp(ic.dataset.app);}});});
 const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["gh","GitHub","gh","https://github.com/JimmyBomy"]];
 const dock=document.getElementById("dock");
@@ -748,6 +802,23 @@ function initCmdk(){
   wrap.addEventListener("click",e=>{if(e.target===wrap)close();});
 }
 initCmdk();
+/* parallaxe du fond (desktop) */
+if(matchMedia("(hover:hover)").matches&&!reduce){const wm=document.querySelector(".wm-watermark");
+  addEventListener("mousemove",e=>{if(wm)wm.style.transform=`translate(${(e.clientX/innerWidth-.5)*-20}px,${(e.clientY/innerHeight-.5)*-14}px)`;});}
+/* écran de veille façon DVD après 90 s d'inactivité */
+(function saver(){if(reduce)return;
+  const sv=document.createElement("div");sv.className="saver";sv.setAttribute("aria-hidden","true");
+  sv.innerHTML='<div class="dvd"><span class="m"></span>BomyOS</div>';document.body.appendChild(sv);
+  const dvd=sv.querySelector(".dvd");let idle,x=80,y=80,vx=2.2,vy=1.8,run=false,raf;
+  function arm(){clearTimeout(idle);if(run)stop();idle=setTimeout(start,90000);}
+  function start(){run=true;sv.classList.add("on");loop();}
+  function stop(){run=false;sv.classList.remove("on");cancelAnimationFrame(raf);}
+  function loop(){if(!run)return;const W=innerWidth-dvd.offsetWidth,H=innerHeight-dvd.offsetHeight;
+    x+=vx;y+=vy;if(x<=0||x>=W)vx=-vx;if(y<=0||y>=H)vy=-vy;
+    x=Math.max(0,Math.min(W,x));y=Math.max(0,Math.min(H,y));
+    dvd.style.transform=`translate(${x}px,${y}px)`;raf=requestAnimationFrame(loop);}
+  ["pointerdown","pointermove","keydown","touchstart","wheel"].forEach(ev=>addEventListener(ev,arm,{passive:true}));
+  arm();})();
 /* PWA */
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("/sw.js").catch(()=>{});
 </script>

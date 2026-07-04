@@ -1,5 +1,5 @@
 /* BomyOS service worker — HTML réseau d'abord, assets cache d'abord */
-const CACHE = "bomyos-v5";
+const CACHE = "bomyos-v6";
 const CORE = ["/", "/assets/css/bomyos.css", "/assets/js/bomyos.js", "/apple-touch-icon.png", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", e => {

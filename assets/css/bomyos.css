@@ -57,8 +57,13 @@ button.menu:hover,button.menu.open{color:var(--ink);background:rgba(255,255,255,
 .rz{position:absolute;right:1px;bottom:1px;width:18px;height:18px;cursor:nwse-resize;z-index:6;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 60%,transparent 60%,transparent 72%,rgba(255,255,255,.25) 72%,rgba(255,255,255,.25) 82%,transparent 82%)}
 .win.max .rz{display:none}
 .win-iframe{flex:1;width:100%;border:0;background:#fff}
-.backportf{margin-left:auto;background:var(--acc);color:#0a0b0e;font-weight:600;font-size:12px;padding:5px 12px;border-radius:8px}
+.backportf{background:var(--acc);color:#0a0b0e;font-weight:600;font-size:12px;padding:5px 12px;border-radius:8px}
 .backportf:hover{filter:brightness(1.06)}
+.fsbtn{margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;font-weight:500;padding:5px 11px;border:1px solid var(--glass-brd);border-radius:8px;margin-right:8px;cursor:pointer}
+.fsbtn:hover,.fsbtn.on{color:var(--ink);background:rgba(255,255,255,.08)}
+.win:fullscreen{width:100vw!important;height:100vh!important;left:0!important;top:0!important;border-radius:0;border:none;transform:none}
+.win:fullscreen .win-iframe{flex:1}
+.win:-webkit-full-screen{width:100vw!important;height:100vh!important;border-radius:0}
 
 .h-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .h-title{font-family:"Archivo";font-weight:800;letter-spacing:-.03em;font-size:clamp(30px,4vw,52px);line-height:.98;margin:10px 0 14px}

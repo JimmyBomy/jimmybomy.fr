@@ -317,22 +317,38 @@ function openSite(url,title){
   const key="site:"+url;
   if(wins[key]){const st=wins[key];if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);return;}
   const el=document.createElement("div");el.className="win";el.dataset.app=key;el.setAttribute("role","dialog");el.setAttribute("aria-label",title);el.tabIndex=-1;
+  const menh=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--menh'))||36;
+  // taille "fenêtrée" mémorisée (pour le bouton restaurer), mais on ouvre maximisé
   const w=Math.min(1200,innerWidth-30),h=Math.min(820,innerHeight-100);
-  el.style.width=w+"px";el.style.height=h+"px";el.style.left=((innerWidth-w)/2)+"px";el.style.top="46px";
+  const prev={l:((innerWidth-w)/2)+"px",t:"46px",w:w+"px",h:h+"px"};
+  el.style.left="12px";el.style.top=(menh+8)+"px";el.style.width=(innerWidth-24)+"px";el.style.height=(innerHeight-menh-8-90)+"px";
+  el.classList.add("max");
   el.innerHTML='<div class="win-bar"><div class="lights">'
     +'<button class="c" data-act="close" aria-label="Fermer"><svg viewBox="0 0 10 10" stroke="#4a0002" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>'
     +'<button class="mi" data-act="min" aria-label="Réduire"><svg viewBox="0 0 10 10" stroke="#7a4a00" stroke-width="1.5"><path d="M2 5h6"/></svg></button>'
     +'<button class="fu" data-act="max" aria-label="Agrandir"><svg viewBox="0 0 10 10" stroke="#0a4a00" stroke-width="1.5"><path d="M2.5 2.5h5v5h-5z"/></svg></button></div>'
-    +'<div class="wtitle"><span style="font-family:JetBrains Mono,monospace;font-size:11.5px;color:var(--acc2);background:rgba(255,255,255,.07);border:1px solid var(--glass-brd);padding:3px 11px;border-radius:100px">bomy://'+title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+'</span></div><button class="backportf" data-act="close">‹ Retour au portfolio</button></div>'
+    +'<div class="wtitle"><span style="font-family:JetBrains Mono,monospace;font-size:11.5px;color:var(--acc2);background:rgba(255,255,255,.07);border:1px solid var(--glass-brd);padding:3px 11px;border-radius:100px">bomy://'+title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+'</span></div>'
+    +'<button class="fsbtn" data-act="full" title="Plein écran" aria-label="Plein écran"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>Plein écran</button>'
+    +'<button class="backportf" data-act="close">‹ Retour au portfolio</button></div>'
     +'<iframe class="win-iframe" src="'+url+'" title="'+title+'" loading="lazy"></iframe><div class="rz" aria-hidden="true"></div>';
-  desktop.appendChild(el);wins[key]={el,min:false,max:false,prev:null};
+  desktop.appendChild(el);wins[key]={el,min:false,max:true,prev:prev};
   requestAnimationFrame(()=>{el.classList.add("open");bringFront(el);el.focus();});snd.open();
   el.addEventListener("mousedown",()=>bringFront(el));
-  el.querySelectorAll('[data-act="close"]').forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();closeApp(key);}));
+  el.querySelectorAll('[data-act="close"]').forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();if(document.fullscreenElement)document.exitFullscreen();closeApp(key);}));
   el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(key);});
   el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(key);});
+  el.querySelector('[data-act="full"]').addEventListener("click",e=>{e.stopPropagation();toggleFull(el);});
   makeDraggable(el,key);makeResizable(el,key);
 }
+function toggleFull(el){
+  if(document.fullscreenElement){document.exitFullscreen&&document.exitFullscreen();return;}
+  const req=el.requestFullscreen||el.webkitRequestFullscreen;
+  if(req)req.call(el);snd.tap();
+}
+addEventListener("fullscreenchange",()=>{
+  const on=!!document.fullscreenElement;const b=document.querySelector('.fsbtn');
+  document.querySelectorAll('.fsbtn').forEach(x=>x.classList.toggle('on',on&&document.fullscreenElement.contains(x)));
+});
 
 /* ICONS + DOCK */
 const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis express"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];

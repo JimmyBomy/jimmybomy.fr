@@ -15,6 +15,7 @@ const ICON={
   calc:'<svg width="42" height="42" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#1c1c1e"/><g fill="#eef0ea"><circle cx="14" cy="15" r="3.4"/><circle cx="24" cy="15" r="3.4"/><circle cx="14" cy="25" r="3.4"/><circle cx="24" cy="25" r="3.4"/><circle cx="14" cy="35" r="3.4"/><circle cx="24" cy="35" r="3.4"/></g><g fill="#ff9f0a"><circle cx="34" cy="15" r="3.4"/><circle cx="34" cy="25" r="3.4"/><circle cx="34" cy="35" r="3.4"/></g></svg>',
   plans:'<svg width="42" height="42" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#d8ecd2"/><path d="M4 30c8-2 12-10 20-9s12 10 20 6v11a10 10 0 0 1-10 10H14A10 10 0 0 1 4 38v-8z" fill="#a8d5e5"/><path d="M4 14h40M18 4v40" stroke="#f6d56a" stroke-width="3.6"/><circle cx="31" cy="21" r="6.4" fill="#ff453a"/><circle cx="31" cy="21" r="2.4" fill="#fff"/></svg>',
   gh:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.52.1.71-.23.71-.5v-1.75c-2.9.63-3.52-1.4-3.52-1.4-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.07-2.8-.1-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.56 1.43.2 2.49.1 2.75.67.73 1.07 1.66 1.07 2.8 0 4-2.45 4.9-4.78 5.16.38.32.72.96.72 1.94v2.88c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>',
+  li:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.12 1.43-2.12 2.9V21H9z"/></svg>',
   li:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.9V21H19v-5.5c0-1.3-.02-3-1.87-3-1.87 0-2.16 1.44-2.16 2.92V21H11V9z"/></svg>',
 };
 /* ==== VITRINE — les flagships (édite ici) ==== */
@@ -274,6 +275,7 @@ function content(app){
       <a class="chip" href="https://wa.me/33788021676" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">WhatsApp</span><span>message direct</span></a>
       <span class="chip" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Localisation</span><span>Sedan / Troyes</span></span>
       <a class="chip" href="https://github.com/JimmyBomy" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">GitHub</span><span>@JimmyBomy</span></a>
+      <a class="chip" href="https://www.linkedin.com/in/jimmy-bomy-1037453a8/" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">LinkedIn</span><span>Jimmy Bomy</span></a>
     </div>
     <a class="btn" href="mailto:${EMAIL}">Écrire un mail <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>`;
   if(app==="cv")return `<div class="pdf"><h1>Jimmy Bomy</h1><div class="role">Développeur web créatif — BUT MMI (Troyes) · Sedan</div>
@@ -414,7 +416,7 @@ document.querySelectorAll(".dicon").forEach(ic=>{
   ic.addEventListener("click",()=>{if(moved){moved=false;return;}
     document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");openApp(ic.dataset.app);});
   ic.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openApp(ic.dataset.app);}});});
-const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["messages","Messages","messages"],["photos","Photos","photos"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["reglages","Réglages","gear"],["gh","GitHub","gh","https://github.com/JimmyBomy"]];
+const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["messages","Messages","messages"],["photos","Photos","photos"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["reglages","Réglages","gear"],["gh","GitHub","gh","https://github.com/JimmyBomy"],["li","LinkedIn","li","https://www.linkedin.com/in/jimmy-bomy-1037453a8/"]];
 const dock=document.getElementById("dock");
 dock.innerHTML=DOCK.map(d=>{if(d[0]==="--")return '<div class="sep"></div>';const link=d[3]&&d[3].startsWith("http");
   return `<button data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}"><span class="tip">${d[1]}</span>${ICON[d[2]]}<span class="run" data-run="${d[0]}"></span></button>`;}).join("");
@@ -434,7 +436,7 @@ addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("butt
 const MENUS={
   Fichier:[["⚡ Nouveau devis express","devis"],["🔍 Rechercher…  (Ctrl+K)","_cmdk"],["🖨️ Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
   Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["BomyOS (ce site)","project:bomyos"],["--"],["🧪 Dossier Labs","labs"],["🌸 Photothèque","photos"]],
-  Aide:[["💡 Raccourcis & astuces","aide"],["✉️ Me contacter","contact"],["GitHub — @JimmyBomy","_gh"]]};
+  Aide:[["💡 Raccourcis & astuces","aide"],["✉️ Me contacter","contact"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
 let curMenu=null;
 document.querySelectorAll("button.menu").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();
   document.querySelectorAll("button.menu.open").forEach(x=>{if(x!==b)x.classList.remove("open");});
@@ -448,6 +450,7 @@ ctx.addEventListener("click",e=>{const b=e.target.closest("[data-mi]");if(!b||!c
   if(v==="_print"){window.print();return;}
   if(v==="_close"){Object.keys(wins).forEach(closeApp);return;}
   if(v==="_gh"){window.open("https://github.com/JimmyBomy","_blank","noopener");return;}
+  if(v==="_li"){window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener");return;}
   openApp(v);});
 /* CTA widgets bureau */
 document.querySelectorAll("[data-wopen]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.wopen)));
@@ -579,7 +582,8 @@ function initCmdk(){
   const inp=wrap.querySelector("input"),list=wrap.querySelector(".cmdk-list");
   const items=[...Object.entries(APPS).map(([id,a])=>({t:a.title,go:()=>openApp(id)})),
     ...Object.entries(ALL).map(([id,p])=>({t:p.name+" — "+p.cat,go:()=>openApp("project:"+id)})),
-    {t:"GitHub — @JimmyBomy",go:()=>window.open("https://github.com/JimmyBomy","_blank","noopener")}];
+    {t:"GitHub — @JimmyBomy",go:()=>window.open("https://github.com/JimmyBomy","_blank","noopener")},
+    {t:"LinkedIn — Jimmy Bomy",go:()=>window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener")}];
   function render(q){const f=items.filter(i=>i.t.toLowerCase().includes(q.toLowerCase())).slice(0,8);
     list.innerHTML=f.map((i,x)=>`<button data-x="${x}" class="${x===0?'sel':''}">${i.t}</button>`).join("")||'<div style="padding:12px 14px;color:var(--dim);font-size:13px">Aucun résultat</div>';
     list._f=f;}

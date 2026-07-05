@@ -360,6 +360,12 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   .cvp h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#888;border-bottom:1px solid #ddd;padding-bottom:4px;margin:18px 0 8px}
   .cvp li{margin-bottom:6px;font-size:13.5px}.cvp p{font-size:13.5px;line-height:1.5}
 }
+/* Badges Lighthouse (À propos) */
+.lhrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.lhb{flex:1;min-width:78px;text-align:center;background:rgba(198,255,78,.06);border:1px solid rgba(198,255,78,.28);border-radius:12px;padding:12px 8px}
+.lhb b{display:block;font-family:"Archivo",sans-serif;font-size:24px;font-weight:800;color:var(--acc);line-height:1;margin-bottom:3px}
+.lhb span{font-size:11px;color:var(--muted)}
+
 /* Fiche projet — étude de cas */
 .pmetrics{display:flex;gap:10px;margin:16px 0 4px;flex-wrap:wrap}
 .pm{flex:1;min-width:88px;background:rgba(255,255,255,.04);border:1px solid var(--glass-brd);border-radius:12px;padding:12px 14px}

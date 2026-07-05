@@ -422,6 +422,16 @@ dock.innerHTML=DOCK.map(d=>{if(d[0]==="--")return '<div class="sep"></div>';cons
   return `<button data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}"><span class="tip">${d[1]}</span>${ICON[d[2]]}<span class="run" data-run="${d[0]}"></span></button>`;}).join("");
 dock.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.link){window.open(b.dataset.link,"_blank","noopener");return;}if(b.dataset.app)openApp(b.dataset.app);}));
 function markDock(app,on){const r=dock.querySelector(`[data-run="${app}"]`);if(r)r.parentElement.classList.toggle("running",on);}
+/* Dock façon macOS : magnification des icônes sous le curseur */
+(function dockMagnify(){
+  if(matchMedia("(pointer:coarse)").matches)return;      // pas sur tactile
+  const RANGE=115,MAX=0.6;const items=()=>[...dock.querySelectorAll("button")];let raf=0,mx=0;
+  dock.addEventListener("pointermove",e=>{mx=e.clientX;if(raf)return;raf=requestAnimationFrame(()=>{raf=0;
+    items().forEach(b=>{const r=b.getBoundingClientRect(),cx=r.left+r.width/2,d=Math.abs(mx-cx);
+      const k=d>=RANGE?0:(1-d/RANGE);const s=1+MAX*k*k;
+      b.style.transform=`translateY(${(-(s-1)*26).toFixed(1)}px) scale(${s.toFixed(3)})`;});});});
+  dock.addEventListener("pointerleave",()=>{items().forEach(b=>b.style.transform="");});
+})();
 
 /* CONTEXT MENU */
 const ctx=document.getElementById("ctx");

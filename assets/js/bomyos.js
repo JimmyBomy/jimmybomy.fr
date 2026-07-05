@@ -444,9 +444,9 @@ ctx.addEventListener("click",e=>{const b=e.target.closest("[data-ctx]");if(!b)re
 addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("button.menu")){hideCtx();document.querySelectorAll("button.menu.open").forEach(b=>b.classList.remove("open"));}});
 /* menus de la barre */
 const MENUS={
-  Fichier:[["⚡ Nouveau devis express","devis"],["🔍 Rechercher…  (Ctrl+K)","_cmdk"],["🖨️ Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
-  Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["BomyOS (ce site)","project:bomyos"],["--"],["🧪 Dossier Labs","labs"],["🌸 Photothèque","photos"]],
-  Aide:[["💡 Raccourcis & astuces","aide"],["✉️ Me contacter","contact"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
+  Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
+  Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
+  Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
 let curMenu=null;
 document.querySelectorAll("button.menu").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();
   document.querySelectorAll("button.menu.open").forEach(x=>{if(x!==b)x.classList.remove("open");});
@@ -582,7 +582,7 @@ function afterBoot(){
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
     if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");
     const n=document.createElement("div");n.id="bnotif";n.className="osnotif";n.setAttribute("role","status");
-    n.innerHTML='<span class="ni">💬</span><div><b>Jimmy répond en moins de 2 h</b><br><span>Un projet de site ? Parlons-en.</span></div><button class="nx" aria-label="Fermer">✕</button>';
+    n.innerHTML='<span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg></span><div><b>Jimmy répond en moins de 2 h</b><br><span>Un projet de site ? Parlons-en.</span></div><button class="nx" aria-label="Fermer"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
     document.body.appendChild(n);requestAnimationFrame(()=>n.classList.add("on"));snd.tap();
     n.addEventListener("click",e=>{if(e.target.closest(".nx")){n.remove();return;}n.remove();innerWidth>720?openApp("contact"):mopen("contact");});
     setTimeout(()=>{n.classList.remove("on");setTimeout(()=>n.remove(),400);},12000);

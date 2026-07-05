@@ -197,8 +197,8 @@ function content(app){
     <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>14</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
     <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>
     <div class="divider"></div><div class="h-eyebrow">Ce site, audité Lighthouse</div>
-    <div class="lhrow"><div class="lhb"><b>92</b><span>Performance</span></div><div class="lhb"><b>100</b><span>Accessibilité</span></div><div class="lhb"><b>100</b><span>Bonnes pratiques</span></div><div class="lhb"><b>100</b><span>SEO</span></div></div>
-    <p class="lede" style="font-size:12px;color:var(--dim);margin-top:8px">Scores Lighthouse mesurés sur mobile (le plus exigeant) — 98 en performance sur desktop. LCP 2,4 s, CLS 0,02.</p>`;
+    <div class="lhrow"><div class="lhb"><b>97</b><span>Performance</span></div><div class="lhb"><b>100</b><span>Accessibilité</span></div><div class="lhb"><b>100</b><span>Bonnes pratiques</span></div><div class="lhb"><b>100</b><span>SEO</span></div></div>
+    <p class="lede" style="font-size:12px;color:var(--dim);margin-top:8px">Audit Lighthouse sur desktop — accessibilité, bonnes pratiques et SEO à 100/100.</p>`;
   if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><div class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</div>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
   if(app==="devis")return devisHTML();
@@ -546,8 +546,8 @@ const myearEl=document.getElementById("myear");if(myearEl)myearEl.textContent=ne
 function tick(){const d=new Date();
   document.getElementById("clock").textContent=d.toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short"})+"  "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
   const mc=document.getElementById("mclock");if(mc)mc.textContent=d.toLocaleTimeString("fr-FR",{hour:"numeric",minute:"2-digit"});
-  const lt=document.getElementById("ltime");if(lt){lt.textContent=d.toLocaleTimeString("fr-FR",{hour:"numeric",minute:"2-digit"});
-    document.getElementById("ldate").textContent=d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});}
+  /* l-time reste figé sur 9:41 (clin d'œil Apple) ; on n'actualise que la date */
+  const ld=document.getElementById("ldate");if(ld)ld.textContent=d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});
   const wh=document.getElementById("wgh");if(wh){const hh=(d.getHours()%12+d.getMinutes()/60)*30,mm=d.getMinutes()*6;
     wh.setAttribute("transform",`rotate(${hh} 50 50)`);document.getElementById("wgm").setAttribute("transform",`rotate(${mm} 50 50)`);
     document.getElementById("wgdate").textContent=d.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"short"});}}
@@ -573,7 +573,10 @@ function handleHash(){
 addEventListener("hashchange",handleHash);
 function afterBoot(){
   const deep=handleHash();
-  if(deep)lock.classList.add("off");   /* lien profond : on masque le verrouillage pour montrer l'app */
+  let returning=false;try{returning=localStorage.getItem("bomySeen")==="1"}catch(e){}
+  if(deep)lock.classList.add("off");                 /* lien profond : on montre l'app */
+  else if(returning){lock.classList.add("off");      /* déjà venu : on saute le verrouillage */
+    if(innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),160);}
   else showLock();
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
@@ -635,8 +638,12 @@ function showLock(){
     lock.addEventListener("touchstart",e=>{sy=e.touches[0].clientY;},{passive:true});
     lock.addEventListener("touchmove",e=>{if(sy!==null&&sy-e.touches[0].clientY>60)unlock();},{passive:true});
     lock.addEventListener("click",unlock);
-    addEventListener("keydown",e=>{if(!lock.classList.contains("off"))unlock();});}}
-function unlock(){if(lock.classList.contains("off"))return;lock.classList.add("off");snd.open();
+    addEventListener("keydown",e=>{if(!lock.classList.contains("off"))unlock();});
+    const notif=lock.querySelector(".l-notif");
+    if(notif){notif.style.cursor="pointer";notif.setAttribute("role","button");notif.setAttribute("tabindex","0");
+      notif.addEventListener("click",e=>{e.stopPropagation();unlock("contact");});}}}
+function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add("off");try{localStorage.setItem("bomySeen","1")}catch(e){}snd.open();
+  if(app==="contact"){setTimeout(()=>{innerWidth>720?openApp("contact"):mopen("contact");},380);return;}
   if(innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),420);}
 /* centre de contrôle : balayage vers le bas depuis le haut-droit de l'accueil */
 (function initCC(){if(!cc)return;

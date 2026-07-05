@@ -48,6 +48,20 @@ function contactKind(string $c): array {
     if (strlen($d) === 10 && $d[0] === '0') $d = '33' . substr($d, 1);
     return ['phone', $d];
 }
+/* Regroupe/nettoie un référent (l.instagram.com, com.linkedin.android → Instagram, LinkedIn) */
+function refLabel(string $ref): string {
+    $host = parse_url($ref, PHP_URL_HOST);
+    $h = strtolower((string)($host ?: $ref));
+    if (strpos($h, 'instagram') !== false)  return 'Instagram';
+    if (strpos($h, 'linkedin') !== false)   return 'LinkedIn';
+    if (strpos($h, 'facebook') !== false || strpos($h, 'fb.') !== false) return 'Facebook';
+    if (strpos($h, 'google') !== false)     return 'Google';
+    if (strpos($h, 't.co') !== false || strpos($h, 'twitter') !== false || strpos($h, 'x.com') !== false) return 'X (Twitter)';
+    if (strpos($h, 'bing') !== false)       return 'Bing';
+    if (strpos($h, 'youtu') !== false)      return 'YouTube';
+    if (strpos($h, 'tiktok') !== false)     return 'TikTok';
+    return preg_replace('/^www\./', '', $h);
+}
 
 $adminHash = setting('admin_hash');
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
@@ -183,17 +197,28 @@ for ($i = 13; $i >= 0; $i--) {
 $chartMax = max(1, max($series));
 $pv14 = array_sum($series);
 
-$topRefs = $pdo->query(
+/* Sources externes : on exclut l'auto-référence (jimmybomy.fr) puis on regroupe par plateforme */
+$refRows = $pdo->query(
     "SELECT ref, COUNT(*) c FROM hits
-     WHERE event='pageview' AND ref <> '' AND created_at >= (NOW() - INTERVAL 30 DAY)
-     GROUP BY ref ORDER BY c DESC LIMIT 8"
+     WHERE event='pageview' AND ref <> '' AND ref NOT LIKE '%jimmybomy.fr%'
+     AND created_at >= (NOW() - INTERVAL 30 DAY)
+     GROUP BY ref"
 )->fetchAll();
+$refAgg = [];
+foreach ($refRows as $r) {
+    $lbl = refLabel($r['ref']);
+    if ($lbl === '') continue;
+    $refAgg[$lbl] = ($refAgg[$lbl] ?? 0) + (int)$r['c'];
+}
+arsort($refAgg);
+$refAgg = array_slice($refAgg, 0, 8, true);
+$refMax = $refAgg ? max($refAgg) : 1;
+
 $topApps = $pdo->query(
     "SELECT event, COUNT(*) c FROM hits
      WHERE event LIKE 'open:%' AND created_at >= (NOW() - INTERVAL 30 DAY)
      GROUP BY event ORDER BY c DESC LIMIT 8"
 )->fetchAll();
-$refMax = $topRefs ? max(array_column($topRefs, 'c')) : 1;
 $appMax = $topApps ? max(array_column($topApps, 'c')) : 1;
 
 /* En-tête convivial */
@@ -203,7 +228,7 @@ $JM = ['janvier','février','mars','avril','mai','juin','juillet','août','septe
 $today = $JD[(int)date('w')] . ' ' . (int)date('j') . ' ' . $JM[(int)date('n') - 1];
 
 render_shell('Dashboard', function () use (
-    $leads, $newCount, $pvToday, $pv7, $pv30, $uniq7, $topRefs, $topApps,
+    $leads, $newCount, $pvToday, $pv7, $pv30, $uniq7, $refAgg, $topApps,
     $refMax, $appMax, $series, $chartMax, $pv14, $err, $greet, $today
 ) { ?>
     <div class="bar">
@@ -216,12 +241,12 @@ render_shell('Dashboard', function () use (
     </div>
 
     <div class="hello">
-        <h1><?= $greet ?> Jimmy 👋</h1>
+        <h1><?= $greet ?> Jimmy</h1>
         <p><?= h($today) ?> ·
             <?php if ($newCount > 0): ?>
                 <span class="hot"><?= $newCount ?> nouveau<?= $newCount > 1 ? 'x' : '' ?> lead<?= $newCount > 1 ? 's' : '' ?></span> à traiter
             <?php else: ?>
-                tout est à jour ✨
+                tout est à jour
             <?php endif; ?>
         </p>
     </div>
@@ -272,7 +297,7 @@ render_shell('Dashboard', function () use (
             <?php if (trim((string)$l['message']) !== ''): ?><div class="msg"><?= nl2br(h($l['message'])) ?></div><?php endif; ?>
             <div class="actions">
                 <?php if ($ck === 'email'): ?>
-                    <a class="act primary" href="<?= h($cv) ?>">✉ Répondre par mail</a>
+                    <a class="act primary" href="<?= h($cv) ?>">Répondre par mail</a>
                 <?php else: ?>
                     <a class="act wa" href="https://wa.me/<?= h($cv) ?>" target="_blank" rel="noopener">WhatsApp</a>
                     <a class="act" href="tel:<?= h($tel) ?>">Appeler</a>
@@ -291,11 +316,9 @@ render_shell('Dashboard', function () use (
         <div>
             <h2>D'où viennent les visiteurs · 30j</h2>
             <div class="card">
-                <?php if (!$topRefs): ?><p class="muted small" style="margin:0">Pas encore de source externe.</p>
-                <?php else: foreach ($topRefs as $r):
-                    $host = parse_url($r['ref'], PHP_URL_HOST) ?: $r['ref'];
-                    $host = preg_replace('/^www\./', '', (string)$host); ?>
-                    <div class="row"><span class="lbl"><?= h($host) ?></span><span class="track"><span class="fill" style="width:<?= (int)round($r['c'] / $refMax * 100) ?>%"></span></span><span class="n"><?= (int)$r['c'] ?></span></div>
+                <?php if (!$refAgg): ?><p class="muted small" style="margin:0">Pas encore de source externe.</p>
+                <?php else: foreach ($refAgg as $lbl => $cnt): ?>
+                    <div class="row"><span class="lbl"><?= h($lbl) ?></span><span class="track"><span class="fill" style="width:<?= (int)round($cnt / $refMax * 100) ?>%"></span></span><span class="n"><?= (int)$cnt ?></span></div>
                 <?php endforeach; endif; ?>
             </div>
         </div>

@@ -116,7 +116,7 @@ if (!$adminHash) {
     }
     render_shell('Créer le mot de passe admin', function () use ($err) { ?>
         <form method="post" class="card auth">
-            <div class="logo"><?= markSvg(34) ?></div>
+            <div class="logo"><?= markSvg(58) ?></div>
             <h1>Espace privé</h1>
             <div class="sub">BomyOS · première connexion</div>
             <p class="muted">Choisis ton mot de passe. Il protège l'accès à tes leads (8 caractères minimum). Personne d'autre ne peut le définir tant qu'il n'existe pas.</p>
@@ -159,7 +159,7 @@ if (empty($_SESSION['auth'])) {
     $expired = isset($_GET['expired']);
     render_shell('Connexion', function () use ($err, $expired) { ?>
         <form method="post" class="card auth">
-            <div class="logo"><?= markSvg(34) ?></div>
+            <div class="logo"><?= markSvg(58) ?></div>
             <h1>Espace privé</h1>
             <div class="sub">BomyOS · admin</div>
             <?php if ($expired && !$err): ?><div class="alert">Session expirée — reconnecte-toi.</div><?php endif; ?>
@@ -404,7 +404,8 @@ h2 .c{color:var(--dim)}
 .card{padding:22px}
 /* auth */
 .auth{max-width:400px;margin:11vh auto 0;padding:36px 32px;text-align:center}
-.auth .logo{width:64px;height:64px;margin:0 auto 18px;border-radius:19px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--brd);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.auth .logo{margin:0 auto 20px;line-height:0}
+.auth .logo svg{border-radius:14px;filter:drop-shadow(0 12px 30px rgba(0,0,0,.5))}
 .auth h1{font-size:23px;margin:0 0 3px;font-weight:700}
 .auth .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
 .auth p.muted{font-size:13.5px;margin:0}

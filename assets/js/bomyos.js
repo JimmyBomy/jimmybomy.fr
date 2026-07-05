@@ -563,7 +563,8 @@ function handleHash(){
 addEventListener("hashchange",handleHash);
 function afterBoot(){
   const deep=handleHash();
-  if(!deep)showLock();
+  if(deep)lock.classList.add("off");   /* lien profond : on masque le verrouillage pour montrer l'app */
+  else showLock();
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
     if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");
@@ -616,7 +617,7 @@ if(matchMedia("(hover:hover)").matches&&!reduce){const wm=document.querySelector
   arm();})();
 /* ==== ÉCRAN VERROUILLÉ + CENTRE DE CONTRÔLE (mobile) ==== */
 const lock=document.getElementById("lock"),cc=document.getElementById("cc"),dim=document.getElementById("dim");
-function showLock(){if(location.hash)return;
+function showLock(){
   tick();
   document.getElementById("lhint").textContent=innerWidth>720?"Cliquez pour découvrir mon travail":"Glissez vers le haut pour découvrir mon travail";
   lock.classList.remove("off");

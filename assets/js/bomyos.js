@@ -614,7 +614,7 @@ if(matchMedia("(hover:hover)").matches&&!reduce){const wm=document.querySelector
 const lock=document.getElementById("lock"),cc=document.getElementById("cc"),dim=document.getElementById("dim");
 function showLock(){if(location.hash)return;
   tick();
-  document.getElementById("lhint").textContent=innerWidth>720?"Cliquez ou appuyez sur une touche pour déverrouiller":"Glisser vers le haut pour déverrouiller";
+  document.getElementById("lhint").textContent=innerWidth>720?"Cliquez pour découvrir mon travail":"Glissez vers le haut pour découvrir mon travail";
   lock.classList.remove("off");
   if(!lock._wired){lock._wired=true;let sy=null;
     lock.addEventListener("touchstart",e=>{sy=e.touches[0].clientY;},{passive:true});

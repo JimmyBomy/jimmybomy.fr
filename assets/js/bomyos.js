@@ -573,11 +573,8 @@ function handleHash(){
 addEventListener("hashchange",handleHash);
 function afterBoot(){
   const deep=handleHash();
-  let returning=false;try{returning=localStorage.getItem("bomySeen")==="1"}catch(e){}
-  if(deep)lock.classList.add("off");                 /* lien profond : on montre l'app */
-  else if(returning){lock.classList.add("off");      /* déjà venu : on saute le verrouillage */
-    if(innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),160);}
-  else showLock();
+  if(deep)lock.classList.add("off");                 /* lien profond : on montre l'app directement */
+  else showLock();                                   /* sinon : l'écran de verrouillage s'affiche (il porte déjà l'identité) */
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
     if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");
@@ -642,7 +639,7 @@ function showLock(){
     const notif=lock.querySelector(".l-notif");
     if(notif){notif.style.cursor="pointer";notif.setAttribute("role","button");notif.setAttribute("tabindex","0");
       notif.addEventListener("click",e=>{e.stopPropagation();unlock("contact");});}}}
-function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add("off");try{localStorage.setItem("bomySeen","1")}catch(e){}snd.open();
+function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add("off");snd.open();
   if(app==="contact"){setTimeout(()=>{innerWidth>720?openApp("contact"):mopen("contact");},380);return;}
   if(innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),420);}
 /* centre de contrôle : balayage vers le bas depuis le haut-droit de l'accueil */

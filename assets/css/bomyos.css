@@ -360,4 +360,11 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   .cvp h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#888;border-bottom:1px solid #ddd;padding-bottom:4px;margin:18px 0 8px}
   .cvp li{margin-bottom:6px;font-size:13.5px}.cvp p{font-size:13.5px;line-height:1.5}
 }
+/* Devis express — formulaire « être rappelé » */
+.devis-lead{margin-top:18px;padding-top:16px;border-top:1px solid var(--glass-brd)}
+.dv-in{display:block;width:100%;margin-bottom:9px;background:rgba(255,255,255,.04);border:1px solid var(--glass-brd);color:var(--ink);border-radius:11px;padding:11px 13px;font:inherit;font-size:14px;outline:none}
+.dv-in:focus{border-color:var(--acc)}
+.dv-in::placeholder{color:var(--dim)}
+.dv-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

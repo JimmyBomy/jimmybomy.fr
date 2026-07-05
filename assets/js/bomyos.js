@@ -46,6 +46,22 @@ const XP=[
 ];
 const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},reglages:{title:"Réglages",icon:"gear",w:540,h:620},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},messages:{title:"Messages",icon:"messages",w:460,h:580},photos:{title:"Photos",icon:"photos",w:640,h:520},calc:{title:"Calculette",icon:"calc",w:340,h:540},plans:{title:"Plans",icon:"plans",w:560,h:540},aide:{title:"Aide — raccourcis",icon:"doc",w:470,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600}};
 
+/* ==== ANALYTICS first-party (privacy-friendly, actif seulement en prod) ==== */
+const ANALYTICS_ON=/(^|\.)jimmybomy\.fr$/.test(location.hostname);
+function track(event,extra){
+  if(!ANALYTICS_ON)return;
+  try{
+    const body=JSON.stringify(Object.assign({
+      event:event||"pageview",
+      path:(location.pathname+location.hash).slice(0,180),
+      ref:document.referrer||"",
+      device:innerWidth<=720?"mobile":"desktop"
+    },extra||{}));
+    if(navigator.sendBeacon)navigator.sendBeacon("/api/hit.php",new Blob([body],{type:"application/json"}));
+    else fetch("/api/hit.php",{method:"POST",headers:{"Content-Type":"application/json"},body,keepalive:true}).catch(()=>{});
+  }catch(e){}
+}
+
 /* ==== DEVIS EXPRESS (configurateur) ==== */
 let DEVIS={step:0,a:[]};
 const DEVIS_Q=[
@@ -68,12 +84,37 @@ function devisHTML(){
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
       <a class="btn" href="https://wa.me/33788021676?text=${msg}" target="_blank" rel="noopener">Envoyer sur WhatsApp <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
       <button class="btn ghost" data-devis="restart">Recommencer</button></div>
-    <p class="lede" style="font-size:12.5px;margin-top:16px;color:var(--dim)">Je réponds en général en moins de 2 heures.</p>`;}
+    <div class="devis-lead">
+      <div class="h-eyebrow">Ou laissez-moi vos coordonnées</div>
+      <p class="lede" style="font-size:13px;margin:6px 0 12px">Je vous rappelle — en général en moins de 2 heures.</p>
+      <input id="dv-name" class="dv-in" placeholder="Votre nom (optionnel)" autocomplete="name">
+      <input id="dv-contact" class="dv-in" placeholder="Email ou téléphone" inputmode="email" autocomplete="email">
+      <input id="dv-hp" class="dv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn" data-devis="send" style="margin-top:4px">Être rappelé ›</button>
+      <div id="dv-status" class="lede" style="font-size:13px;margin-top:8px"></div>
+    </div>`;}
 function devisAct(v,container){
+  if(v==="send"){devisSend(container);return;}
   if(v==="back"){DEVIS.step=Math.max(0,DEVIS.step-1);DEVIS.a.length=DEVIS.step;}
   else if(v==="restart"){DEVIS={step:0,a:[]};}
   else{DEVIS.a[DEVIS.step]=+v;DEVIS.step++;}
   snd.tap();container.innerHTML=devisHTML();}
+function devisSend(container){
+  const esc=s=>String(s||"").replace(/[<>&"]/g,"");
+  const g=id=>{const el=container.querySelector(id);return el?el.value:"";};
+  const name=g("#dv-name").trim(),contact=g("#dv-contact").trim(),hp=g("#dv-hp");
+  const status=container.querySelector("#dv-status"),btn=container.querySelector('[data-devis="send"]');
+  if(!contact){if(status){status.style.color="#ff5f57";status.textContent="Indiquez un email ou un téléphone.";}return;}
+  if(btn){btn.disabled=true;btn.textContent="Envoi…";}
+  const objective=["créer un premier site","moderniser un site vieillissant","améliorer un site récent"][DEVIS.a[0]]||"";
+  const kind=["Restaurant / café","Commerce / boutique","Artisan / service","Autre"][DEVIS.a[1]]||"";
+  const need=["Infos & horaires","Réservation / commande","Contact direct"][DEVIS.a[2]]||"";
+  fetch("/api/devis.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,contact,objective,kind,need,website:hp,source:"devis"})})
+    .then(r=>r.json()).then(j=>{
+      if(!j||!j.ok)throw 0;
+      snd.tap();track("lead");
+      container.innerHTML=`<div class="h-eyebrow">Merci ${esc(name.split(" ")[0])} !</div><div class="h-title" style="font-size:28px">C'est noté.</div><p class="lede">Je vous recontacte très vite sur <b>${esc(contact)}</b>. À tout de suite 👋</p>`;
+    }).catch(()=>{if(status){status.style.color="#ff5f57";status.textContent="Oups — réessayez, ou passez par WhatsApp juste au-dessus.";}if(btn){btn.disabled=false;btn.textContent="Être rappelé ›";}});}
 
 /* ==== TERMINAL (easter egg — accessible via Ctrl+K ou #terminal) ==== */
 function wireTerminal(root){const out=root.querySelector(".term-out"),inp=root.querySelector(".term-in");if(!inp)return;
@@ -265,6 +306,7 @@ const desktop=document.getElementById("desktop");
 let zTop=100,activeWin=null;const wins={};
 function bringFront(el){zTop++;el.style.zIndex=zTop;document.querySelectorAll(".win").forEach(w=>w.classList.remove("active"));el.classList.add("active");activeWin=el.dataset.app;}
 function openApp(app){
+  track("open:"+app);
   const hint=document.getElementById("hint");if(hint)hint.style.display="none";
   const st=wins[app];
   if(st){if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);st.el.focus();snd.tap();return;}
@@ -455,6 +497,7 @@ document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map
 const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
 const mobileEl=document.getElementById("mobile"),msTitle=document.getElementById("msheetTitle");
 function mopen(app,origin){
+  track("open:"+app);
   msBody.innerHTML=content(app);msBody.scrollTop=0;msheet.scrollTop=0;
   msTitle.textContent=titleFor(app);
   // zoom depuis l'icône touchée
@@ -596,3 +639,5 @@ function unlock(){if(lock.classList.contains("off"))return;lock.classList.add("o
 })();
 /* PWA */
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("/sw.js").catch(()=>{});
+/* Analytics : une vue par chargement */
+track("pageview");

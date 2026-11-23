@@ -16,4 +16,6 @@ travaux/
 projets/*
 # … sauf la démo commerce, elle, versionnée
 !projets/demo-boulangerie/
+# … et la fiction Twine Sillenbach (fichier unique)
+!projets/sillenbach/
 !cv-jimmy-bomy.pdf

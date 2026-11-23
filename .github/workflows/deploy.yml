@@ -21,8 +21,10 @@ jobs:
         run: |
           set -euo pipefail
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          # la clé collée depuis Windows peut contenir des fins de ligne CRLF
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null || { echo "::error::VPS_SSH_KEY n'est pas une clé privée valide (copier tout le fichier jimmybomy_ed25519, lignes BEGIN/END comprises)"; exit 1; }
           ssh-keyscan -p 37882 "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
           ssh -i ~/.ssh/deploy_key -p 37882 -o BatchMode=yes "root@$VPS_HOST" \
             "cd /var/www/jimmybomy.fr && git pull --ff-only && git log -1 --oneline"

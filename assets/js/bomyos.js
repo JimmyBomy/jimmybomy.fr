@@ -32,7 +32,7 @@ const PROJECTS={
 /* ==== LABS — les expériences ==== */
 const LABS={
   pendule:{name:"Pendule échecs/dames",cat:"Outil · HTML/JS",grad:"linear-gradient(135deg,#1a1a1a,#c6ff4e 65%,#eef0ea)",role:"Développement",year:"2025",client:"Projet personnel",tags:["HTML","JavaScript"],link:"",desc:"Horloge de jeu (pendule) pour parties d'échecs et de dames, jouable directement dans le navigateur — construite à l'origine pour départager la rivalité aux dames avec mon père."},
-  sillenbach:{name:"Le Nœud de Sillenbach",cat:"Fiction interactive · Twine",grad:"linear-gradient(135deg,#0f172a,#334155 55%,#94a3b8)",role:"Écriture & conception",year:"2025",client:"Projet personnel",tags:["Twine","Narration non-linéaire","Écriture"],link:"",desc:"Fiction interactive sous Twine : un récit non-linéaire à embranchements, inspiré de la série Dark. Écriture multimédia et narration interactive."},
+  sillenbach:{name:"Le Nœud de Sillenbach",cat:"Fiction interactive · Twine",grad:"linear-gradient(135deg,#0f172a,#334155 55%,#94a3b8)",role:"Écriture & conception",year:"2025",client:"Projet personnel",tags:["Twine","Narration non-linéaire","Écriture"],link:"https://jimmybomy.fr/projets/sillenbach/",desc:"Fiction interactive sous Twine : un récit non-linéaire à embranchements, inspiré de la série Dark. Écriture multimédia et narration interactive."},
   cli:{name:"Convertisseur de fichiers",cat:"Outil CLI · Node.js",grad:"linear-gradient(135deg,#0c1016,#22c55e 60%,#a7f3d0)",role:"Développement",year:"2025",client:"Projet personnel",tags:["Node.js","CLI"],link:"",desc:"Outil en ligne de commande Node.js pour convertir des fichiers d'un format à l'autre."},
   sae105:{name:"SAÉ 105",cat:"Site web · S1",grad:"linear-gradient(135deg,#3b1e6e,#7c5cff 60%,#7cc4ff)",role:"Développement",year:"2025",client:"SAÉ 105 · BUT MMI",tags:["HTML/CSS","Web"],link:"",desc:"L'un de mes premiers sites, réalisé au premier semestre du BUT MMI — intégration web et bonnes pratiques."},
   proshop:{name:"Hony Tawk's ProShop",cat:"E-commerce · intégration",img:"assets/shots/proshop.jpg",grad:"linear-gradient(135deg,#111,#333 60%,#c6ff4e)",role:"Intégration HTML/CSS/JS",year:"2025",client:"TP · R2.12",tags:["HTML/CSS","JavaScript","Responsive"],link:"https://jimmybomy.fr/travaux/r212/sequence2/",desc:"Boutique de skateboards fictive (planches, longboards, tee-shirts) : grille produits, filtres et mise en page e-commerce. TP d'intégration web."},
@@ -136,7 +136,7 @@ function runCmd(raw,out){const cmd=raw.toLowerCase();if(!cmd)return;
   const map={help:'commandes : <span class="acc">whoami · projets · labs · services · devis · contact · cv · ls · date · clear</span> — et un sudo bien senti.',
     whoami:"Jimmy Bomy — développeur web créatif · BUT MMI (Troyes) · Sedan.",
     ls:"projets/&nbsp;&nbsp;labs/&nbsp;&nbsp;services&nbsp;&nbsp;devis&nbsp;&nbsp;a-propos.txt&nbsp;&nbsp;cv.pdf&nbsp;&nbsp;reglages",
-    contact:`email → <a href="mailto:${EMAIL}">${EMAIL}</a><br>tél&nbsp;&nbsp;&nbsp;→ <a href="tel:${TEL}">${PHONE}</a><br>whatsapp → <a href="https://wa.me/33788021676" target="_blank" rel="noopener">wa.me</a>`,
+    contact:`email → <a href="mailto:${EMAIL}">${EMAIL}</a><br>tél/wa → <a href="tel:${TEL}">${PHONE}</a> · <a href="https://wa.me/33788021676" target="_blank" rel="noopener">WhatsApp</a>`,
     date:new Date().toLocaleString("fr-FR")};
   if(map[cmd]){tOut(out,map[cmd]);return;}
   tOut(out,`commande introuvable : ${esc(raw)} — tape <span class="acc">help</span>`);}
@@ -273,8 +273,7 @@ function content(app){
     <p class="lede">Un projet, une question, une opportunité ? Je réponds vite.</p>
     <div class="chips" style="flex-direction:column;align-items:stretch;gap:10px;margin:24px 0 6px">
       <a class="chip" href="mailto:${EMAIL}" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Email</span><span>${EMAIL}</span></a>
-      <a class="chip" href="tel:${TEL}" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Téléphone</span><span>${PHONE}</span></a>
-      <a class="chip" href="https://wa.me/33788021676" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">WhatsApp</span><span>message direct</span></a>
+      <span class="chip" style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="color:var(--dim)">Tél. / WhatsApp</span><span><a href="tel:${TEL}" style="color:inherit">${PHONE}</a> · <a href="https://wa.me/33788021676" target="_blank" rel="noopener" style="color:inherit">WhatsApp</a></span></span>
       <span class="chip" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Localisation</span><span>Sedan / Troyes</span></span>
       <a class="chip" href="https://github.com/JimmyBomy" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">GitHub</span><span>@JimmyBomy</span></a>
       <a class="chip" href="https://www.linkedin.com/in/jimmy-bomy-1037453a8/" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">LinkedIn</span><span>Jimmy Bomy</span></a>
@@ -492,7 +491,7 @@ applyPrefs();
 sndBtn.addEventListener("click",()=>{PREF.set("muted",muted?"0":"1");applyPrefs();if(!muted)snd.tap();});
 crtBtn.addEventListener("click",()=>{PREF.set("crt",PREF.get("crt","0")==="1"?"0":"1");applyPrefs();snd.tap();});
 document.getElementById("contactBtn").addEventListener("click",()=>{if(innerWidth<=720)mopen("contact");else openApp("contact");});
-document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();document.querySelector(".dicon")?.focus();});
+document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();const t=[...document.querySelectorAll(".dicon,.mtile")].find(x=>x.offsetParent!==null);t?.focus();});
 
 /* MOBILE — écran d'accueil iOS */
 const IOSGLYPH={

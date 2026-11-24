@@ -32,6 +32,10 @@ try {
         "INSERT INTO hits (event, path, ref, device, iph) VALUES (?, ?, ?, ?, ?)"
     );
     $st->execute([$event, $path, $ref, $device, $iph]);
+    // Conservation 13 mois (cf. /confidentialite/) — purge de temps en temps.
+    if (mt_rand(1, 200) === 1) {
+        pdo()->exec("DELETE FROM hits WHERE created_at < (NOW() - INTERVAL 13 MONTH)");
+    }
     http_response_code(204);
 } catch (Throwable $e) {
     http_response_code(204); // silencieux : l'analytics ne doit jamais gêner le visiteur

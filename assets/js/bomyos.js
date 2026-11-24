@@ -48,7 +48,8 @@ const XP=[
   {yr:"En continu",role:"Auto-hébergement & administration système",co:"VPS personnel",desc:"J'héberge et administre tous mes projets sur mon propre VPS Linux : Apache, monitoring GoAccess, déploiements. Également : serveur de jeu Minecraft (Paper) administré via Pterodactyl."},
   {yr:"2022 — 25",role:"Baccalauréat général",co:"Lycée Mabillon",desc:"Développeur autodidacte en parallèle du lycée : développement web et Node.js en autonomie, avant l'entrée en BUT MMI."},
 ];
-const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},reglages:{title:"Réglages",icon:"gear",w:540,h:620},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},messages:{title:"Messages",icon:"messages",w:460,h:580},photos:{title:"Photos",icon:"photos",w:640,h:520},calc:{title:"Calculette",icon:"calc",w:340,h:540},plans:{title:"Plans",icon:"plans",w:560,h:540},aide:{title:"Aide — raccourcis",icon:"doc",w:470,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600}};
+const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},reglages:{title:"Réglages",icon:"gear",w:540,h:620},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},messages:{title:"Messages",icon:"messages",w:460,h:580},photos:{title:"Photos",icon:"photos",w:640,h:520},calc:{title:"Calculette",icon:"calc",w:340,h:540},plans:{title:"Plans",icon:"plans",w:560,h:540},aide:{title:"Aide — raccourcis",icon:"doc",w:470,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600},mentions:{title:"Mentions légales.txt",icon:"doc",w:620,h:640},confidentialite:{title:"Confidentialité.txt",icon:"doc",w:620,h:640}};
+const LEGAL_URL={mentions:"/mentions-legales/",confidentialite:"/confidentialite/"};
 
 /* ==== ANALYTICS first-party (privacy-friendly, actif seulement en prod) ==== */
 const ANALYTICS_ON=/(^|\.)jimmybomy\.fr$/.test(location.hostname);
@@ -184,7 +185,33 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><div class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</div>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
   <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span></button>`).join("")}</div>`;}
+/* ==== PAGES LÉGALES : une seule source (/mentions-legales/, /confidentialite/), chargée dans la fenêtre ==== */
+function loadLegal(root){const box=root&&root.querySelector("[data-legal]");if(!box)return;const url=box.getAttribute("data-legal");
+  fetch(url,{cache:"no-cache"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
+    const doc=new DOMParser().parseFromString(t,"text/html").querySelector(".legal-doc");if(!doc)throw 0;
+    box.innerHTML=doc.innerHTML+`<p class="upd"><a href="${url}" target="_blank" rel="noopener">Ouvrir en pleine page ↗</a></p>`;
+    box.querySelectorAll('a[href="/confidentialite/"],a[href="/mentions-legales/"]').forEach(a=>{const k=a.getAttribute("href")==="/confidentialite/"?"confidentialite":"mentions";
+      a.addEventListener("click",e=>{e.preventDefault();innerWidth>720?openApp(k):mopen(k);});});
+  }).catch(()=>{box.innerHTML=`<p class="lede">Impossible de charger la page ici. <a class="acc" href="${url}">Ouvrir ${url}</a></p>`;});}
+const LEGAL_LINKS=`<p class="legal-mini">En envoyant ce formulaire, vous acceptez que j'utilise ces informations uniquement pour vous répondre. <a href="/confidentialite/" data-open="confidentialite">Politique de confidentialité</a></p>`;
+/* après ouverture d'une app, amène un élément (ex. le formulaire de contact) à l'écran */
+function focusLater(id){if(!id)return;setTimeout(()=>{const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});const f=el.querySelector("input,textarea");if(f)f.focus({preventScroll:true});},380);}
+function contactSend(form){
+  const g=n=>(form.elements[n]?.value||"").trim();
+  const name=g("name"),email=g("email"),message=g("message"),hp=g("website");
+  const status=form.querySelector(".cf-status"),btn=form.querySelector("button[type=submit]");
+  const err=m=>{status.style.color="#ff5f57";status.textContent=m;};
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err("Indiquez une adresse e-mail valide.");return;}
+  if(message.length<5){err("Écrivez-moi quelques mots sur votre projet.");return;}
+  btn.disabled=true;btn.textContent="Envoi…";
+  fetch("/api/devis.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,contact:email,message,website:hp,source:"contact"})})
+    .then(r=>r.json()).then(j=>{if(!j||!j.ok)throw j||{};
+      snd.tap();track("lead");
+      form.innerHTML=`<div class="h-eyebrow">Merci${name?" "+esc(name.split(" ")[0]):""} !</div><div class="h-title" style="font-size:28px">Message envoyé.</div><p class="lede">Je vous réponds très vite sur <b>${esc(email)}</b>. À tout de suite 👋</p>`;
+    }).catch(j=>{err(j&&j.error==="rate"?"Trop d'envois d'un coup — réessayez dans une heure.":"Oups, l'envoi a échoué — réessayez dans un instant.");btn.disabled=false;btn.textContent="Envoyer le message ›";});}
+document.addEventListener("submit",e=>{const f=e.target.closest("[data-cform]");if(f){e.preventDefault();contactSend(f);}});
 function content(app){
+  if(LEGAL_URL[app])return `<div class="legal-doc" data-legal="${LEGAL_URL[app]}"><p class="lede">Chargement…</p></div>`;
   if(app==="projets")return finderHTML("Projets","La vitrine — mes projets principaux.",PROJECTS);
   if(app==="labs")return finderHTML("Labs","Les expériences — petits projets, outils et bidouilles.",LABS);
   if(app.startsWith("project:")){const p=ALL[app.split(":")[1]];
@@ -195,6 +222,7 @@ function content(app){
       ${p.study?`<div class="study">${p.study.map(s=>`<div class="study-b"><div class="study-h">${s.h}</div><p>${s.p}</p></div>`).join("")}</div>`:""}
       ${p.link?(/jimmybomy\.fr/.test(p.link)||p.link.startsWith("/")?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></button>`:`<a class="btn" href="${p.link}" target="_blank" rel="noopener">Voir le site <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`):`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
   if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><div class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</div></div></div>
+    <div class="pro-note"><b>Développeur web freelance</b>, je crée des sites internet pour les particuliers et les professionnels. Micro-entreprise en cours d'immatriculation, SIRET disponible très bientôt.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
     <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>14</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
     <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>
@@ -255,11 +283,12 @@ function content(app){
     <button class="btn" data-site="https://jimmybomy.fr/projets/demo-boulangerie/" data-title="Exemple — La Fournée de Sedan" style="margin-top:18px">Voir un exemple de site →</button>
     <div class="divider"></div><div class="h-eyebrow">Ce que je propose</div>
     <div class="chips" style="flex-direction:column;align-items:stretch;gap:10px;margin:14px 0 6px">
-      <span class="chip"><b>Site vitrine</b> — présentation, horaires, photos, itinéraire Google Maps</span>
-      <span class="chip"><b>Réservation / click & collect</b> — vos clients commandent en ligne</span>
+      <span class="chip"><b>Création de sites vitrines</b> — présentation, horaires, photos, itinéraire ; réservation ou click & collect en option</span>
       <span class="chip"><b>Refonte</b> — votre site vieillissant remis au goût du jour</span>
-      <span class="chip"><b>Hébergement & mise en ligne inclus</b> — zéro technique pour vous</span>
+      <span class="chip"><b>Maintenance</b> — mises à jour, sauvegardes, petites modifications : votre site reste à jour et en sécurité</span>
+      <span class="chip"><b>Hébergement</b> — mise en ligne et hébergement pris en charge, zéro technique pour vous</span>
     </div>
+    <button class="btn" data-open="contact" data-focus="cf">Demander un devis gratuit</button>
     <div class="divider"></div><div class="h-eyebrow">Comment ça se passe</div>
     <div class="tl" style="margin-top:6px">
       <div class="row"><div class="yr">1</div><div><div class="role">On échange 15 minutes</div><div class="desc">Vous me dites ce qu'il vous faut — par téléphone, WhatsApp ou autour d'un café.</div></div></div>
@@ -270,8 +299,18 @@ function content(app){
       <a class="btn" href="https://wa.me/33788021676" target="_blank" rel="noopener">WhatsApp <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
       <a class="btn ghost" href="tel:${TEL}">${PHONE}</a></div>`;
   if(app==="contact")return `<div class="h-eyebrow">Contact</div><div class="h-title">Travaillons<br>ensemble.</div>
-    <p class="lede">Un projet, une question, une opportunité ? Je réponds vite.</p>
-    <div class="chips" style="flex-direction:column;align-items:stretch;gap:10px;margin:24px 0 6px">
+    <p class="lede">Un projet, une question, une demande de devis gratuit ? Je réponds vite.</p>
+    <form class="cform" id="cf" data-cform novalidate>
+      <label class="cf-l" for="cf-name">Nom</label><input id="cf-name" name="name" class="dv-in" autocomplete="name" maxlength="120" placeholder="Votre nom">
+      <label class="cf-l" for="cf-email">E-mail *</label><input id="cf-email" name="email" type="email" class="dv-in" autocomplete="email" maxlength="160" required placeholder="vous@exemple.fr">
+      <label class="cf-l" for="cf-msg">Message *</label><textarea id="cf-msg" name="message" class="dv-in" rows="4" maxlength="2000" required placeholder="Votre projet en quelques mots : activité, besoin, délai…"></textarea>
+      <input name="website" class="dv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      ${LEGAL_LINKS}
+      <button class="btn" type="submit" style="margin-top:10px">Envoyer le message ›</button>
+      <div class="cf-status lede" role="status" style="font-size:13px;margin-top:8px"></div>
+    </form>
+    <div class="divider"></div><div class="h-eyebrow">Ou directement</div>
+    <div class="chips" style="flex-direction:column;align-items:stretch;gap:10px;margin:14px 0 6px">
       <a class="chip" href="mailto:${EMAIL}" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Email</span><span>${EMAIL}</span></a>
       <span class="chip" style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="color:var(--dim)">Tél. / WhatsApp</span><span><a href="tel:${TEL}" style="color:inherit">${PHONE}</a> · <a href="https://wa.me/33788021676" target="_blank" rel="noopener" style="color:inherit">WhatsApp</a></span></span>
       <span class="chip" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Localisation</span><span>Sedan / Troyes</span></span>
@@ -339,12 +378,13 @@ function openApp(app){
   el.querySelector('[data-act="close"]').addEventListener("click",e=>{e.stopPropagation();closeApp(app);});
   el.querySelector('[data-act="min"]').addEventListener("click",e=>{e.stopPropagation();minApp(app);});
   el.querySelector('[data-act="max"]').addEventListener("click",e=>{e.stopPropagation();maxApp(app);});
-  el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t){openApp(t.getAttribute("data-open"));return;}const s=e.target.closest("[data-site]");if(s){openSite(s.getAttribute("data-site"),s.getAttribute("data-title"));return;}const dv=e.target.closest("[data-devis]");if(dv){devisAct(dv.getAttribute("data-devis"),el.querySelector(".win-body"));return;}
+  el.querySelector(".win-body").addEventListener("click",e=>{const t=e.target.closest("[data-open]");if(t){e.preventDefault();openApp(t.getAttribute("data-open"));focusLater(t.dataset.focus);return;}const s=e.target.closest("[data-site]");if(s){openSite(s.getAttribute("data-site"),s.getAttribute("data-title"));return;}const dv=e.target.closest("[data-devis]");if(dv){devisAct(dv.getAttribute("data-devis"),el.querySelector(".win-body"));return;}
     const mg=e.target.closest("[data-msg]");if(mg){msgAct(mg.getAttribute("data-msg"),el.querySelector(".imsg"));return;}
     const ck=e.target.closest("[data-calc]");if(ck){calcAct(ck.getAttribute("data-calc"),el.querySelector(".calc"));return;}
     settingsAct(e.target,el.querySelector(".win-body"));});
   if(app==="messages")setTimeout(()=>msgBoot(el.querySelector(".imsg")),150);
   if(app==="terminal")wireTerminal(el);
+  if(LEGAL_URL[app])loadLegal(el);
   makeDraggable(el,app);makeResizable(el,app);
 }
 function closeApp(app){const st=wins[app];if(!st)return;st.el.classList.add("closing");markDock(app,false);snd.close();
@@ -447,7 +487,7 @@ addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("butt
 const MENUS={
   Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
   Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["Le Nœud de Sillenbach","project:sillenbach"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
-  Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
+  Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
 let curMenu=null;
 document.querySelectorAll("button.menu").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();
   document.querySelectorAll("button.menu.open").forEach(x=>{if(x!==b)x.classList.remove("open");});
@@ -463,6 +503,8 @@ ctx.addEventListener("click",e=>{const b=e.target.closest("[data-mi]");if(!b||!c
   if(v==="_gh"){window.open("https://github.com/JimmyBomy","_blank","noopener");return;}
   if(v==="_li"){window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener");return;}
   openApp(v);});
+/* liens « Mentions légales / Confidentialité » du pied de page : fenêtre si JS, vraie page sinon */
+document.querySelectorAll("[data-legal-open]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const k=a.dataset.legalOpen;innerWidth>720?openApp(k):mopen(k,a);}));
 /* CTA widgets bureau */
 document.querySelectorAll("[data-wopen]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.wopen)));
 addEventListener("keydown",e=>{if(e.key==="Escape"){if(ctx.classList.contains("on")){hideCtx();return;}if(activeWin&&wins[activeWin]&&!wins[activeWin].min)closeApp(activeWin);}});
@@ -524,13 +566,14 @@ function mopen(app,origin){
   if(origin&&origin.getBoundingClientRect){const r=origin.getBoundingClientRect();msheet.style.transformOrigin=`${r.left+r.width/2}px ${r.top+r.height/2}px`;}
   else msheet.style.transformOrigin="50% 42%";
   msheet.classList.add("on");mobileEl.classList.add("behind");snd.open();
-  msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",()=>mopen(o.getAttribute("data-open"),o)));
+  msBody.querySelectorAll("[data-open]").forEach(o=>o.addEventListener("click",e=>{e.preventDefault();mopen(o.getAttribute("data-open"),o);focusLater(o.dataset.focus);}));
   msBody.querySelectorAll("[data-site]").forEach(o=>o.addEventListener("click",()=>msite(o.getAttribute("data-site"),o.getAttribute("data-title"))));
   if(app==="devis")msBody.addEventListener("click",e=>{const dv=e.target.closest("[data-devis]");if(dv)devisAct(dv.getAttribute("data-devis"),msBody);});
   if(app==="reglages")msBody.addEventListener("click",e=>settingsAct(e.target,msBody));
   if(app==="messages"){setTimeout(()=>msgBoot(msBody.querySelector(".imsg")),200);
     msBody.addEventListener("click",e=>{const mg=e.target.closest("[data-msg]");if(mg)msgAct(mg.getAttribute("data-msg"),msBody.querySelector(".imsg"));});}
   if(app==="calc")msBody.addEventListener("click",e=>{const ck=e.target.closest("[data-calc]");if(ck)calcAct(ck.getAttribute("data-calc"),msBody.querySelector(".calc"));});
+  if(LEGAL_URL[app])loadLegal(msBody);
 }
 function msite(url,title){msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
 function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}
@@ -567,7 +610,7 @@ const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 /* deep links : jimmybomy.fr/#services, #devis, #projet-rois… */
 function handleHash(){
   const h=decodeURIComponent(location.hash.slice(1)).toLowerCase();if(!h)return false;
-  const alias={"a-propos":"apropos","demo":"projets"};let app=alias[h]||( APPS[h]?h:null );
+  const alias={"a-propos":"apropos","demo":"projets","mentions-legales":"mentions"};let app=alias[h]||( APPS[h]?h:null );
   if(!app&&h.startsWith("projet-")){const id=h.slice(7);if(ALL[id])app="project:"+id;}
   if(!app)return false;
   if(innerWidth>720)openApp(app);else mopen(app);return true;}

@@ -1,5 +1,5 @@
 /* BomyOS service worker — HTML réseau d'abord, assets cache d'abord */
-const CACHE = "bomyos-v29";
+const CACHE = "bomyos-v30";
 const CORE = ["/", "/assets/css/bomyos.css", "/assets/js/bomyos.js", "/apple-touch-icon.png", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", e => {
@@ -17,6 +17,8 @@ self.addEventListener("fetch", e => {
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
   // JAMAIS d'interception pour l'admin et l'API (contenu dynamique, sessions, jamais en cache)
   if (url.pathname.startsWith("/admin") || url.pathname.startsWith("/api")) return;
+  // pages légales : toujours servies fraîches (mises à jour quand le SIRET arrive)
+  if (url.pathname.startsWith("/mentions-legales") || url.pathname.startsWith("/confidentialite")) return;
   // pages : réseau d'abord (toujours frais), cache en secours (hors-ligne)
   if (e.request.mode === "navigate") {
     e.respondWith(

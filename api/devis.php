@@ -59,6 +59,13 @@ try {
         mb_substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255),
     ]);
 
+    // Conservation (cf. /confidentialite/) : IP effacée après 30 jours,
+    // demandes sans suite supprimées 3 ans après leur envoi.
+    try {
+        $pdo->exec("UPDATE leads SET ip = '' WHERE ip <> '' AND created_at < (NOW() - INTERVAL 30 DAY)");
+        $pdo->exec("DELETE FROM leads WHERE created_at < (NOW() - INTERVAL 3 YEAR)");
+    } catch (Throwable $e) { /* la purge ne doit jamais bloquer l'envoi */ }
+
     echo json_encode(['ok' => true]);
 } catch (Throwable $e) {
     http_response_code(500);

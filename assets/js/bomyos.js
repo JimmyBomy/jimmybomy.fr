@@ -558,6 +558,7 @@ document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class
 document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
 const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
 const mobileEl=document.getElementById("mobile"),msTitle=document.getElementById("msheetTitle");
+if(mobileEl)mobileEl.addEventListener("scroll",()=>document.body.classList.toggle("mscrolled",mobileEl.scrollTop>6),{passive:true});
 function mopen(app,origin){
   track("open:"+app);
   msBody.innerHTML=content(app);msBody.scrollTop=0;msheet.scrollTop=0;

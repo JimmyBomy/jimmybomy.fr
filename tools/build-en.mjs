@@ -21,14 +21,14 @@ export function buildEn() {
   // 2. <head> : langue, titre, descriptions, URL canonique
   const rep = (from, to) => { if (!h.includes(from)) throw new Error("introuvable dans index.html : " + from); h = h.split(from).join(to); };
   rep('<html lang="fr">', '<html lang="en">');
-  rep("<title>Jimmy Bomy — Développeur web créatif · Sedan / Troyes</title>", "<title>Jimmy Bomy — Creative web developer · Sedan / Troyes, France</title>");
+  rep("<title>Jimmy Bomy · Développeur web créatif · Sedan / Troyes</title>", "<title>Jimmy Bomy · Creative web developer · Sedan / Troyes, France</title>");
   h = h.replace(/<meta name="description" content="[^"]*" \/>/, '<meta name="description" content="Jimmy Bomy, freelance web developer and BUT MMI student in Troyes, France. Client web apps, PHP/MySQL, vanilla JavaScript. Interactive portfolio that works like an operating system." />');
   rep('<link rel="canonical" href="https://jimmybomy.fr/" />', '<link rel="canonical" href="https://jimmybomy.fr/en/" />');
   rep('<meta property="og:url" content="https://jimmybomy.fr/" />', '<meta property="og:url" content="https://jimmybomy.fr/en/" />');
-  h = h.replace(/<meta property="og:title" content="[^"]*" \/>/, '<meta property="og:title" content="Jimmy Bomy — Creative web developer · Sedan / Troyes" />');
+  h = h.replace(/<meta property="og:title" content="[^"]*" \/>/, '<meta property="og:title" content="Jimmy Bomy · Creative web developer · Sedan / Troyes" />');
   h = h.replace(/<meta property="og:description" content="[^"]*" \/>/, '<meta property="og:description" content="Client web apps and websites. An interactive portfolio that works like an operating system." />');
   rep('<meta property="og:locale" content="fr_FR" />', '<meta property="og:locale" content="en_GB" />');
-  h = h.replace(/<meta name="twitter:title" content="[^"]*" \/>/, '<meta name="twitter:title" content="Jimmy Bomy — Creative web developer" />');
+  h = h.replace(/<meta name="twitter:title" content="[^"]*" \/>/, '<meta name="twitter:title" content="Jimmy Bomy · Creative web developer" />');
   h = h.replace(/<meta name="twitter:description" content="[^"]*" \/>/, '<meta name="twitter:description" content="An interactive portfolio that works like an OS · Sedan / Troyes." />');
   rep('"jobTitle": "Développeur web créatif"', '"jobTitle": "Creative web developer"');
 
@@ -42,7 +42,7 @@ export function buildEn() {
 
   // 4. Chemins absolus (la page est servie depuis /en/) + dictionnaire avant le script principal
   h = h.replace(/(src|href)="(?!\/|https?:|data:|mailto:|tel:|#)([^"]+)"/g, '$1="/$2"');
-  h = h.replace(/(<script src="\/assets\/js\/bomyos\.js\?v=\d+"><\/script>)/, '<script src="/assets/js/i18n-en.js?v=4"></script>\n$1');
+  h = h.replace(/(<script src="\/assets\/js\/bomyos\.js\?v=\d+"><\/script>)/, '<script src="/assets/js/i18n-en.js?v=5"></script>\n$1');
 
   // 5. Textes visibles et attributs (hors scripts et styles)
   const parts = h.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->)/);
@@ -58,7 +58,7 @@ export function buildEn() {
       .replace(/\b(aria-label|title|placeholder|alt)="([^"]*)"/g, (m, k, v) => `${k}="${tr(v)}"`);
   }
   h = parts.join("");
-  return h.replace("<!DOCTYPE html>\n", "<!DOCTYPE html>\n<!-- Généré par tools/build-en.mjs à partir de index.html — ne pas modifier à la main. -->\n");
+  return h.replace("<!DOCTYPE html>\n", "<!DOCTYPE html>\n<!-- Généré par tools/build-en.mjs à partir de index.html, ne pas modifier à la main. -->\n");
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop())) {

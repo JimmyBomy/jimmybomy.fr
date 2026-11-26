@@ -12,6 +12,7 @@
 <link rel="canonical" href="https://jimmybomy.fr/en/" />
 <link rel="alternate" hreflang="fr" href="https://jimmybomy.fr/" />
 <link rel="alternate" hreflang="en" href="https://jimmybomy.fr/en/" />
+<link rel="alternate" hreflang="x-default" href="https://jimmybomy.fr/" />
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jimmybomy.fr/en/" />
@@ -71,7 +72,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/bomyos.css?v=18" />
+<link rel="stylesheet" href="/assets/css/bomyos.css?v=19" />
 </head>
 <body>
 <a class="skip" href="#dicons" id="skip">Skip to menu</a>
@@ -115,7 +116,7 @@
   <p>Business websites, redesigns, maintenance and hosting, for individuals and businesses: presentation, opening hours, directions, optional booking or click &amp; collect, updates and backups, hosting and launch included. <a href="/en/#contact">Ask for a free quote</a>. Free mock-up, no commitment.</p>
   <h2>Contact</h2>
   <!--email_off--><p>Email: jimmybomy@icloud.com · Phone and WhatsApp: <a href="tel:+33788021676">+33 7 88 02 16 76</a> · <a href="https://www.linkedin.com/in/jimmy-bomy-1037453a8/" rel="noopener">LinkedIn: Jimmy Bomy</a> · <a href="https://github.com/JimmyBomy" rel="noopener">GitHub: @JimmyBomy</a> · <a href="https://www.twitch.tv/jimmyxetv" rel="noopener">Twitch: jimmyxetv</a> · Sedan / Troyes, France.</p><!--/email_off-->
-  <footer><p>© 2026 Jimmy Bomy · <a href="/mentions-legales/" lang="fr">Legal notice (French)</a> · <a href="/confidentialite/" lang="fr">Privacy policy (French)</a></p></footer>
+  <footer><p>© 2026 Jimmy Bomy · <a href="/en/legal-notice/">Legal notice</a> · <a href="/en/privacy/">Privacy policy</a></p></footer>
 </main>
 
 <div class="boot" id="boot" aria-hidden="true">
@@ -126,7 +127,7 @@
 
 <div id="desktop"><div class="wm-watermark" aria-hidden="true">BOMY<br>OS</div><div class="dicons" id="dicons"></div>
   <!-- Widgets de bureau (desktop) -->
-  <div class="dwidgets" aria-hidden="false">
+  <aside class="dwidgets" aria-label="Widgets">
     <div class="dwidget wclock">
       <svg viewBox="0 0 100 100" width="92" height="92" aria-hidden="true">
         <circle cx="50" cy="50" r="47" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.14)"/>
@@ -142,9 +143,9 @@
       <div class="dw-sub" style="margin:6px 0 12px">Work-study & freelance — reply within 2 h.</div>
       <button class="dw-cta" data-wopen="contact">Contact me</button>
     </div>
-  </div>
+  </aside>
 </div>
-<nav class="legalbar" aria-label="Legal information">© 2026 Jimmy Bomy · <a href="/mentions-legales/" data-legal-open="mentions">Legal notice (FR)</a> · <a href="/confidentialite/" data-legal-open="confidentialite">Privacy (FR)</a></nav>
+<nav class="legalbar" aria-label="Legal information">© 2026 Jimmy Bomy · <a href="/en/legal-notice/" data-legal-open="mentions">Legal notice</a> · <a href="/en/privacy/" data-legal-open="confidentialite">Privacy</a></nav>
 <div class="crtfx" aria-hidden="true"></div>
 <div id="dim" aria-hidden="true"></div>
 
@@ -192,7 +193,7 @@
 </div>
 
 <div class="hint" id="hint"><b>Click an icon</b> to explore · <b>Ctrl+K</b> to search</div>
-<div class="dock" id="dock" role="toolbar" aria-label="App dock"></div>
+<nav aria-label="Dock"><div class="dock" id="dock" role="toolbar" aria-label="App dock"></div></nav>
 <div class="ctx" id="ctx" role="menu" aria-label="Context menu"></div>
 
 <!-- Barre de statut iOS (mobile) -->
@@ -206,7 +207,7 @@
 </div>
 
 <!-- Écran d'accueil iOS (mobile) -->
-<div class="mobile" id="mobile">
+<div class="mobile" id="mobile" role="region" aria-label="Home screen">
   <div class="widget">
     <div class="wtop"><img class="wava" src="/assets/jimmy-avatar.jpg?v=3" alt="Jimmy Bomy" />
       <div><div class="wname">Jimmy Bomy</div><div class="wrole">Creative web developer · BUT MMI Troyes · Sedan</div></div></div>
@@ -215,9 +216,9 @@
   </div>
   <label class="msearch"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="msearchi" type="search" placeholder="Search apps…" aria-label="Search" autocomplete="off"/></label>
   <div class="mgrid" id="mlaunch"></div>
-  <nav class="mlegal" aria-label="Legal information"><a href="/" hreflang="fr" lang="fr">Français</a> · <a href="/mentions-legales/" data-legal-open="mentions">Legal notice (FR)</a> · <a href="/confidentialite/" data-legal-open="confidentialite">Privacy (FR)</a></nav>
+  <nav class="mlegal" aria-label="Legal information"><a href="/" hreflang="fr" lang="fr">Français</a> · <a href="/en/legal-notice/" data-legal-open="mentions">Legal notice</a> · <a href="/en/privacy/" data-legal-open="confidentialite">Privacy</a></nav>
 </div>
-<div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div>
+<nav aria-label="Mobile dock"><div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div></nav>
 <div class="homebar" aria-hidden="true"></div>
 <div class="msheet" id="msheet" role="dialog" aria-modal="true" aria-label="App">
   <div class="mnav"><div class="mnav-row">
@@ -231,6 +232,6 @@
 <div id="printCV" aria-hidden="true"></div>
 
 <script src="/assets/js/i18n-en.js?v=2"></script>
-<script src="/assets/js/bomyos.js?v=32"></script>
+<script src="/assets/js/bomyos.js?v=33"></script>
 </body>
 </html>

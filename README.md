@@ -35,6 +35,14 @@ Tout est en haut du `<script>` dans `index.html` :
 - `XP` — le parcours
 - `EMAIL` / `PHONE` — coordonnées
 
+## Version anglaise (/en/)
+
+La même interface BomyOS, traduite. `en/index.html` est **généré** : après une modification de `index.html`,
+lancer `node tools/build-en.mjs`. Les textes de l'interface sont traduits par le dictionnaire
+`assets/js/i18n-en.js` (ajouter `"texte français":"English text"` pour chaque nouveau texte) ;
+le contenu SEO anglais est dans `tools/en-seo.html`. Les tests échouent si `en/index.html` n'est pas à jour
+ou si un projet n'a pas sa traduction.
+
 ## Tests
 
 `node --test tests/*.test.mjs` (Node 22, aucune dépendance) vérifie à chaque push et chaque pull request :

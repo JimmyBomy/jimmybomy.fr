@@ -99,3 +99,12 @@ test("le sitemap ne contient que des adresses jimmybomy.fr en HTTPS", () => {
   assert.ok(locs.length > 0);
   for (const l of locs) assert.match(l, /^https:\/\/jimmybomy\.fr\//);
 });
+
+test("la version anglaise existe, renvoie vers le français et ses fichiers existent", () => {
+  const en = read("en/index.html");
+  assert.match(en, /<html lang="en">/);
+  assert.match(en, /hreflang="fr" href="https:\/\/jimmybomy\.fr\/"/);
+  assert.match(html, /hreflang="en" href="https:\/\/jimmybomy\.fr\/en\/"/);
+  for (const m of en.matchAll(/src="(\/assets\/[^"]+)"/g)) assert.ok(exists(m[1]), `image manquante : ${m[1]}`);
+  for (const img of en.match(/<img\b[^>]*>/g) || []) assert.match(img, /\salt="[^"]+"/);
+});

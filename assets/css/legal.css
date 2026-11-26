@@ -34,6 +34,5 @@ a{color:var(--acc);text-underline-offset:3px}
 .legal-doc dl{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:8px 20px;font-size:14.5px}
 .legal-doc dt{color:var(--dim)}
 .legal-doc dd{color:var(--ink)}
-.legal-doc .todo{color:#febc2e;font-family:"JetBrains Mono",monospace;font-size:13px}
-.legal-doc .upd{font-size:12.5px;color:var(--dim);margin-top:30px}
+.legal-doc .legal-doc .upd{font-size:12.5px;color:var(--dim);margin-top:30px}
 @media(max-width:520px){.legal-doc dl{grid-template-columns:1fr;gap:2px}.legal-doc dd{margin-bottom:10px}}

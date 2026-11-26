@@ -221,10 +221,10 @@ document.addEventListener("click",e=>{
 });
 function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><h2 class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</h2>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
-  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span>${p.hook?`<span class="fhook">${p.hook}</span>`:""}${p.game?`<span class="ftags">${p.tags.map(t=>`<i>${t}</i>`).join("")}</span>`:""}</button>`).join("")}</div>`;}
+  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span></button>`).join("")}</div>`;}
 /* ==== PAGES LÉGALES : une seule source (/mentions-legales/, /confidentialite/), chargée dans la fenêtre ==== */
 function loadLegal(root){const box=root&&root.querySelector("[data-legal]");if(!box)return;const url=box.getAttribute("data-legal");
-  fetch(url,{cache:"no-cache"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
+  fetch(url+(url.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
     const doc=new DOMParser().parseFromString(t,"text/html").querySelector(".legal-doc");if(!doc)throw 0;
     box.innerHTML=doc.innerHTML+`<p class="upd"><a href="${url}" target="_blank" rel="noopener">Ouvrir en pleine page ↗</a></p>`;
     box.querySelectorAll('a[href="/confidentialite/"],a[href="/mentions-legales/"],a[href="/en/privacy/"],a[href="/en/legal-notice/"]').forEach(a=>{const k=/confidentialite|privacy/.test(a.getAttribute("href"))?"confidentialite":"mentions";
@@ -749,6 +749,8 @@ function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add
   function ccSync(){cc.querySelector('[data-cc="snd"]').classList.toggle("on",!muted);cc.querySelector('[data-cc="crt"]').classList.toggle("on",PREF.get("crt","0")==="1");}
 })();
 /* PWA */
-if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("/sw.js").catch(()=>{});
+/* SW_V = numéro de CACHE dans sw.js : une nouvelle adresse contourne le cache de Cloudflare */
+const SW_V=45;
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("/sw.js?v="+SW_V,{updateViaCache:"none"}).catch(()=>{});
 /* Analytics : une vue par chargement */
 track("pageview");

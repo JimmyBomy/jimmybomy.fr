@@ -425,9 +425,6 @@ textarea.dv-in{resize:vertical;min-height:96px;line-height:1.5}
 .legal-doc .legal-doc .upd{font-size:12px;color:var(--dim);margin-top:26px}
 @media(max-width:520px){.legal-doc dl{grid-template-columns:1fr;gap:2px}.legal-doc dd{margin-bottom:10px}}
 /* ==== Jeux jouables (Mandibules) : carte + fenêtre projet ==== */
-.fitem .fhook{font-size:11px;line-height:1.4;color:var(--muted);margin-top:-4px}
-.fitem .ftags{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:-2px}
-.fitem .ftags i{font-style:normal;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);border:1px solid var(--glass-brd);padding:2px 7px;border-radius:100px}
 .ghook{margin-top:-4px}
 .gframe{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0b0a08;margin-top:18px;box-shadow:0 18px 40px -18px rgba(0,0,0,.8)}
 .gframe::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.12);border-radius:12px;pointer-events:none}

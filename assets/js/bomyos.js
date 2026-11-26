@@ -6,11 +6,11 @@ const ICON={
   labs:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#a78bfa"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#c4b5fd"/><path d="M21.5 25v4.2l-3.6 5.9a2 2 0 0 0 1.7 3h8.8a2 2 0 0 0 1.7-3l-3.6-5.9V25" stroke="#3b2a6e" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M19.8 25h8.4" stroke="#3b2a6e" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="34.5" r="1.6" fill="#c6ff4e"/></svg>',
   user:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="7" y="6" width="34" height="36" rx="5" fill="#eef0ea"/><circle cx="24" cy="20" r="6" fill="#c6ff4e"/><path d="M14 36c1.5-6 6-8 10-8s8.5 2 10 8" stroke="#0a0b0e" stroke-width="2.4" fill="none"/></svg>',
   doc:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="16" y="22" width="16" height="2.4" rx="1.2" fill="#71757e"/><rect x="16" y="28" width="16" height="2.4" rx="1.2" fill="#71757e"/><rect x="16" y="34" width="10" height="2.4" rx="1.2" fill="#71757e"/></svg>',
-  pdf:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="8" y="28" width="32" height="12" rx="2" fill="#ff5f57"/><text x="24" y="37" font-family="Archivo" font-size="8" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
+  pdf:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="8" y="28" width="32" height="12" rx="2" fill="#ff5f57"/><text x="24" y="37" font-family="-apple-system,Inter,Arial" font-size="8" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
   terminal:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="5" y="8" width="38" height="32" rx="5" fill="#0c1016"/><rect x="5" y="8" width="38" height="32" rx="5" stroke="#2b3340" stroke-width="1.5"/><path d="M13 20l6 4-6 4" stroke="#c6ff4e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="24" y="27" width="10" height="2.4" rx="1.2" fill="#7cc4ff"/></svg>',
   mail:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="6" y="11" width="36" height="26" rx="6" fill="#eef0ea"/><path d="M8 15l16 12 16-12" stroke="#7cc4ff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   services:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 16l3-8h26l3 8v3a5 5 0 0 1-10 0 5 5 0 0 1-11 0 5 5 0 0 1-11 0v-3z" fill="#c6ff4e"/><path d="M10 24v14a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V24" stroke="#eef0ea" stroke-width="2.6"/><rect x="20" y="29" width="8" height="11" rx="1" fill="#eef0ea"/></svg>',
-  devis:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 8h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H20l-9 8v-8H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#eef0ea"/><text x="24" y="28" font-family="Archivo" font-size="16" font-weight="800" fill="#0a5ce8" text-anchor="middle">€</text></svg>',
+  devis:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 8h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H20l-9 8v-8H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#eef0ea"/><text x="24" y="28" font-family="-apple-system,Inter,Arial" font-size="16" font-weight="800" fill="#0a5ce8" text-anchor="middle">€</text></svg>',
   gear:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="19" fill="#8e93a0"/><circle cx="24" cy="24" r="7.5" fill="none" stroke="#eef0ea" stroke-width="3.4"/><g stroke="#eef0ea" stroke-width="3.4" stroke-linecap="round"><path d="M24 9v5M24 34v5M9 24h5M34 24h5M13.4 13.4l3.5 3.5M31.1 31.1l3.5 3.5M34.6 13.4l-3.5 3.5M16.9 31.1l-3.5 3.5"/></g></svg>',
   messages:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="10" fill="url(#gmsg)"/><defs><linearGradient id="gmsg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#6ee97c"/><stop offset="1" stop-color="#21c04b"/></linearGradient></defs><path d="M24 12c-7.7 0-14 4.9-14 11 0 3.5 2 6.6 5.2 8.6-.2 1.7-1 3.3-2.4 4.6 2.5-.2 4.7-1.1 6.4-2.4 1.5.4 3.1.7 4.8.7 7.7 0 14-4.9 14-11.2S31.7 12 24 12z" fill="#fff"/></svg>',
   photos:'<svg width="42" height="42" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#f5f5f7"/><g transform="translate(24 24)">'+["#ff453a","#ff9f0a","#ffd60a","#30d158","#63e6e2","#0a84ff","#5e5ce6","#bf5af2"].map((c,i)=>`<ellipse rx="4.6" ry="9.5" cy="-8" fill="${c}" opacity=".82" transform="rotate(${i*45})"/>`).join("")+'</g></svg>',
@@ -265,13 +265,14 @@ function content(app){
   if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><h2 class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</h2>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
   if(app==="devis")return devisHTML();
-  if(app==="reglages"){const curwp=PREF.get("wp","aurora"),curac=PREF.get("accent","lime"),sndOn=PREF.get("muted","0")!=="1",crtOn=PREF.get("crt","0")==="1";
+  if(app==="reglages"){const curwp=PREF.get("wp","aurora"),curac=PREF.get("accent","blue"),sndOn=PREF.get("muted","0")!=="1",crtOn=PREF.get("crt","0")==="1",clearOn=PREF.get("clear","0")==="1";
     return `<div class="h-eyebrow">Réglages</div><h2 class="h-title" style="font-size:26px">Personnalisez<br>votre BomyOS.</h2>
     <div class="set-sec">Fond d'écran</div>
     <div class="wpgrid">${[["aurora","Aurora"],["sunset","Crépuscule"],["ocean","Océan"],["forest","Forêt"],["mono","Minuit"]].map(([id,l])=>`<button class="wpthumb tw-${id}${curwp===id?' on':''}" data-wp="${id}" aria-label="Fond ${l}"><span>${l}</span></button>`).join("")}</div>
     <div class="set-sec">Couleur d'accentuation</div>
-    <div class="acrow">${[["lime","#c6ff4e"],["cyan","#22d3ee"],["violet","#b26bff"],["rose","#ff6b9d"]].map(([id,c])=>`<button class="acdot${curac===id?' on':''}" data-accent="${id}" style="background:${c}" aria-label="Accent ${id}"></button>`).join("")}</div>
+    <div class="acrow">${[["blue","#0a84ff"],["violet","#bf5af2"],["rose","#ff375f"],["orange","#ff9f0a"],["green","#30d158"],["lime","#c6ff4e"]].map(([id,c])=>`<button class="acdot${curac===id?' on':''}" data-accent="${id}" style="background:${c}" aria-label="Accent ${id}"></button>`).join("")}</div>
     <div class="set-sec">Général</div>
+    <div class="setrow"><span>Icônes en verre</span><button class="sw${clearOn?' on':''}" data-tgl="clear" role="switch" aria-checked="${clearOn}" aria-label="Icônes en verre"><i></i></button></div>
     <div class="setrow"><span>Sons d'interface</span><button class="sw${sndOn?' on':''}" data-tgl="snd" role="switch" aria-checked="${sndOn}" aria-label="Sons"><i></i></button></div>
     <div class="setrow"><span>Effet CRT (rétro)</span><button class="sw${crtOn?' on':''}" data-tgl="crt" role="switch" aria-checked="${crtOn}" aria-label="CRT"><i></i></button></div>
     <p class="lede" style="font-size:12px;margin-top:16px;color:var(--dim)">Vos réglages sont mémorisés sur cet appareil.</p>
@@ -298,11 +299,11 @@ function content(app){
       <path d="M0 210 C90 180 150 240 260 215 S430 250 520 205 V300 H0 Z" fill="#0f2436"/>
       <path d="M-10 120 C120 90 240 150 380 110 S480 140 530 120" stroke="#233246" stroke-width="3" fill="none"/>
       <path d="M60 0 C90 90 70 200 110 300 M300 0 C280 110 330 210 310 300" stroke="#233246" stroke-width="3" fill="none"/>
-      <circle cx="150" cy="90" r="34" fill="rgba(198,255,78,.12)" class="pin-pulse"/><circle cx="150" cy="90" r="7" fill="#c6ff4e"/>
-      <text x="150" y="62" text-anchor="middle" fill="#eef0ea" font-family="Space Grotesk" font-size="15" font-weight="600">Sedan</text>
+      <circle cx="150" cy="90" r="34" style="fill:var(--acc);fill-opacity:.16" class="pin-pulse"/><circle cx="150" cy="90" r="7" style="fill:var(--acc)"/>
+      <text x="150" y="62" text-anchor="middle" fill="#eef0ea" font-family="-apple-system,Inter,Arial" font-size="15" font-weight="600">Sedan</text>
       <circle cx="360" cy="205" r="34" fill="rgba(124,196,255,.12)" class="pin-pulse"/><circle cx="360" cy="205" r="7" fill="#7cc4ff"/>
-      <text x="360" y="178" text-anchor="middle" fill="#eef0ea" font-family="Space Grotesk" font-size="15" font-weight="600">Troyes</text>
-      <text x="152" y="132" text-anchor="middle" fill="#71757e" font-family="Space Grotesk" font-size="11">Charleville-Mézières à côté</text>
+      <text x="360" y="178" text-anchor="middle" fill="#eef0ea" font-family="-apple-system,Inter,Arial" font-size="15" font-weight="600">Troyes</text>
+      <text x="152" y="132" text-anchor="middle" fill="#71757e" font-family="-apple-system,Inter,Arial" font-size="11">Charleville-Mézières à côté</text>
     </svg></div>
     <p class="lede">Basé à <b>Sedan</b>, en études à <b>Troyes</b> — je me déplace dans les Ardennes et l'Aube, et je travaille <b>à distance partout en France</b>.</p>
     <a class="btn" href="https://wa.me/33788021676" target="_blank" rel="noopener" style="margin-top:16px">Discuter de votre projet</a>`;
@@ -478,8 +479,26 @@ addEventListener("fullscreenchange",()=>{
 });
 
 /* ICONS + DOCK */
+/* icônes « app » (carré arrondi + pictogramme), partagées par le bureau, le Dock et le mobile */
+const IOSGLYPH={
+  projets:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M3 7c0-1.1.9-2 2-2h4.6l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>',
+  labs:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v5.2L5.8 16a3 3 0 0 0 2.6 4.5h7.2A3 3 0 0 0 18.2 16l-4.7-7.8V3"/><circle cx="12" cy="16.5" r="1.4" fill="#fff" stroke="none"/></svg>',
+  apropos:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.2" r="4"/><path d="M4 20c1.2-4.2 4.4-6 8-6s6.8 1.8 8 6H4z"/></svg>',
+  parcours:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4M10 13h5M10 16.5h5"/></svg>',
+  contact:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>',
+  cv:'<svg width="30" height="30" viewBox="0 0 24 24"><path d="M6 2.5h8l5 5V21.5H6z" fill="#fff"/><rect x="4" y="12" width="16" height="7" rx="1.6" fill="#a41f2e"/><text x="12" y="17.3" font-family="-apple-system,Inter,Arial" font-size="5.4" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
+};
+const IOSBG={projets:"g-blue",labs:"g-purple",services:"g-yellow",devis:"g-cyan",apropos:"g-green",parcours:"g-orange",contact:"g-mail",cv:"g-red",gh:"g-black",li:"g-li"};
+IOSGLYPH.devis='<svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H10l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff"/><text x="12" y="14.5" font-family="-apple-system,Inter,Arial" font-size="9" font-weight="800" fill="#0a9396" text-anchor="middle">€</text></svg>';
+IOSBG.reglages="g-grey";IOSGLYPH.gh=ICON.gh.replace('width="24" height="24"','width="28" height="28"').replace('fill="#eef0ea"','fill="#fff"');IOSGLYPH.li=ICON.li.replace('width="22" height="22"','width="26" height="26"').replace('fill="#eef0ea"','fill="#fff"');IOSBG.messages="g-msg";IOSBG.photos="g-light";IOSBG.calc="g-black";IOSBG.plans="g-map";
+IOSGLYPH.messages='<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 4c-4.9 0-9 3.1-9 7 0 2.2 1.3 4.2 3.3 5.5-.1 1.1-.6 2.1-1.5 2.9 1.6-.1 3-.7 4.1-1.5 1 .3 2 .4 3.1.4 4.9 0 9-3.1 9-7.1S16.9 4 12 4z"/></svg>';
+IOSGLYPH.photos='<svg width="30" height="30" viewBox="0 0 24 24"><g transform="translate(12 12)">'+["#ff453a","#ff9f0a","#ffd60a","#30d158","#63e6e2","#0a84ff","#5e5ce6","#bf5af2"].map((c,i)=>`<ellipse rx="2.5" ry="5.2" cy="-4.4" fill="${c}" opacity=".85" transform="rotate(${i*45})"/>`).join("")+'</g></svg>';
+IOSGLYPH.calc='<svg width="30" height="30" viewBox="0 0 24 24"><g fill="#fff"><circle cx="7" cy="7" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="12" cy="17" r="2"/></g><g fill="#ff9f0a"><circle cx="17" cy="7" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></g></svg>';
+IOSGLYPH.plans='<svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 21s-6.5-6.2-6.5-10.6A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.4C18.5 14.8 12 21 12 21z" fill="#fff"/><circle cx="12" cy="10.4" r="2.6" fill="#2f9e44"/></svg>';
+IOSGLYPH.reglages='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.9 1.9M16.5 16.5l1.9 1.9M18.4 5.6l-1.9 1.9M7.5 16.5l-1.9 1.9"/></svg>';
+IOSGLYPH.services='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0a0b0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l1.5-4h13L20 8v1.5a2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5.5 0 2.5 2.5 0 0 1-5.5 0V8z" fill="#0a0b0e" stroke="none"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7M10 20v-5h4v5"/></svg>';
 const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis express"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
-document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic">${ICON[iconFor(id)]}</span><span class="lbl">${l}</span></button>`).join("");
+document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
 document.querySelectorAll(".dicon").forEach(ic=>{
   let sx,sy,ox,oy,drag=false,moved=false;
   ic.addEventListener("pointerdown",e=>{drag=true;moved=false;sx=e.clientX;sy=e.clientY;const r=ic.getBoundingClientRect();ox=r.left;oy=r.top;});
@@ -494,7 +513,7 @@ document.querySelectorAll(".dicon").forEach(ic=>{
 const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["messages","Messages","messages"],["photos","Photos","photos"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["reglages","Réglages","gear"],["gh","GitHub","gh","https://github.com/JimmyBomy"],["li","LinkedIn","li","https://www.linkedin.com/in/jimmy-bomy-1037453a8/"]];
 const dock=document.getElementById("dock");
 dock.innerHTML=DOCK.map(d=>{if(d[0]==="--")return '<div class="sep"></div>';const link=d[3]&&d[3].startsWith("http");
-  return `<button data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}"><span class="tip">${d[1]}</span>${ICON[d[2]]}<span class="run" data-run="${d[0]}"></span></button>`;}).join("");
+  return `<button data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}"><span class="tip">${d[1]}</span><span class="ic sq ${IOSBG[d[0]]}">${IOSGLYPH[d[0]]}</span><span class="run" data-run="${d[0]}"></span></button>`;}).join("");
 dock.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.link){window.open(b.dataset.link,"_blank","noopener");return;}if(b.dataset.app)openApp(b.dataset.app);}));
 function markDock(app,on){const r=dock.querySelector(`[data-run="${app}"]`);if(r)r.parentElement.classList.toggle("running",on);}
 /* Dock façon macOS : magnification des icônes sous le curseur */
@@ -549,19 +568,19 @@ const sndBtn=document.getElementById("sndBtn"),sndIcon=document.getElementById("
 /* préférences persistantes (Réglages) */
 const PREF={get:(k,d)=>{try{return localStorage.getItem("bomyos-"+k)??d}catch(e){return d}},set:(k,v)=>{try{localStorage.setItem("bomyos-"+k,v)}catch(e){}}};
 function applyPrefs(){
-  document.body.classList.remove("wp-sunset","wp-ocean","wp-forest","wp-mono","ac-cyan","ac-violet","ac-rose");
+  document.body.classList.remove("wp-sunset","wp-ocean","wp-forest","wp-mono","ac-cyan","ac-violet","ac-rose","ac-orange","ac-green","ac-lime");
   const wp=PREF.get("wp","aurora");if(wp!=="aurora")document.body.classList.add("wp-"+wp);
-  const ac=PREF.get("accent","lime");if(ac!=="lime")document.body.classList.add("ac-"+ac);
+  const ac=PREF.get("accent","blue");if(ac!=="blue")document.body.classList.add("ac-"+ac);
   muted=PREF.get("muted","0")==="1";
   sndBtn.setAttribute("aria-pressed",String(!muted));
   sndIcon.innerHTML=muted?'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/>':'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a3 3 0 0 1 0 6"/>';
-  const crt=PREF.get("crt","0")==="1";document.body.classList.toggle("crt",crt);crtBtn.setAttribute("aria-pressed",String(crt));}
+  const crt=PREF.get("crt","0")==="1";document.body.classList.toggle("crt",crt);document.body.classList.toggle("icons-clear",PREF.get("clear","0")==="1");crtBtn.setAttribute("aria-pressed",String(crt));}
 function settingsAct(t,container){
   const wp=t.closest("[data-wp]");if(wp){PREF.set("wp",wp.dataset.wp);applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
   const ac=t.closest("[data-accent]");if(ac){PREF.set("accent",ac.dataset.accent);applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
-  const tg=t.closest("[data-tgl]");if(tg){if(tg.dataset.tgl==="snd")PREF.set("muted",muted?"0":"1");else PREF.set("crt",PREF.get("crt","0")==="1"?"0":"1");
+  const tg=t.closest("[data-tgl]");if(tg){if(tg.dataset.tgl==="snd")PREF.set("muted",muted?"0":"1");else if(tg.dataset.tgl==="clear")PREF.set("clear",PREF.get("clear","0")==="1"?"0":"1");else PREF.set("crt",PREF.get("crt","0")==="1"?"0":"1");
     applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
-  if(t.closest("[data-setreset]")){["wp","accent","muted","crt"].forEach(k=>{try{localStorage.removeItem("bomyos-"+k)}catch(e){}});applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
+  if(t.closest("[data-setreset]")){["wp","accent","muted","crt","clear"].forEach(k=>{try{localStorage.removeItem("bomyos-"+k)}catch(e){}});applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
   return false;}
 applyPrefs();
 sndBtn.addEventListener("click",()=>{PREF.set("muted",muted?"0":"1");applyPrefs();if(!muted)snd.tap();});
@@ -570,26 +589,9 @@ document.getElementById("contactBtn").addEventListener("click",()=>{if(innerWidt
 document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();const t=[...document.querySelectorAll(".dicon,.mtile")].find(x=>x.offsetParent!==null);t?.focus();});
 
 /* MOBILE — écran d'accueil iOS */
-const IOSGLYPH={
-  projets:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M3 7c0-1.1.9-2 2-2h4.6l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>',
-  labs:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v5.2L5.8 16a3 3 0 0 0 2.6 4.5h7.2A3 3 0 0 0 18.2 16l-4.7-7.8V3"/><circle cx="12" cy="16.5" r="1.4" fill="#fff" stroke="none"/></svg>',
-  apropos:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.2" r="4"/><path d="M4 20c1.2-4.2 4.4-6 8-6s6.8 1.8 8 6H4z"/></svg>',
-  parcours:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4M10 13h5M10 16.5h5"/></svg>',
-  contact:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>',
-  cv:'<svg width="30" height="30" viewBox="0 0 24 24"><path d="M6 2.5h8l5 5V21.5H6z" fill="#fff"/><rect x="4" y="12" width="16" height="7" rx="1.6" fill="#a41f2e"/><text x="12" y="17.3" font-family="Archivo,Arial" font-size="5.4" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
-};
-const IOSBG={projets:"g-blue",labs:"g-purple",services:"g-lime",devis:"g-cyan",apropos:"g-green",parcours:"g-orange",contact:"g-dark",cv:"g-red"};
-IOSGLYPH.devis='<svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H10l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff"/><text x="12" y="14.5" font-family="Archivo,Arial" font-size="9" font-weight="800" fill="#0a9396" text-anchor="middle">€</text></svg>';
-IOSBG.reglages="g-grey";IOSBG.messages="g-msg";IOSBG.photos="g-light";IOSBG.calc="g-black";IOSBG.plans="g-map";
-IOSGLYPH.messages='<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 4c-4.9 0-9 3.1-9 7 0 2.2 1.3 4.2 3.3 5.5-.1 1.1-.6 2.1-1.5 2.9 1.6-.1 3-.7 4.1-1.5 1 .3 2 .4 3.1.4 4.9 0 9-3.1 9-7.1S16.9 4 12 4z"/></svg>';
-IOSGLYPH.photos='<svg width="30" height="30" viewBox="0 0 24 24"><g transform="translate(12 12)">'+["#ff453a","#ff9f0a","#ffd60a","#30d158","#63e6e2","#0a84ff","#5e5ce6","#bf5af2"].map((c,i)=>`<ellipse rx="2.5" ry="5.2" cy="-4.4" fill="${c}" opacity=".85" transform="rotate(${i*45})"/>`).join("")+'</g></svg>';
-IOSGLYPH.calc='<svg width="30" height="30" viewBox="0 0 24 24"><g fill="#fff"><circle cx="7" cy="7" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="12" cy="17" r="2"/></g><g fill="#ff9f0a"><circle cx="17" cy="7" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></g></svg>';
-IOSGLYPH.plans='<svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 21s-6.5-6.2-6.5-10.6A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.4C18.5 14.8 12 21 12 21z" fill="#fff"/><circle cx="12" cy="10.4" r="2.6" fill="#2f9e44"/></svg>';
-IOSGLYPH.reglages='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.9 1.9M16.5 16.5l1.9 1.9M18.4 5.6l-1.9 1.9M7.5 16.5l-1.9 1.9"/></svg>';
-IOSGLYPH.services='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0a0b0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l1.5-4h13L20 8v1.5a2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5.5 0 2.5 2.5 0 0 1-5.5 0V8z" fill="#0a0b0e" stroke="none"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7M10 20v-5h4v5"/></svg>';
 const MTILES=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
-document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
-document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
+document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
+document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
 const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
 const mobileEl=document.getElementById("mobile"),msTitle=document.getElementById("msheetTitle");
 if(mobileEl)mobileEl.addEventListener("scroll",()=>document.body.classList.toggle("mscrolled",mobileEl.scrollTop>6),{passive:true});

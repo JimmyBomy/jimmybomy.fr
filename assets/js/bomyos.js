@@ -20,14 +20,14 @@ const ICON={
   li:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.12 1.43-2.12 2.9V21H9z"/></svg>',
   li:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.9V21H19v-5.5c0-1.3-.02-3-1.87-3-1.87 0-2.16 1.44-2.16 2.92V21H11V9z"/></svg>',
 };
-/* ==== VITRINE — les flagships (édite ici) ==== */
+/* ==== VITRINE, les flagships (édite ici) ==== */
 const PROJECTS={
-  amitie:{name:"Amitié Artisan",cat:"Client · plateforme web du terroir",img:"/assets/shots/amitie.jpg",grad:"linear-gradient(135deg,#1e2a44,#2b3b5e 55%,#c96f5a)",role:"Développement web (application)",year:"2026",client:"Amitié Artisan — client, en ligne",tags:["Client","Application web","Comptes & abonnements","Multilingue","En ligne"],link:"https://www.amitie-artisan.fr",desc:"Application web qui relie les artisans et producteurs du terroir aux commerces qui vendent leurs produits, pour que le public sache d'où vient un produit et où l'acheter. Projet client, en production sur amitie-artisan.fr.",metrics:[["≈100","fiches en ligne"],["2","types de comptes"],["3","langues (FR/EN/DE)"]],study:[{h:"Le brief",p:"Le client voulait un réseau national des métiers de bouche (restaurants, boulangeries, boucheries, épiceries, fromageries, charcuteries) : montrer l'origine des produits et, en temps réel, les points de vente où les trouver. Pas un site vitrine : une vraie plateforme avec des comptes et un modèle d'abonnement."},{h:"Le défi",p:"Deux publics aux besoins différents qui doivent se relier entre eux : l'artisan ou producteur présente son activité et ses produits, le commerçant déclare son point de vente et ses fournisseurs. Le tout avec des inscriptions payantes et une interface en trois langues."},{h:"Ce que j'ai fait",p:"Développement de l'application pour le client : parcours d'inscription et de connexion séparés commerçant / artisan, espace membre, système d'invitations entre artisans et points de vente, ajout de produits sans limite, formules d'abonnement et version FR/EN/DE."},{h:"Le résultat",p:"La plateforme est en ligne avec une centaine de fiches d'artisans, producteurs et commerces. Ce que ça prouve : je sais livrer et faire évoluer une application métier pour un vrai client, pas seulement un site de présentation."}]},
-  tonybedja:{name:"DJ Tony Bedja",cat:"Client · DJ à Sedan",img:"/assets/shots/tonybedja.jpg",grad:"linear-gradient(135deg,#1a1714,#b8862b 55%,#efe6d4)",role:"Conception & développement web",year:"2026",client:"DJ Tony (Tony Bedja) — client, en ligne",tags:["Client","Site vitrine","SEO local","En ligne"],link:"https://djtonybedja.fr",desc:"Site de DJ Tony (Tony Bedja), DJ à Sedan dans les Ardennes pour mariages, anniversaires, bars et garden parties : présentation de ses soirées, des mariages, galerie photos et réservation en un clic. Projet client, en ligne sur djtonybedja.fr."},
-  fannyspirit:{name:"Fanny Spirit",cat:"Client · Reiki & soins énergétiques",img:"/assets/shots/fannyspirit.jpg",grad:"linear-gradient(135deg,#120f24,#3b2d5c 55%,#f1d79a)",role:"Conception & développement web",year:"2026",client:"Fanny Spirit — client, en ligne",tags:["Client","Site vitrine","Prise de RDV","En ligne"],link:"https://fannyspirit.fr",desc:"Site de Fanny Spirit, praticienne Reiki et LaHoChi à Charleville-Mézières : ambiance douce et étoilée, présentation des soins (au cabinet et à distance), tarifs, chèque cadeau et prise de rendez-vous. Projet client, en ligne sur fannyspirit.fr."},
-  boulangerie:{name:"La Fournée de Sedan",cat:"Démo — site de commerce",img:"/assets/shots/boulangerie.jpg?v=2",grad:"linear-gradient(135deg,#8a5a1c,#c8892e 55%,#f2d06b)",role:"Exemple pour commerçants & indépendants",year:"2026",client:"Démonstration",tags:["Site vitrine","Click & Collect","Responsive","Fait main"],link:"https://jimmybomy.fr/projets/demo-boulangerie/",desc:"Le site qu'une boulangerie mérite. Vitrine, carte, click & collect, plan d'accès. Pensé pour donner faim et faire venir en boutique. Ici, c'est une démo — le vôtre serait bien réel, à partir d'une maquette gratuite."},
-  rois:{name:"Rois de France",cat:"Encyclopédie web · PHP/MySQL",img:"/assets/shots/rois.jpg",grad:"linear-gradient(135deg,#3a2410,#c8892e 55%,#f2d06b)",role:"Conception, back & front",year:"2025",client:"SAÉ 203 · BUT MMI — noté 18,1/20",tags:["PHP","MySQL","Sécurité XSS/SQL","Lighthouse","VPS"],link:"https://jimmybomy.fr/projets/rois/",desc:"Encyclopédie web sur les monarques de France, de Clovis à Napoléon III : 64 fiches dynamiques, quiz, recherche, sécurisation des formulaires (XSS / injections SQL) et audit Lighthouse. PHP/MySQL, déployé sur mon VPS.",metrics:[["64","fiches dynamiques"],["18,1","note /20"],["0","framework"]],study:[{h:"Le brief",p:"SAÉ 203 du BUT MMI : concevoir de A à Z une encyclopédie web dynamique sur les rois de France — base de données, back PHP, front et mise en ligne réelle. L'exigence : pas une maquette, un site qui tient en production."},{h:"Le défi",p:"Gérer 64 souverains (de Clovis à Napoléon III) sans coder une page par roi, et ouvrir des formulaires au public (recherche, quiz) — donc une vraie surface d'attaque à sécuriser."},{h:"Ce que j'ai fait",p:"Un modèle de données MySQL et des pages PHP paramétrées qui génèrent chaque fiche dynamiquement. Autour du catalogue : filtres par dynastie, recherche et tri, une page de statistiques, un comparateur de règnes, un quiz, un mode aléatoire et même un chatbot — plus un espace admin (back-office) pour gérer le contenu. Côté sécurité : requêtes préparées (PDO) contre l'injection SQL, échappement en sortie contre le XSS, validation des entrées."},{h:"Le résultat",p:"Audité avec Lighthouse, déployé et administré sur mon propre VPS (Apache/PHP/MySQL), noté 18,1/20. Ce que ça prouve : je sais modéliser une base, écrire du PHP sécurisé et livrer moi-même en production."}]},
-  lumina:{name:"Lumina Studio",cat:"Agence événementielle · site",img:"/assets/shots/lumina.jpg",grad:"linear-gradient(135deg,#0e1a3a,#2563eb 55%,#7cc4ff)",role:"Direction artistique & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Direction artistique"],link:"https://jimmybomy.fr/projets/lumina/",desc:"Site d'une agence créative et événementielle basée à Troyes — « là où la nuit devient expérience ». Design dark élégant, présentation de l'agence et de ses prestations immersives, avec son escape game Backrooms en projet phare."},
+  amitie:{name:"Amitié Artisan",cat:"Client · plateforme web du terroir",img:"/assets/shots/amitie.jpg",grad:"linear-gradient(135deg,#1e2a44,#2b3b5e 55%,#c96f5a)",role:"Développement web (application)",year:"2026",client:"Amitié Artisan · client, en ligne",tags:["Client","Application web","Comptes & abonnements","Multilingue","En ligne"],link:"https://www.amitie-artisan.fr",desc:"Application web qui relie les artisans et producteurs du terroir aux commerces qui vendent leurs produits, pour que le public sache d'où vient un produit et où l'acheter. Projet client, en production sur amitie-artisan.fr.",metrics:[["≈100","fiches en ligne"],["2","types de comptes"],["3","langues (FR/EN/DE)"]],study:[{h:"Le brief",p:"Le client voulait un réseau national des métiers de bouche (restaurants, boulangeries, boucheries, épiceries, fromageries, charcuteries) : montrer l'origine des produits et, en temps réel, les points de vente où les trouver. Pas un site vitrine : une vraie plateforme avec des comptes et un modèle d'abonnement."},{h:"Le défi",p:"Deux publics aux besoins différents qui doivent se relier entre eux : l'artisan ou producteur présente son activité et ses produits, le commerçant déclare son point de vente et ses fournisseurs. Le tout avec des inscriptions payantes et une interface en trois langues."},{h:"Ce que j'ai fait",p:"Développement de l'application pour le client : parcours d'inscription et de connexion séparés commerçant / artisan, espace membre, système d'invitations entre artisans et points de vente, ajout de produits sans limite, formules d'abonnement et version FR/EN/DE."},{h:"Le résultat",p:"La plateforme est en ligne avec une centaine de fiches d'artisans, producteurs et commerces. Ce que ça prouve : je sais livrer et faire évoluer une application métier pour un vrai client, pas seulement un site de présentation."}]},
+  tonybedja:{name:"DJ Tony Bedja",cat:"Client · DJ à Sedan",img:"/assets/shots/tonybedja.jpg",grad:"linear-gradient(135deg,#1a1714,#b8862b 55%,#efe6d4)",role:"Conception & développement web",year:"2026",client:"DJ Tony (Tony Bedja) · client, en ligne",tags:["Client","Site vitrine","SEO local","En ligne"],link:"https://djtonybedja.fr",desc:"Site de DJ Tony (Tony Bedja), DJ à Sedan dans les Ardennes pour mariages, anniversaires, bars et garden parties : présentation de ses soirées, des mariages, galerie photos et réservation en un clic. Projet client, en ligne sur djtonybedja.fr."},
+  fannyspirit:{name:"Fanny Spirit",cat:"Client · Reiki & soins énergétiques",img:"/assets/shots/fannyspirit.jpg",grad:"linear-gradient(135deg,#120f24,#3b2d5c 55%,#f1d79a)",role:"Conception & développement web",year:"2026",client:"Fanny Spirit · client, en ligne",tags:["Client","Site vitrine","Prise de RDV","En ligne"],link:"https://fannyspirit.fr",desc:"Site de Fanny Spirit, praticienne Reiki et LaHoChi à Charleville-Mézières : ambiance douce et étoilée, présentation des soins (au cabinet et à distance), tarifs, chèque cadeau et prise de rendez-vous. Projet client, en ligne sur fannyspirit.fr."},
+  boulangerie:{name:"La Fournée de Sedan",cat:"Démo · site de commerce",img:"/assets/shots/boulangerie.jpg?v=2",grad:"linear-gradient(135deg,#8a5a1c,#c8892e 55%,#f2d06b)",role:"Exemple pour commerçants & indépendants",year:"2026",client:"Démonstration",tags:["Site vitrine","Click & Collect","Responsive","Fait main"],link:"https://jimmybomy.fr/projets/demo-boulangerie/",desc:"Le site qu'une boulangerie mérite. Vitrine, carte, click & collect, plan d'accès. Pensé pour donner faim et faire venir en boutique. Ici, c'est une démo, le vôtre serait bien réel, à partir d'une maquette gratuite."},
+  rois:{name:"Rois de France",cat:"Encyclopédie web · PHP/MySQL",img:"/assets/shots/rois.jpg",grad:"linear-gradient(135deg,#3a2410,#c8892e 55%,#f2d06b)",role:"Conception, back & front",year:"2025",client:"SAÉ 203 · BUT MMI · noté 18,1/20",tags:["PHP","MySQL","Sécurité XSS/SQL","Lighthouse","VPS"],link:"https://jimmybomy.fr/projets/rois/",desc:"Encyclopédie web sur les monarques de France, de Clovis à Napoléon III : 64 fiches dynamiques, quiz, recherche, sécurisation des formulaires (XSS / injections SQL) et audit Lighthouse. PHP/MySQL, déployé sur mon VPS.",metrics:[["64","fiches dynamiques"],["18,1","note /20"],["0","framework"]],study:[{h:"Le brief",p:"SAÉ 203 du BUT MMI : concevoir de A à Z une encyclopédie web dynamique sur les rois de France, base de données, back PHP, front et mise en ligne réelle. L'exigence : pas une maquette, un site qui tient en production."},{h:"Le défi",p:"Gérer 64 souverains (de Clovis à Napoléon III) sans coder une page par roi, et ouvrir des formulaires au public (recherche, quiz), donc une vraie surface d'attaque à sécuriser."},{h:"Ce que j'ai fait",p:"Un modèle de données MySQL et des pages PHP paramétrées qui génèrent chaque fiche dynamiquement. Autour du catalogue : filtres par dynastie, recherche et tri, une page de statistiques, un comparateur de règnes, un quiz, un mode aléatoire et même un chatbot, plus un espace admin (back-office) pour gérer le contenu. Côté sécurité : requêtes préparées (PDO) contre l'injection SQL, échappement en sortie contre le XSS, validation des entrées."},{h:"Le résultat",p:"Audité avec Lighthouse, déployé et administré sur mon propre VPS (Apache/PHP/MySQL), noté 18,1/20. Ce que ça prouve : je sais modéliser une base, écrire du PHP sécurisé et livrer moi-même en production."}]},
+  lumina:{name:"Lumina Studio",cat:"Agence événementielle · site",img:"/assets/shots/lumina.jpg",grad:"linear-gradient(135deg,#0e1a3a,#2563eb 55%,#7cc4ff)",role:"Direction artistique & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Direction artistique"],link:"https://jimmybomy.fr/projets/lumina/",desc:"Site d'une agence créative et événementielle basée à Troyes, « là où la nuit devient expérience ». Design dark élégant, présentation de l'agence et de ses prestations immersives, avec son escape game Backrooms en projet phare."},
   backrooms:{name:"Backrooms",cat:"Escape game · site immersif",img:"/assets/shots/backrooms.jpg",grad:"linear-gradient(135deg,#1a1400,#3a3000 60%,#c6a800)",role:"Design & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Ambiance & UX"],link:"https://jimmybomy.fr/projets/backrooms/",desc:"Site de l'escape game de Lumina Studio, inspiré de la légende urbaine des Backrooms : ambiance horreur/liminale, présentation du concept, des salles et réservation. Le pendant immersif du site agence."},
   turbofilm:{name:"Derrière la porte close",cat:"Court-métrage · Festival Turbofilm 2026",img:"/assets/shots/turbofilm.jpg",grad:"linear-gradient(135deg,#111,#3a2a1a 60%,#c8892e)",role:"Acteur principal · aide à l'écriture (idées)",year:"2026",client:"Festival Turbofilm 2026 · Université de Reims Champagne-Ardenne",tags:["Vidéo","Jeu d'acteur","Écriture","Travail d'équipe","24 h"],link:"https://www.youtube.com/watch?v=B5kp5wc4Rlo",cta:"Voir le film",desc:"Court-métrage écrit, tourné et monté en 24 heures par une équipe d'étudiants MMI pour le Festival Turbofilm 2026. J'y tiens le rôle principal, présent dans presque tous les plans, et j'ai participé à l'écriture des idées. Tournage entièrement en intérieur, dans mon appartement. Le film est diffusé par l'Université de Reims Champagne-Ardenne."},
   mandibules:{name:"Mandibules",cat:"Jeu de stratégie 3D · HTML5",hook:"La guerre des fourmilières, en 3D et en papier découpé. Jouable ici, tout de suite.",img:"/assets/shots/mandibules.jpg",grad:"linear-gradient(135deg,#2a1a0e,#8a5a2b 55%,#e9d8b4)",role:"Game design, direction & tests · développement assisté par IA",year:"2026",client:"Projet personnel",tags:["HTML5","JavaScript","Three.js","Game design","Développement assisté par IA"],made:"Mandibules a été développé avec l'aide de l'IA, et je le dis clairement. Ma part : imaginer le concept et la règle de chaque monde, décider de ce qui fait un bon niveau, équilibrer la difficulté, choisir la direction artistique en papier découpé, tester et corriger le jeu jusqu'à ce qu'il tienne la route, puis l'intégrer et le mettre en ligne sur mon site. Piloter une IA pour livrer un jeu complet et fini, c'est aussi une compétence.",link:"https://jimmybomy.fr/jeux/mandibules/",page:"/projets/mandibules/",game:"/jeux/mandibules/",
@@ -36,13 +36,13 @@ const PROJECTS={
     desc:"Mandibules est un jeu de stratégie original que j'ai conçu et développé : une guerre de fourmilières en 3D, dans un style papier découpé. On développe sa colonie, on envoie ses fourmis et on prend le contrôle du terrain face à des colonies rivales. Tout le jeu tient dans un seul fichier HTML5 et se lance directement dans le navigateur, sur ordinateur comme sur téléphone."},
   jimmyxesmp:{name:"JimmyxeSMP",cat:"Serveur Minecraft · 12 plugins Java",img:"/assets/shots/jimmyxesmp.jpg",grad:"linear-gradient(135deg,#0f1a0c,#2f5d1e 55%,#c6ff4e)",role:"Conception, développement, infrastructure & exploitation",year:"2026",client:"Projet personnel · bêta publique août 2026",tags:["Java 25","Paper & Velocity","SQL","Node.js","Discord","Architecture"],link:"https://github.com/JimmyBomy/jimmyxesmp",cta:"Voir l'architecture",desc:"Serveur Minecraft LifeSteal francophone, et tout le backend qui le fait tourner : 12 plugins Java écrits de zéro, un proxy Velocity, un bot Discord et une boutique en ligne. Le serveur n'a pas trouvé son public, mais le système est complet, documenté et a été ouvert au public (bêta le 3 août 2026, ouverture officielle le 17 septembre). Le code des plugins est privé ; l'architecture et les choix techniques sont publics sur GitHub.",metrics:[["12","plugins Java"],["≈18 000","lignes de code"],["134","fichiers Java"]],study:[{h:"Le problème",p:"Sur un serveur multijoueur, une vente n'est pas une simple addition : entre le calcul du prix et le retrait des objets, le joueur peut se déconnecter ou vider son inventaire. Une version naïve permet de dupliquer des objets ou de créer de l'argent."},{h:"Ce que j'ai construit",p:"EcoCore traite chaque vente comme une transaction SQL en plusieurs phases, annulable à chaque étape : le joueur n'est crédité qu'une fois le retrait des objets prouvé. La masse monétaire est suivie par source et par destination pour détecter l'inflation. OreGuard détecte la triche au minage par un modèle statistique plutôt qu'un seuil arbitraire. La téléportation aléatoire analyse les chunks hors du thread principal pour ne jamais faire ramer le serveur."},{h:"L'écosystème",p:"Proxy Velocity avec un pont WebSocket vers Discord (chat bidirectionnel, liaison de comptes par code éphémère), bot Discord en Node.js (16 commandes), boutique en ligne, panel de statistiques derrière un tunnel privé, configurations versionnées et sauvegardées avant chaque modification."},{h:"Ce que j'en retiens",p:"Mener un projet comme un lancement de produit (pré-bêta, bêta, ouverture), et que la technique ne suffit pas : sans communauté au départ, un bon serveur reste vide. La prochaine fois, je construirais l'audience avant le produit."}]},
   sillenbach:{name:"Le Nœud de Sillenbach",cat:"Fiction interactive · Twine",img:"/assets/shots/sillenbach.jpg",grad:"linear-gradient(135deg,#0f172a,#334155 55%,#94a3b8)",role:"Écriture & conception",year:"2025",client:"Projet personnel",tags:["Twine","Narration non-linéaire","Écriture"],link:"https://jimmybomy.fr/projets/sillenbach/",desc:"Fiction interactive jouable dans le navigateur, inspirée de la série Dark : un récit non-linéaire en 30 passages, où chaque choix fait bifurquer l'histoire. Écrite et mise en scène sous Twine (Harlowe), avec images et ambiance sonore."},
-  bomyos:{name:"BomyOS",cat:"Ce site · OS en JS vanilla",img:"/assets/shots/bomyos.jpg",grad:"linear-gradient(135deg,#0d1f12,#c6ff4e 60%,#7cc4ff)",role:"Design & développement from scratch",year:"2026",client:"Portfolio personnel",tags:["JS vanilla","WebAudio","Accessibilité","Tests & CI"],link:"https://github.com/JimmyBomy/jimmybomy.fr",desc:"Le site sur lequel tu te trouves : un système d'exploitation complet en JavaScript vanilla, sans framework — fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés, terminal interactif. Chaque modification passe par des tests automatiques et un déploiement continu (GitHub Actions → mon VPS). La démo tourne sous tes yeux."},
+  bomyos:{name:"BomyOS",cat:"Ce site · OS en JS vanilla",img:"/assets/shots/bomyos.jpg",grad:"linear-gradient(135deg,#0d1f12,#c6ff4e 60%,#7cc4ff)",role:"Design & développement from scratch",year:"2026",client:"Portfolio personnel",tags:["JS vanilla","WebAudio","Accessibilité","Tests & CI"],link:"https://github.com/JimmyBomy/jimmybomy.fr",desc:"Le site sur lequel tu te trouves : un système d'exploitation complet en JavaScript vanilla, sans framework, fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés, terminal interactif. Chaque modification passe par des tests automatiques et un déploiement continu (GitHub Actions → mon VPS). La démo tourne sous tes yeux."},
 };
-/* ==== LABS — les expériences ==== */
+/* ==== LABS, les expériences ==== */
 const LABS={
-  pendule:{name:"Pendule échecs/dames",cat:"Outil · HTML/JS",grad:"linear-gradient(135deg,#1a1a1a,#c6ff4e 65%,#eef0ea)",role:"Développement",year:"2025",client:"Projet personnel",tags:["HTML","JavaScript"],link:"",desc:"Horloge de jeu (pendule) pour parties d'échecs et de dames, jouable directement dans le navigateur — construite à l'origine pour départager la rivalité aux dames avec mon père."},
+  pendule:{name:"Pendule échecs/dames",cat:"Outil · HTML/JS",grad:"linear-gradient(135deg,#1a1a1a,#c6ff4e 65%,#eef0ea)",role:"Développement",year:"2025",client:"Projet personnel",tags:["HTML","JavaScript"],link:"",desc:"Horloge de jeu (pendule) pour parties d'échecs et de dames, jouable directement dans le navigateur, construite à l'origine pour départager la rivalité aux dames avec mon père."},
   cli:{name:"Convertisseur de fichiers",cat:"Outil CLI · Node.js",grad:"linear-gradient(135deg,#0c1016,#22c55e 60%,#a7f3d0)",role:"Développement",year:"2025",client:"Projet personnel",tags:["Node.js","CLI"],link:"",desc:"Outil en ligne de commande Node.js pour convertir des fichiers d'un format à l'autre."},
-  sae105:{name:"SAÉ 105",cat:"Site web · S1",grad:"linear-gradient(135deg,#3b1e6e,#7c5cff 60%,#7cc4ff)",role:"Développement",year:"2025",client:"SAÉ 105 · BUT MMI",tags:["HTML/CSS","Web"],link:"",desc:"L'un de mes premiers sites, réalisé au premier semestre du BUT MMI — intégration web et bonnes pratiques."},
+  sae105:{name:"SAÉ 105",cat:"Site web · S1",grad:"linear-gradient(135deg,#3b1e6e,#7c5cff 60%,#7cc4ff)",role:"Développement",year:"2025",client:"SAÉ 105 · BUT MMI",tags:["HTML/CSS","Web"],link:"",desc:"L'un de mes premiers sites, réalisé au premier semestre du BUT MMI, intégration web et bonnes pratiques."},
   proshop:{name:"Hony Tawk's ProShop",cat:"E-commerce · intégration",img:"/assets/shots/proshop.jpg",grad:"linear-gradient(135deg,#111,#333 60%,#c6ff4e)",role:"Intégration HTML/CSS/JS",year:"2025",client:"TP · R2.12",tags:["HTML/CSS","JavaScript","Responsive"],link:"https://jimmybomy.fr/travaux/r212/sequence2/",desc:"Boutique de skateboards fictive (planches, longboards, tee-shirts) : grille produits, filtres et mise en page e-commerce. TP d'intégration web."},
   arboretum:{name:"Arboretum de Loupessac",cat:"Site multi-pages",img:"/assets/shots/arboretum.jpg",grad:"linear-gradient(135deg,#0b3d2e,#2f8f6b 60%,#a7f3d0)",role:"Intégration HTML/CSS",year:"2025",client:"TP · R1.12",tags:["HTML/CSS","Multi-pages"],link:"https://jimmybomy.fr/travaux/r112/sequence5/",desc:"Site vitrine d'un arboretum : historique, plan du parc, accès. Structuration multi-pages et mise en page soignée."},
   kingyo:{name:"Kingyo",cat:"Site cuisine · design",img:"/assets/shots/kingyo.jpg",grad:"linear-gradient(135deg,#2a2a2a,#8a8a8a 60%,#e26d9a)",role:"Intégration HTML/CSS",year:"2025",client:"TP · R1.12",tags:["HTML/CSS","Design"],link:"https://jimmybomy.fr/travaux/r112/sequence2/",desc:"Site de recettes de cuisine japonaise à l'esthétique épurée (motifs, typographie soignée). TP d'intégration."},
@@ -52,12 +52,12 @@ const LABS={
 };
 const ALL={...PROJECTS,...LABS};
 const XP=[
-  {yr:"2025 — auj.",role:"BUT MMI — Métiers du Multimédia et de l'Internet",co:"IUT de Troyes",desc:"1re année validée — <b style='color:var(--acc)'>18,1/20 de moyenne en développement web</b>."},
+  {yr:"2025 · auj.",role:"BUT MMI : Métiers du Multimédia et de l'Internet",co:"IUT de Troyes",desc:"1re année validée, <b style='color:var(--acc)'>18,1/20 de moyenne en développement web</b>."},
   {yr:"En continu",role:"Auto-hébergement & administration système",co:"VPS personnel",desc:"J'héberge et administre tous mes projets sur mon propre VPS Linux : Apache, monitoring GoAccess, déploiements. Également : serveur de jeu Minecraft (Paper) administré via Pterodactyl."},
   {yr:"En continu",role:"Créateur de contenu Twitch",co:"<a href='https://www.twitch.tv/jimmyxetv' target='_blank' rel='noopener' style='color:inherit'>jimmyxetv</a>",desc:"Plus de 26 000 abonnés : je lance, j'anime et je fais vivre une communauté en direct."},
-  {yr:"2022 — 25",role:"Baccalauréat général",co:"Lycée Mabillon",desc:"Développeur autodidacte en parallèle du lycée : développement web et Node.js en autonomie, avant l'entrée en BUT MMI."},
+  {yr:"2022-25",role:"Baccalauréat général",co:"Lycée Mabillon",desc:"Développeur autodidacte en parallèle du lycée : développement web et Node.js en autonomie, avant l'entrée en BUT MMI."},
 ];
-const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},reglages:{title:"Réglages",icon:"gear",w:540,h:620},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},messages:{title:"Messages",icon:"messages",w:460,h:580},photos:{title:"Photos",icon:"photos",w:640,h:520},calc:{title:"Calculette",icon:"calc",w:340,h:540},plans:{title:"Plans",icon:"plans",w:560,h:540},aide:{title:"Aide — raccourcis",icon:"doc",w:470,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600},mentions:{title:"Mentions légales.txt",icon:"doc",w:620,h:640},confidentialite:{title:"Confidentialité.txt",icon:"doc",w:620,h:640}};
+const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},reglages:{title:"Réglages",icon:"gear",w:540,h:620},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},messages:{title:"Messages",icon:"messages",w:460,h:580},photos:{title:"Photos",icon:"photos",w:640,h:520},calc:{title:"Calculette",icon:"calc",w:340,h:540},plans:{title:"Plans",icon:"plans",w:560,h:540},aide:{title:"Aide · raccourcis",icon:"doc",w:470,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600},mentions:{title:"Mentions légales.txt",icon:"doc",w:620,h:640},confidentialite:{title:"Confidentialité.txt",icon:"doc",w:620,h:640}};
 const LEGAL_URL=window.BOMY_LANG==="en"?{mentions:"/en/legal-notice/",confidentialite:"/en/privacy/"}:{mentions:"/mentions-legales/",confidentialite:"/confidentialite/"};
 
 /* ==== ANALYTICS first-party (privacy-friendly, actif seulement en prod) ==== */
@@ -92,7 +92,7 @@ function devisHTML(){
   const act=["restaurant / café","commerce","activité d'artisan / service","activité"][DEVIS.a[1]];
   const objectif=["créer mon premier site","moderniser mon site","améliorer mon site"][DEVIS.a[0]];
   const need=["un site vitrine clair : présentation, horaires, itinéraire","un site avec réservation / commande en ligne","un site simple avec contact direct (téléphone, WhatsApp)"][DEVIS.a[2]];
-  const msg=encodeURIComponent(`Bonjour Jimmy ! J'ai un ${act} et j'aimerais ${objectif} — il me faudrait ${need}. On peut en parler ?`);
+  const msg=encodeURIComponent(`Bonjour Jimmy ! J'ai un ${act} et j'aimerais ${objectif}, il me faudrait ${need}. On peut en parler ?`);
   return `<div class="h-eyebrow">Ma recommandation</div><h2 class="h-title" style="font-size:28px">Voilà ce qu'il<br>vous faut.</h2>
     <p class="lede">Pour votre <b>${act}</b> : ${need}. Hébergement et mise en ligne <b>inclus</b>, et on démarre par une <b>maquette gratuite</b>, sans engagement.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
@@ -100,7 +100,7 @@ function devisHTML(){
       <button class="btn ghost" data-devis="restart">Recommencer</button></div>
     <div class="devis-lead">
       <div class="h-eyebrow">Ou laissez-moi vos coordonnées</div>
-      <p class="lede" style="font-size:13px;margin:6px 0 12px">Je vous rappelle — en général en moins de 2 heures.</p>
+      <p class="lede" style="font-size:13px;margin:6px 0 12px">Je vous rappelle, en général en moins de 2 heures.</p>
       <input id="dv-name" class="dv-in" placeholder="Votre nom (optionnel)" autocomplete="name">
       <input id="dv-contact" class="dv-in" placeholder="Email ou téléphone" inputmode="email" autocomplete="email">
       <input id="dv-hp" class="dv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -128,9 +128,9 @@ function devisSend(container){
       if(!j||!j.ok)throw 0;
       snd.tap();track("lead");
       container.innerHTML=`<div class="h-eyebrow">Merci ${esc(name.split(" ")[0])} !</div><h2 class="h-title" style="font-size:28px">C'est noté.</h2><p class="lede">Je vous recontacte très vite sur <b>${esc(contact)}</b>. À tout de suite 👋</p>`;
-    }).catch(()=>{if(status){status.style.color="#ff5f57";status.textContent="Oups — réessayez, ou passez par WhatsApp juste au-dessus.";}if(btn){btn.disabled=false;btn.textContent="Être rappelé ›";}});}
+    }).catch(()=>{if(status){status.style.color="#ff5f57";status.textContent="Oups, réessayez, ou passez par WhatsApp juste au-dessus.";}if(btn){btn.disabled=false;btn.textContent="Être rappelé ›";}});}
 
-/* ==== TERMINAL (easter egg — accessible via Ctrl+K ou #terminal) ==== */
+/* ==== TERMINAL (easter egg, accessible via Ctrl+K ou #terminal) ==== */
 function wireTerminal(root){const out=root.querySelector(".term-out"),inp=root.querySelector(".term-in");if(!inp)return;
   setTimeout(()=>inp.focus(),80);
   inp.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const raw=inp.value.trim();inp.value="";
@@ -141,20 +141,20 @@ function runCmd(raw,out){const cmd=raw.toLowerCase();if(!cmd)return;
   if(cmd==="clear"){out.innerHTML="";return;}
   const open={projets:"projets",labs:"labs",devis:"devis",services:"services",cv:"cv",parcours:"parcours",contact:"contact"};
   if(open[cmd]){tOut(out,'<span class="muted">Ouverture…</span>');openApp(open[cmd]);return;}
-  if(cmd==="sudo embauche-moi"){tOut(out,'Permission accordée ✅ — <a href="mailto:'+EMAIL+'?subject=On%20t%27embauche">envoie le mail d\'embauche</a>');return;}
-  if(cmd.startsWith("sudo")){tOut(out,'Nice try 😏 — essaie <span class="acc">sudo embauche-moi</span>');return;}
-  const map={help:'commandes : <span class="acc">whoami · projets · labs · services · devis · contact · cv · ls · date · clear</span> — et un sudo bien senti.',
-    whoami:"Jimmy Bomy — développeur web créatif · BUT MMI (Troyes) · Sedan.",
+  if(cmd==="sudo embauche-moi"){tOut(out,'Permission accordée ✅, <a href="mailto:'+EMAIL+'?subject=On%20t%27embauche">envoie le mail d\'embauche</a>');return;}
+  if(cmd.startsWith("sudo")){tOut(out,'Nice try 😏, essaie <span class="acc">sudo embauche-moi</span>');return;}
+  const map={help:'commandes : <span class="acc">whoami · projets · labs · services · devis · contact · cv · ls · date · clear</span>, et un sudo bien senti.',
+    whoami:"Jimmy Bomy · développeur web créatif · BUT MMI (Troyes) · Sedan.",
     ls:"projets/&nbsp;&nbsp;labs/&nbsp;&nbsp;services&nbsp;&nbsp;devis&nbsp;&nbsp;a-propos.txt&nbsp;&nbsp;cv.pdf&nbsp;&nbsp;reglages",
     contact:`email → <a href="mailto:${EMAIL}">${EMAIL}</a><br>tél/wa → <a href="tel:${TEL}">${PHONE}</a> · <a href="https://wa.me/33788021676" target="_blank" rel="noopener">WhatsApp</a>`,
     date:new Date().toLocaleString(LOC)};
   if(map[cmd]){tOut(out,map[cmd]);return;}
-  tOut(out,`commande introuvable : ${esc(raw)} — tape <span class="acc">help</span>`);}
+  tOut(out,`commande introuvable : ${esc(raw)}, tape <span class="acc">help</span>`);}
 
 /* ==== MESSAGES (iMessage) ==== */
 const MSG={
   start:{j:["Salut 👋 Ici Jimmy.","Qu'est-ce qui vous amène ?"],c:[["🏪 Un site pour mon commerce","biz"],["💼 Je recrute / stage","rec"],["👀 Je visite","fun"]]},
-  biz:{j:["Parfait, c'est mon métier 👌","Site vitrine, réservation, refonte — et on démarre toujours par une maquette gratuite, sans engagement."],c:[["⚡ Devis express (3 questions)","@devis"],["💬 WhatsApp direct","!wa"],["📁 Voir vos réalisations","@projets"]]},
+  biz:{j:["Parfait, c'est mon métier 👌","Site vitrine, réservation, refonte, et on démarre toujours par une maquette gratuite, sans engagement."],c:[["⚡ Devis express (3 questions)","@devis"],["💬 WhatsApp direct","!wa"],["📁 Voir vos réalisations","@projets"]]},
   rec:{j:["Super !","BUT MMI à Troyes, 18,1/20 en dev web. Le mieux, c'est de juger sur pièces :"],c:[["📁 Mes projets","@projets"],["📄 Mon CV","@cv"],["✉️ M'écrire","!mail"]]},
   fun:{j:["Bienvenue sur BomyOS 😄","Tout est explorable : changez le fond dans Réglages, fouillez le dossier Labs… il y a même des secrets."],c:[["📁 Les projets","@projets"],["🧪 Le dossier Labs","@labs"],["⚙️ Réglages","@reglages"]]},
 };
@@ -240,12 +240,12 @@ function contactSend(form){
     .then(r=>r.json()).then(j=>{if(!j||!j.ok)throw j||{};
       snd.tap();track("lead");
       form.innerHTML=`<div class="h-eyebrow">Merci${name?" "+esc(name.split(" ")[0]):""} !</div><h2 class="h-title" style="font-size:28px">Message envoyé.</h2><p class="lede">Je vous réponds très vite sur <b>${esc(email)}</b>. À tout de suite 👋</p>`;
-    }).catch(j=>{err(j&&j.error==="rate"?"Trop d'envois d'un coup — réessayez dans une heure.":"Oups, l'envoi a échoué — réessayez dans un instant.");btn.disabled=false;btn.textContent="Envoyer le message ›";});}
+    }).catch(j=>{err(j&&j.error==="rate"?"Trop d'envois d'un coup, réessayez dans une heure.":"Oups, l'envoi a échoué, réessayez dans un instant.");btn.disabled=false;btn.textContent="Envoyer le message ›";});}
 document.addEventListener("submit",e=>{const f=e.target.closest("[data-cform]");if(f){e.preventDefault();contactSend(f);}});
 function content(app){
   if(LEGAL_URL[app])return `<div class="legal-doc" data-legal="${LEGAL_URL[app]}"><p class="lede">Chargement…</p></div>`;
-  if(app==="projets")return finderHTML("Projets","La vitrine — mes projets principaux.",PROJECTS);
-  if(app==="labs")return finderHTML("Labs","Les expériences — petits projets, outils et bidouilles.",LABS);
+  if(app==="projets")return finderHTML("Projets","La vitrine : mes projets principaux.",PROJECTS);
+  if(app==="labs")return finderHTML("Labs","Les expériences : petits projets, outils et bidouilles.",LABS);
   if(app.startsWith("project:")){const p=ALL[app.split(":")[1]];
     if(p.game)return gameHTML(p);
     return `<div class="proj-hero" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}">${p.img?"":'<div class="mock"></div>'}</div><div class="h-eyebrow">${p.cat}</div><h2 class="h-title">${p.name}</h2>
@@ -256,12 +256,12 @@ function content(app){
       ${p.link?(/jimmybomy\.fr/.test(p.link)||p.link.startsWith("/")?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></button>`:`<a class="btn" href="${p.link}" target="_blank" rel="noopener">${p.cta||"Voir le site"} <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`):`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
   if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="/assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><h2 class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</h2></div></div>
     <div class="pro-note"><b>Développeur web freelance</b>, je crée des sites internet pour les particuliers et les professionnels. Micro-entreprise immatriculée, SIRET 133 309 369 00014.</div>
-    <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
+    <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web, du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b>, et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
     <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>15</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
     <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>
     <div class="divider"></div><div class="h-eyebrow">Ce site, audité Lighthouse</div>
     <div class="lhrow"><div class="lhb"><b>97</b><span>Performance</span></div><div class="lhb"><b>100</b><span>Accessibilité</span></div><div class="lhb"><b>100</b><span>Bonnes pratiques</span></div><div class="lhb"><b>100</b><span>SEO</span></div></div>
-    <p class="lede" style="font-size:12px;color:var(--dim);margin-top:8px">Audit Lighthouse sur desktop — accessibilité, bonnes pratiques et SEO à 100/100.</p>`;
+    <p class="lede" style="font-size:12px;color:var(--dim);margin-top:8px">Audit Lighthouse sur desktop, accessibilité, bonnes pratiques et SEO à 100/100.</p>`;
   if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><h2 class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</h2>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
   if(app==="devis")return devisHTML();
@@ -279,13 +279,13 @@ function content(app){
     <button class="btn ghost" data-setreset style="margin-top:8px">Réinitialiser</button>`;}
   if(app==="aide")return `<div class="h-eyebrow">Aide</div><h2 class="h-title" style="font-size:24px">Trucs & astuces<br>de BomyOS.</h2>
     <div class="chips" style="flex-direction:column;align-items:stretch;gap:9px;margin-top:16px">
-      <span class="chip"><b>Ctrl + K</b> — rechercher et ouvrir n'importe quoi</span>
-      <span class="chip"><b>Échap</b> — fermer la fenêtre active</span>
-      <span class="chip"><b>Clic droit</b> sur le bureau — menu contextuel</span>
-      <span class="chip"><b>Glisser</b> les icônes — réorganisez le bureau</span>
-      <span class="chip"><b>Double-clic</b> sur une barre de titre — agrandir</span>
-      <span class="chip"><b>Coin bas-droit</b> d'une fenêtre — redimensionner</span>
-      <span class="chip"><b>⚙️ Réglages</b> — fond d'écran & couleurs, mémorisés</span>
+      <span class="chip"><b>Ctrl + K</b> : rechercher et ouvrir n'importe quoi</span>
+      <span class="chip"><b>Échap</b> : fermer la fenêtre active</span>
+      <span class="chip"><b>Clic droit</b> sur le bureau : menu contextuel</span>
+      <span class="chip"><b>Glisser</b> les icônes : réorganisez le bureau</span>
+      <span class="chip"><b>Double-clic</b> sur une barre de titre : agrandir</span>
+      <span class="chip"><b>Coin bas-droit</b> d'une fenêtre : redimensionner</span>
+      <span class="chip"><b>⚙️ Réglages</b> : fond d'écran & couleurs, mémorisés</span>
       <span class="chip">👀 Il paraît qu'un <b>terminal</b> se cache quelque part…</span>
     </div>`;
   if(app==="messages")return `<div class="imsg"><div class="imsg-log"></div><div class="imsg-chips"></div></div>`;
@@ -305,27 +305,27 @@ function content(app){
       <text x="360" y="178" text-anchor="middle" fill="#eef0ea" font-family="-apple-system,Inter,Arial" font-size="15" font-weight="600">Troyes</text>
       <text x="152" y="132" text-anchor="middle" fill="#71757e" font-family="-apple-system,Inter,Arial" font-size="11">Charleville-Mézières à côté</text>
     </svg></div>
-    <p class="lede">Basé à <b>Sedan</b>, en études à <b>Troyes</b> — je me déplace dans les Ardennes et l'Aube, et je travaille <b>à distance partout en France</b>.</p>
+    <p class="lede">Basé à <b>Sedan</b>, en études à <b>Troyes</b>, je me déplace dans les Ardennes et l'Aube, et je travaille <b>à distance partout en France</b>.</p>
     <a class="btn" href="https://wa.me/33788021676" target="_blank" rel="noopener" style="margin-top:16px">Discuter de votre projet</a>`;
   if(app==="terminal")return `<div class="term"><div class="term-out" id="termOut">
-      <div class="muted">BomyOS terminal — tape <span class="acc">help</span>.</div>
+      <div class="muted">BomyOS terminal · tape <span class="acc">help</span>.</div>
       <div><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ whoami</div>
-      <div class="c">Jimmy Bomy — développeur web créatif (Sedan / Troyes)</div></div>
+      <div class="c">Jimmy Bomy · développeur web créatif (Sedan / Troyes)</div></div>
     <div class="term-line"><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$&nbsp;<input class="term-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal"/></div></div>`;
   if(app==="services")return `<div class="h-eyebrow">Pour les commerces & indépendants</div><h2 class="h-title">Un site pro,<br>sans prise de tête.</h2>
-    <p class="lede">Votre établissement mérite mieux qu'une page Facebook. Je crée des sites <b>simples, rapides et beaux</b> — et je m'occupe de tout.</p>
-    <button class="btn" data-site="https://jimmybomy.fr/projets/demo-boulangerie/" data-title="Exemple — La Fournée de Sedan" style="margin-top:18px">Voir un exemple de site →</button>
+    <p class="lede">Votre établissement mérite mieux qu'une page Facebook. Je crée des sites <b>simples, rapides et beaux</b>, et je m'occupe de tout.</p>
+    <button class="btn" data-site="https://jimmybomy.fr/projets/demo-boulangerie/" data-title="Exemple · La Fournée de Sedan" style="margin-top:18px">Voir un exemple de site →</button>
     <div class="divider"></div><div class="h-eyebrow">Ce que je propose</div>
     <div class="chips" style="flex-direction:column;align-items:stretch;gap:10px;margin:14px 0 6px">
-      <span class="chip"><b>Création de sites vitrines</b> — présentation, horaires, photos, itinéraire ; réservation ou click & collect en option</span>
-      <span class="chip"><b>Refonte</b> — votre site vieillissant remis au goût du jour</span>
-      <span class="chip"><b>Maintenance</b> — mises à jour, sauvegardes, petites modifications : votre site reste à jour et en sécurité</span>
-      <span class="chip"><b>Hébergement</b> — mise en ligne et hébergement pris en charge, zéro technique pour vous</span>
+      <span class="chip"><b>Création de sites vitrines</b> : présentation, horaires, photos, itinéraire ; réservation ou click & collect en option</span>
+      <span class="chip"><b>Refonte</b> : votre site vieillissant remis au goût du jour</span>
+      <span class="chip"><b>Maintenance</b> : mises à jour, sauvegardes, petites modifications : votre site reste à jour et en sécurité</span>
+      <span class="chip"><b>Hébergement</b> : mise en ligne et hébergement pris en charge, zéro technique pour vous</span>
     </div>
     <button class="btn" data-open="contact" data-focus="cf">Demander un devis gratuit</button>
     <div class="divider"></div><div class="h-eyebrow">Comment ça se passe</div>
     <div class="tl" style="margin-top:6px">
-      <div class="row"><div class="yr">1</div><div><div class="role">On échange 15 minutes</div><div class="desc">Vous me dites ce qu'il vous faut — par téléphone, WhatsApp ou autour d'un café.</div></div></div>
+      <div class="row"><div class="yr">1</div><div><div class="role">On échange 15 minutes</div><div class="desc">Vous me dites ce qu'il vous faut, par téléphone, WhatsApp ou autour d'un café.</div></div></div>
       <div class="row"><div class="yr">2</div><div><div class="role">Maquette gratuite</div><div class="desc">Je vous montre à quoi ressemblerait VOTRE site. Sans engagement.</div></div></div>
       <div class="row"><div class="yr">3</div><div><div class="role">Ajustements & mise en ligne</div><div class="desc">On affine ensemble, puis je mets en ligne. Le nom de domaine est à votre nom : il vous appartient.</div></div></div>
     </div>
@@ -353,9 +353,9 @@ function content(app){
       <a class="chip" href="https://www.twitch.tv/jimmyxetv" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--dim)">Twitch</span><span>jimmyxetv · 26 000+ abonnés</span></a>
     </div>
     <a class="btn" href="mailto:${EMAIL}">Écrire un mail <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>`;
-  if(app==="cv")return `<div class="pdf"><h1>Jimmy Bomy</h1><div class="role">Développeur web créatif — BUT MMI (Troyes) · Sedan</div>
-    <div class="sec">Formation</div><div class="li"><span><b>BUT MMI</b> — IUT de Troyes · <span class="muted">18,1/20 en développement web</span></span><span class="muted">depuis 2025</span></div><div class="li"><span><b>Baccalauréat général</b> — Lycée Mabillon</span><span class="muted">2022–25</span></div>
-    <div class="sec">Projets</div>${Object.values(PROJECTS).map(p=>`<div class="li"><span><b>${p.name}</b> — ${p.cat}</span><span class="muted">${p.year}</span></div>`).join("")}
+  if(app==="cv")return `<div class="pdf"><h1>Jimmy Bomy</h1><div class="role">Développeur web créatif · BUT MMI (Troyes) · Sedan</div>
+    <div class="sec">Formation</div><div class="li"><span><b>BUT MMI</b> : IUT de Troyes · <span class="muted">18,1/20 en développement web</span></span><span class="muted">depuis 2025</span></div><div class="li"><span><b>Baccalauréat général</b> : Lycée Mabillon</span><span class="muted">2022-25</span></div>
+    <div class="sec">Projets</div>${Object.values(PROJECTS).map(p=>`<div class="li"><span><b>${p.name}</b> : ${p.cat}</span><span class="muted">${p.year}</span></div>`).join("")}
     <div class="sec">Compétences</div><div class="li"><span>Back</span><span class="muted">PHP · MySQL · Node.js · Linux/Apache (VPS)</span></div><div class="li"><span>Front</span><span class="muted">JavaScript · HTML/CSS · HTML5 Canvas</span></div>
     <div class="sec">Contact</div><div class="li"><span>${EMAIL} · ${PHONE}</span><span class="muted">Sedan / Troyes</span></div></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="/cv-jimmy-bomy.pdf" target="_blank" rel="noopener">Télécharger le CV (PDF) ↓</a>
@@ -367,10 +367,10 @@ const iconFor=a=>a.startsWith("project:")?"folder":(APPS[a]?.icon||"doc");
 
 /* print CV */
 document.getElementById("printCV").innerHTML=`<div class="cvp"><h1>Jimmy Bomy</h1>
-  <div class="role">Développeur web créatif — Étudiant BUT MMI (Troyes) · Sedan</div>
+  <div class="role">Développeur web créatif · Étudiant BUT MMI (Troyes) · Sedan</div>
   <div class="contact">${EMAIL} · ${PHONE} · jimmybomy.fr</div>
-  <h2>Formation</h2><p><b>BUT MMI</b> — IUT de Troyes (depuis 2025). 1re année validée — 18,1/20 de moyenne en développement web. Baccalauréat général, Lycée Mabillon (2022–2025).</p>
-  <h2>Projets</h2><ul>${Object.values(PROJECTS).map(p=>`<li><b>${p.name}</b> — ${p.desc.replace(/<[^>]+>/g,'')}</li>`).join("")}</ul>
+  <h2>Formation</h2><p><b>BUT MMI</b> : IUT de Troyes (depuis 2025). 1re année validée, 18,1/20 de moyenne en développement web. Baccalauréat général, Lycée Mabillon (2022-2025).</p>
+  <h2>Projets</h2><ul>${Object.values(PROJECTS).map(p=>`<li><b>${p.name}</b> : ${p.desc.replace(/<[^>]+>/g,'')}</li>`).join("")}</ul>
   <h2>Compétences</h2><p>PHP · MySQL · JavaScript · HTML/CSS · HTML5 Canvas · Node.js · Administration Linux/Apache (VPS) · Git</p></div>`;
 
 /* SOUND */
@@ -540,7 +540,7 @@ addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("butt
 const MENUS={
   Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
   Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["Mandibules (jeu)","project:mandibules"],["Le Nœud de Sillenbach","project:sillenbach"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
-  Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
+  Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub, @JimmyBomy","_gh"],["LinkedIn · Jimmy Bomy","_li"]]};
 let curMenu=null;
 document.querySelectorAll("button.menu").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();
   document.querySelectorAll("button.menu.open").forEach(x=>{if(x!==b)x.classList.remove("open");});
@@ -588,7 +588,7 @@ crtBtn.addEventListener("click",()=>{PREF.set("crt",PREF.get("crt","0")==="1"?"0
 document.getElementById("contactBtn").addEventListener("click",()=>{if(innerWidth<=720)mopen("contact");else openApp("contact");});
 document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();const t=[...document.querySelectorAll(".dicon,.mtile")].find(x=>x.offsetParent!==null);t?.focus();});
 
-/* MOBILE — écran d'accueil iOS */
+/* MOBILE, écran d'accueil iOS */
 const MTILES=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
 document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
 document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
@@ -673,9 +673,9 @@ function initCmdk(){
   document.body.appendChild(wrap);
   const inp=wrap.querySelector("input"),list=wrap.querySelector(".cmdk-list");
   const items=[...Object.entries(APPS).map(([id,a])=>({t:T(a.title),go:()=>openApp(id)})),
-    ...Object.entries(ALL).map(([id,p])=>({t:p.name+" — "+T(p.cat),go:()=>openApp("project:"+id)})),
-    {t:"GitHub — @JimmyBomy",go:()=>window.open("https://github.com/JimmyBomy","_blank","noopener")},
-    {t:"LinkedIn — Jimmy Bomy",go:()=>window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener")}];
+    ...Object.entries(ALL).map(([id,p])=>({t:p.name+", "+T(p.cat),go:()=>openApp("project:"+id)})),
+    {t:"GitHub, @JimmyBomy",go:()=>window.open("https://github.com/JimmyBomy","_blank","noopener")},
+    {t:"LinkedIn · Jimmy Bomy",go:()=>window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener")}];
   function render(q){const f=items.filter(i=>i.t.toLowerCase().includes(q.toLowerCase())).slice(0,8);
     list.innerHTML=f.map((i,x)=>`<button data-x="${x}" class="${x===0?'sel':''}">${i.t}</button>`).join("")||'<div style="padding:12px 14px;color:var(--dim);font-size:13px">Aucun résultat</div>';
     list._f=f;}

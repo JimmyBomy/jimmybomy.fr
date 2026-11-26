@@ -62,7 +62,7 @@ function ago(string $ts): string {
 function contactKind(string $c): array {
     $c = trim($c);
     if (strpos($c, '@') !== false) {
-        return ['email', 'mailto:' . rawurlencode($c) . '?subject=' . rawurlencode('Votre projet de site — Jimmy Bomy')];
+        return ['email', 'mailto:' . rawurlencode($c) . '?subject=' . rawurlencode('Votre projet de site · Jimmy Bomy')];
     }
     $d = preg_replace('/\D/', '', $c);
     if (strlen($d) === 10 && $d[0] === '0') $d = '33' . substr($d, 1);
@@ -150,7 +150,7 @@ if (empty($_SESSION['auth'])) {
             if ($f >= 5) {
                 setSetting("lock_$sfx", (string)(time() + 900));
                 setSetting("fail_$sfx", '0');
-                $err = '5 échecs — accès bloqué 15 minutes.';
+                $err = '5 échecs, accès bloqué 15 minutes.';
             } else {
                 $err = 'Mot de passe incorrect.';
             }
@@ -162,7 +162,7 @@ if (empty($_SESSION['auth'])) {
             <div class="logo"><?= markSvg(58) ?></div>
             <h1>Espace privé</h1>
             <div class="sub">BomyOS · admin</div>
-            <?php if ($expired && !$err): ?><div class="alert">Session expirée — reconnecte-toi.</div><?php endif; ?>
+            <?php if ($expired && !$err): ?><div class="alert">Session expirée, reconnecte-toi.</div><?php endif; ?>
             <?php if ($err): ?><div class="alert"><?= h($err) ?></div><?php endif; ?>
             <input type="hidden" name="action" value="login">
             <input type="hidden" name="csrf" value="<?= h($_SESSION['csrf']) ?>">

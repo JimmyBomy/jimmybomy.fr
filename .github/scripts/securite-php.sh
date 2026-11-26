@@ -70,6 +70,42 @@ pub "=== PHP ==="
 for e in $BEFORE; do pub "Avant la mise à jour : PHP ${e%%:*} $( [ "${e#*:}" = ok ] && echo 'déjà corrigé' || echo 'VULNÉRABLE')"; done
 for e in $AFTER;  do pub "Après la mise à jour : PHP ${e%%:*} $( [ "${e#*:}" = ok ] && echo 'corrigé' || echo 'TOUJOURS VULNÉRABLE (pas de correctif disponible dans les dépôts)')"; done
 
+# --- nginx : failles RCE HTTP/2 (CVE-2026-123633, -123007…), corrigées en 1.30.7 / 1.31.9 ---
+if command -v nginx >/dev/null; then
+  nv=$(nginx -v 2>&1 | sed -n 's#.*nginx/\([0-9.]*\).*#\1#p')
+  ncl=$(ls /usr/share/doc/nginx*/changelog.Debian.gz 2>/dev/null | head -n1)
+  nfix=no
+  case "$nv" in
+    1.30.*) ver_ge "$nv" 1.30.7 && nfix=yes ;;
+    *) ver_ge "$nv" 1.31.9 && nfix=yes ;;
+  esac
+  [ -n "$ncl" ] && zgrep -qs 'CVE-2026-123007' "$ncl" && zgrep -qs 'CVE-2026-123633' "$ncl" && nfix=yes
+  log "nginx $nv, corrigé : $nfix"
+  h2=$(nginx -T 2>/dev/null | grep -Ev '^\s*#' | grep -Ec '(listen[^;]*\bhttp2\b|^\s*http2\s+on)' || true)
+  pub ""
+  pub "=== nginx ==="
+  if [ "$nfix" = yes ]; then
+    pub "nginx : corrigé"
+  else
+    pub "nginx : pas encore de correctif dans les dépôts installés"
+    if [ "${h2:-0}" -gt 0 ]; then
+      pub "HTTP/2 activé sur nginx : oui -> les failles RCE sont exploitables"
+      if ver_ge "$nv" 1.25.1; then
+        printf '# Protection CVE-2026-123633 / CVE-2026-123007, ajoutée le %s. À retirer après mise à jour de nginx.\nhttp2 off;\n' "$(date +%F)" > /etc/nginx/conf.d/99-securite-http2-off.conf
+        if nginx -t >> "$OUT" 2>&1; then systemctl reload nginx; pub "Protection appliquée : HTTP/2 désactivé sur nginx (Cloudflare continue de servir le site en HTTP/2 aux visiteurs)."
+        else rm -f /etc/nginx/conf.d/99-securite-http2-off.conf; pub "Protection automatique impossible (config nginx refusée) : à faire à la main."; fi
+      else
+        pub "nginx trop ancien pour la directive http2 off : retirer « http2 » des lignes listen à la main."
+      fi
+    else
+      pub "HTTP/2 activé sur nginx : non -> les deux failles RCE HTTP/2 ne sont pas exploitables"
+    fi
+  fi
+  h2b=$(nginx -T 2>/dev/null | grep -Ec '(^\s*listen[^;]*\bhttp2\b|^\s*http2\s+on)' || true)
+  log "lignes qui activent encore http2 : $h2b"
+  [ "$nfix" = no ] && [ "${h2b:-0}" -gt 0 ] && pub "Attention : $h2b ligne(s) de config activent encore HTTP/2 (détail dans le rapport)."
+fi
+
 # --- Recherche de traces d'intrusion (détail privé, chiffres publics) ---------
 log ""; log "=== Traces ==="
 SITE=/var/www/jimmybomy.fr
@@ -91,7 +127,7 @@ while IFS= read -r f; do [ -n "$f" ] && { n_tmp=$((n_tmp+1)); log "Fichier suspe
 procs=$(ps -u www-data -o pid=,args= 2>/dev/null | grep -Ev 'php-fpm|apache2|nginx' || true)
 n_proc=$(printf '%s' "$procs" | grep -c . || true)
 log "[processus www-data inhabituels]"; log "$procs"
-cron_www=$( (crontab -l -u www-data 2>/dev/null | grep -v '^#' | grep -c .) || echo 0)
+cron_www=$(crontab -l -u www-data 2>/dev/null | grep -v '^#' | grep -c . || true); cron_www=${cron_www:-0}
 log "[crontab www-data]"; crontab -l -u www-data >> "$OUT" 2>&1
 log "[clés SSH root]"; ls -l --time-style=+%F /root/.ssh/authorized_keys >> "$OUT" 2>&1; awk '{print $1, $NF}' /root/.ssh/authorized_keys >> "$OUT" 2>/dev/null
 

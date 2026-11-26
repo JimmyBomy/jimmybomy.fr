@@ -94,6 +94,18 @@ test("le cache du service worker est versionné", () => {
   assert.match(read("sw.js"), /const CACHE = "bomyos-v\d+"/);
 });
 
+test("le service worker est enregistré avec son numéro de version (contourne le cache Cloudflare)", () => {
+  const cache = read("sw.js").match(/const CACHE = "bomyos-v(\d+)"/)[1];
+  const js = read("assets/js/bomyos.js");
+  assert.equal(js.match(/const SW_V=(\d+);/)[1], cache, "SW_V dans bomyos.js doit égaler le numéro de CACHE de sw.js");
+  assert.match(js, /register\("\/sw\.js\?v="\+SW_V/);
+});
+
+test("les pages légales ne passent jamais par un cache", () => {
+  assert.match(read("assets/js/bomyos.js"), /cache:"no-store"/);
+  assert.match(read("sw.js"), /mentions-legales\|confidentialite/);
+});
+
 test("le sitemap ne contient que des adresses jimmybomy.fr en HTTPS", () => {
   const locs = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   assert.ok(locs.length > 0);

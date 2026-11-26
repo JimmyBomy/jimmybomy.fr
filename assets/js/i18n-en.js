@@ -156,7 +156,7 @@ window.BOMY_EN = {
   "Glisser":"Drag","les icônes — réorganisez le bureau":"the icons — rearrange the desktop","Double-clic":"Double-click","sur une barre de titre — agrandir":"a title bar — maximise",
   "Coin bas-droit":"Bottom-right corner","d'une fenêtre — redimensionner":"of a window — resize","— fond d'écran & couleurs, mémorisés":"— wallpaper & colours, remembered",
   "👀 Il paraît qu'un":"👀 Rumour has it a","se cache quelque part…":"is hiding somewhere…","Personnalisez":"Customise","votre BomyOS.":"your BomyOS.",
-  "Couleur d'accentuation":"Accent colour","Général":"General","Sons d'interface":"Interface sounds","Effet CRT (rétro)":"CRT effect (retro)","Vos réglages sont mémorisés sur cet appareil.":"Your settings are saved on this device.",
+  "Couleur d'accentuation":"Accent colour","Général":"General","Sons d'interface":"Interface sounds","Icônes en verre":"Glass icons","Effet CRT (rétro)":"CRT effect (retro)","Vos réglages sont mémorisés sur cet appareil.":"Your settings are saved on this device.",
   "Réinitialiser":"Reset","Aurora":"Aurora","Crépuscule":"Dusk","Océan":"Ocean","Forêt":"Forest","Minuit":"Midnight",
   "BomyOS terminal — tape":"BomyOS terminal — type","Jimmy Bomy — développeur web créatif (Sedan / Troyes)":"Jimmy Bomy — creative web developer (Sedan / Troyes)",
   "commandes :":"commands:","— et un sudo bien senti.":"— and a well-placed sudo.","Jimmy Bomy — développeur web créatif · BUT MMI (Troyes) · Sedan.":"Jimmy Bomy — creative web developer · BUT MMI (Troyes) · Sedan.",

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Mandibules : jeu de stratégie 3D jouable en ligne · Jimmy Bomy</title>
+<meta name="description" content="Mandibules, un jeu de stratégie HTML5 original de Jimmy Bomy : une guerre de fourmilières en 3D, style papier découpé. Campagne de 60 niveaux, mode Conquête, Défis du jour, 7 langues. Jouable gratuitement dans le navigateur." />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="Jimmy Bomy" />
+<meta name="theme-color" content="#05060a" />
+<link rel="canonical" href="https://jimmybomy.fr/projets/mandibules/" />
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Jimmy Bomy" />
+<meta property="og:url" content="https://jimmybomy.fr/projets/mandibules/" />
+<meta property="og:title" content="Mandibules : la guerre des fourmilières, en 3D" />
+<meta property="og:description" content="Un jeu de stratégie original en papier découpé, jouable dans le navigateur : 60 niveaux, mode Conquête sur 21 territoires, Défis du jour, 7 langues." />
+<meta property="og:image" content="https://jimmybomy.fr/assets/og/mandibules.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Mandibules, jeu de stratégie 3D de Jimmy Bomy : des colonies de fourmis en papier découpé s'affrontent" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mandibules : la guerre des fourmilières, en 3D" />
+<meta name="twitter:description" content="Jeu de stratégie original en papier découpé, jouable dans le navigateur." />
+<meta name="twitter:image" content="https://jimmybomy.fr/assets/og/mandibules.jpg" />
+<meta name="twitter:image:alt" content="Mandibules, jeu de stratégie 3D de Jimmy Bomy" />
+<link rel="icon" href="/icon-192.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Mandibules","url":"https://jimmybomy.fr/projets/mandibules/","image":"https://jimmybomy.fr/assets/og/mandibules.jpg","description":"Jeu de stratégie HTML5 original : une guerre de fourmilières en 3D, style papier découpé.","genre":"Stratégie","gamePlatform":"Navigateur web","applicationCategory":"Game","operatingSystem":"Tous (navigateur)","inLanguage":["fr","en"],"author":{"@type":"Person","name":"Jimmy Bomy","url":"https://jimmybomy.fr/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Archivo:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/legal.css?v=1" />
+<style>
+.win{max-width:980px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 20px;border-radius:100px;background:var(--acc);color:#0a0b0e;font:600 14px "Space Grotesk",system-ui,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(198,255,78,.5)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--glass-brd)}.btn.ghost:hover{box-shadow:none;background:rgba(255,255,255,.06)}
+.hook{font-size:17px;color:var(--ink);margin-bottom:4px}
+.gframe{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0b0a08;margin-top:18px;box-shadow:0 18px 40px -18px rgba(0,0,0,.8)}
+.gframe::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.12);border-radius:12px;pointer-events:none}
+.gframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.gposter{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0b0a08 url('/assets/shots/mandibules.jpg') center/cover;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.gposter::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,10,.05),rgba(5,6,10,.55))}
+.gplay{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:100px;background:var(--acc);color:#0a0b0e;font:700 15px "Space Grotesk",system-ui,sans-serif;box-shadow:0 12px 34px -10px rgba(198,255,78,.6);transition:transform .15s}
+.gposter:hover .gplay,.gposter:focus-visible .gplay{transform:scale(1.05)}
+.gacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.gnote{font-size:12.5px!important;color:var(--dim)!important;margin-top:10px}
+.gshots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0 6px}
+.gshots img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:9px;border:1px solid var(--glass-brd);display:block}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border:1px solid var(--glass-brd);padding:5px 11px;border-radius:100px}
+@media(max-width:720px){.gshots{grid-template-columns:1fr}.gacts .btn{flex:1 1 100%}.gacts .btn.ghost{order:-1;background:var(--acc);color:#0a0b0e;border-color:transparent}.gacts .btn[data-gfs]{background:transparent;color:var(--ink);border:1px solid var(--glass-brd)}}
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="Navigation">
+  <a href="/#projets">‹ BomyOS</a><span class="sp"></span>
+  <a class="lnk" href="/#projets">Projets</a>
+  <a class="lnk" href="/#contact">Contact</a>
+</nav>
+<main class="win">
+  <div class="win-bar" aria-hidden="true"><div class="lights"><i></i><i></i><i></i></div><div class="wtitle">Mandibules.app</div></div>
+  <div class="win-body">
+    <article class="legal-doc">
+      <div class="h-eyebrow">Jeu de stratégie 3D · HTML5</div>
+      <h1>Mandibules</h1>
+      <p class="hook">La guerre des fourmilières, en 3D et en papier découpé. Jouable ici, tout de suite.</p>
+
+      <div class="gframe" id="gframe"><button class="gposter" id="gplay" aria-label="Lancer Mandibules ici"><span class="gplay"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Jouer ici</span></button></div>
+      <div class="gacts">
+        <button class="btn" data-gfs id="gfs">Plein écran <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="btn ghost" href="/jeux/mandibules/" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      </div>
+      <p class="gnote">Sur téléphone, le nouvel onglet est plus confortable. Le son démarre au premier clic dans le jeu, et ta progression est gardée dans ce navigateur.</p>
+
+      <div class="gshots">
+        <img src="/assets/shots/mandibules-1-gameplay.jpg" alt="Mandibules, niveau 10 « Le Jardin » : des fourmilières numérotées reliées par des chemins sur un plateau d'herbe, des colonnes de fourmis partent à l'attaque d'une colonie rivale" width="1280" height="720" loading="lazy">
+        <img src="/assets/shots/mandibules-2-final-boss.jpg" alt="Mandibules, niveau 60 « Boss final » : un plateau volcanique parcouru de lave où quatre colonies de couleurs différentes se disputent les fourmilières" width="1280" height="720" loading="lazy">
+        <img src="/assets/shots/mandibules-3-home.jpg" alt="Mandibules, écran d'accueil : le titre du jeu au-dessus d'une fourmilière couronnée sur un plateau de sable, avec le bouton Jouer, la carte et la colonie" width="1280" height="720" loading="lazy">
+      </div>
+
+      <h2>Le jeu</h2>
+      <p>Mandibules est un jeu de stratégie original que j'ai conçu et développé : une guerre de fourmilières en 3D, dans un style papier découpé. On développe sa colonie, on envoie ses fourmis et on prend le contrôle du terrain face à des colonies rivales. Tout le jeu tient dans un seul fichier HTML5 et se lance directement dans le navigateur, sur ordinateur comme sur téléphone.</p>
+      <div class="tags"><span class="tag">HTML5</span><span class="tag">JavaScript</span><span class="tag">Three.js</span><span class="tag">Game design</span></div>
+
+      <h2>Fonctionnalités</h2>
+      <ul>
+        <li>Campagne de 60 niveaux, avec une règle différente pour chaque monde</li>
+        <li>Mode Conquête sur une carte de 21 territoires</li>
+        <li>3 niveaux de difficulté</li>
+        <li>52 drapeaux de pays</li>
+        <li>Défis du jour, renouvelés chaque jour</li>
+        <li>7 langues</li>
+        <li>Direction artistique en papier découpé, en 3D (Three.js)</li>
+        <li>Un seul fichier HTML de 570 Ko, sans rien à installer, et la progression est sauvegardée dans le navigateur</li>
+      </ul>
+
+      <h2>Fiche</h2>
+      <dl><dt>Rôle</dt><dd>Game design &amp; développement</dd><dt>Année</dt><dd>2026</dd><dt>Contexte</dt><dd>Projet personnel</dd></dl>
+      <p class="upd"><a href="/#projet-mandibules">Voir dans le portfolio BomyOS</a> · <a href="/#contact">Me contacter</a></p>
+    </article>
+  </div>
+</main>
+<p class="foot">© Jimmy Bomy · <a href="/mentions-legales/">Mentions légales</a> · <a href="/confidentialite/">Confidentialité</a></p>
+<script>
+(function(){var box=document.getElementById("gframe"),url="/jeux/mandibules/";
+function frame(){var f=box.querySelector("iframe");if(f)return f;f=document.createElement("iframe");f.src=url;f.title="Mandibules : jeu jouable";
+  f.setAttribute("allow","fullscreen; autoplay");f.setAttribute("allowfullscreen","");box.innerHTML="";box.appendChild(f);setTimeout(function(){try{f.focus()}catch(e){}},300);return f;}
+document.getElementById("gplay").addEventListener("click",frame);
+document.getElementById("gfs").addEventListener("click",function(){var f=frame(),rq=f.requestFullscreen||f.webkitRequestFullscreen;
+  if(rq&&(document.fullscreenEnabled||document.webkitFullscreenEnabled)){try{var r=rq.call(f);if(r&&r.catch)r.catch(function(){open(url,"_blank","noopener")});}catch(e){open(url,"_blank","noopener")}}
+  else open(url,"_blank","noopener");});
+})();
+</script>
+</body>
+</html>

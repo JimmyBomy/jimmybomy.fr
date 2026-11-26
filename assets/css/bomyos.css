@@ -425,3 +425,21 @@ textarea.dv-in{resize:vertical;min-height:96px;line-height:1.5}
 .legal-doc .todo{color:#febc2e;font-family:"JetBrains Mono";font-size:12.5px}
 .legal-doc .upd{font-size:12px;color:var(--dim);margin-top:26px}
 @media(max-width:520px){.legal-doc dl{grid-template-columns:1fr;gap:2px}.legal-doc dd{margin-bottom:10px}}
+/* ==== Jeux jouables (Mandibules) : carte + fenêtre projet ==== */
+.fitem .fhook{font-size:11px;line-height:1.4;color:var(--muted);margin-top:-4px}
+.fitem .ftags{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:-2px}
+.fitem .ftags i{font-style:normal;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);border:1px solid var(--glass-brd);padding:2px 7px;border-radius:100px}
+.ghook{margin-top:-4px}
+.gframe{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0b0a08;margin-top:18px;box-shadow:0 18px 40px -18px rgba(0,0,0,.8)}
+.gframe::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.12);border-radius:12px;pointer-events:none}
+.gframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.gposter{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.gposter::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,10,.05),rgba(5,6,10,.55))}
+.gplay{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:100px;background:var(--acc);color:#0a0b0e;font-weight:700;font-size:15px;box-shadow:0 12px 34px -10px rgba(198,255,78,.6);transition:transform .15s}
+.gposter:hover .gplay,.gposter:focus-visible .gplay{transform:scale(1.05)}
+.gacts{display:flex;flex-wrap:wrap;gap:10px}.gacts .btn{margin-top:14px}
+.gnote{font-size:12.5px;color:var(--dim);margin-top:10px;line-height:1.5}.gnote a{color:var(--muted)}
+.gshots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
+.gshots img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:9px;border:1px solid var(--glass-brd);display:block}
+.gfeat{padding-left:18px;color:var(--muted);font-size:14px;line-height:1.58}.gfeat li+li{margin-top:3px}
+@media(max-width:720px){.gshots{grid-template-columns:1fr}.gacts .btn{flex:1 1 100%;justify-content:center}.gacts .btn.ghost{order:-1;background:var(--acc);color:#0a0b0e;border-color:transparent}.gacts .btn[data-gfs]{background:transparent;color:var(--ink);border:1px solid var(--glass-brd)}}

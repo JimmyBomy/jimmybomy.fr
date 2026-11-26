@@ -100,11 +100,25 @@ test("le sitemap ne contient que des adresses jimmybomy.fr en HTTPS", () => {
   for (const l of locs) assert.match(l, /^https:\/\/jimmybomy\.fr\//);
 });
 
-test("la version anglaise existe, renvoie vers le français et ses fichiers existent", () => {
+test("la version anglaise est la même interface BomyOS, à jour avec index.html", async () => {
+  const { buildEn } = await import("../tools/build-en.mjs");
+  assert.equal(read("en/index.html"), buildEn(), "en/index.html n'est pas à jour : lancer node tools/build-en.mjs");
   const en = read("en/index.html");
   assert.match(en, /<html lang="en">/);
   assert.match(en, /hreflang="fr" href="https:\/\/jimmybomy\.fr\/"/);
   assert.match(html, /hreflang="en" href="https:\/\/jimmybomy\.fr\/en\/"/);
-  for (const m of en.matchAll(/src="(\/assets\/[^"]+)"/g)) assert.ok(exists(m[1]), `image manquante : ${m[1]}`);
-  for (const img of en.match(/<img\b[^>]*>/g) || []) assert.match(img, /\salt="[^"]+"/);
+  assert.match(en, /<script src="\/assets\/js\/i18n-en\.js[^"]*"><\/script>\s*<script src="\/assets\/js\/bomyos\.js/);
+  for (const m of en.matchAll(/(?:src|href)="(\/assets\/[^"?]+)/g)) assert.ok(exists(m[1]), `fichier manquant : ${m[1]}`);
+});
+
+test("chaque projet est traduit en anglais", () => {
+  const ctx = { window: {} };
+  vm.runInNewContext(read("assets/js/i18n-en.js"), ctx);
+  const D = ctx.window.BOMY_EN;
+  for (const [id, p] of Object.entries({ ...PROJECTS, ...LABS })) {
+    for (const k of ["cat", "role", "client", "desc"]) assert.ok(p[k] in D, `${id} : « ${k} » sans traduction dans i18n-en.js`);
+    for (const s of p.study || []) { assert.ok(s.h in D, `${id} : titre « ${s.h} » sans traduction`); assert.ok(s.p in D, `${id} : étude de cas sans traduction`); }
+    for (const m of p.metrics || []) assert.ok(m[1] in D, `${id} : chiffre « ${m[1]} » sans traduction`);
+  }
+  for (const x of XP) for (const k of ["role", "desc"]) assert.ok(x[k].replace(/<[^>]+>/g, "") in D || x[k] in D || x[k].includes("<"), `parcours : « ${x[k]} » sans traduction`);
 });

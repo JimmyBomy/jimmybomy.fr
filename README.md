@@ -1,5 +1,7 @@
 # BomyOS — jimmybomy.fr
 
+[![Tests](https://github.com/JimmyBomy/jimmybomy.fr/actions/workflows/tests.yml/badge.svg)](https://github.com/JimmyBomy/jimmybomy.fr/actions/workflows/tests.yml) [![Déploiement VPS](https://github.com/JimmyBomy/jimmybomy.fr/actions/workflows/deploy.yml/badge.svg)](https://github.com/JimmyBomy/jimmybomy.fr/actions/workflows/deploy.yml)
+
 Portfolio interactif de **Jimmy Bomy**, développeur web créatif — étudiant BUT MMI (Troyes), basé à Sedan.
 
 Un système d'exploitation complet dans le navigateur, **en JavaScript vanilla, sans framework** :
@@ -33,7 +35,13 @@ Tout est en haut du `<script>` dans `index.html` :
 - `XP` — le parcours
 - `EMAIL` / `PHONE` — coordonnées
 
+## Tests
+
+`node --test tests/*.test.mjs` (Node 22, aucune dépendance) vérifie à chaque push et chaque pull request :
+le JavaScript, les fiches projets (champs, images, liens HTTPS, études de cas), la synchro avec le contenu SEO,
+les fichiers référencés, les textes alternatifs des images, le service worker et le sitemap.
+
 ## Déploiement
 
-Hébergé sur GitHub Pages avec domaine custom `jimmybomy.fr` (fichier `CNAME`).
-Chaque push sur `main` déploie automatiquement.
+Hébergé sur mon VPS Linux (Apache). Chaque fusion sur `main` déclenche la GitHub Action `Déploiement VPS`,
+qui se connecte en SSH et fait un `git pull` dans `/var/www/jimmybomy.fr`.

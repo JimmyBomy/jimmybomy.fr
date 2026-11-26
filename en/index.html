@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Jimmy Bomy — Creative web developer · France</title>
+<meta name="description" content="Jimmy Bomy, freelance web developer and Multimedia & Internet (BUT MMI) student in Troyes, France. Client web apps, PHP/MySQL, vanilla JavaScript, self-hosted on my own Linux VPS." />
+<meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#05060a" />
+<link rel="canonical" href="https://jimmybomy.fr/en/" />
+<link rel="alternate" hreflang="fr" href="https://jimmybomy.fr/" />
+<link rel="alternate" hreflang="en" href="https://jimmybomy.fr/en/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jimmybomy.fr/en/" />
+<meta property="og:title" content="Jimmy Bomy — Creative web developer" />
+<meta property="og:description" content="Client web apps, PHP/MySQL, vanilla JavaScript, self-hosted on my own VPS." />
+<meta property="og:image" content="https://jimmybomy.fr/og.png?v=3" />
+<meta property="og:locale" content="en_GB" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c6ff4e'/%3E%3Crect x='7' y='9.5' width='18' height='13' rx='2.6' fill='%230d0f14'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@800;900&display=swap" rel="stylesheet" />
+<style>
+:root{--acc:#c6ff4e;--acc2:#7cc4ff;--ink:#f4f4f6;--muted:#a1a1a6;--dim:#6e6e73;--card:#111318;--brd:rgba(255,255,255,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Space Grotesk",system-ui,sans-serif;background:#05060a;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:5;background:rgba(5,6,10,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;gap:12px}
+header b{font-family:Archivo,sans-serif;font-weight:900;letter-spacing:-.01em}
+header nav{display:flex;gap:16px;font-size:14px;flex-wrap:wrap}
+header nav a{color:var(--muted);text-decoration:none}
+header nav a:hover{color:var(--ink)}
+.hero{padding-top:72px;padding-bottom:40px}
+.eyebrow{color:var(--acc);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+h1{font-family:Archivo,sans-serif;font-weight:900;font-size:clamp(36px,7vw,68px);line-height:1.02;letter-spacing:-.02em;margin:14px 0 18px}
+.lede{color:var(--muted);font-size:18px;max-width:680px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:11px 18px;border-radius:12px;background:var(--acc);color:#0a0b0e;font-weight:600;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--brd)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:40px 0 10px}
+.stat{background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:16px}
+.stat b{display:block;font-family:Archivo,sans-serif;font-size:28px;color:var(--acc)}
+.stat span{color:var(--muted);font-size:13px}
+section{padding:44px 0;border-top:1px solid var(--brd)}
+h2{font-family:Archivo,sans-serif;font-weight:800;font-size:30px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;background:#1a1d24}
+.card .b{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{font-size:19px}
+.card .meta{color:var(--acc2);font-size:13px}
+.card p{color:var(--muted);font-size:14.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{font-size:12px;border:1px solid var(--brd);border-radius:999px;padding:3px 9px;color:var(--muted)}
+.card a.go{font-size:14px;font-weight:600;text-decoration:none}
+.case{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:22px;display:grid;gap:16px}
+.case h3{font-size:22px}
+.case .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.case h4{color:var(--acc);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.case p{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--brd);border-radius:10px;padding:6px 12px;font-size:14px}
+.tl{display:grid;gap:16px}
+.tl div{display:grid;grid-template-columns:120px 1fr;gap:14px}
+.tl .y{color:var(--dim);font-size:14px}
+.tl p{color:var(--muted);font-size:14.5px}
+footer{padding:30px 0 50px;color:var(--dim);font-size:13px;border-top:1px solid var(--brd)}
+@media (max-width:560px){.tl div{grid-template-columns:1fr;gap:2px}header nav{gap:12px;font-size:13px}.hero{padding-top:44px}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","@id":"https://jimmybomy.fr/#jimmy","name":"Jimmy Bomy","jobTitle":"Creative web developer","url":"https://jimmybomy.fr/en/","sameAs":["https://github.com/JimmyBomy","https://www.linkedin.com/in/jimmy-bomy-1037453a8/","https://www.twitch.tv/jimmyxetv"]}
+</script>
+</head>
+<body>
+<header><div class="wrap"><b>Jimmy Bomy</b>
+  <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="/" hreflang="fr" lang="fr">Version française</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <div class="eyebrow">Freelance web developer · France</div>
+  <h1>I build web apps<br>that real clients use.</h1>
+  <p class="lede">I'm Jimmy, a second-year student in Multimedia &amp; Internet (BUT MMI) at the IUT of Troyes, and a registered freelance developer. I design, code, host and maintain websites and web apps, from the PHP/MySQL back end to the interface, on my own Linux server.</p>
+  <div class="cta"><a class="btn" href="#work">See my work</a><a class="btn ghost" href="/">Try the interactive OS portfolio (FR)</a></div>
+  <div class="stats">
+    <div class="stat"><b>3</b><span>live client websites</span></div>
+    <div class="stat"><b>18.1/20</b><span>web development average, year 1</span></div>
+    <div class="stat"><b>100</b><span>Lighthouse accessibility, best practices &amp; SEO</span></div>
+    <div class="stat"><b>26k+</b><span>Twitch followers</span></div>
+  </div>
+</div>
+
+<section id="work"><div class="wrap">
+  <h2>Featured case study</h2>
+  <article class="case">
+    <img src="/assets/shots/amitie.jpg" alt="Amitié Artisan home page" style="width:100%;border-radius:12px;aspect-ratio:16/8;object-fit:cover;object-position:top" />
+    <div><div class="meta" style="color:var(--acc2);font-size:13px">Client project · in production · 2026</div><h3>Amitié Artisan — a web platform for local food producers</h3></div>
+    <div class="row">
+      <div><h4>The brief</h4><p>A national network of food businesses (bakeries, butchers, cheese shops, restaurants…) showing where each product comes from and, in real time, where to buy it. Not a brochure site: a platform with accounts and paid subscriptions.</p></div>
+      <div><h4>The challenge</h4><p>Two audiences that must connect: producers present their craft and products, shops declare their outlets and suppliers. All with paid sign-ups and a three-language interface.</p></div>
+      <div><h4>What I did</h4><p>Developed the application for the client: separate sign-up and login flows for shops and producers, member area, invitations between producers and outlets, unlimited products, subscription plans and FR/EN/DE versions.</p></div>
+      <div><h4>The result</h4><p>Live at <a href="https://www.amitie-artisan.fr" rel="noopener">amitie-artisan.fr</a> with around a hundred listings of producers, makers and shops.</p></div>
+    </div>
+  </article>
+
+  <h2 style="margin-top:44px">More work</h2>
+  <div class="grid">
+    <article class="card"><img src="/assets/shots/rois.jpg" alt="Rois de France website" loading="lazy" /><div class="b"><div class="meta">University project · graded 18.1/20</div><h3>Rois de France</h3><p>A web encyclopedia of the kings of France: 64 dynamic pages generated from MySQL, search, quiz, admin back office, prepared statements against SQL injection and output escaping against XSS. Deployed on my VPS.</p><div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Security</span></div><a class="go" href="/projets/rois/">Open the site →</a></div></article>
+    <article class="card"><img src="/assets/shots/bomyos.jpg" alt="BomyOS portfolio" loading="lazy" /><div class="b"><div class="meta">This portfolio · open source</div><h3>BomyOS</h3><p>My French portfolio is a full operating system in vanilla JavaScript: draggable windows, WebAudio sounds, full keyboard navigation and screen-reader support. Automated tests and continuous deployment with GitHub Actions.</p><div class="tags"><span class="tag">Vanilla JS</span><span class="tag">Accessibility</span><span class="tag">Tests &amp; CI</span></div><a class="go" href="https://github.com/JimmyBomy/jimmybomy.fr" rel="noopener">Source code →</a></div></article>
+    <article class="card"><img src="/assets/shots/tonybedja.jpg" alt="DJ Tony Bedja website" loading="lazy" /><div class="b"><div class="meta">Client project · live</div><h3>DJ Tony Bedja</h3><p>Website for a wedding and party DJ in the Ardennes: events, photo gallery and one-click booking, optimised for local search.</p><div class="tags"><span class="tag">Client</span><span class="tag">Local SEO</span></div><a class="go" href="https://djtonybedja.fr" rel="noopener">Visit →</a></div></article>
+    <article class="card"><img src="/assets/shots/fannyspirit.jpg" alt="Fanny Spirit website" loading="lazy" /><div class="b"><div class="meta">Client project · live</div><h3>Fanny Spirit</h3><p>Website for a Reiki practitioner: soft starry design, treatments, prices, gift vouchers and appointment booking.</p><div class="tags"><span class="tag">Client</span><span class="tag">Booking</span></div><a class="go" href="https://fannyspirit.fr" rel="noopener">Visit →</a></div></article>
+    <article class="card"><img src="/assets/shots/lumina.jpg" alt="Lumina Studio website" loading="lazy" /><div class="b"><div class="meta">University project · art direction &amp; code</div><h3>Lumina Studio &amp; Backrooms</h3><p>Website for a fictional events agency in Troyes and its immersive horror escape-game site, designed and built as a pair.</p><div class="tags"><span class="tag">Art direction</span><span class="tag">JavaScript</span></div><a class="go" href="/projets/lumina/">Open the site →</a></div></article>
+    <article class="card"><img src="/assets/shots/turbofilm.jpg" alt="Still from the short film Derrière la porte close" loading="lazy" /><div class="b"><div class="meta">Short film · Turbofilm Festival 2026</div><h3>Derrière la porte close</h3><p>A short film written, shot and edited in 24 hours by a team of MMI students. I played the lead role and helped write the ideas.</p><div class="tags"><span class="tag">Video</span><span class="tag">Acting</span><span class="tag">Teamwork</span></div><a class="go" href="https://www.youtube.com/watch?v=B5kp5wc4Rlo" rel="noopener">Watch the film →</a></div></article>
+    <article class="card"><img src="/assets/shots/sillenbach.jpg" alt="Le Nœud de Sillenbach" loading="lazy" /><div class="b"><div class="meta">Personal project · French</div><h3>Le Nœud de Sillenbach</h3><p>A non-linear interactive fiction in 30 passages, inspired by the series Dark, playable in the browser (Twine).</p><div class="tags"><span class="tag">Twine</span><span class="tag">Writing</span></div><a class="go" href="/projets/sillenbach/">Play →</a></div></article>
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <h2>About</h2>
+  <div class="tl">
+    <div><span class="y">2025 — now</span><p><b style="color:var(--ink)">BUT MMI (Multimedia &amp; Internet), IUT of Troyes</b><br>First year passed with an 18.1/20 average in web development.</p></div>
+    <div><span class="y">2026 — now</span><p><b style="color:var(--ink)">Freelance web developer</b><br>Registered sole trader, building and hosting websites for small businesses.</p></div>
+    <div><span class="y">Ongoing</span><p><b style="color:var(--ink)">Self-hosting &amp; Linux administration</b><br>All my projects run on my own VPS (Apache, GoAccess monitoring, automated deployments), plus a game server managed with Pterodactyl.</p></div>
+    <div><span class="y">Ongoing</span><p><b style="color:var(--ink)">Twitch creator — <a href="https://www.twitch.tv/jimmyxetv" rel="noopener">jimmyxetv</a></b><br>26,000+ followers: building and running a live community.</p></div>
+  </div>
+  <h2 style="margin-top:36px;font-size:22px">Toolbox</h2>
+  <div class="chips"><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">HTML5 Canvas</span><span class="chip">Node.js</span><span class="chip">Linux / Apache</span><span class="chip">Git &amp; GitHub Actions</span><span class="chip">Accessibility</span></div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2>Let's work together</h2>
+  <p class="lede">Internship, freelance project or a question: I reply quickly, in English or French.</p>
+  <div class="cta">
+    <a class="btn" href="mailto:jimmybomy@icloud.com">Email me</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/jimmy-bomy-1037453a8/" rel="noopener">LinkedIn</a>
+    <a class="btn ghost" href="https://github.com/JimmyBomy" rel="noopener">GitHub</a>
+    <a class="btn ghost" href="/cv-jimmy-bomy.pdf">CV (PDF, French)</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© 2026 Jimmy Bomy · Sedan / Troyes, France · <a href="/mentions-legales/" lang="fr">Mentions légales</a> · <a href="/confidentialite/" lang="fr">Confidentialité</a></div></footer>
+</body>
+</html>

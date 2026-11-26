@@ -216,7 +216,7 @@ document.addEventListener("click",e=>{
 });
 function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><h2 class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</h2>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
-  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span>${p.hook?`<span class="fhook">${p.hook}</span>`:""}${p.game?`<span class="ftags">${p.tags.map(t=>`<i>${t}</i>`).join("")}</span>`:""}</button>`).join("")}</div>`;}
+  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span></button>`).join("")}</div>`;}
 /* ==== PAGES LÉGALES : une seule source (/mentions-legales/, /confidentialite/), chargée dans la fenêtre ==== */
 function loadLegal(root){const box=root&&root.querySelector("[data-legal]");if(!box)return;const url=box.getAttribute("data-legal");
   fetch(url,{cache:"no-cache"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{

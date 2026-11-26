@@ -1,0 +1,36 @@
+name: Sécurité VPS (mise à jour PHP + recherche de traces)
+
+# Lancement manuel uniquement : onglet Actions > « Sécurité VPS » > Run workflow.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  securite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mise à jour et audit sur le VPS
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p 37882 "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -i ~/.ssh/deploy_key -p 37882 -o BatchMode=yes -o ServerAliveInterval=30 \
+            "root@$VPS_HOST" 'bash -s' < .github/scripts/securite-php.sh
+      - name: Le site répond toujours
+        if: always()
+        run: |
+          for u in https://jimmybomy.fr/ https://jimmybomy.fr/admin/; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$u")
+            echo "$u -> $code"
+            [ "$code" = 200 ] || exit 1
+          done

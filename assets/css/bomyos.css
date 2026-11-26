@@ -1,4 +1,4 @@
-:root{--acc:#c6ff4e;--acc2:#7cc4ff;--ink:#f4f4f6;--muted:#a1a1a6;--dim:#6e6e73;--glass:rgba(30,30,34,.72);--glass-brd:rgba(255,255,255,.11);--bar:rgba(24,24,27,.62);--radius:16px;--menh:36px}
+:root{--acc:#c6ff4e;--acc2:#7cc4ff;--ink:#f4f4f6;--muted:#a1a1a6;--dim:#8e8e93;--glass:rgba(30,30,34,.72);--glass-brd:rgba(255,255,255,.11);--bar:rgba(24,24,27,.62);--radius:16px;--menh:36px}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);background:#05060a;overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
@@ -67,6 +67,7 @@ button.menu:hover,button.menu.open{color:var(--ink);background:rgba(255,255,255,
 .win:-webkit-full-screen{width:100vw!important;height:100vh!important;border-radius:0}
 
 .h-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.win-body:focus{outline:none}.win-body:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
 .h-title{font-family:"Archivo";font-weight:800;letter-spacing:-.03em;font-size:clamp(30px,4vw,52px);line-height:.98;margin:10px 0 14px}
 .lede{color:var(--muted);line-height:1.65;max-width:60ch}.lede b{color:var(--ink);font-weight:600}.acc{color:var(--acc)}
 .divider{height:1px;background:var(--glass-brd);margin:26px 0}

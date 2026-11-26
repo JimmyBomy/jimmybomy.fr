@@ -57,7 +57,7 @@ const XP=[
   {yr:"2022 — 25",role:"Baccalauréat général",co:"Lycée Mabillon",desc:"Développeur autodidacte en parallèle du lycée : développement web et Node.js en autonomie, avant l'entrée en BUT MMI."},
 ];
 const APPS={projets:{title:"Projets",icon:"folder",w:600,h:460},labs:{title:"Labs",icon:"labs",w:600,h:460},services:{title:"Services",icon:"services",w:560,h:620},devis:{title:"Devis express",icon:"devis",w:520,h:480},reglages:{title:"Réglages",icon:"gear",w:540,h:620},terminal:{title:"Terminal",icon:"terminal",w:580,h:430},messages:{title:"Messages",icon:"messages",w:460,h:580},photos:{title:"Photos",icon:"photos",w:640,h:520},calc:{title:"Calculette",icon:"calc",w:340,h:540},plans:{title:"Plans",icon:"plans",w:560,h:540},aide:{title:"Aide — raccourcis",icon:"doc",w:470,h:460},apropos:{title:"À propos.txt",icon:"user",w:520,h:540},parcours:{title:"Parcours.doc",icon:"doc",w:560,h:460},contact:{title:"Contact",icon:"mail",w:520,h:560},cv:{title:"CV.pdf",icon:"pdf",w:540,h:600},mentions:{title:"Mentions légales.txt",icon:"doc",w:620,h:640},confidentialite:{title:"Confidentialité.txt",icon:"doc",w:620,h:640}};
-const LEGAL_URL={mentions:"/mentions-legales/",confidentialite:"/confidentialite/"};
+const LEGAL_URL=window.BOMY_LANG==="en"?{mentions:"/en/legal-notice/",confidentialite:"/en/privacy/"}:{mentions:"/mentions-legales/",confidentialite:"/confidentialite/"};
 
 /* ==== ANALYTICS first-party (privacy-friendly, actif seulement en prod) ==== */
 const ANALYTICS_ON=/(^|\.)jimmybomy\.fr$/.test(location.hostname);
@@ -84,7 +84,7 @@ const DEVIS_Q=[
 ];
 function devisHTML(){
   if(DEVIS.step<DEVIS_Q.length){const c=DEVIS_Q[DEVIS.step];
-    return `<div class="h-eyebrow">Devis express · question ${DEVIS.step+1} / 3</div><div class="h-title" style="font-size:26px">${c.q}</div>
+    return `<div class="h-eyebrow">Devis express · question ${DEVIS.step+1} / 3</div><h2 class="h-title" style="font-size:26px">${c.q}</h2>
       <div class="chips" style="flex-direction:column;align-items:stretch;gap:10px;margin-top:18px">
       ${c.opts.map((o,i)=>`<button class="chip" data-devis="${i}" style="text-align:left;cursor:pointer;font-size:14px;padding:13px 15px">${o}</button>`).join("")}</div>
       ${DEVIS.step>0?'<button class="btn ghost" data-devis="back" style="margin-top:20px">‹ Question précédente</button>':''}`;}
@@ -92,7 +92,7 @@ function devisHTML(){
   const objectif=["créer mon premier site","moderniser mon site","améliorer mon site"][DEVIS.a[0]];
   const need=["un site vitrine clair : présentation, horaires, itinéraire","un site avec réservation / commande en ligne","un site simple avec contact direct (téléphone, WhatsApp)"][DEVIS.a[2]];
   const msg=encodeURIComponent(`Bonjour Jimmy ! J'ai un ${act} et j'aimerais ${objectif} — il me faudrait ${need}. On peut en parler ?`);
-  return `<div class="h-eyebrow">Ma recommandation</div><div class="h-title" style="font-size:28px">Voilà ce qu'il<br>vous faut.</div>
+  return `<div class="h-eyebrow">Ma recommandation</div><h2 class="h-title" style="font-size:28px">Voilà ce qu'il<br>vous faut.</h2>
     <p class="lede">Pour votre <b>${act}</b> : ${need}. Hébergement et mise en ligne <b>inclus</b>, et on démarre par une <b>maquette gratuite</b>, sans engagement.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
       <a class="btn" href="https://wa.me/33788021676?text=${msg}" target="_blank" rel="noopener">Envoyer sur WhatsApp <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
@@ -126,7 +126,7 @@ function devisSend(container){
     .then(r=>r.json()).then(j=>{
       if(!j||!j.ok)throw 0;
       snd.tap();track("lead");
-      container.innerHTML=`<div class="h-eyebrow">Merci ${esc(name.split(" ")[0])} !</div><div class="h-title" style="font-size:28px">C'est noté.</div><p class="lede">Je vous recontacte très vite sur <b>${esc(contact)}</b>. À tout de suite 👋</p>`;
+      container.innerHTML=`<div class="h-eyebrow">Merci ${esc(name.split(" ")[0])} !</div><h2 class="h-title" style="font-size:28px">C'est noté.</h2><p class="lede">Je vous recontacte très vite sur <b>${esc(contact)}</b>. À tout de suite 👋</p>`;
     }).catch(()=>{if(status){status.style.color="#ff5f57";status.textContent="Oups — réessayez, ou passez par WhatsApp juste au-dessus.";}if(btn){btn.disabled=false;btn.textContent="Être rappelé ›";}});}
 
 /* ==== TERMINAL (easter egg — accessible via Ctrl+K ou #terminal) ==== */
@@ -192,7 +192,7 @@ function calcAct(k,root){const d=root.querySelector("[data-cd]");let s=root._c||
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* ==== JEUX jouables dans la fenêtre (Mandibules…) : iframe 16:9, chargée au clic ==== */
 const ARROW='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>';
-function gameHTML(p){return `<div class="h-eyebrow">${p.cat}</div><div class="h-title">${p.name}</div><p class="lede ghook">${p.hook}</p>
+function gameHTML(p){return `<div class="h-eyebrow">${p.cat}</div><h2 class="h-title">${p.name}</h2><p class="lede ghook">${p.hook}</p>
   <div class="gframe" data-game="${p.game}" data-gtitle="${esc(p.name)}"><button class="gposter" data-gplay style="background-image:url('${p.img}')" aria-label="Lancer ${esc(p.name)} ici"><span class="gplay"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Jouer ici</span></button></div>
   <div class="gacts"><button class="btn" data-gfs>Plein écran <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="btn ghost" href="${p.game}" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet ${ARROW}</a></div>
   <p class="gnote">Sur téléphone, le nouvel onglet est plus confortable. Le son démarre au premier clic dans le jeu, et ta progression est gardée dans ce navigateur.</p>
@@ -213,7 +213,7 @@ document.addEventListener("click",e=>{
   if(rq&&(document.fullscreenEnabled||document.webkitFullscreenEnabled)){try{const r=rq.call(f);if(r&&r.catch)r.catch(()=>open(box.dataset.game,"_blank","noopener"));}catch(err){open(box.dataset.game,"_blank","noopener");}}
   else open(box.dataset.game,"_blank","noopener");
 });
-function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><div class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</div>
+function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><h2 class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</h2>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
   <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span>${p.hook?`<span class="fhook">${p.hook}</span>`:""}${p.game?`<span class="ftags">${p.tags.map(t=>`<i>${t}</i>`).join("")}</span>`:""}</button>`).join("")}</div>`;}
 /* ==== PAGES LÉGALES : une seule source (/mentions-legales/, /confidentialite/), chargée dans la fenêtre ==== */
@@ -221,7 +221,7 @@ function loadLegal(root){const box=root&&root.querySelector("[data-legal]");if(!
   fetch(url,{cache:"no-cache"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
     const doc=new DOMParser().parseFromString(t,"text/html").querySelector(".legal-doc");if(!doc)throw 0;
     box.innerHTML=doc.innerHTML+`<p class="upd"><a href="${url}" target="_blank" rel="noopener">Ouvrir en pleine page ↗</a></p>`;
-    box.querySelectorAll('a[href="/confidentialite/"],a[href="/mentions-legales/"]').forEach(a=>{const k=a.getAttribute("href")==="/confidentialite/"?"confidentialite":"mentions";
+    box.querySelectorAll('a[href="/confidentialite/"],a[href="/mentions-legales/"],a[href="/en/privacy/"],a[href="/en/legal-notice/"]').forEach(a=>{const k=/confidentialite|privacy/.test(a.getAttribute("href"))?"confidentialite":"mentions";
       a.addEventListener("click",e=>{e.preventDefault();innerWidth>720?openApp(k):mopen(k);});});
   }).catch(()=>{box.innerHTML=`<p class="lede">Impossible de charger la page ici. <a class="acc" href="${url}">Ouvrir ${url}</a></p>`;});}
 const LEGAL_LINKS=`<p class="legal-mini">En envoyant ce formulaire, vous acceptez que j'utilise ces informations uniquement pour vous répondre. <a href="/confidentialite/" data-open="confidentialite">Politique de confidentialité</a></p>`;
@@ -238,7 +238,7 @@ function contactSend(form){
   fetch("/api/devis.php",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,contact:email,message,website:hp,source:"contact"})})
     .then(r=>r.json()).then(j=>{if(!j||!j.ok)throw j||{};
       snd.tap();track("lead");
-      form.innerHTML=`<div class="h-eyebrow">Merci${name?" "+esc(name.split(" ")[0]):""} !</div><div class="h-title" style="font-size:28px">Message envoyé.</div><p class="lede">Je vous réponds très vite sur <b>${esc(email)}</b>. À tout de suite 👋</p>`;
+      form.innerHTML=`<div class="h-eyebrow">Merci${name?" "+esc(name.split(" ")[0]):""} !</div><h2 class="h-title" style="font-size:28px">Message envoyé.</h2><p class="lede">Je vous réponds très vite sur <b>${esc(email)}</b>. À tout de suite 👋</p>`;
     }).catch(j=>{err(j&&j.error==="rate"?"Trop d'envois d'un coup — réessayez dans une heure.":"Oups, l'envoi a échoué — réessayez dans un instant.");btn.disabled=false;btn.textContent="Envoyer le message ›";});}
 document.addEventListener("submit",e=>{const f=e.target.closest("[data-cform]");if(f){e.preventDefault();contactSend(f);}});
 function content(app){
@@ -247,13 +247,13 @@ function content(app){
   if(app==="labs")return finderHTML("Labs","Les expériences — petits projets, outils et bidouilles.",LABS);
   if(app.startsWith("project:")){const p=ALL[app.split(":")[1]];
     if(p.game)return gameHTML(p);
-    return `<div class="proj-hero" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}">${p.img?"":'<div class="mock"></div>'}</div><div class="h-eyebrow">${p.cat}</div><div class="h-title">${p.name}</div>
+    return `<div class="proj-hero" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}">${p.img?"":'<div class="mock"></div>'}</div><div class="h-eyebrow">${p.cat}</div><h2 class="h-title">${p.name}</h2>
       <p class="lede">${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
       <div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div>
       ${p.metrics?`<div class="pmetrics">${p.metrics.map(m=>`<div class="pm"><b>${m[0]}</b><span>${m[1]}</span></div>`).join("")}</div>`:""}
       ${p.study?`<div class="study">${p.study.map(s=>`<div class="study-b"><div class="study-h">${s.h}</div><p>${s.p}</p></div>`).join("")}</div>`:""}
       ${p.link?(/jimmybomy\.fr/.test(p.link)||p.link.startsWith("/")?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></button>`:`<a class="btn" href="${p.link}" target="_blank" rel="noopener">${p.cta||"Voir le site"} <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`):`<span class="btn ghost" style="cursor:default">En développement</span>`}`;}
-  if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="/assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><div class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</div></div></div>
+  if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="/assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><h2 class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</h2></div></div>
     <div class="pro-note"><b>Développeur web freelance</b>, je crée des sites internet pour les particuliers et les professionnels. Micro-entreprise immatriculée, SIRET 133 309 369 00014.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
     <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>15</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
@@ -261,11 +261,11 @@ function content(app){
     <div class="divider"></div><div class="h-eyebrow">Ce site, audité Lighthouse</div>
     <div class="lhrow"><div class="lhb"><b>97</b><span>Performance</span></div><div class="lhb"><b>100</b><span>Accessibilité</span></div><div class="lhb"><b>100</b><span>Bonnes pratiques</span></div><div class="lhb"><b>100</b><span>SEO</span></div></div>
     <p class="lede" style="font-size:12px;color:var(--dim);margin-top:8px">Audit Lighthouse sur desktop — accessibilité, bonnes pratiques et SEO à 100/100.</p>`;
-  if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><div class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</div>
+  if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><h2 class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</h2>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
   if(app==="devis")return devisHTML();
   if(app==="reglages"){const curwp=PREF.get("wp","aurora"),curac=PREF.get("accent","lime"),sndOn=PREF.get("muted","0")!=="1",crtOn=PREF.get("crt","0")==="1";
-    return `<div class="h-eyebrow">Réglages</div><div class="h-title" style="font-size:26px">Personnalisez<br>votre BomyOS.</div>
+    return `<div class="h-eyebrow">Réglages</div><h2 class="h-title" style="font-size:26px">Personnalisez<br>votre BomyOS.</h2>
     <div class="set-sec">Fond d'écran</div>
     <div class="wpgrid">${[["aurora","Aurora"],["sunset","Crépuscule"],["ocean","Océan"],["forest","Forêt"],["mono","Minuit"]].map(([id,l])=>`<button class="wpthumb tw-${id}${curwp===id?' on':''}" data-wp="${id}" aria-label="Fond ${l}"><span>${l}</span></button>`).join("")}</div>
     <div class="set-sec">Couleur d'accentuation</div>
@@ -275,7 +275,7 @@ function content(app){
     <div class="setrow"><span>Effet CRT (rétro)</span><button class="sw${crtOn?' on':''}" data-tgl="crt" role="switch" aria-checked="${crtOn}" aria-label="CRT"><i></i></button></div>
     <p class="lede" style="font-size:12px;margin-top:16px;color:var(--dim)">Vos réglages sont mémorisés sur cet appareil.</p>
     <button class="btn ghost" data-setreset style="margin-top:8px">Réinitialiser</button>`;}
-  if(app==="aide")return `<div class="h-eyebrow">Aide</div><div class="h-title" style="font-size:24px">Trucs & astuces<br>de BomyOS.</div>
+  if(app==="aide")return `<div class="h-eyebrow">Aide</div><h2 class="h-title" style="font-size:24px">Trucs & astuces<br>de BomyOS.</h2>
     <div class="chips" style="flex-direction:column;align-items:stretch;gap:9px;margin-top:16px">
       <span class="chip"><b>Ctrl + K</b> — rechercher et ouvrir n'importe quoi</span>
       <span class="chip"><b>Échap</b> — fermer la fenêtre active</span>
@@ -288,11 +288,11 @@ function content(app){
     </div>`;
   if(app==="messages")return `<div class="imsg"><div class="imsg-log"></div><div class="imsg-chips"></div></div>`;
   if(app==="photos"){const ph=[["/assets/shots/rois.jpg","Rois de France","project:rois"],["/assets/shots/lumina.jpg","Lumina Studio","project:lumina"],["/assets/shots/backrooms.jpg","Backrooms","project:backrooms"],["/assets/shots/bomyos.jpg","BomyOS","project:bomyos"]];
-    return `<div class="h-eyebrow">Photothèque · ${ph.length} éléments</div><div class="h-title" style="font-size:24px;margin-bottom:16px">Mes réalisations.</div>
+    return `<div class="h-eyebrow">Photothèque · ${ph.length} éléments</div><h2 class="h-title" style="font-size:24px;margin-bottom:16px">Mes réalisations.</h2>
     <div class="phgrid">${ph.map(([src,cap,go])=>`<button class="phitem" data-open="${go}" style="background-image:url('${src}')" aria-label="${cap}"><span>${cap}</span></button>`).join("")}</div>
     <p class="lede" style="font-size:12.5px;margin-top:14px;color:var(--dim)">Touchez une photo pour ouvrir le projet.</p>`;}
   if(app==="calc")return `<div class="calc"><div class="calc-d" data-cd>0</div><div class="calc-g">${["C","±","%","÷","7","8","9","×","4","5","6","−","1","2","3","+","0",",","="].map(k=>`<button data-calc="${k}" class="ck${["÷","×","−","+","="].includes(k)?" op":""}${["C","±","%"].includes(k)?" fn":""}${k==="0"?" z":""}" aria-label="${k}">${k}</button>`).join("")}</div></div>`;
-  if(app==="plans")return `<div class="h-eyebrow">Zone d'intervention</div><div class="h-title" style="font-size:26px">Sedan, Troyes<br>& partout à distance.</div>
+  if(app==="plans")return `<div class="h-eyebrow">Zone d'intervention</div><h2 class="h-title" style="font-size:26px">Sedan, Troyes<br>& partout à distance.</h2>
     <div class="mapwrap"><svg viewBox="0 0 520 300" width="100%" style="display:block;background:#0d1420">
       <path d="M0 210 C90 180 150 240 260 215 S430 250 520 205 V300 H0 Z" fill="#0f2436"/>
       <path d="M-10 120 C120 90 240 150 380 110 S480 140 530 120" stroke="#233246" stroke-width="3" fill="none"/>
@@ -310,7 +310,7 @@ function content(app){
       <div><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$ whoami</div>
       <div class="c">Jimmy Bomy — développeur web créatif (Sedan / Troyes)</div></div>
     <div class="term-line"><span class="p">jimmy@bomyos</span>:<span class="u">~</span>$&nbsp;<input class="term-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal"/></div></div>`;
-  if(app==="services")return `<div class="h-eyebrow">Pour les commerces & indépendants</div><div class="h-title">Un site pro,<br>sans prise de tête.</div>
+  if(app==="services")return `<div class="h-eyebrow">Pour les commerces & indépendants</div><h2 class="h-title">Un site pro,<br>sans prise de tête.</h2>
     <p class="lede">Votre établissement mérite mieux qu'une page Facebook. Je crée des sites <b>simples, rapides et beaux</b> — et je m'occupe de tout.</p>
     <button class="btn" data-site="https://jimmybomy.fr/projets/demo-boulangerie/" data-title="Exemple — La Fournée de Sedan" style="margin-top:18px">Voir un exemple de site →</button>
     <div class="divider"></div><div class="h-eyebrow">Ce que je propose</div>
@@ -330,7 +330,7 @@ function content(app){
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <a class="btn" href="https://wa.me/33788021676" target="_blank" rel="noopener">WhatsApp <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
       <a class="btn ghost" href="tel:${TEL}">${PHONE}</a></div>`;
-  if(app==="contact")return `<div class="h-eyebrow">Contact</div><div class="h-title">Travaillons<br>ensemble.</div>
+  if(app==="contact")return `<div class="h-eyebrow">Contact</div><h2 class="h-title">Travaillons<br>ensemble.</h2>
     <p class="lede">Un projet, une question, une demande de devis gratuit ? Je réponds vite.</p>
     <form class="cform" id="cf" data-cform novalidate>
       <label class="cf-l" for="cf-name">Nom</label><input id="cf-name" name="name" class="dv-in" autocomplete="name" maxlength="120" placeholder="Votre nom">
@@ -403,7 +403,7 @@ function openApp(app){
       <button class="mi" data-act="min" aria-label="Réduire ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#7a4a00" stroke-width="1.5"><path d="M2 5h6"/></svg></button>
       <button class="fu" data-act="max" aria-label="Agrandir ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#0a4a00" stroke-width="1.5"><path d="M2.5 2.5h5v5h-5z"/></svg></button></div>
       <div class="wtitle">${ICON[iconFor(app)].replace('width="42" height="42"','width="15" height="15"')}${titleFor(app)}</div></div>
-    <div class="win-body">${content(app)}</div><div class="rz" aria-hidden="true"></div>`;
+    <div class="win-body" tabindex="0">${content(app)}</div><div class="rz" aria-hidden="true"></div>`;
   desktop.appendChild(el);wins[app]={el,min:false,max:false,prev:null};
   requestAnimationFrame(()=>{el.classList.add("open");bringFront(el);el.focus();});
   markDock(app,true);snd.open();

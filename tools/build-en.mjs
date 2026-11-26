@@ -37,6 +37,9 @@ export function buildEn() {
   h = h.replace(/(class="icb" title="Version française"[^>]*>)EN</, "$1FR<");
   rep('<a href="/en/" hreflang="en" lang="en">English</a>', '<a href="/" hreflang="fr" lang="fr">Français</a>');
 
+  // 3 bis. Pages légales en anglais
+  h = h.split('href="/mentions-legales/"').join('href="/en/legal-notice/"').split('href="/confidentialite/"').join('href="/en/privacy/"');
+
   // 4. Chemins absolus (la page est servie depuis /en/) + dictionnaire avant le script principal
   h = h.replace(/(src|href)="(?!\/|https?:|data:|mailto:|tel:|#)([^"]+)"/g, '$1="/$2"');
   h = h.replace(/(<script src="\/assets\/js\/bomyos\.js\?v=\d+"><\/script>)/, '<script src="/assets/js/i18n-en.js?v=1"></script>\n$1');

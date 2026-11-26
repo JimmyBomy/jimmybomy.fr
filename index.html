@@ -11,6 +11,7 @@
 <link rel="canonical" href="https://jimmybomy.fr/" />
 <link rel="alternate" hreflang="fr" href="https://jimmybomy.fr/" />
 <link rel="alternate" hreflang="en" href="https://jimmybomy.fr/en/" />
+<link rel="alternate" hreflang="x-default" href="https://jimmybomy.fr/" />
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jimmybomy.fr/" />
@@ -70,7 +71,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/bomyos.css?v=17" />
+<link rel="stylesheet" href="assets/css/bomyos.css?v=18" />
 </head>
 <body>
 <a class="skip" href="#dicons" id="skip">Aller au menu</a>
@@ -124,7 +125,7 @@
 
 <div id="desktop"><div class="wm-watermark" aria-hidden="true">BOMY<br>OS</div><div class="dicons" id="dicons"></div>
   <!-- Widgets de bureau (desktop) -->
-  <div class="dwidgets" aria-hidden="false">
+  <aside class="dwidgets" aria-label="Widgets">
     <div class="dwidget wclock">
       <svg viewBox="0 0 100 100" width="92" height="92" aria-hidden="true">
         <circle cx="50" cy="50" r="47" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.14)"/>
@@ -140,7 +141,7 @@
       <div class="dw-sub" style="margin:6px 0 12px">Alternance & freelance — réponse en moins de 2 h.</div>
       <button class="dw-cta" data-wopen="contact">Me contacter</button>
     </div>
-  </div>
+  </aside>
 </div>
 <nav class="legalbar" aria-label="Informations légales">© 2026 Jimmy Bomy · <a href="/mentions-legales/" data-legal-open="mentions">Mentions légales</a> · <a href="/confidentialite/" data-legal-open="confidentialite">Confidentialité</a></nav>
 <div class="crtfx" aria-hidden="true"></div>
@@ -190,7 +191,7 @@
 </div>
 
 <div class="hint" id="hint"><b>Cliquez une icône</b> pour explorer · <b>Ctrl+K</b> pour chercher</div>
-<div class="dock" id="dock" role="toolbar" aria-label="Dock des applications"></div>
+<nav aria-label="Dock"><div class="dock" id="dock" role="toolbar" aria-label="Dock des applications"></div></nav>
 <div class="ctx" id="ctx" role="menu" aria-label="Menu contextuel"></div>
 
 <!-- Barre de statut iOS (mobile) -->
@@ -204,7 +205,7 @@
 </div>
 
 <!-- Écran d'accueil iOS (mobile) -->
-<div class="mobile" id="mobile">
+<div class="mobile" id="mobile" role="region" aria-label="Écran d'accueil">
   <div class="widget">
     <div class="wtop"><img class="wava" src="assets/jimmy-avatar.jpg?v=3" alt="Jimmy Bomy" />
       <div><div class="wname">Jimmy Bomy</div><div class="wrole">Développeur web créatif · BUT MMI Troyes · Sedan</div></div></div>
@@ -215,7 +216,7 @@
   <div class="mgrid" id="mlaunch"></div>
   <nav class="mlegal" aria-label="Informations légales"><a href="/en/" hreflang="en" lang="en">English</a> · <a href="/mentions-legales/" data-legal-open="mentions">Mentions légales</a> · <a href="/confidentialite/" data-legal-open="confidentialite">Confidentialité</a></nav>
 </div>
-<div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div>
+<nav aria-label="Dock mobile"><div class="mdock" id="mdock" role="toolbar" aria-label="Dock"></div></nav>
 <div class="homebar" aria-hidden="true"></div>
 <div class="msheet" id="msheet" role="dialog" aria-modal="true" aria-label="Application">
   <div class="mnav"><div class="mnav-row">
@@ -228,6 +229,6 @@
 
 <div id="printCV" aria-hidden="true"></div>
 
-<script src="assets/js/bomyos.js?v=31"></script>
+<script src="assets/js/bomyos.js?v=32"></script>
 </body>
 </html>

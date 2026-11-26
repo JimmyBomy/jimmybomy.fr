@@ -1,5 +1,5 @@
 /* Pages légales autonomes (mentions légales, confidentialité) — style fenêtre BomyOS */
-:root{--acc:#c6ff4e;--acc2:#7cc4ff;--ink:#f4f4f6;--muted:#a1a1a6;--dim:#6e6e73;--glass:rgba(30,30,34,.78);--glass-brd:rgba(255,255,255,.11)}
+:root{--acc:#c6ff4e;--acc2:#7cc4ff;--ink:#f4f4f6;--muted:#a1a1a6;--dim:#8e8e93;--glass:rgba(30,30,34,.78);--glass-brd:rgba(255,255,255,.11)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{color-scheme:dark}
 body{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;

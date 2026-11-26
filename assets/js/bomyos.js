@@ -750,7 +750,7 @@ function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add
 })();
 /* PWA */
 /* SW_V = numéro de CACHE dans sw.js : une nouvelle adresse contourne le cache de Cloudflare */
-const SW_V=45;
+const SW_V=46;
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("/sw.js?v="+SW_V,{updateViaCache:"none"}).catch(()=>{});
 /* Analytics : une vue par chargement */
 track("pageview");

@@ -122,3 +122,23 @@ test("chaque projet est traduit en anglais", () => {
   }
   for (const x of XP) for (const k of ["role", "desc"]) assert.ok(x[k].replace(/<[^>]+>/g, "") in D || x[k] in D || x[k].includes("<"), `parcours : « ${x[k]} » sans traduction`);
 });
+test("les jeux jouables ont leur fichier, leurs captures avec texte alternatif et une page à partager", () => {
+  for (const [id, p] of Object.entries({ ...PROJECTS, ...LABS })) {
+    if (!p.game) continue;
+    assert.ok(exists(p.game + "index.html"), `${id} : jeu manquant ${p.game}index.html`);
+    assert.ok(Array.isArray(p.shots) && p.shots.length >= 3, `${id} : il faut 3 captures`);
+    for (const [src, alt] of p.shots) {
+      assert.ok(exists(src), `${id} : capture manquante ${src}`);
+      assert.ok(alt && alt.length > 10, `${id} : capture sans texte alternatif ${src}`);
+    }
+    assert.ok(Array.isArray(p.features) && p.features.length > 0, `${id} : aucune fonctionnalité`);
+    assert.ok(p.page && exists(p.page + "index.html"), `${id} : page projet manquante`);
+    const page = read(p.page.replace(/^\//, "") + "index.html");
+    for (const tag of ["og:title", "og:description", "og:image", "twitter:card"]) assert.match(page, new RegExp(`property="${tag}"|name="${tag}"`), `${id} : ${tag} manquant`);
+    const og = page.match(/property="og:image" content="https:\/\/jimmybomy\.fr(\/[^"]+)"/);
+    assert.ok(og && exists(og[1]), `${id} : image Open Graph manquante`);
+    assert.match(page, /allow="fullscreen; autoplay"|"allow","fullscreen; autoplay"/);
+    for (const img of page.match(/<img\b[^>]*>/g) || []) assert.match(img, /\salt="[^"]+"/, `${id} : image sans alt`);
+    for (const m of page.matchAll(/src="(\/assets\/[^"]+)"/g)) assert.ok(exists(m[1]), `${id} : fichier manquant ${m[1]}`);
+  }
+});

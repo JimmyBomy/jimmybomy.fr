@@ -18,4 +18,6 @@ projets/*
 !projets/demo-boulangerie/
 # … et la fiction Twine Sillenbach (fichier unique)
 !projets/sillenbach/
+# … et la page projet du jeu Mandibules (le jeu lui-même est dans jeux/)
+!projets/mandibules/
 !cv-jimmy-bomy.pdf

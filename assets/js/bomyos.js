@@ -30,6 +30,10 @@ const PROJECTS={
   lumina:{name:"Lumina Studio",cat:"Agence événementielle · site",img:"/assets/shots/lumina.jpg",grad:"linear-gradient(135deg,#0e1a3a,#2563eb 55%,#7cc4ff)",role:"Direction artistique & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Direction artistique"],link:"https://jimmybomy.fr/projets/lumina/",desc:"Site d'une agence créative et événementielle basée à Troyes — « là où la nuit devient expérience ». Design dark élégant, présentation de l'agence et de ses prestations immersives, avec son escape game Backrooms en projet phare."},
   backrooms:{name:"Backrooms",cat:"Escape game · site immersif",img:"/assets/shots/backrooms.jpg",grad:"linear-gradient(135deg,#1a1400,#3a3000 60%,#c6a800)",role:"Design & développement",year:"2025",client:"SAÉ 202 · BUT MMI",tags:["HTML/CSS","JavaScript","Ambiance & UX"],link:"https://jimmybomy.fr/projets/backrooms/",desc:"Site de l'escape game de Lumina Studio, inspiré de la légende urbaine des Backrooms : ambiance horreur/liminale, présentation du concept, des salles et réservation. Le pendant immersif du site agence."},
   turbofilm:{name:"Derrière la porte close",cat:"Court-métrage · Festival Turbofilm 2026",img:"/assets/shots/turbofilm.jpg",grad:"linear-gradient(135deg,#111,#3a2a1a 60%,#c8892e)",role:"Acteur principal · aide à l'écriture (idées)",year:"2026",client:"Festival Turbofilm 2026 · Université de Reims Champagne-Ardenne",tags:["Vidéo","Jeu d'acteur","Écriture","Travail d'équipe","24 h"],link:"https://www.youtube.com/watch?v=B5kp5wc4Rlo",cta:"Voir le film",desc:"Court-métrage écrit, tourné et monté en 24 heures par une équipe d'étudiants MMI pour le Festival Turbofilm 2026. J'y tiens le rôle principal, présent dans presque tous les plans, et j'ai participé à l'écriture des idées. Tournage entièrement en intérieur, dans mon appartement. Le film est diffusé par l'Université de Reims Champagne-Ardenne."},
+  mandibules:{name:"Mandibules",cat:"Jeu de stratégie 3D · HTML5",hook:"La guerre des fourmilières, en 3D et en papier découpé. Jouable ici, tout de suite.",img:"/assets/shots/mandibules.jpg",grad:"linear-gradient(135deg,#2a1a0e,#8a5a2b 55%,#e9d8b4)",role:"Game design & développement",year:"2026",client:"Projet personnel",tags:["HTML5","JavaScript","Three.js","Game design"],link:"https://jimmybomy.fr/jeux/mandibules/",page:"/projets/mandibules/",game:"/jeux/mandibules/",
+    shots:[["/assets/shots/mandibules-1-gameplay.jpg","Mandibules, niveau 10 « Le Jardin » : des fourmilières numérotées reliées par des chemins sur un plateau d'herbe, des colonnes de fourmis partent à l'attaque d'une colonie rivale"],["/assets/shots/mandibules-2-final-boss.jpg","Mandibules, niveau 60 « Boss final » : un plateau volcanique parcouru de lave où quatre colonies de couleurs différentes se disputent les fourmilières"],["/assets/shots/mandibules-3-home.jpg","Mandibules, écran d'accueil : le titre du jeu au-dessus d'une fourmilière couronnée sur un plateau de sable, avec le bouton Jouer, la carte et la colonie"]],
+    features:["Campagne de 60 niveaux, avec une règle différente pour chaque monde","Mode Conquête sur une carte de 21 territoires","3 niveaux de difficulté","52 drapeaux de pays","Défis du jour, renouvelés chaque jour","7 langues","Direction artistique en papier découpé, en 3D (Three.js)","Un seul fichier HTML de 570 Ko, sans rien à installer, et la progression est sauvegardée dans le navigateur"],
+    desc:"Mandibules est un jeu de stratégie original que j'ai conçu et développé : une guerre de fourmilières en 3D, dans un style papier découpé. On développe sa colonie, on envoie ses fourmis et on prend le contrôle du terrain face à des colonies rivales. Tout le jeu tient dans un seul fichier HTML5 et se lance directement dans le navigateur, sur ordinateur comme sur téléphone."},
   sillenbach:{name:"Le Nœud de Sillenbach",cat:"Fiction interactive · Twine",img:"/assets/shots/sillenbach.jpg",grad:"linear-gradient(135deg,#0f172a,#334155 55%,#94a3b8)",role:"Écriture & conception",year:"2025",client:"Projet personnel",tags:["Twine","Narration non-linéaire","Écriture"],link:"https://jimmybomy.fr/projets/sillenbach/",desc:"Fiction interactive jouable dans le navigateur, inspirée de la série Dark : un récit non-linéaire en 30 passages, où chaque choix fait bifurquer l'histoire. Écrite et mise en scène sous Twine (Harlowe), avec images et ambiance sonore."},
   bomyos:{name:"BomyOS",cat:"Ce site · OS en JS vanilla",img:"/assets/shots/bomyos.jpg",grad:"linear-gradient(135deg,#0d1f12,#c6ff4e 60%,#7cc4ff)",role:"Design & développement from scratch",year:"2026",client:"Portfolio personnel",tags:["JS vanilla","WebAudio","Accessibilité","Tests & CI"],link:"https://github.com/JimmyBomy/jimmybomy.fr",desc:"Le site sur lequel tu te trouves : un système d'exploitation complet en JavaScript vanilla, sans framework — fenêtres draggables et redimensionnables, sons WebAudio, navigation clavier intégrale, lecteurs d'écran supportés, terminal interactif. Chaque modification passe par des tests automatiques et un déploiement continu (GitHub Actions → mon VPS). La démo tourne sous tes yeux."},
 };
@@ -186,9 +190,32 @@ function calcAct(k,root){const d=root.querySelector("[data-cd]");let s=root._c||
   show(s.cur);snd.tap();}
 
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ==== JEUX jouables dans la fenêtre (Mandibules…) : iframe 16:9, chargée au clic ==== */
+const ARROW='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+function gameHTML(p){return `<div class="h-eyebrow">${p.cat}</div><div class="h-title">${p.name}</div><p class="lede ghook">${p.hook}</p>
+  <div class="gframe" data-game="${p.game}" data-gtitle="${esc(p.name)}"><button class="gposter" data-gplay style="background-image:url('${p.img}')" aria-label="Lancer ${esc(p.name)} ici"><span class="gplay"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Jouer ici</span></button></div>
+  <div class="gacts"><button class="btn" data-gfs>Plein écran <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="btn ghost" href="${p.game}" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet ${ARROW}</a></div>
+  <p class="gnote">Sur téléphone, le nouvel onglet est plus confortable. Le son démarre au premier clic dans le jeu, et ta progression est gardée dans ce navigateur.</p>
+  <div class="gshots">${p.shots.map(([src,alt])=>`<img src="${src}" alt="${esc(alt)}" loading="lazy" width="1280" height="720">`).join("")}</div>
+  <p class="lede">${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+  <div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div>
+  <div class="study"><div class="study-b"><div class="study-h">Fonctionnalités</div><ul class="gfeat">${p.features.map(f=>`<li>${f}</li>`).join("")}</ul></div></div>
+  ${p.page?`<p class="gnote"><a href="${p.page}" target="_blank" rel="noopener">Page du projet à partager ↗</a></p>`:""}`;}
+function gameFrame(box){let f=box.querySelector("iframe");if(f)return f;
+  f=document.createElement("iframe");f.src=box.dataset.game;f.title=box.dataset.gtitle+" : jeu jouable";
+  f.setAttribute("allow","fullscreen; autoplay");f.setAttribute("allowfullscreen","");box.innerHTML="";box.appendChild(f);
+  setTimeout(()=>{try{f.focus()}catch(e){}},300);return f;}
+document.addEventListener("click",e=>{
+  const pl=e.target.closest("[data-gplay]");if(pl){gameFrame(pl.closest(".gframe"));return;}
+  const fs=e.target.closest("[data-gfs]");if(!fs)return;
+  const box=(fs.closest(".win-body,#msheetBody")||document).querySelector(".gframe");if(!box)return;
+  const f=gameFrame(box),rq=f.requestFullscreen||f.webkitRequestFullscreen;
+  if(rq&&(document.fullscreenEnabled||document.webkitFullscreenEnabled)){try{const r=rq.call(f);if(r&&r.catch)r.catch(()=>open(box.dataset.game,"_blank","noopener"));}catch(err){open(box.dataset.game,"_blank","noopener");}}
+  else open(box.dataset.game,"_blank","noopener");
+});
 function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><div class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</div>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
-  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span></button>`).join("")}</div>`;}
+  <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span>${p.hook?`<span class="fhook">${p.hook}</span>`:""}${p.game?`<span class="ftags">${p.tags.map(t=>`<i>${t}</i>`).join("")}</span>`:""}</button>`).join("")}</div>`;}
 /* ==== PAGES LÉGALES : une seule source (/mentions-legales/, /confidentialite/), chargée dans la fenêtre ==== */
 function loadLegal(root){const box=root&&root.querySelector("[data-legal]");if(!box)return;const url=box.getAttribute("data-legal");
   fetch(url,{cache:"no-cache"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
@@ -219,6 +246,7 @@ function content(app){
   if(app==="projets")return finderHTML("Projets","La vitrine — mes projets principaux.",PROJECTS);
   if(app==="labs")return finderHTML("Labs","Les expériences — petits projets, outils et bidouilles.",LABS);
   if(app.startsWith("project:")){const p=ALL[app.split(":")[1]];
+    if(p.game)return gameHTML(p);
     return `<div class="proj-hero" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}">${p.img?"":'<div class="mock"></div>'}</div><div class="h-eyebrow">${p.cat}</div><div class="h-title">${p.name}</div>
       <p class="lede">${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
       <div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div>
@@ -228,7 +256,7 @@ function content(app){
   if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="/assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><div class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</div></div></div>
     <div class="pro-note"><b>Développeur web freelance</b>, je crée des sites internet pour les particuliers et les professionnels. Micro-entreprise immatriculée, SIRET 133 309 369 00014.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web — du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b> — et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
-    <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>14</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
+    <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>15</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
     <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>
     <div class="divider"></div><div class="h-eyebrow">Ce site, audité Lighthouse</div>
     <div class="lhrow"><div class="lhb"><b>97</b><span>Performance</span></div><div class="lhb"><b>100</b><span>Accessibilité</span></div><div class="lhb"><b>100</b><span>Bonnes pratiques</span></div><div class="lhb"><b>100</b><span>SEO</span></div></div>
@@ -363,7 +391,7 @@ function openApp(app){
   const hint=document.getElementById("hint");if(hint)hint.style.display="none";
   const st=wins[app];
   if(st){if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);st.el.focus();snd.tap();return;}
-  const meta=APPS[app]||{w:560,h:460};
+  const meta=APPS[app]||(app.startsWith("project:")&&ALL[app.slice(8)]?.game?{w:860,h:680}:{w:560,h:460});
   const el=document.createElement("div");el.className="win";el.dataset.app=app;el.setAttribute("role","dialog");el.setAttribute("aria-label",titleFor(app));el.tabIndex=-1;
   const w=Math.min(meta.w||560,innerWidth-40),h=Math.min(meta.h||460,innerHeight-160);
   const n=Object.keys(wins).length;
@@ -491,7 +519,7 @@ addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("butt
 /* menus de la barre */
 const MENUS={
   Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
-  Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["Le Nœud de Sillenbach","project:sillenbach"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
+  Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["Mandibules (jeu)","project:mandibules"],["Le Nœud de Sillenbach","project:sillenbach"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
   Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub — @JimmyBomy","_gh"],["LinkedIn — Jimmy Bomy","_li"]]};
 let curMenu=null;
 document.querySelectorAll("button.menu").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();

@@ -32,7 +32,7 @@ button.menu:hover,button.menu.open{color:var(--ink);background:rgba(255,255,255,
 .menubar .right button.icb[aria-pressed="true"]{color:var(--acc)}
 .mb-cta{background:var(--acc);color:var(--on-acc);font-weight:600;padding:5px 13px;border-radius:8px;font-size:13px}
 .mb-cta:hover{filter:brightness(1.06)}
-@media(max-width:720px){.menubar .menu,.menubar .right .hidem{display:none}}
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){.menubar .menu,.menubar .right .hidem{display:none}}
 
 .dicon{width:96px;height:108px;padding:12px 8px 6px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transition:background .15s;border:1px solid transparent}
 .dicon:hover{background:rgba(255,255,255,.06)}
@@ -115,7 +115,7 @@ button.menu:hover,button.menu.open{color:var(--ink);background:rgba(255,255,255,
 .dock .sep{width:1px;height:38px;background:var(--glass-brd);margin:0 3px;align-self:center}
 .dock .tip{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:#0c0d11;border:1px solid var(--glass-brd);padding:4px 10px;border-radius:7px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
 .dock button:hover .tip,.dock button:focus-visible .tip{opacity:1}
-@media(max-width:720px){.dock{display:none}}
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){.dock{display:none}}
 
 .ctx{position:fixed;z-index:9500;min-width:216px;background:var(--glass);border:1px solid var(--glass-brd);border-radius:12px;backdrop-filter:blur(24px) saturate(1.4);padding:6px;box-shadow:0 20px 50px -18px rgba(0,0,0,.7);display:none;font-size:13.5px}
 .ctx.on{display:block;animation:ctxin .12s ease}
@@ -217,7 +217,7 @@ body.ac-rose{--acc:#ff6b9d;--acc2:#ffb46b}
 .lock .l-notif{display:flex;gap:12px;align-items:center;margin-top:38px;width:min(390px,calc(100% - 32px));padding:13px 15px;background:rgba(40,42,52,.55);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:13px;color:var(--muted);line-height:1.4;text-align:left}
 .lock .l-notif b{color:#fff;font-size:14px}
 .lock .l-hint{margin-top:auto;margin-bottom:44px;font-size:13px;color:rgba(255,255,255,.75)}
-@media(max-width:720px){
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){
   .lock{z-index:65;padding-top:calc(env(safe-area-inset-top,10px) + 54px)}
   .lock .l-time{font-size:74px}
   .lock .l-name{font-size:21px}
@@ -226,7 +226,7 @@ body.ac-rose{--acc:#ff6b9d;--acc2:#ffb46b}
 .cc{position:fixed;inset:0;z-index:8990;background:rgba(4,5,8,.4);backdrop-filter:blur(14px) saturate(1.3);opacity:0;pointer-events:none;transition:opacity .3s}
 .cc.on{opacity:1;pointer-events:auto}
 .cc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:calc(env(safe-area-inset-top,10px) + 56px) 18px 0;max-width:420px;margin:0 auto}
-@media(min-width:721px){.cc-grid{margin:calc(var(--menh) + 12px) 16px 0 auto;max-width:360px;padding:0}}
+@media(min-width:721px) and (min-height:501px),(min-width:961px),(min-width:721px) and (pointer:fine){.cc-grid{margin:calc(var(--menh) + 12px) 16px 0 auto;max-width:360px;padding:0}}
 .cc-tile{background:rgba(60,62,74,.6);backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;color:var(--ink);font-size:12.5px;transition:background .2s;cursor:pointer}
 .cc-tile.on{background:var(--acc);color:var(--on-acc)}
 .cc-tile .ci{font-size:22px;line-height:0}
@@ -235,7 +235,7 @@ body.ac-rose{--acc:#ff6b9d;--acc2:#ffb46b}
 .cc-bright{grid-column:span 2;background:rgba(60,62,74,.6);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:16px;backdrop-filter:blur(26px)}
 .cc-bright input{width:100%;accent-color:#fff}
 .cc-close{display:block;margin:18px auto;color:rgba(255,255,255,.7);font-size:13px;cursor:pointer}
-@media(min-width:721px){.cc-close{margin:14px calc(16px + 110px) 0 auto}}
+@media(min-width:721px) and (min-height:501px),(min-width:961px),(min-width:721px) and (pointer:fine){.cc-close{margin:14px calc(16px + 110px) 0 auto}}
 #dim{position:fixed;inset:0;z-index:9950;background:#000;opacity:0;pointer-events:none}
 /* écran de veille */
 .saver{position:fixed;inset:0;z-index:9900;background:#000;display:none;cursor:none}
@@ -253,7 +253,7 @@ body.ac-rose{--acc:#ff6b9d;--acc2:#ffb46b}
 .osnotif .ni svg{width:22px;height:22px;display:block}
 .osnotif .nx{flex:0 0 auto;color:var(--dim);padding:4px 7px;border-radius:7px}
 .osnotif .nx:hover{background:rgba(255,255,255,.08);color:var(--ink)}
-@media(max-width:720px){.osnotif{top:calc(env(safe-area-inset-top,10px) + 46px);left:14px;right:14px;max-width:none}}
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){.osnotif{top:calc(env(safe-area-inset-top,10px) + 46px);left:14px;right:14px;max-width:none}}
 /* palette Ctrl+K */
 .cmdk{position:fixed;inset:0;z-index:9700;background:rgba(4,5,8,.55);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding-top:16vh}
 .cmdk.on{display:flex;animation:ctxin .14s ease}
@@ -277,7 +277,7 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 /* ============ MOBILE — interface façon iOS ============ */
 .ios-status,.mobile,.msheet,.homebar,.mdock{display:none}
 @media(max-width:1100px){.wm-watermark{font-size:clamp(44px,9vw,110px)}}
-@media(max-width:720px){
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){
   .menubar,.dicons,.wm-watermark,.win,.dock,.hint{display:none!important}
   /* barre de statut */
   .ios-status{display:flex;position:fixed;top:0;left:0;right:0;z-index:70;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,10px) + 6px) 28px 4px;color:#fff;pointer-events:none}
@@ -343,7 +343,7 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
   .tl .row{grid-template-columns:1fr;gap:4px}
 }
 /* écrans courts (iPhone SE…) : layout compact pour que rien ne passe sous le dock */
-@media(max-width:720px) and (max-height:720px){
+@media(max-width:720px) and (max-height:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){
   .mobile{padding-top:calc(env(safe-area-inset-top,8px) + 44px)}
   .widget{padding:13px 14px 12px;margin-bottom:18px;border-radius:22px}
   .widget .wava{width:44px;height:44px;font-size:16px}
@@ -409,7 +409,7 @@ textarea.dv-in{resize:vertical;min-height:96px;line-height:1.5}
 .legalbar a{color:var(--muted);text-decoration:none}.legalbar a:hover{color:var(--ink);text-decoration:underline}
 @media(max-width:1100px){.legalbar{bottom:92px}}
 .mlegal{display:none}
-@media(max-width:720px){.legalbar{display:none}.mlegal{display:block;text-align:center;font-size:12.5px;color:rgba(255,255,255,.55);margin-top:26px;text-shadow:0 1px 4px rgba(0,0,0,.6)}.mlegal a{display:inline-block;padding:8px 4px;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}}
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){.legalbar{display:none}.mlegal{display:block;text-align:center;font-size:12.5px;color:rgba(255,255,255,.55);margin-top:26px;text-shadow:0 1px 4px rgba(0,0,0,.6)}.mlegal a{display:inline-block;padding:8px 4px;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}}
 /* contenu chargé depuis /mentions-legales/ et /confidentialite/ */
 .legal-doc .h-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .legal-doc h1{font-family:var(--fd);font-weight:800;letter-spacing:-.03em;font-size:clamp(26px,3.4vw,38px);line-height:1;margin:10px 0 14px}
@@ -437,7 +437,7 @@ textarea.dv-in{resize:vertical;min-height:96px;line-height:1.5}
 .gshots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
 .gshots img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:9px;border:1px solid var(--glass-brd);display:block}
 .gfeat{padding-left:18px;color:var(--muted);font-size:14px;line-height:1.58}.gfeat li+li{margin-top:3px}
-@media(max-width:720px){.gshots{grid-template-columns:1fr}.gacts .btn{flex:1 1 100%;justify-content:center}.gacts .btn.ghost{order:-1;background:var(--acc);color:var(--on-acc);border-color:transparent}.gacts .btn[data-gfs]{background:transparent;color:var(--ink);border:1px solid var(--glass-brd)}}
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){.gshots{grid-template-columns:1fr}.gacts .btn{flex:1 1 100%;justify-content:center}.gacts .btn.ghost{order:-1;background:var(--acc);color:var(--on-acc);border-color:transparent}.gacts .btn[data-gfs]{background:transparent;color:var(--ink);border:1px solid var(--glass-brd)}}
 
 /* =====================================================================
    BomyOS 2 — matière « verre liquide » façon macOS / iOS 26
@@ -626,7 +626,7 @@ button.menu:hover,button.menu.open{background:rgba(255,255,255,.18)}
 .hint{border-radius:100px}
 
 /* ---------- mobile ---------- */
-@media(max-width:720px){
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){
   .widget{border-radius:28px}
   .mdock{border-radius:34px;padding:12px 10px}
   .mtile .ic{border-radius:23%;width:62px;height:62px}
@@ -634,7 +634,7 @@ button.menu:hover,button.menu.open{background:rgba(255,255,255,.18)}
   .msheet .mnav{background:rgba(18,18,24,.62);-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%)}
   .msearch{border-radius:100px}
 }
-@media(max-width:720px) and (max-height:720px){.mtile .ic{width:54px;height:54px}}
+@media(max-width:720px) and (max-height:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){.mtile .ic{width:54px;height:54px}}
 @media (prefers-reduced-transparency:reduce){
   .win,.dock,.ctx,.cmdk-box,.osnotif,.dwidget,.cc-tile,.lock .l-notif,.widget,.mdock{background:#1c1c22;-webkit-backdrop-filter:none;backdrop-filter:none}
 }
@@ -672,7 +672,7 @@ body.wp-aurora{--wall:url("/assets/wall/aurora.jpg") center/cover no-repeat,line
 .boot.fly{pointer-events:none}
 .boot.fly .bi-name span{transition:transform .8s cubic-bezier(.7,0,.18,1)}
 .boot.fly .bi-role,.boot.fly .btip{opacity:0;transition:opacity .22s}
-@media(max-width:720px){
+@media(max-width:720px),(max-height:500px) and (max-width:960px) and (pointer:coarse){
   .bi-name{flex-direction:column;align-items:center;gap:0;font-size:min(27vw,150px);line-height:.84}
   .bi-name span{padding:.1em .04em}
   .bi-role{margin-top:.5em;font-size:16px}
@@ -700,3 +700,32 @@ body.intro-out .msearch{animation:inRise .7s cubic-bezier(.2,.9,.25,1) .08s back
 body.intro-out #mlaunch .mtile{animation:inPop .5s cubic-bezier(.3,1.4,.5,1) calc(.16s + var(--i,0)*28ms) backwards}
 body.intro-out .mdock{animation:inUp .75s cubic-bezier(.2,.9,.25,1) .2s backwards}
 .win:focus-visible{outline:none}
+
+/* téléphone couché : l'écran d'accueil passe sur deux colonnes, le dock se range à droite comme sur iOS */
+@media (max-height:500px) and (max-width:960px) and (pointer:coarse){
+  .ios-status,.msearch{display:none}
+  .mobile{display:grid;grid-template-columns:minmax(200px,250px) 1fr;align-content:start;align-items:start;column-gap:22px;
+    padding:14px calc(env(safe-area-inset-right,0px) + 96px) 0 calc(env(safe-area-inset-left,0px) + 16px)}
+  .mobile::after{grid-column:1/-1;height:calc(env(safe-area-inset-bottom,0px) + 22px)}
+  .widget{grid-column:1;grid-row:1/span 2;margin-bottom:0}
+  .mgrid{grid-column:2;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:14px 6px;padding:2px 0 0}
+  .mlegal{grid-column:2;padding:12px 0 0}
+  .mdock{left:auto;right:calc(env(safe-area-inset-right,0px) + 12px);top:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);height:max-content;margin:auto 0;flex-direction:column;gap:9px;padding:9px 8px;border-radius:26px}
+  .mdock .mtile .ic{width:46px;height:46px}
+  .msheet .mnav{padding-top:env(safe-area-inset-top,0px)}
+  .msbody{padding-left:calc(env(safe-area-inset-left,0px) + 20px);padding-right:calc(env(safe-area-inset-right,0px) + 20px)}
+  .lock{padding-top:18px}
+  .lock .l-id{margin-bottom:6px}
+  .lock .l-time{font-size:56px}
+  .lock .l-notif{margin-top:12px}
+  .lock .l-hint{margin-bottom:16px}
+  .bi-name{flex-direction:row;gap:.24em;font-size:min(13vw,30vh);line-height:.9}
+  .bi-role{margin-top:.2em}
+  .boot .btip{bottom:12px}
+  body.intro-out .mdock{animation-name:inSide}
+}
+/* barre des menus : rien ne passe à la ligne, les éléments secondaires s'effacent quand la place manque */
+.menubar .left,.menubar .right{white-space:nowrap;min-width:0}
+.menubar .left>*,.menubar .right>*{flex:0 0 auto}
+@media(max-width:940px){.menubar .right .live{display:none}.menubar .left{gap:10px}}
+@media(max-width:800px){#crtBtn,#ccBtn{display:none}}

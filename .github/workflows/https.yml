@@ -1,0 +1,37 @@
+name: Correctif HTTPS (redirections nginx)
+
+# Lancement manuel uniquement : onglet Actions > « Correctif HTTPS » > Run workflow.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  https:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Redirections relatives sur nginx
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p 37882 "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -i ~/.ssh/deploy_key -p 37882 -o BatchMode=yes "root@$VPS_HOST" 'bash -s' < .github/scripts/https-redirections.sh
+      - name: Aucune redirection vers http
+        run: |
+          sleep 3
+          ok=1
+          for p in mentions-legales confidentialite en en/legal-notice en/privacy projets/mandibules jeux/mandibules admin; do
+            loc=$(curl -s -o /dev/null -w '%{redirect_url}' "https://jimmybomy.fr/$p")
+            echo "/$p -> $loc"
+            case "$loc" in http://*) ok=0;; esac
+          done
+          [ "$ok" = 1 ] || { echo "::error::une page redirige encore vers http"; exit 1; }

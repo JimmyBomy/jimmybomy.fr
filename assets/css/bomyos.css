@@ -834,3 +834,25 @@ body.touring .hint{display:none!important}
   .tour-ctl button{width:36px;height:36px}
 }
 @media (prefers-reduced-transparency:reduce){.tour{background:#1c1c22;-webkit-backdrop-filter:none;backdrop-filter:none}}
+
+/* ==== Icônes « Méandres » : tuile sombre, pictogramme au trait, une courbe de niveau en couleur ==== */
+.ic.sq.mk{border-radius:29%;background:linear-gradient(160deg,#20234a,#0b0c1e);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--h) 46%,transparent),inset 0 1px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.8)}
+.ic.sq.mk::before,.ic.sq.mk::after{content:none}
+.ic.sq.mk>svg.topo{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:none;transform:rotate(var(--r,0deg))}
+.ic.sq.mk>svg.topo path{fill:none;stroke:var(--h);stroke-width:1.3;opacity:.3;vector-effect:non-scaling-stroke}
+.ic.sq.mk>svg.g{width:57%;height:57%;overflow:visible}
+svg.g *{fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+svg.g .w{stroke:#f4f6ff}
+svg.g .h{stroke:var(--h)}
+svg.g .f{fill:#f4f6ff;stroke:none}
+svg.g.tg *{stroke-width:2.1}
+.win:not(.active) svg.g.tg{opacity:.6}
+body.icons-clear .ic.sq.mk>svg.topo path{stroke:#fff;opacity:.22}
+/* boutons de fenêtre : une capsule de verre, trois signes toujours visibles */
+.win .lights{gap:2px;padding:3px;border-radius:100px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.13),inset 0 1px 0 rgba(255,255,255,.16)}
+.win .lights button{width:26px;height:22px;border-radius:100px;background:none;box-shadow:none;color:rgba(244,246,255,.78);transition:background .15s,color .15s}
+.win .lights .c,.win .lights .mi,.win .lights .fu{background:none}
+.win .lights button svg,.win-bar:hover .lights button svg,.win .lights button:focus-visible svg{opacity:1;width:10px;height:10px}
+.win:not(.active) .lights button{background:none;color:rgba(244,246,255,.42)}
+.win .lights button:hover,.win:not(.active) .lights button:hover{background:rgba(255,255,255,.2);color:#fff}
+.win .lights .c:hover,.win:not(.active) .lights .c:hover{background:#ff8274;color:#fff}

@@ -1,25 +1,6 @@
 /* langue : "en" sur /en/ (/assets/js/i18n-en.js), sinon français */
 const LOC=window.BOMY_LANG==="en"?"en-GB":"fr-FR",T=s=>window.bomyTr?window.bomyTr(s):s;
 const EMAIL="jimmybomy@icloud.com",PHONE="07 88 02 16 76",TEL="0788021676";
-const ICON={
-  folder:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#7cc4ff"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#a9d8ff"/></svg>',
-  labs:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M6 14c0-2.2 1.8-4 4-4h9l4 4h15c2.2 0 4 1.8 4 4v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V14z" fill="#a78bfa"/><path d="M6 20h36v18c0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4V20z" fill="#c4b5fd"/><path d="M21.5 25v4.2l-3.6 5.9a2 2 0 0 0 1.7 3h8.8a2 2 0 0 0 1.7-3l-3.6-5.9V25" stroke="#3b2a6e" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M19.8 25h8.4" stroke="#3b2a6e" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="34.5" r="1.6" fill="#c6ff4e"/></svg>',
-  user:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="7" y="6" width="34" height="36" rx="5" fill="#eef0ea"/><circle cx="24" cy="20" r="6" fill="#c6ff4e"/><path d="M14 36c1.5-6 6-8 10-8s8.5 2 10 8" stroke="#0a0b0e" stroke-width="2.4" fill="none"/></svg>',
-  doc:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="16" y="22" width="16" height="2.4" rx="1.2" fill="#71757e"/><rect x="16" y="28" width="16" height="2.4" rx="1.2" fill="#71757e"/><rect x="16" y="34" width="10" height="2.4" rx="1.2" fill="#71757e"/></svg>',
-  pdf:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M12 5h16l8 8v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#eef0ea"/><path d="M28 5l8 8h-8V5z" fill="#b9bcc4"/><rect x="8" y="28" width="32" height="12" rx="2" fill="#ff5f57"/><text x="24" y="37" font-family="-apple-system,Inter,Arial" font-size="8" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
-  terminal:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="5" y="8" width="38" height="32" rx="5" fill="#0c1016"/><rect x="5" y="8" width="38" height="32" rx="5" stroke="#2b3340" stroke-width="1.5"/><path d="M13 20l6 4-6 4" stroke="#c6ff4e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="24" y="27" width="10" height="2.4" rx="1.2" fill="#7cc4ff"/></svg>',
-  mail:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="6" y="11" width="36" height="26" rx="6" fill="#eef0ea"/><path d="M8 15l16 12 16-12" stroke="#7cc4ff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  services:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 16l3-8h26l3 8v3a5 5 0 0 1-10 0 5 5 0 0 1-11 0 5 5 0 0 1-11 0v-3z" fill="#c6ff4e"/><path d="M10 24v14a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V24" stroke="#eef0ea" stroke-width="2.6"/><rect x="20" y="29" width="8" height="11" rx="1" fill="#eef0ea"/></svg>',
-  devis:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><path d="M8 8h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H20l-9 8v-8H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#eef0ea"/><text x="24" y="28" font-family="-apple-system,Inter,Arial" font-size="16" font-weight="800" fill="#0a5ce8" text-anchor="middle">€</text></svg>',
-  gear:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="19" fill="#8e93a0"/><circle cx="24" cy="24" r="7.5" fill="none" stroke="#eef0ea" stroke-width="3.4"/><g stroke="#eef0ea" stroke-width="3.4" stroke-linecap="round"><path d="M24 9v5M24 34v5M9 24h5M34 24h5M13.4 13.4l3.5 3.5M31.1 31.1l3.5 3.5M34.6 13.4l-3.5 3.5M16.9 31.1l-3.5 3.5"/></g></svg>',
-  messages:'<svg width="42" height="42" viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="10" fill="url(#gmsg)"/><defs><linearGradient id="gmsg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#6ee97c"/><stop offset="1" stop-color="#21c04b"/></linearGradient></defs><path d="M24 12c-7.7 0-14 4.9-14 11 0 3.5 2 6.6 5.2 8.6-.2 1.7-1 3.3-2.4 4.6 2.5-.2 4.7-1.1 6.4-2.4 1.5.4 3.1.7 4.8.7 7.7 0 14-4.9 14-11.2S31.7 12 24 12z" fill="#fff"/></svg>',
-  photos:'<svg width="42" height="42" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#f5f5f7"/><g transform="translate(24 24)">'+["#ff453a","#ff9f0a","#ffd60a","#30d158","#63e6e2","#0a84ff","#5e5ce6","#bf5af2"].map((c,i)=>`<ellipse rx="4.6" ry="9.5" cy="-8" fill="${c}" opacity=".82" transform="rotate(${i*45})"/>`).join("")+'</g></svg>',
-  calc:'<svg width="42" height="42" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#1c1c1e"/><g fill="#eef0ea"><circle cx="14" cy="15" r="3.4"/><circle cx="24" cy="15" r="3.4"/><circle cx="14" cy="25" r="3.4"/><circle cx="24" cy="25" r="3.4"/><circle cx="14" cy="35" r="3.4"/><circle cx="24" cy="35" r="3.4"/></g><g fill="#ff9f0a"><circle cx="34" cy="15" r="3.4"/><circle cx="34" cy="25" r="3.4"/><circle cx="34" cy="35" r="3.4"/></g></svg>',
-  plans:'<svg width="42" height="42" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#d8ecd2"/><path d="M4 30c8-2 12-10 20-9s12 10 20 6v11a10 10 0 0 1-10 10H14A10 10 0 0 1 4 38v-8z" fill="#a8d5e5"/><path d="M4 14h40M18 4v40" stroke="#f6d56a" stroke-width="3.6"/><circle cx="31" cy="21" r="6.4" fill="#ff453a"/><circle cx="31" cy="21" r="2.4" fill="#fff"/></svg>',
-  gh:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.52.1.71-.23.71-.5v-1.75c-2.9.63-3.52-1.4-3.52-1.4-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.07-2.8-.1-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.56 1.43.2 2.49.1 2.75.67.73 1.07 1.66 1.07 2.8 0 4-2.45 4.9-4.78 5.16.38.32.72.96.72 1.94v2.88c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>',
-  li:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.12 1.43-2.12 2.9V21H9z"/></svg>',
-  li:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#eef0ea"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.9V21H19v-5.5c0-1.3-.02-3-1.87-3-1.87 0-2.16 1.44-2.16 2.92V21H11V9z"/></svg>',
-};
 /* ==== VITRINE, les flagships (édite ici) ==== */
 const PROJECTS={
   amitie:{name:"Amitié Artisan",cat:"Client · reprise et relance d'une plateforme locale",img:"/assets/shots/amitie.jpg",grad:"linear-gradient(135deg,#1e2a44,#2b3b5e 55%,#c96f5a)",role:"Reprise du projet, remise en ligne, sécurité et nouvelle identité visuelle",year:"2026",client:"Amitié Artisan · client, en ligne",tags:["Client","Reprise de projet","Web, iOS et Android","Sécurité","Multilingue","En ligne"],link:"https://www.amitie-artisan.fr",host:"www.amitie-artisan.fr",
@@ -420,7 +401,6 @@ function content(app){
   return "";
 }
 const titleFor=a=>a.startsWith("project:")?ALL[a.split(":")[1]].name:(APPS[a]?.title||a);
-const iconFor=a=>a.startsWith("project:")?"folder":(APPS[a]?.icon||"doc");
 
 /* print CV */
 document.getElementById("printCV").innerHTML=`<div class="cvp"><h1>Jimmy Bomy</h1>
@@ -459,10 +439,10 @@ function openApp(app){
   const top=Math.max(56,innerHeight/2-h/2+(n*26-40));
   el.style.width=w+"px";el.style.height=h+"px";el.style.left=left+"px";el.style.top=top+"px";
   el.innerHTML=`<div class="win-bar"><div class="lights">
-      <button class="c" data-act="close" aria-label="Fermer ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#4a0002" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>
-      <button class="mi" data-act="min" aria-label="Réduire ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#7a4a00" stroke-width="1.5"><path d="M2 5h6"/></svg></button>
-      <button class="fu" data-act="max" aria-label="Agrandir ${titleFor(app)}"><svg viewBox="0 0 10 10" stroke="#0a4a00" stroke-width="1.5"><path d="M2.5 2.5h5v5h-5z"/></svg></button></div>
-      <div class="wtitle">${ICON[iconFor(app)].replace('width="42" height="42"','width="15" height="15"')}${titleFor(app)}</div></div>
+      <button class="c" data-act="close" aria-label="Fermer ${titleFor(app)}"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>
+      <button class="mi" data-act="min" aria-label="Réduire ${titleFor(app)}"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h6"/></svg></button>
+      <button class="fu" data-act="max" aria-label="Agrandir ${titleFor(app)}"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 1.8h2.4v2.4M4.2 8.2H1.8V5.8M8 2 5.7 4.3M2 8l2.3-2.3"/></svg></button></div>
+      <div class="wtitle">${titleIcon(app)}${titleFor(app)}</div></div>
     <div class="win-body" tabindex="0">${content(app)}</div><div class="rz" aria-hidden="true"></div>`;
   desktop.appendChild(el);wins[app]={el,min:false,max:false,prev:null};
   requestAnimationFrame(()=>{el.classList.add("open");bringFront(el);el.focus();});
@@ -509,9 +489,9 @@ function openSite(url,title){
   el.style.left="12px";el.style.top=(menh+8)+"px";el.style.width=(innerWidth-24)+"px";el.style.height=(innerHeight-menh-8-90)+"px";
   el.classList.add("max");
   el.innerHTML='<div class="win-bar"><div class="lights">'
-    +'<button class="c" data-act="close" aria-label="Fermer"><svg viewBox="0 0 10 10" stroke="#4a0002" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>'
-    +'<button class="mi" data-act="min" aria-label="Réduire"><svg viewBox="0 0 10 10" stroke="#7a4a00" stroke-width="1.5"><path d="M2 5h6"/></svg></button>'
-    +'<button class="fu" data-act="max" aria-label="Agrandir"><svg viewBox="0 0 10 10" stroke="#0a4a00" stroke-width="1.5"><path d="M2.5 2.5h5v5h-5z"/></svg></button></div>'
+    +'<button class="c" data-act="close" aria-label="Fermer"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l6 6M8 2l-6 6"/></svg></button>'
+    +'<button class="mi" data-act="min" aria-label="Réduire"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h6"/></svg></button>'
+    +'<button class="fu" data-act="max" aria-label="Agrandir"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 1.8h2.4v2.4M4.2 8.2H1.8V5.8M8 2 5.7 4.3M2 8l2.3-2.3"/></svg></button></div>'
     +'<div class="wtitle"><span style="font-family:JetBrains Mono,monospace;font-size:11.5px;color:var(--acc2);background:rgba(255,255,255,.07);border:1px solid var(--glass-brd);padding:3px 11px;border-radius:100px">bomy://'+title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+'</span></div>'
     +'<button class="fsbtn" data-act="full" title="Plein écran" aria-label="Plein écran"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>Plein écran</button>'
     +'<button class="backportf" data-act="close">‹ Retour au portfolio</button></div>'
@@ -538,26 +518,34 @@ addEventListener("fullscreenchange",()=>{
 });
 
 /* ICONS + DOCK */
-/* icônes « app » (carré arrondi + pictogramme), partagées par le bureau, le Dock et le mobile */
-const IOSGLYPH={
-  projets:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M3 7c0-1.1.9-2 2-2h4.6l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>',
-  labs:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v5.2L5.8 16a3 3 0 0 0 2.6 4.5h7.2A3 3 0 0 0 18.2 16l-4.7-7.8V3"/><circle cx="12" cy="16.5" r="1.4" fill="#fff" stroke="none"/></svg>',
-  apropos:'<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.2" r="4"/><path d="M4 20c1.2-4.2 4.4-6 8-6s6.8 1.8 8 6H4z"/></svg>',
-  parcours:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4M10 13h5M10 16.5h5"/></svg>',
-  contact:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>',
-  cv:'<svg width="30" height="30" viewBox="0 0 24 24"><path d="M6 2.5h8l5 5V21.5H6z" fill="#fff"/><rect x="4" y="12" width="16" height="7" rx="1.6" fill="#a41f2e"/><text x="12" y="17.3" font-family="-apple-system,Inter,Arial" font-size="5.4" font-weight="800" fill="#fff" text-anchor="middle">PDF</text></svg>',
-};
-const IOSBG={projets:"g-blue",labs:"g-purple",services:"g-yellow",devis:"g-cyan",apropos:"g-green",parcours:"g-orange",contact:"g-mail",cv:"g-red",gh:"g-black",li:"g-li"};
-IOSGLYPH.devis='<svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H10l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff"/><text x="12" y="14.5" font-family="-apple-system,Inter,Arial" font-size="9" font-weight="800" fill="#0a9396" text-anchor="middle">€</text></svg>';
-IOSBG.reglages="g-grey";IOSGLYPH.gh=ICON.gh.replace('width="24" height="24"','width="28" height="28"').replace('fill="#eef0ea"','fill="#fff"');IOSGLYPH.li=ICON.li.replace('width="22" height="22"','width="26" height="26"').replace('fill="#eef0ea"','fill="#fff"');IOSBG.messages="g-msg";IOSBG.photos="g-light";IOSBG.calc="g-black";IOSBG.plans="g-map";
-IOSGLYPH.messages='<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 4c-4.9 0-9 3.1-9 7 0 2.2 1.3 4.2 3.3 5.5-.1 1.1-.6 2.1-1.5 2.9 1.6-.1 3-.7 4.1-1.5 1 .3 2 .4 3.1.4 4.9 0 9-3.1 9-7.1S16.9 4 12 4z"/></svg>';
-IOSGLYPH.photos='<svg width="30" height="30" viewBox="0 0 24 24"><g transform="translate(12 12)">'+["#ff453a","#ff9f0a","#ffd60a","#30d158","#63e6e2","#0a84ff","#5e5ce6","#bf5af2"].map((c,i)=>`<ellipse rx="2.5" ry="5.2" cy="-4.4" fill="${c}" opacity=".85" transform="rotate(${i*45})"/>`).join("")+'</g></svg>';
-IOSGLYPH.calc='<svg width="30" height="30" viewBox="0 0 24 24"><g fill="#fff"><circle cx="7" cy="7" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="12" cy="17" r="2"/></g><g fill="#ff9f0a"><circle cx="17" cy="7" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></g></svg>';
-IOSGLYPH.plans='<svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 21s-6.5-6.2-6.5-10.6A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.4C18.5 14.8 12 21 12 21z" fill="#fff"/><circle cx="12" cy="10.4" r="2.6" fill="#2f9e44"/></svg>';
-IOSGLYPH.reglages='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.9 1.9M16.5 16.5l1.9 1.9M18.4 5.6l-1.9 1.9M7.5 16.5l-1.9 1.9"/></svg>';
-IOSGLYPH.services='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0a0b0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l1.5-4h13L20 8v1.5a2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5.5 0 2.5 2.5 0 0 1-5.5 0V8z" fill="#0a0b0e" stroke="none"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7M10 20v-5h4v5"/></svg>';
+/* icônes « Méandres », partagées par le bureau, le Dock, le mobile et les barres de titre :
+   un pictogramme au trait (.w) avec une courbe en couleur (.h), sur une tuile sombre traversée de courbes de niveau */
+const MHUE={projets:"#4d94ff",labs:"#a57bff",services:"#ffc857",devis:"#2ed3e6",messages:"#b9ef4f",photos:"#ff8274",contact:"#2ed3e6",cv:"#ff8274",reglages:"#aeb7dc",gh:"#e8ebff",li:"#4d94ff",plans:"#b9ef4f",calc:"#a57bff",apropos:"#4d94ff",parcours:"#ffc857",doc:"#aeb7dc",terminal:"#b9ef4f"};
+const MGLYPH={
+  projets:'<path class="w" d="M3.5 8.2V7a2 2 0 0 1 2-2h3.6l2 2.2h7.4a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V8.2z"/><path class="h" d="M7 14.2c1.6-1.6 3.4-1.6 5 0s3.4 1.6 5 0"/>',
+  labs:'<path class="w" d="M9.5 3.5h5M10.3 3.5v5.3L5.6 16.6a2.6 2.6 0 0 0 2.2 3.9h8.4a2.6 2.6 0 0 0 2.2-3.9l-4.7-7.8V3.5"/><path class="h" d="M7.6 15.4c1.5-1.2 2.9-1.2 4.4 0s2.9 1.2 4.4 0"/>',
+  services:'<path class="w" d="M5.2 12.4V19h13.6v-6.6M10 19v-4h4v4M4.2 8.2 5.6 5h12.8l1.4 3.2"/><path class="h" d="M4.2 8.2c0 1.6 1.2 2.6 2.6 2.6s2.6-1 2.6-2.6c0 1.6 1.2 2.6 2.6 2.6s2.6-1 2.6-2.6c0 1.6 1.2 2.6 2.6 2.6s2.6-1 2.6-2.6"/>',
+  devis:'<path class="w" d="M6.5 19.6V4.5h11v15.1M14.4 8.7a3 3 0 1 0 0 4.9M9.2 10.3h3.3M9.2 12h3.3"/><path class="h" d="M6.5 19.6c.9-1.3 1.8-1.3 2.75 0s1.85 1.3 2.75 0 1.8-1.3 2.75 0 1.85 1.3 2.75 0"/>',
+  messages:'<path class="w" d="M12 4.5c4.7 0 8.5 3.1 8.5 7s-3.8 7-8.5 7c-1 0-2-.1-2.9-.4L5 19.8l1-3.3c-1.6-1.2-2.5-3-2.5-5 0-3.9 3.8-7 8.5-7z"/><path class="h" d="M8 11.6c1.3-1.4 2.7-1.4 4 0s2.7 1.4 4 0"/>',
+  photos:'<path class="w" d="M5.5 5h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><circle class="f" cx="8.4" cy="9.2" r="1.35"/><path class="h" d="M3.9 16.2c2.1-3.6 3.9-4.4 5.5-2.6 1.4 1.6 2.4 1.4 3.6-.4 1.8-2.6 4-2.4 7.1 1.3"/>',
+  contact:'<path class="w" d="M5.5 5.5h13a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"/><path class="h" d="M4.3 7.8c2.4 2.4 4.9 5 7.7 5s5.3-2.6 7.7-5"/>',
+  cv:'<path class="w" d="M7.5 3.5H14l4 4v11.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V5a1.5 1.5 0 0 1 1.5-1.5zM14 3.5v4h4M9 11h6M9 13.8h3.6"/><path class="h" d="M9 17.3c1-1.3 2-1.3 3 0s2 1.3 3 0"/>',
+  reglages:'<path class="w" d="M4 8h8.8M18.2 8H20M4 16h1.8M11.2 16H20"/><circle class="w" cx="15.5" cy="8" r="2.5"/><circle class="h" cx="8.5" cy="16" r="2.5"/>',
+  gh:'<path class="f" d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.52.1.71-.23.71-.5v-1.75c-2.9.63-3.52-1.4-3.52-1.4-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.07-2.8-.1-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.56 1.43.2 2.49.1 2.75.67.73 1.07 1.66 1.07 2.8 0 4-2.45 4.9-4.78 5.16.38.32.72.96.72 1.94v2.88c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/>',
+  li:'<path class="f" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.9V21H19v-5.5c0-1.3-.02-3-1.87-3-1.87 0-2.16 1.44-2.16 2.92V21H11V9z"/>',
+  plans:'<path class="w" d="M12 14.6s4.2-3.7 4.2-6.9a4.2 4.2 0 0 0-8.4 0c0 3.2 4.2 6.9 4.2 6.9z"/><circle class="f" cx="12" cy="7.7" r="1.3"/><path class="h" d="M7.6 15.3c-1.9.5-3.1 1.3-3.1 2.3 0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3c0-1-1.2-1.8-3.1-2.3"/>',
+  calc:'<path class="w" d="M7 3.5h10a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/><path class="h" d="M8.3 7.7c1.2-1.1 2.5-1.1 3.7 0s2.5 1.1 3.7 0"/><circle class="f" cx="8.8" cy="12.3" r="1.05"/><circle class="f" cx="12" cy="12.3" r="1.05"/><circle class="f" cx="15.2" cy="12.3" r="1.05"/><circle class="f" cx="8.8" cy="16.3" r="1.05"/><circle class="f" cx="12" cy="16.3" r="1.05"/><circle class="f" cx="15.2" cy="16.3" r="1.05"/>',
+  apropos:'<circle class="w" cx="12" cy="8.3" r="3.5"/><path class="h" d="M4.8 19.6c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"/>',
+  parcours:'<circle class="w" cx="5.9" cy="18" r="1.9"/><circle class="w" cx="18.1" cy="4.8" r="1.9"/><path class="h" d="M7.9 18h6.3a3.3 3.3 0 0 0 0-6.6H9.8a3.3 3.3 0 0 1 0-6.6h6.3"/>',
+  doc:'<path class="w" d="M7.5 3.5H14l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V5a1.5 1.5 0 0 1 1.5-1.5zM14 3.5v4h4M9 16.5h4"/><path class="h" d="M9 12.3c1-1.3 2-1.3 3 0s2 1.3 3 0"/>',
+  terminal:'<path class="w" d="M5.5 5h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM7.3 9.5l2.7 2.5-2.7 2.5"/><path class="h" d="M12 15c.8-.9 1.7-.9 2.5 0s1.7.9 2.5 0"/>'};
+const MTOPO='<svg class="topo" viewBox="0 0 54 54" aria-hidden="true"><path d="M54 20c-11-2-21 5-25 15s-3 13-3 19"/><path d="M54 31c-7-1-13 3-16 9s-2 9-2 14"/><path d="M54 42c-4 0-6 2-8 5s-1 5-1 7"/><path d="M0 15c6 2 11-2 14-8s5-7 8-7"/></svg>';
+const MIDS=Object.keys(MGLYPH);
+function appIcon(id){return `<span class="ic sq mk" style="--h:${MHUE[id]};--r:${MIDS.indexOf(id)%4*90}deg">${MTOPO}<svg class="g" viewBox="0 0 24 24" aria-hidden="true">${MGLYPH[id]}</svg></span>`;}
+function titleIcon(app){const id=app.startsWith("project:")?"projets":MGLYPH[app]?app:APPS[app]&&APPS[app].icon==="terminal"?"terminal":"doc";
+  return `<svg class="g tg" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="--h:${MHUE[id]}">${MGLYPH[id]}</svg>`;}
 const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis express"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
-document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
+document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}">${appIcon(id)}<span class="lbl">${l}</span></button>`).join("");
 /* icônes du bureau : on les déplace librement, elles se posent sur la case libre la plus proche (jamais deux par case) */
 const deskGrid={
   icons:()=>[...document.querySelectorAll(".dicon")],free:false,
@@ -592,7 +580,7 @@ document.querySelectorAll(".dicon").forEach(ic=>{
 const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["messages","Messages","messages"],["photos","Photos","photos"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["reglages","Réglages","gear"],["gh","GitHub","gh","https://github.com/JimmyBomy"],["li","LinkedIn","li","https://www.linkedin.com/in/jimmy-bomy-1037453a8/"]];
 const dock=document.getElementById("dock");
 dock.innerHTML=DOCK.map(d=>{if(d[0]==="--")return '<div class="sep"></div>';const link=d[3]&&d[3].startsWith("http");
-  return `<button data-id="${d[0]}" data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}" aria-keyshortcuts="Alt+ArrowLeft Alt+ArrowRight"><span class="tip">${d[1]}</span><span class="ic sq ${IOSBG[d[0]]}">${IOSGLYPH[d[0]]}</span><span class="run" data-run="${d[0]}"></span></button>`;}).join("");
+  return `<button data-id="${d[0]}" data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}" aria-keyshortcuts="Alt+ArrowLeft Alt+ArrowRight"><span class="tip">${d[1]}</span>${appIcon(d[0])}<span class="run" data-run="${d[0]}"></span></button>`;}).join("");
 dock.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{if(dockOrder.justDragged){dockOrder.justDragged=false;return;}if(b.dataset.link){window.open(b.dataset.link,"_blank","noopener");return;}if(b.dataset.app)openApp(b.dataset.app);}));
 function markDock(app,on){const r=dock.querySelector(`[data-run="${app}"]`);if(r)r.parentElement.classList.toggle("running",on);}
 /* Dock réorganisable : on glisse une icône (ou Alt + flèches au clavier), l'ordre est gardé sur l'appareil */
@@ -712,8 +700,8 @@ document.getElementById("skip").addEventListener("click",e=>{e.preventDefault();
 
 /* MOBILE, écran d'accueil iOS */
 const MTILES=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
-document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
-document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span></button>`).join("");
+document.getElementById("mlaunch").innerHTML=MTILES.map(([id,l])=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${l}">${appIcon(id)}<span class="lbl">${l}</span></button>`).join("");
+document.getElementById("mdock").innerHTML=["projets","labs","contact","cv"].map(id=>`<button class="mtile" data-app="${id}" aria-label="Ouvrir ${titleFor(id)}">${appIcon(id)}</button>`).join("");
 const msheet=document.getElementById("msheet"),msBody=document.getElementById("msheetBody");
 const mobileEl=document.getElementById("mobile"),msTitle=document.getElementById("msheetTitle");
 if(mobileEl)mobileEl.addEventListener("scroll",()=>document.body.classList.toggle("mscrolled",mobileEl.scrollTop>6),{passive:true});

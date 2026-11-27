@@ -271,10 +271,10 @@ function content(app){
   if(app==="parcours")return `<div class="h-eyebrow">Parcours</div><h2 class="h-title" style="font-size:28px;margin-bottom:22px">Parcours</h2>
     <div class="tl">${XP.map(x=>`<div class="row"><div class="yr">${x.yr}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="desc">${x.desc}</div></div></div>`).join("")}</div>`;
   if(app==="devis")return devisHTML();
-  if(app==="reglages"){const curwp=PREF.get("wp","aurora"),curac=PREF.get("accent","blue"),sndOn=PREF.get("muted","0")!=="1",crtOn=PREF.get("crt","0")==="1",clearOn=PREF.get("clear","0")==="1";
+  if(app==="reglages"){const curwp=PREF.get("wp","meandres"),curac=PREF.get("accent","blue"),sndOn=PREF.get("muted","0")!=="1",crtOn=PREF.get("crt","0")==="1",clearOn=PREF.get("clear","0")==="1";
     return `<div class="h-eyebrow">Réglages</div><h2 class="h-title" style="font-size:26px">Personnalisez<br>votre BomyOS.</h2>
     <div class="set-sec">Fond d'écran</div>
-    <div class="wpgrid">${[["aurora","Aurora"],["sunset","Crépuscule"],["ocean","Océan"],["forest","Forêt"],["mono","Minuit"]].map(([id,l])=>`<button class="wpthumb tw-${id}${curwp===id?' on':''}" data-wp="${id}" aria-label="Fond ${l}"><span>${l}</span></button>`).join("")}</div>
+    <div class="wpgrid">${[["meandres","Méandres"],["aurora","Aurora"],["sunset","Crépuscule"],["ocean","Océan"],["forest","Forêt"],["mono","Minuit"]].map(([id,l])=>`<button class="wpthumb tw-${id}${curwp===id?' on':''}" data-wp="${id}" aria-label="Fond ${l}"><span>${l}</span></button>`).join("")}</div>
     <div class="set-sec">Couleur d'accentuation</div>
     <div class="acrow">${[["blue","#0a84ff"],["violet","#bf5af2"],["rose","#ff375f"],["orange","#ff9f0a"],["green","#30d158"],["lime","#c6ff4e"]].map(([id,c])=>`<button class="acdot${curac===id?' on':''}" data-accent="${id}" style="background:${c}" aria-label="Accent ${id}"></button>`).join("")}</div>
     <div class="set-sec">Général</div>
@@ -544,7 +544,7 @@ ctx.addEventListener("click",e=>{const b=e.target.closest("[data-ctx]");if(!b)re
 addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("button.menu")){hideCtx();document.querySelectorAll("button.menu.open").forEach(b=>b.classList.remove("open"));}});
 /* menus de la barre */
 const MENUS={
-  Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Tout fermer","_close"]],
+  Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Verrouiller l'écran","_lock"],["Tout fermer","_close"]],
   Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["Mandibules (jeu)","project:mandibules"],["claude-jauge","project:claudejauge"],["Le Nœud de Sillenbach","project:sillenbach"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
   Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub, @JimmyBomy","_gh"],["LinkedIn · Jimmy Bomy","_li"]]};
 let curMenu=null;
@@ -558,6 +558,7 @@ ctx.addEventListener("click",e=>{const b=e.target.closest("[data-mi]");if(!b||!c
   const v=curMenu[+b.dataset.mi][1];hideCtx();document.querySelectorAll("button.menu.open").forEach(x=>x.classList.remove("open"));curMenu=null;
   if(v==="_cmdk"){const w=document.querySelector(".cmdk");if(w){w.classList.add("on");w.querySelector("input").focus();w.querySelector("input").dispatchEvent(new Event("input"));}return;}
   if(v==="_print"){window.print();return;}
+  if(v==="_lock"){showLock();return;}
   if(v==="_close"){Object.keys(wins).forEach(closeApp);return;}
   if(v==="_gh"){window.open("https://github.com/JimmyBomy","_blank","noopener");return;}
   if(v==="_li"){window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener");return;}
@@ -573,9 +574,10 @@ document.getElementById("year").textContent=new Date().getFullYear();
 const sndBtn=document.getElementById("sndBtn"),sndIcon=document.getElementById("sndIcon"),crtBtn=document.getElementById("crtBtn");
 /* préférences persistantes (Réglages) */
 const PREF={get:(k,d)=>{try{return localStorage.getItem("bomyos-"+k)??d}catch(e){return d}},set:(k,v)=>{try{localStorage.setItem("bomyos-"+k,v)}catch(e){}}};
+let wallSync=null;
 function applyPrefs(){
-  document.body.classList.remove("wp-sunset","wp-ocean","wp-forest","wp-mono","ac-cyan","ac-violet","ac-rose","ac-orange","ac-green","ac-lime");
-  const wp=PREF.get("wp","aurora");if(wp!=="aurora")document.body.classList.add("wp-"+wp);
+  document.body.classList.remove("wp-meandres","wp-aurora","wp-sunset","wp-ocean","wp-forest","wp-mono","ac-cyan","ac-violet","ac-rose","ac-orange","ac-green","ac-lime");
+  const wp=PREF.get("wp","meandres");document.body.classList.add("wp-"+wp);if(wallSync)wallSync();
   const ac=PREF.get("accent","blue");if(ac!=="blue")document.body.classList.add("ac-"+ac);
   muted=PREF.get("muted","0")==="1";
   sndBtn.setAttribute("aria-pressed",String(!muted));
@@ -642,14 +644,121 @@ tick();setInterval(tick,10000);
 
 /* BOOT */
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-(function boot(){const b=document.getElementById("boot"),bar=document.getElementById("bbar"),tip=document.getElementById("btip");
-  const steps=["initialisation du noyau…","montage de /projets…","chargement des polices…","démarrage du bureau…"];
-  if(reduce){b.style.display="none";afterBoot();return;}
-  let fin=false;const done=()=>{if(fin)return;fin=true;b.classList.add("done");setTimeout(()=>{b.style.display="none";afterBoot();},600);};
-  b.addEventListener("click",()=>{clearInterval(iv);done();});
-  let v=0,si=0;const iv=setInterval(()=>{v+=Math.random()*18+7;if(v>100)v=100;bar.style.width=v+"%";
-    const ns=Math.min(steps.length-1,Math.floor(v/26));if(ns!==si){si=ns;tip.textContent=steps[si];}
-    if(v>=100){clearInterval(iv);setTimeout(done,250);}},160);})();
+/* fond d'écran vivant « Méandres » : une carte de relief dessinée en WebGL, qui dérive lentement et se soulève sous le pointeur */
+const wallfx=(function(){
+  const cv=document.createElement("canvas");cv.id="wallfx";cv.setAttribute("aria-hidden","true");document.getElementById("desktop").prepend(cv);
+  const FS=`#extension GL_OES_standard_derivatives : enable
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 r;uniform float t;uniform vec2 m;uniform float k;
+float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<4;i++){s+=a*noise(p);p=p*2.02+vec2(17.1,9.2);a*=.5;}return s;}
+vec3 ramp(float h){
+  vec3 c0=vec3(.04,.04,.19),c1=vec3(.21,.12,.60),c2=vec3(.10,.38,.95),c3=vec3(.12,.74,.88),c4=vec3(.70,.96,.36);
+  vec3 c=mix(c0,c1,smoothstep(.0,.36,h));
+  c=mix(c,c2,smoothstep(.3,.58,h));
+  c=mix(c,c3,smoothstep(.56,.8,h));
+  c=mix(c,c4,smoothstep(.8,1.05,h));
+  return c;}
+void main(){
+  vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
+  vec2 q=p*1.15+vec2(t*.012,-t*.008);
+  vec2 w=vec2(fbm(q+vec2(0.,t*.02)),fbm(q+vec2(5.2,1.3)-vec2(t*.016,0.)));
+  float h=fbm(q+1.6*w);
+  vec2 d=p-m;h+=.16*exp(-dot(d,d)*7.);
+  h=(h-.3)*2.3;
+  float rev=smoothstep(0.,1.,k*2.4-length(p)*.9);
+  h*=mix(.25,1.,rev);
+  vec3 c=ramp(h);
+  float n=h*14.;float f=abs(fract(n-.5)-.5)/max(fwidth(n),1e-4);
+  float idx=mod(floor(n+.5),4.);
+  float line=1.-smoothstep(0.,1.3,f);
+  float major=step(idx,.5);
+  vec3 lc=mix(vec3(.55,.80,1.),vec3(.78,1.,.31),smoothstep(.25,.7,h));
+  c+=lc*line*mix(.16,.42,major)*rev;
+  c*=1.-.32*dot(p,p)*.6;
+  c*=mix(.0,1.,smoothstep(0.,.5,k));
+  gl_FragColor=vec4(c,1.);}`;
+  let gl=null,U={},ok=false,on=false,raf=0,last=0,tt=60,k=1,k0=0,kd=0,mx=9,my=9,px=9,py=9,seen=performance.now(),slow=0,frames=0,still=reduce;
+  function init(){
+    try{gl=cv.getContext("webgl",{antialias:false,alpha:false,powerPreference:"low-power"});}catch(e){gl=null;}
+    if(!gl||!gl.getExtension("OES_standard_derivatives"))return false;
+    const sh=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return gl.getShaderParameter(s,gl.COMPILE_STATUS)?s:null;};
+    const vs=sh(gl.VERTEX_SHADER,"attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}"),fs=sh(gl.FRAGMENT_SHADER,FS);
+    if(!vs||!fs)return false;
+    const pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);
+    if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return false;
+    gl.useProgram(pr);gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+    const loc=gl.getAttribLocation(pr,"a");gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+    ["r","t","m","k"].forEach(n=>U[n]=gl.getUniformLocation(pr,n));
+    cv.addEventListener("webglcontextlost",e=>{e.preventDefault();ok=false;stop();cv.classList.remove("on");});
+    return true;}
+  function size(){const w=innerWidth,h=innerHeight;let f=Math.min(devicePixelRatio||1,1.5);if(w*h*f*f>2.4e6)f=Math.sqrt(2.4e6/(w*h));
+    cv.width=Math.max(2,Math.round(w*f));cv.height=Math.max(2,Math.round(h*f));gl.viewport(0,0,cv.width,cv.height);gl.uniform2f(U.r,cv.width,cv.height);}
+  function draw(){gl.uniform1f(U.t,tt);gl.uniform2f(U.m,mx,my);gl.uniform1f(U.k,k);gl.drawArrays(gl.TRIANGLES,0,3);}
+  function frame(now){raf=0;if(!on)return;
+    const dt=now-last;
+    if(dt>=30){last=now;tt+=Math.min(dt,100)/1000;mx+=(px-mx)*.07;my+=(py-my)*.07;
+      if(kd){const u=Math.min(1,(now-k0)/kd);k=1-Math.pow(1-u,3);if(u>=1)kd=0;}
+      draw();
+      if(++frames>60){if(dt>80)slow++;if(frames>150){if(slow>30){still=true;k=1;kd=0;draw();stop();return;}frames=61;slow=0;}}}
+    if(!kd&&now-seen>40000){stop();return;}
+    raf=requestAnimationFrame(frame);}
+  function start(){if(!ok||on||still)return;on=true;last=performance.now();frames=0;slow=0;raf=requestAnimationFrame(frame);}
+  function stop(){on=false;if(raf)cancelAnimationFrame(raf);raf=0;}
+  function sync(){const want=document.body.classList.contains("wp-meandres");
+    if(want&&!gl)ok=init();
+    cv.classList.toggle("on",want&&ok);
+    if(want&&ok){size();draw();start();}else stop();}
+  addEventListener("resize",()=>{if(ok&&cv.classList.contains("on")){size();draw();}});
+  const wake=()=>{seen=performance.now();if(ok&&!on&&cv.classList.contains("on"))start();};
+  addEventListener("pointermove",e=>{px=(e.clientX-innerWidth/2)/innerHeight;py=(innerHeight/2-e.clientY)/innerHeight;wake();},{passive:true});
+  ["keydown","pointerdown","wheel"].forEach(ev=>addEventListener(ev,wake,{passive:true}));
+  return{sync,dark(){if(still)return;k=0;kd=0;if(ok&&cv.classList.contains("on"))draw();},
+    ignite(ms){if(still||!ok||!cv.classList.contains("on")){k=1;return;}k0=performance.now();kd=ms;seen=k0;start();},
+    full(){k=1;kd=0;if(ok&&cv.classList.contains("on"))draw();}};
+})();
+wallSync=wallfx.sync;wallfx.sync();
+
+/* OUVERTURE : le nom en grand, le fond s'allume, puis le nom rejoint la barre pendant que le bureau se construit */
+(function boot(){const b=document.getElementById("boot"),B=document.body;
+  const mob=()=>innerWidth<=720;
+  const skip=reduce||!!location.hash||(()=>{try{return sessionStorage.getItem("bintro")==="1"}catch(e){return false}})();
+  if(skip){b.style.display="none";afterBoot();return;}
+  try{sessionStorage.setItem("bintro","1")}catch(e){}
+  const timers=[];let fin=false,started=false;
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  const words=[...b.querySelectorAll(".bi-name span")];
+  B.classList.add("intro");wallfx.dark();
+  document.querySelectorAll(".dicon,.dock>*,.dwidget,#mlaunch .mtile,.mdock .mtile").forEach(el=>{
+    const sib=[...el.parentNode.children];el.style.setProperty("--i",sib.indexOf(el));});
+  function end(){if(fin)return;fin=true;timers.forEach(clearTimeout);
+    b.style.display="none";B.classList.remove("intro");wallfx.full();
+    if(!started){started=true;afterBoot();}
+    setTimeout(()=>B.classList.remove("intro-out"),1700);}
+  function fly(){
+    const target=document.getElementById(mob()?"msigName":"sigName"),tw=[...target.children];
+    const tfs=parseFloat(getComputedStyle(target).fontSize),sfs=parseFloat(getComputedStyle(words[0]).fontSize);
+    const moves=words.map((w,i)=>{const s=w.getBoundingClientRect(),t=tw[i].getBoundingClientRect();
+      return `translate(${t.left+t.width/2-s.left-s.width/2}px,${t.top+t.height/2-s.top-s.height/2}px) scale(${tfs/sfs})`;});
+    B.classList.remove("intro");B.classList.add("intro-out","intro-fly");b.classList.add("fly");
+    words.forEach((w,i)=>{w.style.transform=moves[i];});
+    at(420,()=>{if(!started){started=true;afterBoot();}});
+    at(800,()=>{B.classList.remove("intro-fly");end();});}
+  function play(){if(fin)return;
+    b.classList.add("in");
+    at(1000,()=>{b.classList.add("lit");wallfx.ignite(1900);});
+    at(1750,fly);}
+  b.addEventListener("click",end);
+  addEventListener("keydown",function key(){removeEventListener("keydown",key);end();});
+  const ready=document.fonts&&document.fonts.load?document.fonts.load('800 80px "Bricolage Grotesque"',"Jimmy Bomy"):Promise.resolve();
+  Promise.race([ready,new Promise(r=>setTimeout(r,700))]).then(()=>requestAnimationFrame(play),()=>play());})();
 /* deep links : jimmybomy.fr/#services, #devis, #projet-rois… */
 function handleHash(){
   const h=decodeURIComponent(location.hash.slice(1)).toLowerCase();if(!h)return false;
@@ -660,8 +769,7 @@ function handleHash(){
 addEventListener("hashchange",handleHash);
 function afterBoot(){
   const deep=handleHash();
-  if(deep)lock.classList.add("off");                 /* lien profond : on montre l'app directement */
-  else showLock();                                   /* sinon : l'écran de verrouillage s'affiche (il porte déjà l'identité) */
+  if(!deep&&innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),reduce?0:260);
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
     if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");
@@ -728,7 +836,7 @@ function showLock(){
       notif.addEventListener("click",e=>{e.stopPropagation();unlock("contact");});}}}
 function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add("off");snd.open();
   if(app==="contact"){setTimeout(()=>{innerWidth>720?openApp("contact"):mopen("contact");},380);return;}
-  if(innerWidth>720&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),420);}
+}
 /* centre de contrôle : balayage vers le bas depuis le haut-droit de l'accueil */
 (function initCC(){if(!cc)return;
   const mob=document.getElementById("mobile");let sy=null,sx=null;
@@ -742,7 +850,7 @@ function unlock(app){if(lock.classList.contains("off"))return;lock.classList.add
     if(k==="wifi"){t.classList.toggle("on");snd.tap();return;}
     if(k==="snd"){PREF.set("muted",muted?"0":"1");applyPrefs();ccSync();snd.tap();return;}
     if(k==="crt"){PREF.set("crt",PREF.get("crt","0")==="1"?"0":"1");applyPrefs();ccSync();snd.tap();return;}
-    if(k==="wp"){const seq=["aurora","sunset","ocean","forest","mono"];const cur=PREF.get("wp","aurora");PREF.set("wp",seq[(seq.indexOf(cur)+1)%seq.length]);applyPrefs();snd.tap();return;}
+    if(k==="wp"){const seq=["meandres","aurora","sunset","ocean","forest","mono"];const cur=PREF.get("wp","meandres");PREF.set("wp",seq[(seq.indexOf(cur)+1)%seq.length]);applyPrefs();snd.tap();return;}
     if(k==="contact"){cc.classList.remove("on");innerWidth>720?openApp("contact"):mopen("contact");return;}});
   const ccBtn=document.getElementById("ccBtn");
   if(ccBtn)ccBtn.addEventListener("click",()=>{ccSync();cc.classList.toggle("on");snd.tap();});

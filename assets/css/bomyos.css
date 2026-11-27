@@ -268,12 +268,6 @@ body.crt #desktop::after{content:"";position:absolute;inset:0;background:radial-
 @keyframes flick{50%{opacity:.93}}
 
 .boot{position:fixed;inset:0;z-index:10000;background:radial-gradient(900px 620px at 50% 40%,#16161b,#0a0a0d 72%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
-.boot .bmark{width:76px;height:76px;background:var(--mark) center/contain no-repeat;filter:drop-shadow(0 0 40px color-mix(in srgb,var(--acc) 40%,transparent));animation:pop .7s cubic-bezier(.2,.9,.3,1)}
-.boot .bname{font-family:var(--fd);font-weight:800;font-size:26px;letter-spacing:-.02em}
-.boot .bbar{width:200px;height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
-.boot .bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px}
-.boot .btip{font-size:12.5px;color:var(--dim);font-family:var(--fm)}
-.boot.done{opacity:0;transition:opacity .6s ease;pointer-events:none}
 @keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
 
 .hint{position:fixed;left:50%;top:calc(var(--menh) + 14px);transform:translateX(-50%);z-index:20;font-size:12.5px;color:var(--muted);background:var(--bar);border:1px solid var(--glass-brd);padding:8px 15px;border-radius:100px;backdrop-filter:blur(14px);display:flex;align-items:center;gap:9px;animation:floaty 3s ease-in-out infinite}
@@ -571,7 +565,7 @@ button.menu:hover,button.menu.open{background:rgba(255,255,255,.18)}
 .h-title{font-weight:700;letter-spacing:-.028em;line-height:1.04}
 .lede{line-height:1.6;font-size:15.5px}
 .stat .n,.pm b,.dw-stats b,.lhb b{font-weight:700;letter-spacing:-.02em}
-.lock .l-name,.boot .bname,.dw-big,.widget .wname{font-weight:700;letter-spacing:-.02em}
+.lock .l-name,.dw-big,.widget .wname{font-weight:700;letter-spacing:-.02em}
 
 /* ---------- contrôles ---------- */
 .btn{padding:12px 22px;font-weight:600;letter-spacing:-.01em;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.12),0 8px 22px -10px color-mix(in srgb,var(--acc) 80%,transparent)}
@@ -623,11 +617,6 @@ button.menu:hover,button.menu.open{background:rgba(255,255,255,.18)}
 .lock .l-date{font-weight:500;font-size:18px;color:rgba(255,255,255,.9)}
 .lock .l-notif{border-radius:24px;color:rgba(255,255,255,.75)}
 .lock .l-hint{font-weight:500;padding:8px 16px;border-radius:100px;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
-.boot{background:#000}
-.boot .bmark{filter:none}
-.boot .bbar{height:5px;width:180px;background:rgba(255,255,255,.18)}
-.boot .bbar i{background:#fff}
-.boot .btip{font-family:var(--ft);color:rgba(255,255,255,.45)}
 .saver .dvd .m{box-shadow:none}
 
 /* centre de contrôle */
@@ -654,3 +643,60 @@ body.icons-clear .sq{background:linear-gradient(180deg,rgba(255,255,255,.26),rgb
 body.icons-clear .sq svg [fill="#0a0b0e"],body.icons-clear .sq svg[stroke="#0a0b0e"]{fill:#fff;stroke:#fff}
 /* point « Disponible » : vert système partout */
 .widget .wdispo .dot{background:#30d158;box-shadow:0 0 0 3px rgba(48,209,88,.22)}
+
+/* =====================================================================
+   Signature : fond d'écran « Méandres » et ouverture
+   ===================================================================== */
+:root{--fsig:"Bricolage Grotesque",var(--fd)}
+body.wp-meandres{--wall:url("/assets/wall/meandres.jpg") center/cover no-repeat,#0b0f3a}
+body.wp-aurora{--wall:url("/assets/wall/aurora.jpg") center/cover no-repeat,linear-gradient(160deg,#2f4dff,#5b2bd6 45%,#1a0a3a 55%,#ff5a3c)}
+.tw-meandres{background:url("/assets/wall/meandres.jpg") center/cover}
+#wallfx{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none}
+#wallfx.on{display:block}
+
+.sig,.widget .wname.sig{font-family:var(--fsig);font-weight:700;letter-spacing:-.02em}
+.menubar .menu.sig{color:var(--ink);cursor:default;font-size:14.5px;padding-top:2px}
+.sig>span{display:inline-block}
+
+.boot{background:#04050d;display:grid;place-items:center;gap:0;transition:background-color .9s ease}
+.boot.lit{background-color:rgba(4,5,13,0)}
+.bi{display:flex;flex-direction:column;align-items:center}
+.bi-name{display:flex;gap:.24em;font-family:var(--fsig);font-weight:800;font-size:clamp(56px,12.5vw,200px);line-height:.9;letter-spacing:-.045em;color:#fff}
+.bi-name span{display:block;overflow:hidden;padding:.14em .04em;margin:0 -.04em;will-change:transform}
+.bi-name i{display:block;font-style:normal;transform:translateY(118%);transition:transform .85s cubic-bezier(.16,1,.3,1)}
+.bi-name span+span i{transition-delay:.1s}
+.boot.in .bi-name i{transform:none}
+.bi-role{margin-top:.2em;font-size:clamp(15px,1.5vw,22px);font-weight:500;letter-spacing:-.005em;color:rgba(255,255,255,.74);opacity:0;transform:translateY(10px);transition:opacity .55s ease .4s,transform .55s ease .4s}
+.boot.in .bi-role{opacity:1;transform:none}
+.boot .btip{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 28px);text-align:center;font-family:var(--ft);font-size:12px;color:rgba(255,255,255,.42);transition:opacity .25s}
+.boot.fly{pointer-events:none}
+.boot.fly .bi-name span{transition:transform .8s cubic-bezier(.7,0,.18,1)}
+.boot.fly .bi-role,.boot.fly .btip{opacity:0;transition:opacity .22s}
+@media(max-width:720px){
+  .bi-name{flex-direction:column;align-items:center;gap:0;font-size:min(27vw,150px);line-height:.84}
+  .bi-name span{padding:.1em .04em}
+  .bi-role{margin-top:.5em;font-size:16px}
+}
+
+body.intro .menubar,body.intro .dock,body.intro .dicons,body.intro .dwidgets,body.intro .legalbar,body.intro .mobile,body.intro .mdock,body.intro .ios-status,body.intro .homebar,
+body.intro .hint,body.intro-out .hint{opacity:0}
+.hint{transition:opacity .5s}
+body.intro-fly #sigName,body.intro-fly #msigName{visibility:hidden}
+@keyframes inDown{from{transform:translateY(-100%);opacity:0}}
+@keyframes inDock{from{transform:translateX(-50%) translateY(150%)}}
+@keyframes inUp{from{transform:translateY(120%);opacity:0}}
+@keyframes inPop{from{transform:scale(.4);opacity:0}}
+@keyframes inSide{from{transform:translateX(36px);opacity:0}}
+@keyframes inRise{from{transform:translateY(22px) scale(.97);opacity:0}}
+@keyframes inFade{from{opacity:0}}
+body.intro-out .menubar{animation:inDown .7s cubic-bezier(.2,.9,.25,1) backwards}
+body.intro-out .dock{animation:inDock .8s cubic-bezier(.2,.9,.25,1) .1s backwards}
+body.intro-out .dock>*{animation:inPop .5s cubic-bezier(.3,1.4,.5,1) calc(.3s + var(--i,0)*35ms) backwards}
+body.intro-out .dicon{animation:inPop .5s cubic-bezier(.3,1.4,.5,1) calc(.12s + var(--i,0)*40ms) backwards}
+body.intro-out .dwidget{animation:inSide .7s cubic-bezier(.2,.9,.25,1) calc(.3s + var(--i,0)*90ms) backwards}
+body.intro-out .legalbar,body.intro-out .ios-status,body.intro-out .mlegal,body.intro-out .homebar{animation:inFade .6s ease .5s backwards}
+body.intro-out .widget{animation:inRise .7s cubic-bezier(.2,.9,.25,1) backwards}
+body.intro-out .msearch{animation:inRise .7s cubic-bezier(.2,.9,.25,1) .08s backwards}
+body.intro-out #mlaunch .mtile{animation:inPop .5s cubic-bezier(.3,1.4,.5,1) calc(.16s + var(--i,0)*28ms) backwards}
+body.intro-out .mdock{animation:inUp .75s cubic-bezier(.2,.9,.25,1) .2s backwards}
+.win:focus-visible{outline:none}

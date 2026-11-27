@@ -6,6 +6,8 @@ Portfolio interactif de **Jimmy Bomy**, développeur web créatif — étudiant 
 
 Un système d'exploitation complet dans le navigateur, **en JavaScript vanilla, sans framework** :
 
+- 🗺️ Fond d'écran vivant « Méandres » : une carte de relief dessinée en WebGL, qui réagit au pointeur
+- ✨ Ouverture animée : le nom en grand, puis le bureau qui se construit (désactivée si « réduire les animations »)
 - 🪟 Fenêtres draggables, redimensionnables, minimisables, maximisables
 - 🖱️ Clic droit → menu contextuel · dock façon macOS · icônes de bureau
 - ⌨️ Navigation clavier intégrale (Tab / Entrée / Échap) + lecteurs d'écran supportés

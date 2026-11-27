@@ -22,7 +22,10 @@ const ICON={
 };
 /* ==== VITRINE, les flagships (édite ici) ==== */
 const PROJECTS={
-  amitie:{name:"Amitié Artisan",cat:"Client · reprise et relance d'une plateforme locale",img:"/assets/shots/amitie.jpg",grad:"linear-gradient(135deg,#1e2a44,#2b3b5e 55%,#c96f5a)",role:"Reprise du projet, remise en ligne, sécurité et nouvelle identité visuelle",year:"2026",client:"Amitié Artisan · client, en ligne",tags:["Client","Reprise de projet","Web, iOS et Android","Sécurité","Multilingue","En ligne"],link:"https://www.amitie-artisan.fr",desc:"Amitié Artisan met en relation le public avec des artisans, producteurs, commerçants et restaurants, sur le web et sur iOS et Android, en trois langues (FR, EN, DE).",metrics:[["76","fiches publiées"],["2 183","produits"],["100","SEO Lighthouse mobile"],["93","accessibilité Lighthouse mobile"]],study:[{h:"Le contexte",p:"J'ai repris le projet en août 2026, alors qu'il était à l'arrêt."},{h:"Ce que j'ai fait",p:"J'ai remis en ligne et sécurisé le site, l'API et les applications, puis lancé une nouvelle identité visuelle."},{h:"Le résultat",p:"Aujourd'hui : 76 fiches publiées et 2 183 produits, un score Lighthouse mobile de 100 en SEO et 93 en accessibilité."}],quote:["« Les commerçants à qui je l'ai montrée ont adoré. C'est du bon travail, Amitié Artisan reprend vie. »","Christophe, président d'Amitié Artisan"]},
+  amitie:{name:"Amitié Artisan",cat:"Client · reprise et relance d'une plateforme locale",img:"/assets/shots/amitie.jpg",grad:"linear-gradient(135deg,#1e2a44,#2b3b5e 55%,#c96f5a)",role:"Reprise du projet, remise en ligne, sécurité et nouvelle identité visuelle",year:"2026",client:"Amitié Artisan · client, en ligne",tags:["Client","Reprise de projet","Web, iOS et Android","Sécurité","Multilingue","En ligne"],link:"https://www.amitie-artisan.fr",host:"www.amitie-artisan.fr",
+    scenes:[["/assets/shots/amitie-1-accueil.jpg","Accueil du site Amitié Artisan : le titre « Rejoignez le réseau des artisans et des produits du terroir » à côté d'un paysage de campagne dessiné au trait"],["/assets/shots/amitie-2-metiers.jpg","Page d'accueil d'Amitié Artisan : les métiers de bouche en pictogrammes (restaurants, boulangeries, boucheries, épiceries, fromageries, charcuteries) et une photo de mains qui pétrissent une pâte"],["/assets/shots/amitie-3-fonctionnement.jpg","Section « Comment ça marche ? » d'Amitié Artisan : deux cartes en quatre étapes, l'une pour les commerçants, l'autre pour les artisans et producteurs"]],
+    phone:["/assets/shots/amitie-4-telephone.jpg","Amitié Artisan sur téléphone : le logo, le choix de la langue et le titre d'accueil sur un écran étroit"],
+    desc:"Amitié Artisan met en relation le public avec des artisans, producteurs, commerçants et restaurants, sur le web et sur iOS et Android, en trois langues (FR, EN, DE).",metrics:[["76","fiches publiées"],["2 183","produits"],["100","SEO Lighthouse mobile"],["93","accessibilité Lighthouse mobile"]],study:[{h:"Le contexte",p:"J'ai repris le projet en août 2026, alors qu'il était à l'arrêt."},{h:"Ce que j'ai fait",p:"J'ai remis en ligne et sécurisé le site, l'API et les applications, puis lancé une nouvelle identité visuelle."},{h:"Le résultat",p:"Aujourd'hui : 76 fiches publiées et 2 183 produits, un score Lighthouse mobile de 100 en SEO et 93 en accessibilité."}],quote:["« Les commerçants à qui je l'ai montrée ont adoré. C'est du bon travail, Amitié Artisan reprend vie. »","Christophe, président d'Amitié Artisan"]},
   tonybedja:{name:"DJ Tony Bedja",cat:"Client · DJ à Sedan",img:"/assets/shots/tonybedja.jpg",grad:"linear-gradient(135deg,#1a1714,#b8862b 55%,#efe6d4)",role:"Conception & développement web",year:"2026",client:"DJ Tony (Tony Bedja) · client, en ligne",tags:["Client","Site vitrine","SEO local","En ligne"],link:"https://djtonybedja.fr",desc:"Site de DJ Tony (Tony Bedja), DJ à Sedan dans les Ardennes pour mariages, anniversaires, bars et garden parties : présentation de ses soirées, des mariages, galerie photos et réservation en un clic. Projet client, en ligne sur djtonybedja.fr."},
   fannyspirit:{name:"Fanny Spirit",cat:"Client · Reiki & soins énergétiques",img:"/assets/shots/fannyspirit.jpg",grad:"linear-gradient(135deg,#120f24,#3b2d5c 55%,#f1d79a)",role:"Conception & développement web",year:"2026",client:"Fanny Spirit · client, en ligne",tags:["Client","Site vitrine","Prise de RDV","En ligne"],link:"https://fannyspirit.fr",desc:"Site de Fanny Spirit, praticienne Reiki et LaHoChi à Charleville-Mézières : ambiance douce et étoilée, présentation des soins (au cabinet et à distance), tarifs, chèque cadeau et prise de rendez-vous. Projet client, en ligne sur fannyspirit.fr."},
   boulangerie:{name:"La Fournée de Sedan",cat:"Démo · site de commerce",img:"/assets/shots/boulangerie.jpg?v=2",grad:"linear-gradient(135deg,#8a5a1c,#c8892e 55%,#f2d06b)",role:"Exemple pour commerçants & indépendants",year:"2026",client:"Démonstration",tags:["Site vitrine","Click & Collect","Responsive","Fait main"],link:"https://jimmybomy.fr/projets/demo-boulangerie/",desc:"Le site qu'une boulangerie mérite. Vitrine, carte, click & collect, plan d'accès. Pensé pour donner faim et faire venir en boutique. Ici, c'est une démo, le vôtre serait bien réel, à partir d'une maquette gratuite."},
@@ -222,6 +225,50 @@ document.addEventListener("click",e=>{
 function finderHTML(title,sub,items){return `<div class="h-eyebrow">Finder · ${Object.keys(items).length} éléments</div><h2 class="h-title" style="font-size:26px;margin:10px 0 6px">${title}</h2>
   ${sub?`<p class="lede" style="font-size:13px;margin-bottom:18px">${sub}</p>`:'<div style="height:14px"></div>'}
   <div class="finder">${Object.entries(items).map(([id,p])=>`<button class="fitem" data-open="project:${id}" aria-label="Ouvrir ${p.name}"><span class="fthumb" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}"></span><span class="fname">${p.name}</span><span class="fmeta">${p.cat}</span></button>`).join("")}</div>`;}
+/* bouton principal d'une fiche projet : ouvre le site dans une fenêtre s'il est hébergé ici, sinon dans un nouvel onglet */
+function projBtn(p){return (p.link?(/jimmybomy\.fr/.test(p.link)||p.link.startsWith("/")?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet ${ARROW}</button>`:`<a class="btn" href="${p.link}" target="_blank" rel="noopener">${p.cta||"Voir le site"} ${ARROW}</a>`):`<span class="btn ghost" style="cursor:default">En développement</span>`)+(p.more||[]).map(([u,l])=>` <a class="btn ghost" href="${u}" target="_blank" rel="noopener">${l} ${ARROW}</a>`).join("");}
+/* ==== FICHES « PAGE PRODUIT » : le site reste épinglé pendant que les chapitres défilent, puis les chiffres en grand ==== */
+function storyHTML(p){const last=p.study.length-1;
+  return `<article class="story">
+    <header class="st-head"><div class="h-eyebrow">${p.cat}</div><h2 class="h-title st-title">${p.name}</h2><p class="lede st-lede">${p.desc}</p><div class="st-cta">${projBtn(p)}</div></header>
+    <section class="st-scene" aria-label="Étude de cas">
+      <div class="st-pin"><div class="st-view"><figure class="st-browser">${p.host?`<div class="st-bar" aria-hidden="true"><span>${p.host}</span></div>`:""}<div class="st-shots">${p.scenes.map(([src,alt],i)=>`<img${i?"":' class="on"'} src="${src}" alt="${esc(alt)}" width="1280" height="800"${i?' loading="lazy"':""}>`).join("")}</div></figure>${p.phone?`<img class="st-phone" src="${p.phone[0]}" alt="${esc(p.phone[1])}" width="468" height="797" loading="lazy">`:""}</div>
+        <div class="st-steps" aria-hidden="true">${p.study.map((s,i)=>`<i${i?"":' class="on"'}></i>`).join("")}</div></div>
+      <div class="st-chapters">${p.study.map((s,i)=>`<div class="st-ch${i?"":" on"}"><div class="st-k">0${i+1} / 0${last+1}</div><h3 class="st-h">${s.h}</h3><p class="st-p${s.p.length>170?" long":""}">${s.p}</p></div>`).join("")}</div>
+    </section>
+    ${p.metrics?`<section class="st-figs"><div class="h-eyebrow">En chiffres</div><div class="st-nums n${p.metrics.length}">${p.metrics.map(m=>`<div class="st-fig"><b>${m[0]}</b><span>${m[1]}</span></div>`).join("")}</div></section>`:""}
+    ${p.quote?`<figure class="st-quote"><div class="h-eyebrow">Le mot du client</div><blockquote><p>${p.quote[0]}</p></blockquote><figcaption>${p.quote[1]}</figcaption></figure>`:""}
+    <section class="st-meta"><div class="h-eyebrow">Le projet en bref</div><div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>${projBtn(p)}</section>
+  </article>`;}
+/* branche une fiche « page produit » : chapitre actif selon le défilement, image correspondante, chiffres qui comptent une fois visibles */
+function wireStory(root){const sc=root&&(root.closest(".msheet")||root);if(sc&&sc._storyOff){sc._storyOff();sc._storyOff=null;}
+  const st=root&&root.querySelector(".story");if(!st)return;
+  const still=matchMedia("(prefers-reduced-motion:reduce)").matches,nav=sc.querySelector(".mnav");
+  const pin=st.querySelector(".st-pin"),chs=[...st.querySelectorAll(".st-ch")],imgs=[...st.querySelectorAll(".st-shots img")],steps=[...st.querySelectorAll(".st-steps i")],nums=st.querySelector(".st-nums");
+  let cur=-1,counted=!nums||still,raf=0;
+  const blank=el=>{const k=el.children;return k.length?(el.getBoundingClientRect().height-(k[k.length-1].getBoundingClientRect().bottom-k[0].getBoundingClientRect().top))/2:0;};
+  const size=()=>{const top=nav?nav.offsetHeight:0;st.style.setProperty("--st-top",top+"px");st.style.setProperty("--st-vh",Math.max(300,sc.clientHeight-top)+"px");
+    /* en deux colonnes, la scène remonte sous le titre : pas de grand vide avant ni après */
+    st.style.setProperty("--st-lift",(st.clientWidth>640&&chs.length?Math.max(0,Math.min(blank(pin),blank(chs[0]))-34):0)+"px");};
+  const show=i=>{if(i===cur)return;cur=i;const im=Math.min(i,imgs.length-1);
+    chs.forEach((c,k)=>c.classList.toggle("on",k===i));imgs.forEach((g,k)=>g.classList.toggle("on",k===im));steps.forEach((d,k)=>d.classList.toggle("on",k===i));
+    pin.classList.toggle("ph",i===chs.length-1);};
+  const count=()=>{counted=true;nums.querySelectorAll("b").forEach(b=>{const txt=b.textContent.trim();if(!/^\d[\d\s]*$/.test(txt))return;
+    const end=parseInt(txt.replace(/\D/g,""),10),grp=/\s/.test(txt),t0=performance.now();
+    const step=now=>{const k=Math.min(1,(now-t0)/1100),v=Math.round(end*(1-Math.pow(1-k,3)));
+      b.textContent=k===1?txt:(grp?String(v).replace(/\B(?=(\d{3})+(?!\d))/g," "):String(v));if(k<1&&b.isConnected)requestAnimationFrame(step);};
+    requestAnimationFrame(step);});};
+  const update=()=>{raf=0;if(!st.isConnected){off();return;}
+    const r=sc.getBoundingClientRect(),top=r.top+(nav?nav.offsetHeight:0),pb=pin.getBoundingClientRect().bottom;
+    /* repère : le milieu de la zone libre (sous l'image épinglée en une colonne, toute la hauteur en deux colonnes) */
+    const mid=st.clientWidth>640?(top+r.bottom)/2:(Math.max(top,Math.min(pb,r.bottom-80))+r.bottom)/2;
+    let best=0,bd=1e9;chs.forEach((c,k)=>{const b=c.getBoundingClientRect(),d=Math.abs((b.top+b.bottom)/2-mid);if(d<bd){bd=d;best=k;}});show(best);
+    if(!counted&&nums.getBoundingClientRect().top<r.bottom-60)count();};
+  const onScroll=()=>{if(!raf)raf=requestAnimationFrame(update);};
+  const ro=window.ResizeObserver?new ResizeObserver(()=>{size();onScroll();}):null;
+  function off(){sc.removeEventListener("scroll",onScroll);if(ro)ro.disconnect();}
+  sc.addEventListener("scroll",onScroll,{passive:true});if(ro)ro.observe(sc);sc._storyOff=off;
+  size();update();}
 /* ==== PAGES LÉGALES : une seule source (/mentions-legales/, /confidentialite/), chargée dans la fenêtre ==== */
 function loadLegal(root){const box=root&&root.querySelector("[data-legal]");if(!box)return;const url=box.getAttribute("data-legal");
   fetch(url+(url.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
@@ -253,13 +300,14 @@ function content(app){
   if(app==="labs")return finderHTML("Labs","Les expériences : petits projets, outils et bidouilles.",LABS);
   if(app.startsWith("project:")){const p=ALL[app.split(":")[1]];
     if(p.game)return gameHTML(p);
+    if(p.scenes&&p.study)return storyHTML(p);
     return `<div class="proj-hero" style="${p.img?`background-image:url('${p.img}');background-size:cover;background-position:top center`:`background:${p.grad}`}">${p.img?"":'<div class="mock"></div>'}</div><div class="h-eyebrow">${p.cat}</div><h2 class="h-title">${p.name}</h2>
       <p class="lede">${p.desc}</p>${p.shots?`<div class="gshots">${p.shots.map(([src,alt])=>`<img src="${src}" alt="${esc(alt)}" loading="lazy" width="1280" height="720">`).join("")}</div>`:""}<div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
       <div class="kv"><span class="k">Rôle</span><span>${p.role}</span><span class="k">Année</span><span>${p.year}</span><span class="k">Contexte</span><span>${p.client}</span></div>
       ${p.metrics?`<div class="pmetrics">${p.metrics.map(m=>`<div class="pm"><b>${m[0]}</b><span>${m[1]}</span></div>`).join("")}</div>`:""}
       ${p.study?`<div class="study">${p.study.map(s=>`<div class="study-b"><div class="study-h">${s.h}</div><p>${s.p}</p></div>`).join("")}</div>`:""}
       ${p.quote?`<figure class="pquote"><blockquote><p>${p.quote[0]}</p></blockquote><figcaption>${p.quote[1]}</figcaption></figure>`:""}
-      ${p.link?(/jimmybomy\.fr/.test(p.link)||p.link.startsWith("/")?`<button class="btn" data-site="${p.link}" data-title="${esc(p.name)}">Ouvrir le projet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></button>`:`<a class="btn" href="${p.link}" target="_blank" rel="noopener">${p.cta||"Voir le site"} <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`):`<span class="btn ghost" style="cursor:default">En développement</span>`}${(p.more||[]).map(([u,l])=>` <a class="btn ghost" href="${u}" target="_blank" rel="noopener">${l} ${ARROW}</a>`).join("")}`;}
+      ${projBtn(p)}`;}
   if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="/assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><h2 class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</h2></div></div>
     <div class="pro-note"><b>Développeur web freelance</b>, je crée des sites internet pour les particuliers et les professionnels. Micro-entreprise immatriculée, SIRET 133 309 369 00014.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web, du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b>, et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
@@ -401,7 +449,8 @@ function openApp(app){
   const hint=document.getElementById("hint");if(hint)hint.style.display="none";
   const st=wins[app];
   if(st){if(st.min){st.el.classList.remove("min");st.min=false;}bringFront(st.el);st.el.focus();snd.tap();return;}
-  const meta=APPS[app]||(app.startsWith("project:")&&ALL[app.slice(8)]?.game?{w:860,h:680}:{w:560,h:460});
+  const pj=app.startsWith("project:")?ALL[app.slice(8)]:null;
+  const meta=APPS[app]||(pj&&pj.game?{w:860,h:680}:pj&&pj.scenes?{w:960,h:720}:{w:560,h:460});
   const el=document.createElement("div");el.className="win";el.dataset.app=app;el.setAttribute("role","dialog");el.setAttribute("aria-label",titleFor(app));el.tabIndex=-1;
   const w=Math.min(meta.w||560,innerWidth-40),h=Math.min(meta.h||460,innerHeight-160);
   const n=Object.keys(wins).length;
@@ -428,6 +477,7 @@ function openApp(app){
   if(app==="messages")setTimeout(()=>msgBoot(el.querySelector(".imsg")),150);
   if(app==="terminal")wireTerminal(el);
   if(LEGAL_URL[app])loadLegal(el);
+  wireStory(el.querySelector(".win-body"));
   makeDraggable(el,app);makeResizable(el,app);
 }
 function closeApp(app){const st=wins[app];if(!st)return;st.el.classList.add("closing");markDock(app,false);snd.close();
@@ -681,6 +731,7 @@ function mopen(app,origin){
     msBody.addEventListener("click",e=>{const mg=e.target.closest("[data-msg]");if(mg)msgAct(mg.getAttribute("data-msg"),msBody.querySelector(".imsg"));});}
   if(app==="calc")msBody.addEventListener("click",e=>{const ck=e.target.closest("[data-calc]");if(ck)calcAct(ck.getAttribute("data-calc"),msBody.querySelector(".calc"));});
   if(LEGAL_URL[app])loadLegal(msBody);
+  wireStory(msBody);
 }
 function msite(url,title){msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
 function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}

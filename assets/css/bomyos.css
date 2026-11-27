@@ -729,3 +729,8 @@ body.intro-out .mdock{animation:inUp .75s cubic-bezier(.2,.9,.25,1) .2s backward
 .menubar .left>*,.menubar .right>*{flex:0 0 auto}
 @media(max-width:940px){.menubar .right .live{display:none}.menubar .left{gap:10px}}
 @media(max-width:800px){#crtBtn,#ccBtn{display:none}}
+/* Dock réorganisable */
+.dock button{touch-action:none}
+.dock.sorting .tip{opacity:0!important}
+.dock button.drag{transition:none;z-index:2;cursor:grabbing;filter:drop-shadow(0 14px 16px rgba(0,0,0,.45))}
+.dicon{touch-action:none}

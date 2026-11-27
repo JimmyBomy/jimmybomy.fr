@@ -281,6 +281,7 @@ function content(app){
     <div class="setrow"><span>Icônes en verre</span><button class="sw${clearOn?' on':''}" data-tgl="clear" role="switch" aria-checked="${clearOn}" aria-label="Icônes en verre"><i></i></button></div>
     <div class="setrow"><span>Sons d'interface</span><button class="sw${sndOn?' on':''}" data-tgl="snd" role="switch" aria-checked="${sndOn}" aria-label="Sons"><i></i></button></div>
     <div class="setrow"><span>Effet CRT (rétro)</span><button class="sw${crtOn?' on':''}" data-tgl="crt" role="switch" aria-checked="${crtOn}" aria-label="CRT"><i></i></button></div>
+    ${isMob()?"":`<div class="setrow"><span>Ordre du Dock et des icônes</span><button class="btn ghost" data-orderreset style="padding:6px 14px;font-size:13px;margin:0">Remettre par défaut</button></div>`}
     <p class="lede" style="font-size:12px;margin-top:16px;color:var(--dim)">Vos réglages sont mémorisés sur cet appareil.</p>
     <button class="btn ghost" data-setreset style="margin-top:8px">Réinitialiser</button>`;}
   if(app==="aide")return `<div class="h-eyebrow">Aide</div><h2 class="h-title" style="font-size:24px">Trucs & astuces<br>de BomyOS.</h2>
@@ -289,6 +290,7 @@ function content(app){
       <span class="chip"><b>Échap</b> : fermer la fenêtre active</span>
       <span class="chip"><b>Clic droit</b> sur le bureau : menu contextuel</span>
       <span class="chip"><b>Glisser</b> les icônes : réorganisez le bureau</span>
+      <span class="chip"><b>Glisser</b> une icône du Dock : changez l'ordre (Alt + ← → au clavier)</span>
       <span class="chip"><b>Double-clic</b> sur une barre de titre : agrandir</span>
       <span class="chip"><b>Coin bas-droit</b> d'une fenêtre : redimensionner</span>
       <span class="chip"><b>⚙️ Réglages</b> : fond d'écran & couleurs, mémorisés</span>
@@ -505,13 +507,33 @@ IOSGLYPH.reglages='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" s
 IOSGLYPH.services='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0a0b0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l1.5-4h13L20 8v1.5a2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5.5 0 2.5 2.5 0 0 1-5.5 0V8z" fill="#0a0b0e" stroke="none"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7M10 20v-5h4v5"/></svg>';
 const DESK_ICONS=[["projets","Projets"],["labs","Labs"],["photos","Photos"],["messages","Messages"],["services","Services"],["devis","Devis express"],["plans","Plans"],["calc","Calculette"],["apropos","À propos"],["parcours","Parcours"],["cv","CV"],["reglages","Réglages"]];
 document.getElementById("dicons").innerHTML=DESK_ICONS.map(([id,l])=>`<button class="dicon" data-app="${id}" aria-label="Ouvrir ${l}"><span class="ic sq ${IOSBG[id]}">${IOSGLYPH[id]}</span><span class="lbl">${l}</span></button>`).join("");
+/* icônes du bureau : on les déplace librement, elles se posent sur la case libre la plus proche (jamais deux par case) */
+const deskGrid={
+  icons:()=>[...document.querySelectorAll(".dicon")],free:false,
+  cell(){const ic=this.icons()[0],menh=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--menh"))||36;
+    const pw=ic.offsetWidth+6,ph=ic.offsetHeight+6,x0=16,y0=menh+18;
+    return{pw,ph,x0,y0,cols:Math.max(1,Math.floor((innerWidth-x0)/pw)),rows:Math.max(1,Math.floor((innerHeight-y0-104)/ph))};},
+  freeze(){if(this.free)return;const rects=this.icons().map(ic=>ic.getBoundingClientRect());
+    this.icons().forEach((ic,i)=>{ic.style.position="fixed";ic.style.margin=0;ic.style.left=rects[i].left+"px";ic.style.top=rects[i].top+"px";});this.free=true;},
+  reset(){this.icons().forEach(ic=>{["position","margin","left","top","zIndex","transition"].forEach(p=>ic.style[p]="");});this.free=false;},
+  drop(ic){const g=this.cell(),at=el=>[Math.round((parseFloat(el.style.left)-g.x0)/g.pw),Math.round((parseFloat(el.style.top)-g.y0)/g.ph)];
+    const taken=new Set(this.icons().filter(o=>o!==ic).map(o=>at(o).join(","))),x=parseFloat(ic.style.left),y=parseFloat(ic.style.top);
+    let best=null,bd=Infinity;
+    for(let c=0;c<g.cols;c++)for(let r=0;r<g.rows;r++){if(taken.has(c+","+r))continue;
+      const d=Math.hypot(g.x0+c*g.pw-x,g.y0+r*g.ph-y);if(d<bd){bd=d;best=[c,r];}}
+    if(!best){this.reset();return;}
+    ic.style.transition="left .2s cubic-bezier(.2,.9,.3,1),top .2s cubic-bezier(.2,.9,.3,1)";
+    ic.style.left=g.x0+best[0]*g.pw+"px";ic.style.top=g.y0+best[1]*g.ph+"px";
+    setTimeout(()=>{ic.style.transition="";ic.style.zIndex="";},220);}};
+addEventListener("resize",()=>deskGrid.reset());
 document.querySelectorAll(".dicon").forEach(ic=>{
   let sx,sy,ox,oy,drag=false,moved=false;
-  ic.addEventListener("pointerdown",e=>{drag=true;moved=false;sx=e.clientX;sy=e.clientY;const r=ic.getBoundingClientRect();ox=r.left;oy=r.top;});
+  ic.addEventListener("pointerdown",e=>{drag=true;moved=false;sx=e.clientX;sy=e.clientY;});
   ic.addEventListener("pointermove",e=>{if(!drag)return;
-    if(!moved&&Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>7){moved=true;ic.setPointerCapture(e.pointerId);ic.style.position="fixed";ic.style.zIndex=60;ic.style.margin=0;}
-    if(moved){ic.style.left=Math.max(0,Math.min(innerWidth-96,ox+e.clientX-sx))+"px";ic.style.top=Math.max(38,Math.min(innerHeight-90,oy+e.clientY-sy))+"px";}});
-  const up=()=>{drag=false;};
+    if(!moved&&Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>7){moved=true;deskGrid.freeze();ic.setPointerCapture(e.pointerId);
+      ox=parseFloat(ic.style.left);oy=parseFloat(ic.style.top);ic.style.transition="none";ic.style.zIndex=60;}
+    if(moved){ic.style.left=Math.max(0,Math.min(innerWidth-ic.offsetWidth,ox+e.clientX-sx))+"px";ic.style.top=Math.max(38,Math.min(innerHeight-ic.offsetHeight,oy+e.clientY-sy))+"px";}});
+  const up=()=>{if(drag&&moved)deskGrid.drop(ic);drag=false;};
   ic.addEventListener("pointerup",up);ic.addEventListener("pointercancel",up);
   ic.addEventListener("click",()=>{if(moved){moved=false;return;}
     document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));ic.classList.add("sel");openApp(ic.dataset.app);});
@@ -519,18 +541,54 @@ document.querySelectorAll(".dicon").forEach(ic=>{
 const DOCK=[["projets","Projets","folder"],["labs","Labs","labs"],["services","Services","services"],["devis","Devis express","devis"],["messages","Messages","messages"],["photos","Photos","photos"],["contact","Contact","mail"],["cv","CV","pdf"],["--","",""],["reglages","Réglages","gear"],["gh","GitHub","gh","https://github.com/JimmyBomy"],["li","LinkedIn","li","https://www.linkedin.com/in/jimmy-bomy-1037453a8/"]];
 const dock=document.getElementById("dock");
 dock.innerHTML=DOCK.map(d=>{if(d[0]==="--")return '<div class="sep"></div>';const link=d[3]&&d[3].startsWith("http");
-  return `<button data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}"><span class="tip">${d[1]}</span><span class="ic sq ${IOSBG[d[0]]}">${IOSGLYPH[d[0]]}</span><span class="run" data-run="${d[0]}"></span></button>`;}).join("");
-dock.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.link){window.open(b.dataset.link,"_blank","noopener");return;}if(b.dataset.app)openApp(b.dataset.app);}));
+  return `<button data-id="${d[0]}" data-app="${link?"":d[0]}" ${link?`data-link="${d[3]}"`:""} aria-label="${d[1]}" aria-keyshortcuts="Alt+ArrowLeft Alt+ArrowRight"><span class="tip">${d[1]}</span><span class="ic sq ${IOSBG[d[0]]}">${IOSGLYPH[d[0]]}</span><span class="run" data-run="${d[0]}"></span></button>`;}).join("");
+dock.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{if(dockOrder.justDragged){dockOrder.justDragged=false;return;}if(b.dataset.link){window.open(b.dataset.link,"_blank","noopener");return;}if(b.dataset.app)openApp(b.dataset.app);}));
 function markDock(app,on){const r=dock.querySelector(`[data-run="${app}"]`);if(r)r.parentElement.classList.toggle("running",on);}
+/* Dock réorganisable : on glisse une icône (ou Alt + flèches au clavier), l'ordre est gardé sur l'appareil */
+const dockOrder={
+  ids:DOCK.filter(d=>d[0]!=="--").map(d=>d[0]),sepAt:DOCK.findIndex(d=>d[0]==="--"),dragging:false,justDragged:false,
+  btns:()=>[...dock.querySelectorAll("button")],
+  place(list,keep){const sep=dock.querySelector(".sep"),full=list.slice();if(sep)full.splice(this.sepAt,0,sep);
+    const k=keep?full.indexOf(keep):-1;
+    full.forEach((x,i)=>{if(i<k)dock.insertBefore(x,keep);else if(i>k)dock.appendChild(x);});},
+  move(el,to){const list=this.btns(),before=new Map(list.map(b=>[b,b.offsetLeft]));
+    list.splice(list.indexOf(el),1);list.splice(to,0,el);this.place(list,el);
+    list.forEach(b=>{if(b===el)return;const d=before.get(b)-b.offsetLeft;if(!d||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+      b.style.transition="none";b.style.transform=`translateX(${d}px)`;b.offsetWidth;b.style.transition="";b.style.transform="";});},
+  save(){try{localStorage.setItem("bomyos-dock",this.btns().map(b=>b.dataset.id).join(","))}catch(e){}},
+  load(){let saved=[];try{saved=(localStorage.getItem("bomyos-dock")||"").split(",").filter(Boolean)}catch(e){}
+    if(saved.length!==this.ids.length||!this.ids.every(id=>saved.includes(id)))return;
+    this.place(saved.map(id=>dock.querySelector(`button[data-id="${id}"]`)));},
+  reset(){try{localStorage.removeItem("bomyos-dock")}catch(e){}this.place(this.ids.map(id=>dock.querySelector(`button[data-id="${id}"]`)));},
+  say(el){const live=document.getElementById("dockLive"),list=this.btns();if(live)live.textContent=el.getAttribute("aria-label")+", "+T("position")+" "+(list.indexOf(el)+1)+" / "+list.length;}};
+dockOrder.load();
+dock.insertAdjacentHTML("afterend",'<div id="dockLive" class="sr-only" role="status" aria-live="polite"></div>');
+dockOrder.btns().forEach(b=>{
+  let sx=0,sl=0,down=false,moved=false;
+  b.addEventListener("pointerdown",e=>{if(e.button)return;down=true;moved=false;sx=e.clientX;sl=b.offsetLeft;});
+  b.addEventListener("pointermove",e=>{if(!down)return;
+    if(!moved){if(Math.abs(e.clientX-sx)<8)return;moved=true;dockOrder.dragging=true;b.setPointerCapture(e.pointerId);dock.classList.add("sorting");b.classList.add("drag");
+      dockOrder.btns().forEach(x=>{if(x!==b)x.style.transform="";});}
+    const tx=()=>e.clientX-sx+sl-b.offsetLeft,mid=b.offsetLeft+tx()+b.offsetWidth/2;
+    const others=dockOrder.btns().filter(x=>x!==b),to=others.filter(x=>x.offsetLeft+x.offsetWidth/2<mid).length;
+    if(to!==dockOrder.btns().indexOf(b))dockOrder.move(b,to);
+    b.style.transform=`translate(${tx()}px,-10px) scale(1.12)`;});
+  const up=()=>{if(!down)return;down=false;if(!moved)return;
+    dockOrder.dragging=false;dockOrder.justDragged=true;setTimeout(()=>{dockOrder.justDragged=false;},0);
+    dock.classList.remove("sorting");b.classList.remove("drag");b.style.transform="";dockOrder.save();dockOrder.say(b);snd.tap();};
+  b.addEventListener("pointerup",up);b.addEventListener("pointercancel",up);
+  b.addEventListener("keydown",e=>{if(!e.altKey||(e.key!=="ArrowLeft"&&e.key!=="ArrowRight"))return;e.preventDefault();
+    const list=dockOrder.btns(),i=list.indexOf(b),to=Math.max(0,Math.min(list.length-1,i+(e.key==="ArrowLeft"?-1:1)));
+    if(to===i)return;dockOrder.move(b,to);b.focus();dockOrder.save();dockOrder.say(b);snd.tap();});});
 /* Dock façon macOS : magnification des icônes sous le curseur */
 (function dockMagnify(){
   if(matchMedia("(pointer:coarse)").matches)return;      // pas sur tactile
   const RANGE=115,MAX=0.6;const items=()=>[...dock.querySelectorAll("button")];let raf=0,mx=0;
-  dock.addEventListener("pointermove",e=>{mx=e.clientX;if(raf)return;raf=requestAnimationFrame(()=>{raf=0;
+  dock.addEventListener("pointermove",e=>{if(dockOrder.dragging)return;mx=e.clientX;if(raf)return;raf=requestAnimationFrame(()=>{raf=0;
     items().forEach(b=>{const r=b.getBoundingClientRect(),cx=r.left+r.width/2,d=Math.abs(mx-cx);
       const k=d>=RANGE?0:(1-d/RANGE);const s=1+MAX*k*k;
       b.style.transform=`translateY(${(-(s-1)*26).toFixed(1)}px) scale(${s.toFixed(3)})`;});});});
-  dock.addEventListener("pointerleave",()=>{items().forEach(b=>b.style.transform="");});
+  dock.addEventListener("pointerleave",()=>{if(dockOrder.dragging)return;items().forEach(b=>b.style.transform="");});
 })();
 
 /* CONTEXT MENU */
@@ -591,7 +649,8 @@ function settingsAct(t,container){
   const ac=t.closest("[data-accent]");if(ac){PREF.set("accent",ac.dataset.accent);applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
   const tg=t.closest("[data-tgl]");if(tg){if(tg.dataset.tgl==="snd")PREF.set("muted",muted?"0":"1");else if(tg.dataset.tgl==="clear")PREF.set("clear",PREF.get("clear","0")==="1"?"0":"1");else PREF.set("crt",PREF.get("crt","0")==="1"?"0":"1");
     applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
-  if(t.closest("[data-setreset]")){["wp","accent","muted","crt","clear"].forEach(k=>{try{localStorage.removeItem("bomyos-"+k)}catch(e){}});applyPrefs();container.innerHTML=content("reglages");snd.tap();return true;}
+  if(t.closest("[data-orderreset]")){dockOrder.reset();deskGrid.reset();snd.tap();return true;}
+  if(t.closest("[data-setreset]")){["wp","accent","muted","crt","clear"].forEach(k=>{try{localStorage.removeItem("bomyos-"+k)}catch(e){}});applyPrefs();dockOrder.reset();deskGrid.reset();container.innerHTML=content("reglages");snd.tap();return true;}
   return false;}
 applyPrefs();
 sndBtn.addEventListener("click",()=>{PREF.set("muted",muted?"0":"1");applyPrefs();if(!muted)snd.tap();});

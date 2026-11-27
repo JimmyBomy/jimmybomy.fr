@@ -155,6 +155,23 @@ test("les fiches « page produit » ont leurs images, décrites et traduites", (
   assert.match(js, /wireStory\(el\.querySelector\("\.win-body"\)\)/);
   assert.match(js, /wireStory\(msBody\)/);
 });
+test("la visite guidée dure 30 s, n'ouvre que des apps qui existent et est traduite", () => {
+  const ctx = { window: {} };
+  vm.runInNewContext(read("assets/js/i18n-en.js"), ctx);
+  const D = ctx.window.BOMY_EN;
+  const STEPS = data("TOUR_STEPS"), APPS = data("APPS");
+  assert.equal(STEPS.reduce((a, s) => a + s.ms, 0), 30000, "la visite doit durer 30 secondes");
+  for (const s of STEPS) {
+    const ok = s.app.startsWith("project:") ? s.app.slice(8) in PROJECTS : s.app in APPS;
+    assert.ok(ok, `visite : app inconnue « ${s.app} »`);
+    if (s.from) assert.ok(s.from in APPS, `visite : app de départ inconnue « ${s.from} »`);
+    assert.ok(s.txt in D, `visite : légende sans traduction « ${s.txt} »`);
+    assert.ok(!/[—–]/.test(s.txt), "visite : pas de tiret long dans les légendes");
+  }
+  for (const k of ["Visite guidée", "Lancer la visite", "Fin de la visite. Le bureau est à vous.", "En pause", "Étape précédente", "Étape suivante", "Mettre en pause", "Reprendre la visite", "Revoir la visite", "Quitter la visite"]) assert.ok(k in D, `« ${k} » sans traduction`);
+  assert.ok((html.match(/data-tour/g) || []).length >= 2, "la visite doit pouvoir se lancer depuis le bureau et depuis l'accueil téléphone");
+  assert.match(js, /e\.key==="Escape"\)\{e\.preventDefault\(\);e\.stopImmediatePropagation\(\);stop\(\)/, "Échap doit quitter la visite");
+});
 test("les jeux jouables ont leur fichier, leurs captures avec texte alternatif et une page à partager", () => {
   for (const [id, p] of Object.entries({ ...PROJECTS, ...LABS })) {
     if (!p.game) continue;

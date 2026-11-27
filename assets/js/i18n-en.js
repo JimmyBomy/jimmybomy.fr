@@ -30,6 +30,11 @@ window.BOMY_EN = {
   "La vitrine : mes projets principaux.":"The showcase: my main projects.","Les expériences : petits projets, outils et bidouilles.":"Experiments: small projects, tools and tinkering.",
   /* ---- Fiche projet ---- */
   "Rôle":"Role","Année":"Year","Contexte":"Context","Ouvrir le projet":"Open the project","Voir le site":"Visit the site","Voir le film":"Watch the film","En développement":"In development",
+  "En chiffres":"In numbers","Le mot du client":"What the client says","Le projet en bref":"The project at a glance","Étude de cas":"Case study",
+  "Accueil du site Amitié Artisan : le titre « Rejoignez le réseau des artisans et des produits du terroir » à côté d'un paysage de campagne dessiné au trait":"Amitié Artisan home page: the headline “Rejoignez le réseau des artisans et des produits du terroir” next to a line drawing of a countryside landscape",
+  "Page d'accueil d'Amitié Artisan : les métiers de bouche en pictogrammes (restaurants, boulangeries, boucheries, épiceries, fromageries, charcuteries) et une photo de mains qui pétrissent une pâte":"Amitié Artisan home page: food trades shown as pictograms (restaurants, bakeries, butchers, grocers, cheese shops, delicatessens) and a photo of hands kneading dough",
+  "Section « Comment ça marche ? » d'Amitié Artisan : deux cartes en quatre étapes, l'une pour les commerçants, l'autre pour les artisans et producteurs":"Amitié Artisan “How it works” section: two four-step cards, one for shopkeepers, one for craftspeople and producers",
+  "Amitié Artisan sur téléphone : le logo, le choix de la langue et le titre d'accueil sur un écran étroit":"Amitié Artisan on a phone: the logo, the language picker and the home headline on a narrow screen",
   "Le brief":"The brief","Le défi":"The challenge","Ce que j'ai fait":"What I did","Le résultat":"The result","Le contexte":"The context",
   /* ---- Projets : catégories, rôles, contextes, tags ---- */
   "Client · DJ à Sedan":"Client · DJ in Sedan","Client · Reiki & soins énergétiques":"Client · Reiki & energy healing",

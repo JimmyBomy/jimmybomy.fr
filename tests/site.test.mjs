@@ -134,6 +134,27 @@ test("chaque projet est traduit en anglais", () => {
   }
   for (const x of XP) for (const k of ["role", "desc"]) assert.ok(x[k].replace(/<[^>]+>/g, "") in D || x[k] in D || x[k].includes("<"), `parcours : « ${x[k]} » sans traduction`);
 });
+test("les fiches « page produit » ont leurs images, décrites et traduites", () => {
+  const ctx = { window: {} };
+  vm.runInNewContext(read("assets/js/i18n-en.js"), ctx);
+  const D = ctx.window.BOMY_EN;
+  let n = 0;
+  for (const [id, p] of Object.entries(PROJECTS)) {
+    if (!p.scenes) continue;
+    n++;
+    assert.ok(p.study && p.study.length >= 3, `${id} : une fiche « page produit » a besoin d'une étude de cas`);
+    assert.ok(p.scenes.length >= 1 && p.scenes.length <= p.study.length, `${id} : au plus une image par chapitre`);
+    for (const [src, alt] of [...p.scenes, ...(p.phone ? [p.phone] : [])]) {
+      assert.ok(exists(src), `${id} : image manquante ${src}`);
+      assert.ok(alt && alt.length > 20, `${id} : image sans description ${src}`);
+      assert.ok(alt in D, `${id} : description sans traduction ${src}`);
+    }
+  }
+  assert.ok(n >= 1, "aucune fiche « page produit »");
+  for (const k of ["En chiffres", "Le mot du client", "Le projet en bref", "Étude de cas"]) assert.ok(k in D, `« ${k} » sans traduction`);
+  assert.match(js, /wireStory\(el\.querySelector\("\.win-body"\)\)/);
+  assert.match(js, /wireStory\(msBody\)/);
+});
 test("les jeux jouables ont leur fichier, leurs captures avec texte alternatif et une page à partager", () => {
   for (const [id, p] of Object.entries({ ...PROJECTS, ...LABS })) {
     if (!p.game) continue;

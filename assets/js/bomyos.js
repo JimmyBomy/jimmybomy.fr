@@ -311,6 +311,7 @@ function content(app){
   if(app==="apropos")return `<div style="display:flex;gap:20px;align-items:center;margin-bottom:6px"><img src="/assets/jimmy.jpg?v=2" alt="Jimmy Bomy" style="width:100px;height:126px;object-fit:cover;object-position:top center;border-radius:12px;border:1px solid var(--glass-brd);flex:0 0 auto"><div><div class="h-eyebrow">À propos</div><h2 class="h-title" style="font-size:clamp(30px,4.2vw,46px)">Salut,<br>moi c'est Jimmy.</h2></div></div>
     <div class="pro-note"><b>Développeur web freelance</b>, je crée des sites internet pour les particuliers et les professionnels. Micro-entreprise immatriculée, SIRET 133 309 369 00014.</div>
     <p class="lede">Étudiant en <span class="acc">BUT MMI</span> à Troyes, basé à Sedan. Je développe des sites et des jeux web, du <b>back PHP/MySQL</b> au <b>Canvas HTML5</b>, et j'héberge et administre <b>tous mes projets sur mon propre VPS Linux</b> (Apache, monitoring GoAccess). Autodidacte avant la fac, je code parce que j'aime résoudre des problèmes et voir le résultat tourner.</p>
+    <button class="btn ghost" data-tour style="margin-top:16px">${TOUR_ICON} Visite guidée · 30 s</button>
     <div class="stats"><div class="stat"><div class="n"><i>18,1</i></div><div class="l">moyenne dev web</div></div><div class="stat"><div class="n"><i>10</i></div><div class="l">sites en ligne</div></div><div class="stat"><div class="n"><i>15</i></div><div class="l">projets & labs</div></div><div class="stat"><div class="n"><i>VPS</i></div><div class="l">auto-hébergé</div></div></div>
     <div class="divider"></div><div class="h-eyebrow">Boîte à outils</div><div class="chips">${["PHP","MySQL","JavaScript","HTML / CSS","HTML5 Canvas","Node.js","Twine","Linux / Apache","Administration VPS","Pterodactyl","Git"].map(c=>`<span class="chip">${c}</span>`).join("")}</div>
     <div class="divider"></div><div class="h-eyebrow">Ce site, audité Lighthouse</div>
@@ -654,7 +655,7 @@ addEventListener("click",e=>{if(!ctx.contains(e.target)&&!e.target.closest("butt
 const MENUS={
   Fichier:[["Nouveau devis express","devis"],["Rechercher…  (Ctrl+K)","_cmdk"],["Imprimer le CV","_print"],["--"],["Verrouiller l'écran","_lock"],["Tout fermer","_close"]],
   Projets:[["Rois de France","project:rois"],["Lumina Studio","project:lumina"],["Backrooms","project:backrooms"],["Mandibules (jeu)","project:mandibules"],["claude-jauge","project:claudejauge"],["Le Nœud de Sillenbach","project:sillenbach"],["BomyOS (ce site)","project:bomyos"],["--"],["Dossier Labs","labs"],["Photothèque","photos"]],
-  Aide:[["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub, @JimmyBomy","_gh"],["LinkedIn · Jimmy Bomy","_li"]]};
+  Aide:[["Visite guidée · 30 s","_tour"],["Raccourcis & astuces","aide"],["Me contacter","contact"],["Mentions légales","mentions"],["Politique de confidentialité","confidentialite"],["GitHub, @JimmyBomy","_gh"],["LinkedIn · Jimmy Bomy","_li"]]};
 let curMenu=null;
 document.querySelectorAll("button.menu").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();
   document.querySelectorAll("button.menu.open").forEach(x=>{if(x!==b)x.classList.remove("open");});
@@ -668,6 +669,7 @@ ctx.addEventListener("click",e=>{const b=e.target.closest("[data-mi]");if(!b||!c
   if(v==="_print"){window.print();return;}
   if(v==="_lock"){showLock();return;}
   if(v==="_close"){Object.keys(wins).forEach(closeApp);return;}
+  if(v==="_tour"){tour.start();return;}
   if(v==="_gh"){window.open("https://github.com/JimmyBomy","_blank","noopener");return;}
   if(v==="_li"){window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener");return;}
   openApp(v);});
@@ -717,7 +719,7 @@ const mobileEl=document.getElementById("mobile"),msTitle=document.getElementById
 if(mobileEl)mobileEl.addEventListener("scroll",()=>document.body.classList.toggle("mscrolled",mobileEl.scrollTop>6),{passive:true});
 function mopen(app,origin){
   track("open:"+app);
-  msBody.innerHTML=content(app);msBody.scrollTop=0;msheet.scrollTop=0;
+  msBody.innerHTML=content(app);msBody.scrollTop=0;msheet.scrollTop=0;msheet.dataset.app=app;
   msTitle.textContent=titleFor(app);
   // zoom depuis l'icône touchée
   if(origin&&origin.getBoundingClientRect){const r=origin.getBoundingClientRect();msheet.style.transformOrigin=`${r.left+r.width/2}px ${r.top+r.height/2}px`;}
@@ -733,7 +735,7 @@ function mopen(app,origin){
   if(LEGAL_URL[app])loadLegal(msBody);
   wireStory(msBody);
 }
-function msite(url,title){msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
+function msite(url,title){msheet.dataset.app="";msTitle.textContent=title;msBody.innerHTML='<iframe src="'+url+'" title="'+title+'" style="width:100%;height:calc(100vh - 96px);border:0;border-radius:12px;background:#fff"></iframe>';msheet.scrollTop=0;}
 function mclose(){msheet.classList.remove("on");mobileEl.classList.remove("behind");snd.close();}
 document.querySelectorAll(".mtile").forEach(t=>t.addEventListener("click",()=>mopen(t.dataset.app,t)));
 /* recherche Spotlight (accueil mobile) */
@@ -839,6 +841,109 @@ void main(){
 })();
 wallSync=wallfx.sync;wallfx.sync();
 
+/* ==== VISITE GUIDÉE : 30 secondes pendant lesquelles le vrai bureau se présente tout seul ==== */
+const TOUR_ICON='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="18" r="2"/><circle cx="18" cy="4.5" r="2"/><path d="M7.2 18H14a3.4 3.4 0 0 0 0-6.8h-4a3.4 3.4 0 0 1 0-6.7h5.8"/></svg>';
+const TOUR_STEPS=[
+  {app:"apropos",ms:4000,txt:"Moi, c'est Jimmy : développeur web freelance et étudiant en BUT MMI à Troyes."},
+  {app:"projets",ms:4000,txt:"Mes projets sont rangés ici : sites clients, jeux et outils, chacun avec sa fiche."},
+  {app:"project:amitie",from:"projets",scroll:true,ms:9000,txt:"Un projet client : Amitié Artisan, une plateforme reprise à l'arrêt et remise en ligne."},
+  {app:"services",ms:4500,txt:"Pour les commerces et les indépendants : je crée leur site et je m'occupe de tout."},
+  {app:"cv",ms:4000,txt:"Le CV : formation, projets et compétences sur une seule page."},
+  {app:"contact",ms:4500,txt:"Un projet ou une alternance à proposer ? Écrivez-moi, je réponds en moins de 2 h."}];
+const tour=(()=>{
+  const N=TOUR_STEPS.length,TOTAL=TOUR_STEPS.reduce((a,s)=>a+s.ms,0),AIM_AT=reduce?0:260,OPEN_AT=reduce?300:900;
+  const starts=[];TOUR_STEPS.reduce((a,s)=>{starts.push(a/TOTAL);return a+s.ms;},0);
+  const svg=d=>`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const IC={prev:svg('<path d="M15 5l-7 7 7 7"/>'),next:svg('<path d="M9 5l7 7-7 7"/>'),pause:svg('<path d="M8.5 5v14M15.5 5v14"/>'),play:svg('<path d="M8 5l11 7-11 7z" fill="currentColor"/>'),again:svg('<path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4.6h4.6"/>'),quit:svg('<path d="M6 6l12 12M18 6 6 18"/>')};
+  /* le tracé : un méandre par étape, plus long quand l'étape dure plus longtemps */
+  const route=()=>{let d="M0 7";starts.forEach((f,k)=>{const x0=f*600,x1=(k<N-1?starts[k+1]:1)*600,n=Math.max(1,Math.round((x1-x0)/90)),w=(x1-x0)/n;
+    for(let j=0;j<n;j++){const a=x0+j*w;d+=` Q${(a+w/4).toFixed(1)} -3 ${(a+w/2).toFixed(1)} 7 T${(a+w).toFixed(1)} 7`;}});return d;};
+  let on=false,paused=false,done=false,i=0,t=0,last=0,raf=0,aimed=false,opened=false,sc=null,bar=null,cur=null,target=null,endT=0,cx=0,cy=0;
+  const q=s=>bar.querySelector(s);
+  const inBar=()=>bar&&bar.contains(document.activeElement)?document.activeElement:null;
+  const refocus=(f,ms)=>{if(f)setTimeout(()=>{if(on&&bar.contains(f))f.focus({preventScroll:true});},ms||0);};
+  const shown=app=>!isMob()?!!(wins[app]&&!wins[app].min&&!wins[app].el.classList.contains("closing")):msheet.classList.contains("on")&&msheet.dataset.app===app;
+  const moveCur=(x,y)=>{cx=x;cy=y;cur.style.transform=`translate(${x}px,${y}px)`;};
+  function find(s,keep){let el;
+    if(keep)el=(!isMob()?wins[keep].el:msBody).querySelector(`[data-open="${s.app}"]`);
+    else if(!isMob())el=s.app==="contact"?document.getElementById("contactBtn"):document.querySelector(`.dicon[data-app="${s.app}"]`);
+    else el=s.app==="contact"?document.getElementById("mContact"):document.querySelector(`#mlaunch .mtile[data-app="${s.app}"]`);
+    if(!el||!el.getClientRects().length)return null;
+    if(keep||isMob())el.scrollIntoView({block:"center",behavior:"instant"});
+    const r=el.getBoundingClientRect();
+    return r.bottom<0||r.top>innerHeight||r.right<0||r.left>innerWidth?null:el;}
+  function aim(s){aimed=true;const keep=s.from&&shown(s.from)?s.from:null;target=reduce?null:find(s,keep);
+    if(!target){cur.classList.remove("on");return;}
+    const r=target.getBoundingClientRect();
+    if(!cur.classList.contains("on")){const b=bar.getBoundingClientRect();cur.style.transition="none";moveCur(cx||b.left+b.width/2,cy||b.top);cur.offsetWidth;cur.style.transition="";cur.classList.add("on");}
+    moveCur(r.left+r.width/2,r.top+Math.min(r.height/2,60));}
+  function open(s){opened=true;const f=inBar();
+    if(target){cur.classList.add("tap");setTimeout(()=>{if(cur)cur.classList.remove("tap","on");},520);
+      if(target.classList.contains("dicon")){document.querySelectorAll(".dicon").forEach(x=>x.classList.remove("sel"));target.classList.add("sel");}}
+    if(!isMob()){openApp(s.app);if(s.from&&shown(s.from))closeApp(s.from);}else mopen(s.app,target||undefined);
+    target=null;refocus(f,90);}
+  function scrollIt(s){
+    if(!sc){const root=!isMob()?wins[s.app]&&wins[s.app].el.querySelector(".win-body"):msheet;if(!root)return;
+      const figs=root.querySelector(".st-figs"),max=root.scrollHeight-root.clientHeight;
+      const end=figs?figs.getBoundingClientRect().top-root.getBoundingClientRect().top+root.scrollTop-root.clientHeight*.3:max;
+      sc={el:root,end:Math.max(0,Math.min(max,end))};}
+    const a=OPEN_AT+1700,b=s.ms-900,p=Math.max(0,Math.min(1,(t-a)/(b-a)));
+    sc.el.scrollTop=sc.end*(reduce?Math.floor(p*3.999)/3:p*p*(3-2*p));}
+  function draw(){const p=done?1:(starts[i]*TOTAL+Math.min(t,TOUR_STEPS[i].ms))/TOTAL;
+    q(".r1").style.clipPath=`inset(-6px ${((1-p)*100).toFixed(2)}% -6px 0)`;
+    bar.querySelectorAll(".tour-route i").forEach((d,k)=>{d.className=done||k<i?"ok":k===i?"at":"";});}
+  function label(){q(".tour-n").textContent=done?"":(paused?"En pause · ":"")+(i+1)+" / "+N;
+    const b=q('[data-t="play"]');b.innerHTML=done?IC.again:paused?IC.play:IC.pause;
+    b.setAttribute("aria-label",done?"Revoir la visite":paused?"Reprendre la visite":"Mettre en pause");
+    bar.classList.toggle("paused",paused);bar.classList.toggle("done",done);}
+  function go(k){clearTimeout(endT);i=k;t=0;aimed=opened=done=false;sc=null;target=null;
+    const s=TOUR_STEPS[i],keep=s.from&&shown(s.from)?s.from:null,f=inBar();
+    q(".tour-txt").textContent=s.txt;label();
+    if(!isMob())Object.keys(wins).forEach(a=>{if(a!==keep&&!wins[a].el.classList.contains("closing"))closeApp(a);});
+    else if(!keep&&msheet.classList.contains("on"))mclose();
+    refocus(f);draw();}
+  function finish(){done=true;paused=false;q(".tour-txt").textContent="Fin de la visite. Le bureau est à vous.";label();draw();cur.classList.remove("on");
+    track("tour:fin");endT=setTimeout(stop,9000);}
+  function frame(now){raf=requestAnimationFrame(frame);const dt=Math.min(now-last,250);last=now;if(paused||done)return;
+    t+=dt;const s=TOUR_STEPS[i];
+    if(!aimed&&t>=AIM_AT)aim(s);
+    if(!opened&&t>=OPEN_AT)open(s);
+    if(s.scroll&&opened)scrollIt(s);
+    draw();
+    if(t>=s.ms){i<N-1?go(i+1):finish();}}
+  function pause(){if(!on||paused||done)return;paused=true;cur.classList.remove("on");label();}
+  function resume(){if(!paused)return;paused=false;if(opened&&!shown(TOUR_STEPS[i].app))go(i);else label();}
+  function onDown(e){if(!bar.contains(e.target))pause();}
+  function onKey(e){
+    if(e.key==="Escape"){e.preventDefault();e.stopImmediatePropagation();stop();return;}
+    if(bar.contains(e.target)){if(done)return;if(e.key==="ArrowRight"){e.preventDefault();act("next");}else if(e.key==="ArrowLeft"){e.preventDefault();act("prev");}return;}
+    if(!["Tab","Shift","Control","Alt","Meta"].includes(e.key))pause();}
+  function act(a){
+    if(a==="quit")stop();
+    else if(a==="play"){done?go(0):paused?resume():pause();}
+    else if(a==="next"){paused=false;i<N-1?go(i+1):finish();}
+    else if(a==="prev"){paused=false;go(Math.max(0,i-1));}}
+  function start(){if(on)return;on=true;track("tour:debut");hideCtx();
+    const n=document.getElementById("bnotif");if(n)n.remove();
+    bar=document.createElement("div");bar.className="tour glass";bar.setAttribute("role","region");bar.setAttribute("aria-label","Visite guidée");
+    bar.innerHTML=`<div class="tour-main"><div class="tour-k"><b>Visite guidée</b><span class="tour-n"></span></div>
+      <p class="tour-txt" aria-live="polite"></p>
+      <div class="tour-route" aria-hidden="true"><svg viewBox="0 0 600 14" preserveAspectRatio="none"><path class="r0" d="${route()}"/><path class="r1" d="${route()}"/></svg>${starts.map(f=>`<i style="left:${(f*100).toFixed(2)}%"></i>`).join("")}</div></div>
+      <div class="tour-ctl"><button data-t="prev" aria-label="Étape précédente">${IC.prev}</button><button data-t="play"></button><button data-t="next" aria-label="Étape suivante">${IC.next}</button><button data-t="quit" aria-label="Quitter la visite">${IC.quit}</button></div>`;
+    cur=document.createElement("div");cur.className="tour-cur";cur.setAttribute("aria-hidden","true");cx=cy=0;
+    document.body.append(bar,cur);document.body.classList.add("touring");
+    bar.addEventListener("click",e=>{const b=e.target.closest("[data-t]");if(b)act(b.dataset.t);});
+    document.addEventListener("pointerdown",onDown,true);document.addEventListener("wheel",onDown,{capture:true,passive:true});addEventListener("keydown",onKey,true);
+    paused=false;go(0);requestAnimationFrame(()=>{if(!on)return;bar.classList.add("on");q('[data-t="play"]').focus({preventScroll:true});});
+    last=performance.now();raf=requestAnimationFrame(frame);}
+  function stop(){if(!on)return;on=false;cancelAnimationFrame(raf);clearTimeout(endT);
+    document.removeEventListener("pointerdown",onDown,true);document.removeEventListener("wheel",onDown,{capture:true});removeEventListener("keydown",onKey,true);
+    document.body.classList.remove("touring");document.querySelectorAll(".dicon.sel").forEach(x=>x.classList.remove("sel"));const b=bar,c=cur;bar=cur=null;c.remove();b.classList.remove("on");setTimeout(()=>b.remove(),reduce?0:450);}
+  MOBQ.addEventListener("change",stop);
+  document.addEventListener("click",e=>{if(e.target.closest("[data-tour]")){e.preventDefault();start();}});
+  return {start,stop};
+})();
+
 /* OUVERTURE : le nom en grand, le fond s'allume, puis le nom rejoint la barre pendant que le bureau se construit */
 (function boot(){const b=document.getElementById("boot"),B=document.body;
     const skip=reduce||!!location.hash||(()=>{try{return sessionStorage.getItem("bintro")==="1"}catch(e){return false}})();
@@ -874,6 +979,7 @@ wallSync=wallfx.sync;wallfx.sync();
 /* deep links : jimmybomy.fr/#services, #devis, #projet-rois… */
 function handleHash(){
   const h=decodeURIComponent(location.hash.slice(1)).toLowerCase();if(!h)return false;
+  if(h==="visite"||h==="tour"){tour.start();return true;}
   const alias={"a-propos":"apropos","demo":"projets","mentions-legales":"mentions"};let app=alias[h]||( APPS[h]?h:null );
   if(!app&&h.startsWith("projet-")){const id=h.slice(7);if(ALL[id])app="project:"+id;}
   if(!app)return false;
@@ -884,7 +990,7 @@ function afterBoot(){
   if(!deep&&!isMob()&&!Object.keys(wins).length)setTimeout(()=>openApp("apropos"),reduce?0:260);
   /* notification de conversion après 25 s (1 fois par session) */
   if(!sessionStorage.getItem("bnotif")){setTimeout(()=>{
-    if(document.getElementById("bnotif"))return;sessionStorage.setItem("bnotif","1");
+    if(document.getElementById("bnotif")||document.body.classList.contains("touring"))return;sessionStorage.setItem("bnotif","1");
     const n=document.createElement("div");n.id="bnotif";n.className="osnotif";n.setAttribute("role","status");
     n.innerHTML='<span class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg></span><div><b>Jimmy répond en moins de 2 h</b><br><span>Un projet de site ? Parlons-en.</span></div><button class="nx" aria-label="Fermer"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
     document.body.appendChild(n);requestAnimationFrame(()=>n.classList.add("on"));snd.tap();
@@ -900,6 +1006,7 @@ function initCmdk(){
   const inp=wrap.querySelector("input"),list=wrap.querySelector(".cmdk-list");
   const items=[...Object.entries(APPS).map(([id,a])=>({t:T(a.title),go:()=>openApp(id)})),
     ...Object.entries(ALL).map(([id,p])=>({t:p.name+", "+T(p.cat),go:()=>openApp("project:"+id)})),
+    {t:"Visite guidée · 30 s",go:()=>tour.start()},
     {t:"GitHub, @JimmyBomy",go:()=>window.open("https://github.com/JimmyBomy","_blank","noopener")},
     {t:"LinkedIn · Jimmy Bomy",go:()=>window.open("https://www.linkedin.com/in/jimmy-bomy-1037453a8/","_blank","noopener")}];
   function render(q){const f=items.filter(i=>i.t.toLowerCase().includes(q.toLowerCase())).slice(0,8);
@@ -935,7 +1042,7 @@ if(matchMedia("(hover:hover)").matches&&!reduce){const wm=document.querySelector
 /* ==== ÉCRAN VERROUILLÉ + CENTRE DE CONTRÔLE (mobile) ==== */
 const lock=document.getElementById("lock"),cc=document.getElementById("cc"),dim=document.getElementById("dim");
 function showLock(){
-  tick();
+  tour.stop();tick();
   document.getElementById("lhint").textContent=!isMob()?"Cliquez pour découvrir mon travail":"Glissez vers le haut pour découvrir mon travail";
   lock.classList.remove("off");
   if(!lock._wired){lock._wired=true;let sy=null;

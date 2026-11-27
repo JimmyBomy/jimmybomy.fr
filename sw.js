@@ -1,5 +1,5 @@
 /* BomyOS service worker : pages et fichiers non versionnés réseau d'abord, fichiers versionnés (?v=) cache d'abord */
-const CACHE = "bomyos-v45";
+const CACHE = "bomyos-v46";
 const CORE = ["/", "/apple-touch-icon.png", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", e => {

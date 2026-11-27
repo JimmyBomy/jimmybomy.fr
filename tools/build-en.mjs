@@ -42,7 +42,7 @@ export function buildEn() {
 
   // 4. Chemins absolus (la page est servie depuis /en/) + dictionnaire avant le script principal
   h = h.replace(/(src|href)="(?!\/|https?:|data:|mailto:|tel:|#)([^"]+)"/g, '$1="/$2"');
-  h = h.replace(/(<script src="\/assets\/js\/bomyos\.js\?v=\d+"><\/script>)/, '<script src="/assets/js/i18n-en.js?v=5"></script>\n$1');
+  h = h.replace(/(<script src="\/assets\/js\/bomyos\.js\?v=\d+"><\/script>)/, '<script src="/assets/js/i18n-en.js?v=6"></script>\n$1');
 
   // 5. Textes visibles et attributs (hors scripts et styles)
   const parts = h.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->)/);

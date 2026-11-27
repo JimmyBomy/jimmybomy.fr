@@ -172,6 +172,16 @@ test("la visite guidée dure 30 s, n'ouvre que des apps qui existent et est trad
   assert.ok((html.match(/data-tour/g) || []).length >= 2, "la visite doit pouvoir se lancer depuis le bureau et depuis l'accueil téléphone");
   assert.match(js, /e\.key==="Escape"\)\{e\.preventDefault\(\);e\.stopImmediatePropagation\(\);stop\(\)/, "Échap doit quitter la visite");
 });
+test("chaque icône du bureau, du Dock et de l'accueil téléphone a son pictogramme et sa couleur", () => {
+  const MGLYPH = data("MGLYPH"), MHUE = data("MHUE"), APPS = data("APPS");
+  const ids = new Set([...data("DESK_ICONS"), ...data("MTILES"), ...data("DOCK")].map((d) => d[0]).filter((id) => id !== "--"));
+  for (const id of [...ids, "contact", "doc", "terminal"]) {
+    assert.ok(MGLYPH[id], `icône sans pictogramme : ${id}`);
+    assert.match(MHUE[id] || "", /^#[0-9a-f]{6}$/, `icône sans couleur : ${id}`);
+  }
+  for (const [id, d] of Object.entries(MGLYPH)) if (!["gh", "li"].includes(id)) assert.ok(d.includes('class="h"'), `${id} : il manque la courbe en couleur`);
+  for (const id of Object.keys(APPS)) assert.ok(MGLYPH[id] || ["doc", "terminal", "folder"].includes(APPS[id].icon), `fenêtre sans icône de titre : ${id}`);
+});
 test("les jeux jouables ont leur fichier, leurs captures avec texte alternatif et une page à partager", () => {
   for (const [id, p] of Object.entries({ ...PROJECTS, ...LABS })) {
     if (!p.game) continue;
